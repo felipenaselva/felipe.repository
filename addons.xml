@@ -778,4 +778,164 @@ Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal
     <platform>all</platform>
   </extension>
 </addon>
+
+<addon id="repository.addonBrasil" name="AddonBrasil Repository" version="0.0.2" provider-name="AddonBrasil">
+	<extension point="xbmc.addon.repository" name="AddonBrasil Repository">
+		<info compressed="false">http://raw.github.com/addonBrasil/addonBrasil-kodi/master/addons.xml</info>
+		<checksum>http://raw.github.com/addonBrasil/addonBrasil-kodi/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/addonBrasil/addonBrasil-kodi/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>RepositÃ³rio AddonBrasil</summary>
+		<description>RepositÃ³rio de addons brasileiros AddonBrasil</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.BlazeRepo" name="Blazetamer's Repository" version="3.2" provider-name="Blazetamer">
+<extension point="xbmc.addon.repository" name="Blaztamer's Addon Repository">
+    <dir>
+	        <info compressed="false">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml</info>
+	        <checksum>https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml.md5</checksum>
+	        <datadir zip="true">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/zips/</datadir>
+    </dir>
+    <dir>
+            <info compressed="false">https://offshoregit.com/Blazetamer/repo/raw/master/addons.xml</info>
+            <checksum>https://offshoregit.com/Blazetamer/repo/raw/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://offshoregit.com/Blazetamer/repo/raw/master/zips</datadir>
+    </dir>
+
+</extension>
+<extension point="xbmc.addon.metadata">
+<summary>Install all of Blazetamer's Addons</summary>
+<description>Download and install addons from Blazetamer.......For Official Support Visit TVADDONS.AG</description>
+<platform>all</platform>
+</extension>
+</addon>
+
+<addon id="repository.exodus" version="1.0.1" name="Exodus repository" provider-name="Exodus">
+	<extension point="xbmc.addon.repository" name="Exodus repository">
+		<dir>
+			<info compressed="false">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml</info>
+			<checksum>https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/zips/</datadir>
+		</dir>
+		<info compressed="false">https://offshoregit.com/exodus/addons.xml</info>
+		<checksum>https://offshoregit.com/exodus/addons.xml.md5</checksum>
+		<datadir zip="true">https://offshoregit.com/exodus/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Exodus repository</summary>
+		<description lang="en">Exodus repository</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.filmkodi.com" name="Filmkodi.com repository - MRKNOW" version="2.1.0" provider-name="Mrknow">
+	<extension point="xbmc.addon.repository" name="Filmkodi.com Kodi Add-on Repository">
+		<info compressed="false">http://kodi.filmkodi.com/addons.xml</info>
+		<checksum>http://kodi.filmkodi.com/addons.xml.md5</checksum>
+		<datadir zip="true">http://kodi.filmkodi.com/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Install Add-ons  from filmkodi.com</summary>
+		<summary lang="pl">Zainstaluj wtyczki z filmkodi.com</summary>
+		<description lang="en">Add-ons from filmkodi.com (mrknow.pl) repository.</description>
+		<description lang="pl">Wtyczki z nieoficjalnego, repozytorium polskiego mrknow.pl..</description>
+		<disclaimer lang="en">Repository has non-comercial nature. Created by enthusiasts, acting in good faith.</disclaimer>
+		<disclaimer lang="pl">ZawartoÅ›Ä‡ repozytorium ma charakter niekomercyjny, wtyczki tworzone przez pasjonatÃ³w, .</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.husham.com" name="Husham.com Repo" version="1.1.0004" provider-name="husham.com">
+	<extension point="xbmc.addon.repository" name="Husham.com Repository">
+		<info compressed="false">https://raw.githubusercontent.com/hmemar/husham.com/master/repository/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/hmemar/husham.com/master/repository/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/hmemar/husham.com/master/zip</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>The Husham.com Repo</summary>
+		<description>Download and install addons from husham.com repo</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.Kinkin" name="Kinkins REPO" version="1.4" provider-name="Kinkin">
+	<extension point="xbmc.addon.repository" name="Kinkin Addon Repository">
+		<info compressed="false">https://offshoregit.com/kinkin-xbmc-repository/addons.xml</info>
+		<checksum>https://offshoregit.com/kinkin-xbmc-repository/addons.xml.md5</checksum>
+		<datadir zip="true">https://offshoregit.com/kinkin-xbmc-repository/zips</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Install Kinkins Addons</summary>
+		<description>Install addons by Kinkin</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.mdrepo" name="Mucky Ducks Repo" version="1.0.2" provider-name="Mucky Duck">
+	<extension point="xbmc.addon.repository" name="Mucky Ducks Repo">
+		<info compressed="false">https://raw.githubusercontent.com/mucky-duck/mdrepo/master/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/mucky-duck/mdrepo/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/mucky-duck/mdrepo/master/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Mucky Ducks Repo</summary>
+		<description>Download And Install Addons Developed By Mucky Duck And Various Other Developers </description>
+		<disclaimer>The owners and submitters to this repository do not host or distribute any of the content displayed by these addons nor do they have any affiliation with the content providers.</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.metalkettle" name="MetalKettles Addon Repository" version="1.7.1" provider-name="MetalKettle">
+	<extension point="xbmc.addon.repository" name="MetalKettles Addon Repository">
+	<dir>
+		<info compressed="false">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml</info>
+		<checksum>https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/zips/</datadir>
+	</dir>
+		<info compressed="false">http://offshoregit.com/metalkettle/addons.xml</info>
+		<checksum>http://offshoregit.com/metalkettle/addons.xml.md5</checksum>
+		<datadir zip="true">http://offshoregit.com/metalkettle/zips/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Install my Addons</summary>
+		<description>Download and install addons from MetalKettle</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.mrpiracy" name="MrPiracy.top RepositÃ³rio" version="1.0.2" provider-name="MrPiracy.top">
+	<extension point="xbmc.addon.repository" name="MrPiracy Repository">
+		<info compressed="false">http://mrpiracy.top/kodi/repository.mrpiracy/addons.xml</info>
+		<checksum>http://mrpiracy.top/kodi//repository.mrpiracy/addons.xml.md5</checksum>
+		<datadir zip="true">http://mrpiracy.top/kodi/repository.mrpiracy/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>MrPiracy.top RepositÃ³rio</summary>
+		<description>Addon Description</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.rato.tv"
+  version="1.0.0"
+  name="Rato-TV repository"
+  provider-name="Rato">
+  <extension point="xbmc.addon.repository"
+    name="repository with ratotv addons">
+    <info compressed="false">http://tralhas.xyz/kodi/addons.xml</info>
+    <checksum>http://tralhas.xyz/kodi/addons.xml.md5</checksum>
+    <datadir zip="true">http://tralhas.xyz/kodi/repo/</datadir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Rato-TV repository</summary>
+    <description>
+    </description>
+    <platform>all</platform>
+  </extension>
+</addon>
 </addons>
