@@ -301,4 +301,177 @@
         <platform>all</platform>
     </extension>
 </addon>
+
+<addon id="plugin.video.horadapipoca" name="Hora Da Pipoca" version="1.2.0" provider-name="AddonBrasil">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.urlresolver" version="2.10.8"/>
+		<import addon="script.extendedinfo" version="3.0.0"/>
+  </requires>
+
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+
+  <extension point="xbmc.addon.metadata">
+    <language>en</language>
+    <platform>all</platform>
+    <summary lang="en">Hora Da Pipoca</summary>
+    <description lang="en">
+			No addon Hora Da Pipoca vocÃª assiste filmes separados por categorias, lanÃ§amentos,filmes HD, etc.
+			VocÃªtambÃ©m pode ver as informaÃ§Ãµes ou assistir ao trailer do filme no submenu do addon (BotÃ£o direito do mouse ou tecla "C").
+			Atencao: Este addon necessita do script URLRESOLVER na versÃ£o 2.10.8 ou superior
+		</description>
+  </extension>
+</addon>
+
+<addon id="plugin.video.igorlista" name="Igor Lista" version="0.0.2" provider-name="Igor Rangel e Cleiton Leonel Creton">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.urlresolver" version="2.10.8"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <language>en</language>
+    <platform>all</platform>
+    <summary lang="en">Curta a minha Lista agora em forma de Add On com mais canais. Os Canais da MASTER TV foram Desenvolvidos por Cleiton Leonel Creton e Rogger Henrique e Filipe Carvalho  </summary>
+    <description lang="en">Curta a minha Lista agora em forma de Add On com mais canais. Os Canais da MASTER TV foram Desenvolvidos por Cleiton Leonel Creton e Rogger Henrique e Filipe Carvalho </description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.kmusictube"
+       name="KMusic Tube"
+       version="1.1"
+       provider-name="deran">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.t0mm0.common" version="2.1.1"/>
+        <import addon="script.module.requests" version="1.1.0"/>
+		<import addon="plugin.video.youtube" optional="true" />
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video audio</provides>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary>The ultimate mash-up between MP3Streams and YouTube music addons with a Israeli twist.</summary>
+        <description>Browse and streams an endless music library via YouTube. Manage favourites artists, albums and songs.</description>
+    </extension>
+
+</addon>
+
+<addon id="plugin.video.mrpiracy" name="MrPiracy.top" provider-name="MrPiracy.top" version="0.3.1">
+ <requires>
+  <import addon="xbmc.python" version="2.14.0"/>
+  <import addon="script.module.beautifulsoup4" version="4.3.2"/>
+  <import addon="script.module.t0mm0.common" version="1.0.0"/>
+  <import addon="plugin.video.youtube" optional="true" />
+  </requires>
+ <extension library="addon.py" point="xbmc.python.pluginsource">
+  <provides>video</provides>
+ </extension>
+ <extension point="xbmc.addon.metadata">
+    <summary lang="en">MrPiracy.top</summary>
+    <description lang="en">Addon site MrPiracy.top</description>
+    <description lang="en">Filmes e series no Kodi. </description>
+    <disclaimer lang="en">Como desenvolvedor do addon, nada tenho a haver com site. O site pode ser acedido por um browser. Limito-me a ler o seu conteÃºdo disponibilizado e converter em addon.</disclaimer>
+    <language></language>
+    <platform>all</platform>
+    <license></license>
+    <forum></forum>
+    <website></website>
+    <email></email>
+    <source></source>
+ </extension>
+</addon>
+
+<addon id="plugin.video.playlistLoader" name="Playlist Loader" version="1.0.9" provider-name="Avigdor">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="repository.xbmc-israel" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Playlist Loader - downloaded for free from:
+http://www.hometheater.co.il</summary>
+    <description lang="en">Playlist Loader - downloaded for free from:
+http://www.hometheater.co.il</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.ratotv" name="RatoTv" version="2.3.0" provider-name="ratotv.top">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.t0mm0.common" version="2.1.1"/>
+    <import addon="plugin.video.youtube" version="2.9.2"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.service" library="service.py" start="startup">
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <language>pt</language>
+    <platform>all</platform>
+    <summary lang="en">Rato TV</summary>
+    <description lang="en">Filmes e series no Kodi em HD. Visita o site oficial em http://www.ratotv.top. Ã‰ necessÃ¡ria conta no site para aceder aos conteÃºdos do addon.</description>
+    <disclaimer lang="en">Os autores nÃ£o alojam nem distribuem nenhum do conteÃºdo acessÃ­vel a partir deste addon. Os autores nÃ£o tÃªm qualquer afiliaÃ§Ã£o com o site em questÃ£o. O addon nÃ£o contem nenhuma ferramenta de tracking.</disclaimer>
+    <website>http://www.ratotv.top/</website>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.redecanais" name="[B][COLOR blue]Rede[COLOR white] Canais[/B][/COLOR]" version="0.01" provider-name="Nirjan">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.urlresolver"/>
+	<import addon="script.module.beautifulsoup4"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <language>en</language>
+    <platform>all</platform>
+    <summary lang="en">Assista os filmes do site redecanais direto no kodi</summary>
+	<description lang="en">Assista os filmes do site Rede Canais direto no kodi  - CrÃ©dito: RedeCanais</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.roggerstream"
+       name="Rogger Stream"
+       version="5.0.2"
+       provider-name="Rogger Henrique, Filipe Carvalho e Marcos Alvarenga">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" optional="true" />
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+     <import addon="script.module.livestreamer" optional="true"/>
+     <import addon="script.module.pyamf" optional="true"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Lista de canais IPTV by Rogger</summary>
+    <description lang="en">Assista a vÃ¡rios canais transmitidos pela internet diretamente no Kodi</description>
+    <platform>all</platform>
+  </extension>
+</addon>
 </addons>
