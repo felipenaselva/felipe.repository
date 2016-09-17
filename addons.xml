@@ -474,4 +474,143 @@ http://www.hometheater.co.il</description>
     <platform>all</platform>
   </extension>
 </addon>
+
+<!--suppress ALL -->
+<addon id="plugin.video.salts" version="2.0.88" name="Stream All The Sources" provider-name="tknorris">
+    <requires>
+        <import addon="xbmc.python" version="2.19.0"/>
+        <import addon="script.module.urlresolver" version="3.0.0"/>
+        <import addon="script.module.myconnpy" version="1.1.6" />
+        <import addon="script.module.tknorris.shared" version="0.0.2"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+     <extension point="xbmc.service" library="service.py" start="startup"/>
+    <extension point="xbmc.addon.metadata">
+        <summary>Stream video from many difference sources</summary>
+        <description>This addon uses trakt.tv for most show and movie meta data and uses a variety of websites for hoster sources</description>
+        <platform>all</platform>
+        <website>http://tvaddons.ag/</website>
+		<forum>http://forums.tvaddons.ag/forums/180-TKNORRIS-RELEASE-REPOSITORY</forum>
+	</extension>
+</addon>
+
+<addon id="plugin.video.sembilhete.tv" name="SemBilhete.tv" provider-name="SemBilhete.tv" version="0.5.4">
+ <requires>
+  <import addon="xbmc.python" version="2.7.10"/>
+ </requires>
+ <extension library="addon.py" point="xbmc.python.pluginsource">
+  <provides>video</provides>
+ </extension>
+ <extension point="xbmc.addon.metadata">
+    <summary>SemBilhete.tv</summary>
+    <description>Addon oficial do SemBilhete.tv, os teus Filmes e SÃ©ries do Sem Bilhete agora no Kodi.</description>
+    <disclaimer>Addon oficial do Sem Bilhete, qualquer duvida ou questÃ£o contacte-nos pelo site ou pelo Facebook.</disclaimer>
+    <language>pt</language>
+    <platform>all</platform>
+    <license></license>
+    <forum></forum>
+    <website>https://sembilhete.tv</website>
+    <email></email>
+    <source></source>
+ </extension>
+</addon>
+
+<addon id="plugin.video.specto" name="Specto - ... Fork"  version="2016.09.01.1" provider-name="mrknow" >
+	<requires>
+		<import addon="xbmc.python" version="2.1.0" />
+		<import addon="script.module.requests" version="1.0.0" />
+		<import addon="script.module.metahandler" version="1.0.0" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.mrknow.urlresolver" />
+		<import addon="script.specto.media" />
+
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="service.py" start="startup" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Mrknow fork of ...</summary>
+		<description lang="en">Specto - ... Fork. Website http://filmkodi.com . Our suport forum https://github.com/mrknow/filmkodi/issues.</description>
+		<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon. The author does not have any affiliation with the content provider.
+		</disclaimer>
+		<forum>https://github.com/mrknow/filmkodi/issues</forum>
+		<source>http://filmkodi.com/repository/</source>
+		<website>http://filmkodi.com/en/wtyczka-specto-fork-genesis/</website>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="plugin.video.superlistamilton"
+       name="[COLOR red][B]Super[/B][/COLOR] [COLOR red][B]Lista[/B][/COLOR] [COLOR red][B]Milton[/B][/COLOR]"
+       version="2.0.1"
+       provider-name="Milton Guedes">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+	<import addon="script.module.livestreamer" optional="true"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">ADD-ON da Lista de canais do Milton Guedes</summary>
+    <description lang="en">ADD-ON da Lista de canais do Milton Guedes,com varios canais de TV Brasileira e internacionais
+sempre atualizados.Addon com varios tipo de videos, shows, clips, Filmes em Torrents Dublados e Legendados,
+Desenhos, Canais Youtubes.
+Twitter - https://twitter.com/listamilton
+Canal Facebook - https://www.facebook.com/canalmiltonguedes/
+Grupo Facebook - https://www.facebook.com/groups/568745316624875
+Canal Youtube  - https://www.youtube.com/channel/UC55I5rSsJdEX8jptFDZTHuw
+Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal --- http://bit.ly/doacao-milton</description>
+<disclaimer lang="en">Todos os links encontrados neste Addon sÃ£o fruto de uma pesquisa na net, todos eles encontram-se em qualquer site de iptv. Eu simplesmente utilizei esses links e os adicionei em um sÃ³ local, sendo assim nÃ£o me responsabilizo por esse conteudo compartilhado.</disclaimer>
+	<platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.jico"
+       name="TÃºnel do tempo"
+       version="1.0"
+       provider-name="jico">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">TÃºnel do Tempo</summary>
+    <description lang="en">O addon TÃºnel do Tempo Ã© voltado a SÃ©ries e Desenhos Antigos</description>
+    <platform>all</platform>
+  </extension>
+</addon>
 </addons>
