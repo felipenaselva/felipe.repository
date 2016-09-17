@@ -938,4 +938,131 @@ Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal
     <platform>all</platform>
   </extension>
 </addon>
+
+<addon id="repository.tknorris.release" name="tknorris Release Repository" version="1.0.2" provider-name="tknorris">
+    <extension point="xbmc.addon.repository" name="tknorris release repository">
+        <dir>
+            <info compressed="false">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml</info>
+            <checksum>https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/zips/</datadir>
+        </dir>
+        <info compressed="false">https://offshoregit.com/tknorris/tknorris-release-repo/raw/master/addons.xml</info>
+        <checksum>https://offshoregit.com/tknorris/tknorris-release-repo/raw/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://offshoregit.com/tknorris/tknorris-release-repo/raw/master/zips/</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>This is tknorris's release repository</summary>
+        <description>This repository contains official releases of my Kodi/XBMC addons
+
+Addons Included
+    - Stream All The Sources
+    - 1Channel
+    - 1Channel Themepaks
+        </description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
+<addon id="repository.VinManJSV" name="VinmanJSV REPO" version="1.1" provider-name="Vinman_sv">
+	<extension point="xbmc.addon.repository" name="VinManJSV REPO">
+        <info compressed="false">https://offshoregit.com/VinManJSV/repo/raw/master/addons.xml</info>
+        <checksum>https://offshoregit.com/VinManJSV/repo/raw/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://offshoregit.com/VinManJSV/repo/raw/master/zips</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Install VinManJSV Addons</summary>
+        <description></description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
+<addon id="repository.whitecream" name="WhiteCream repo" version="0.0.1" provider-name="mortael">
+	<extension point="xbmc.addon.repository" name="WhiteCream repo">
+		<info compressed="false">http://raw.github.com/whitecream01/WhiteCream-V0.0.1/master/addons.xml</info>
+		<checksum>http://raw.github.com/whitecream01/WhiteCream-V0.0.1/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/whitecream01/WhiteCream-V0.0.1/master</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>The Official WhiteCream repository</summary>
+		<description>This repository contains addons that are for adults only. You may only view the contents of this repository if you are at least 18 years of age, or at least the age of majority in the jurisdiction where you reside or from which you access this content.</description>
+		<disclaimer>The owners and submitters to this repository do not host or distribute any of the content displayed by these addons nor do they have any affiliation with the content providers.</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.xbmc-israel" name=".[COLOR blue]XBMC Israeli [/COLOR][COLOR white] Streaming Sites[/COLOR]" version="1.0.4" provider-name="cubicle-vdo">
+    <extension point="xbmc.addon.repository" name="XBMC Israeli streaming repo for streaming sites">
+        <info compressed="false">https://raw.githubusercontent.com/cubicle-vdo/xbmc-israel/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/cubicle-vdo/xbmc-israel/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/cubicle-vdo/xbmc-israel/master/repo</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>XBMC Israeli Streaming Sites</summary>
+        <description>Download and install addons for XBMC Israeli streaming repo for streaming sites</description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
+<addon id="repository.xbmcadult" name="XBMC-Adult Addons" version="1.0.6" provider-name="xbmc-adult">
+	<extension point="xbmc.addon.repository" name="XBMC Adult Addons">
+		<info compressed="false">http://raw.github.com/xbmc-adult/xbmc-adult/ghmaster/addons.xml</info>
+		<checksum>http://raw.github.com/xbmc-adult/xbmc-adult/ghmaster/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/xbmc-adult/xbmc-adult/ghmaster</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>XBMC Addons for Adults Only</summary>
+		<description>This repository contains addons that are for adults only. You may only view the contents of this repository if you are at least 18 years of age, or at least the age of majority in the jurisdiction where you reside or from which you access this content.</description>
+		<disclaimer>The owners and submitters to this repository do not host or distribute any of the content displayed by these addons nor do they have any affiliation with the content providers.</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.xbmchub" name="TVADDONS.ag Addon Repository" version="1.0.6" provider-name="tvaddons.ag">
+	<extension point="xbmc.addon.repository" name="TVADDONS.ag Addon Repository">
+	<dir>
+		<info compressed="false">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml</info>
+		<checksum>https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://offshoregit.com/tvaresolvers/tva-common-repository/raw/master/zips/</datadir>
+	</dir>
+		<info compressed="false">https://offshoregit.com/xbmchub/xbmc-hub-repo/raw/master/addons.xml</info>
+		<checksum>https://offshoregit.com/xbmchub/xbmc-hub-repo/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://offshoregit.com/xbmchub/xbmc-hub-repo/raw/master/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>The Best Third Party Addons for Kodi, Brought to you by TVADDONS.ag</summary>
+		<description>The Best Third Party Addons for Kodi, Brought to you by TVADDONS.ag</description>
+		<platform>all</platform>
+                <forum>http://forums.tvaddons.ag/forums/113-TVADDONS-AG-ADDON-REPOSITORY</forum>
+                <website>http://www.tvaddons.ag/</website>
+	</extension>
+</addon>
+
+<addon id="repository.xxxadultxbmc" name="AdultXBMC.com Add-on Repository" version="1.0.0" provider-name="adultxbmc.com">
+	<extension point="xbmc.addon.repository" name="AdultXBMC.com Add-on Repository">
+		<info compressed="false">https://offshoregit.com/adultxbmc/raw/master/addons.xml</info>
+		<checksum>https://offshoregit.com/adultxbmc/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://offshoregit.com/adultxbmc/raw/master/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Adult Content for Kodi from High Quality Sources Only</summary>
+		<description>Collection of Adult Addons for Kodi by Various Developers</description>
+		<platform>all</platform>
+                <forum>http://www.adultxbmc.com</forum>
+                <website>http://www.adultxbmc.com</website>
+	</extension>
+</addon>
+
+<addon id="supermilton.repository" name="Super Milton Add-on Repository" version="0.0.2" provider-name="Milton Guedes">
+	<extension point="xbmc.addon.repository" name="Super Milton Add-on Repository">
+		<info compressed="false">http://raw.github.com/listamilton/supermilton.repository/supermilton.repository/addons.xml</info>
+		<checksum>http://raw.github.com/listamilton/supermilton.repository/supermilton.repository/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/listamilton/supermilton.repository/supermilton.repository/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Super Milton Add-on Repository</summary>
+		<description>Repositorio de Addons do Milton Guedes</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
 </addons>
