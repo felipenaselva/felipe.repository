@@ -1,0 +1,75 @@
+v1.5.3.rc1
+- Fixed Issue #11
+- Added trailers for movies Issue #10
+- Added 480p selection
+
+v1.5.2.b
+- Metadata for TV-Shows
+- Fixed torrents with url=None
+
+v1.5.1.b
+- Show more for TV-Shows and Anime section
+- Cleaned-up settings page (partialy)
+- Cleaned-up code (partialy)
+- Fixed Issue #8
+- Fixed Issue #9
+
+v1.5.0.b
+- Added TV Shows section
+- Added Anime Section
+- Changed API
+
+v1.0.1.b Beta 2
+- Changed Provider
+- Fixed timeout Issue on Raspberry PI
+
+v1.0.0.b Beta 1
+- Movies are working again
+- Fixed Download is Complete Error
+
+v0.7.0 alpha 2
+- Checks whether there is room for movie
+- Improved view and navigation
+- More icons
+- Improved setting possibilities
+- Setting: Improved proxy settings
+- Search
+- Better cache cleanup
+- Several modules have been removed
+- New structure
+- Do not show the loading window, when there is a cache
+- Improved debugging
+
+v0.7.0 alpha
+- New and more icons
+- New and improved setting possibilities (You will love it!)
+- Has become ready to integrate TV series provider
+- Setting: Preferred video quality
+- Setting: Download and upload rate limit
+- Setting: Prioritize hearing impaired subtitles
+- Setting: Ability to add more proxy domains at once
+- Integrated proxy domains
+- New and better torrent2http provider (https://github.com/anteo/torrent2http)
+- Several modules have been removed
+- Tuning and optimization
+- New structure
+
+v0.6.5
+- Support XBMC/KODI 13.x and later
+
+v0.6.4
+- Support Linux ARM
+- Removed Android x86 support
+
+v0.6.3
+- Improving and optimize metadata
+- Improving and optimize subtitles
+- Improving clean cache
+- Improving loading bar
+- Improvements and restructuring
+- FIX: Android issue
+- FIX: "Add to movies"
+- FIX: Subtitle caching issue
+
+v0.6.0
+- Initial release

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+  <!--
+   * The range 30000-30099 - 99
+   -->
+
+  <string id="30001">KODI Popcorn Time - Buscar</string>
+  <string id="30002">Buscar</string>
+  <string id="30003">Por Género</string>
+  <string id="30004">Por Popularidad</string>
+  <string id="30005">Por Valoración</string>
+  <string id="30006">Añadido recientemente</string>
+  <string id="30007">Descargando contenido</string>
+   <string id="30008">Descargado: %s/s, Subido: %s/s</string>
+  <string id="30009">Siguiente página</string>
+  <string id="30010">Película 3D</string>
+  <string id="30011">¿Quieres reproducir esta película en 3D?</string>
+  <string id="30012">Confirmar</string>
+  <string id="30013">¿Estás seguro que quieres resetear los ajustes de Torrent?</string>
+  <string id="30014">Path, download and upload rate will not be reset.</string>
+  <string id="30015">Semillas: </string>
+  <string id="30016">Descarga iniciada</string>
+  <string id="30017">Hecho</string>
+  <string id="30018">Consiguiendo información</string>
+  <string id="30019">Descargando subtítulos</string>
+  <string id="30020">Reproducción iniciada</string>
+  <string id="30021">Descargando</string>
+  <string id="30022">Descarga completada</string>
+  <string id="30023">Título</string>
+  <string id="30024">Año</string>
+
+  <!--
+   * Settings
+   * The range 30100-30199 - 99
+   -->
+  <string id="30100">Prioriar subtítulos para discapacidad auditiva</string>
+  <string id="30101">General</string>
+  <string id="30102">Ficheros</string>
+  <string id="30103">Ruta de descargas</string>
+  <string id="30104">Conservar los ficheros después de terminar la reproducción/descaga</string>
+  <string id="30105">Subtítulos</string>
+  <string id="30106">Sólo 720p</string>
+  <string id="30107">Sólo 1080p</string>
+  <string id="30108">Red</string>
+  <string id="30109">Reproducción de vídeo 3D</string>
+  <string id="30110">Velodidad de descarga máxima (Kilobyte - 0: Ilimitada)</string>
+  <string id="30111">Encriptación</string>
+  <string id="30112">Otros</string>
+  <string id="30113">Mantenimiento</string>
+  <string id="30114">Vaciar caché</string>
+  <string id="30115">Añadir dominios</string>
+  <string id="30116">YIFY (nombres de host separados por coma)</string>
+  <string id="30117">Calidad preferida</string>
+  <string id="30118">1080p e inferiores</string>
+  <string id="30119">Idioma preferido #1</string>
+  <string id="30120">Idioma preferido #2</string>
+  <string id="30121">Idioma preferido #3</string>
+  <string id="30122">Velodidad de subida máxima (Kilobyte - 0: Ilimitada - Mín. 15 kB/s)</string>
+  <string id="30123">Forzados</string>
+  <string id="30124">Activados</string>
+  <string id="30125">Desactivados</string>
+  <string id="30126">Nunca</string>
+  <string id="30127">Preguntarme</string>
+  <string id="30128">Siempre</string>
+  <string id="30129">Reproducir</string>
+  <string id="30130">Torrent</string>
+  <string id="30131">Ajustes</string>
+  <string id="30132">Puerto</string>
+  <string id="30133">Peers</string>
+  <string id="30134">Características</string>
+  <string id="30135">Log / depuración</string>
+  <string id="30136">Conservar ficheros incompletos después de salir</string>
+  <string id="30137">Conservar ficheros completados al salir</string>
+  <string id="30138">Adicional</string>
+  <string id="30139">Puerto para conexiones entrantes</string>
+  <string id="30140">Utilizar un puerto aleatorio (49152-65535)</string>
+  <string id="30141">Habilitar el protocolo TCP</string>
+  <string id="30142">Habilitar uTP (uTorrent Transport Protocol)</string>
+  <string id="30143">Límite del número total de conexiones</string>
+  <string id="30144">Resetear ajustes de Torrent</string>
+  <string id="30145">Número de peers que intentan conectar después de la respuesta inicial</string>
+  <string id="30146">Número total de intentos de conexión por segundo</string>
+  <string id="30147">Número de segundos antes de dar el intento de conexión por fallido</string>
+  <string id="30148">Puerto</string>
+  <string id="30149">Segundos de espera entre fallos de conexión</string>
+  <string id="30150">Intentos fallidos antes de que el peer sea descartado</string>
+  <string id="30151">Habilitar DHT (Distributed Hash Table)</string>
+  <string id="30152">Habilitar LSD (Local Service Discovery)</string>
+  <string id="30153">Habilitar NATPMP (NAT Port Mapping Protocol)</string>
+  <string id="30154">Habilitar UPnP (Universal Plug and Play)</string>
+  <string id="30155">Habilitar envío de petición de scrape al tracker (Tracker Scrape)</string>
+  <string id="30156">Trackers (lista de URLs separadas por coma)</string>
+  <string id="30157">Routers DHT (lista de host:port separada por comas)</string>
+  <string id="30158">Depuración</string>
+  <string id="30159">Mostrar notificaciones de depuración</string>
+
+  <!--
+   * Languages
+   * The range 30200-30299 - 99
+   -->
+  <string id="30200">Ninguno</string>
+  <string id="30201">Albanés</string>
+  <string id="30202">Árabe</string>
+  <string id="30203">Bengalí</string>
+  <string id="30204">Portugués brasileño</string>
+  <string id="30205">Búlgaro</string>
+  <string id="30206">Chino</string>
+  <string id="30207">Croata</string>
+  <string id="30208">Checo</string>
+  <string id="30209">Danés</string>
+  <string id="30210">Dutch</string>
+  <string id="30211">Inglés</string>
+  <string id="30212">Persa/Farsi</string>
+  <string id="30213">Finlandés</string>
+  <string id="30214">Francés</string>
+  <string id="30215">Alemán</string>
+  <string id="30216">Griego</string>
+  <string id="30217">Hebreo</string>
+  <string id="30218">Húngaro</string>
+  <string id="30219">Indonesio</string>
+  <string id="30220">Italiano</string>
+  <string id="30221">Japonés</string>
+  <string id="30222">Coreano</string>
+  <string id="30223">Lituano</string>
+  <string id="30224">Macedonio</string>
+  <string id="30225">Malayo</string>
+  <string id="30226">Noruego</string>
+  <string id="30227">Polaco</string>
+  <string id="30228">Portugués</string>
+  <string id="30229">Rumano</string>
+  <string id="30230">Ruso</string>
+  <string id="30231">Serbio</string>
+  <string id="30232">Esloveno</string>
+  <string id="30233">Español</string>
+  <string id="30234">Sueco</string>
+  <string id="30235">Tailandés</string>
+  <string id="30236">Turco</string>
+  <string id="30237">Urdú</string>
+  <string id="30238">Vietnamita</string>
+
+  <!--
+   * Notify
+   * The range 30300-30399 - 99
+   -->
+  <string id="30300">No se encuentra el puerto para enlazar torrent2http</string>
+  <string id="30301">Caché vaciada</string>
+  <string id="30302">Tu S.O. no está soportado</string>
+  <string id="30303">No se puede iniciar torrent2http. Ver los detalles en el log</string>
+  <string id="30304">No se han recibido datos</string>
+  <string id="30305">No se han encontrado películas</string>
+  <string id="30306">Ha ocurrido un error</string>
+  <string id="30307">No se han encontrado elementos</string>
+  <string id="30308">Ha ocurrido un error desconocido</string>
+  <string id="30309">Se supone que estamos ejecutando KODI/XBMC, pero las variables de entorno XBMC_HOME o KODI_HOME no se han encontrado</string>
+  <string id="30310">Ruta de descargas no válida</string>
+  <string id="30311">torrent2http ha petado.</string>
+  <string id="30312">Ha ocurrido un error en torrent2http</string>
+  <string id="30313">Se ha cambiado la velocidad de subida a 15 kB/s</string>
+  <string id="30314">Los ajustes de Torrent han sido reseteados</string>
+  <string id="30315">No se han encontrado proveedores de películas o series</string>
+  <string id="30316">El fichero Torrent no contiene una película</string>
+  <string id="30317">La conexión no ha respondido en el tiempo esperado</string>
+
+  <!--
+   * Genres
+   * The range 30400-30499 - 99
+   * See http://www.imdb.com/genre/
+   -->
+   <string id="30400">Action</string>
+   <string id="30401">Adventure</string>
+   <string id="30402">Animation</string>
+   <string id="30403">Comedy</string>
+   <string id="30404">Crime</string>
+   <string id="30405">Disaster</string>
+   <string id="30406">Documentary</string>
+   <string id="30407">Drama</string>
+   <string id="30408">Eastern</string>
+   <string id="30409">Family</string>
+   <string id="30410">Fan-Film</string>
+   <string id="30411">Fantasy</string>
+   <string id="30412">Film-Noir</string>
+   <string id="30413">History</string>
+   <string id="30414">Horror</string>
+   <string id="30415">Indie</string>
+   <string id="30416">Music</string>
+   <string id="30417">Mystery</string>
+   <string id="30418">Road</string>
+   <string id="30419">Romance</string>
+   <string id="30420">Sci-Fi</string>
+   <string id="30421">Short</string>
+   <string id="30422">Sport</string>
+   <string id="30423">Sporting-event</string>
+   <string id="30424">Suspence</string>
+   <string id="30425">Thriller</string>
+   <string id="30426">TV-Movie</string>
+   <string id="30427">War</string>
+   <string id="30428">Western</string>
+   <string id="30499">30400,30401,30402,30403,30404,30405,30406,30407,30408,30409,30410,30411,30412,30413,30414,30415,30416,30417,30418,30419,30420,30421,30422,30423,30424,30425,30426,30427,30428</string> <!-- The order of the genres - You Cannot add new ids! -->
+ </strings>
