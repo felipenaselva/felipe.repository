@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repo.felipe" name="Felipe repository" version="0.0.5" provider-name="felipenaselva">
+	<extension point="xbmc.addon.repository" name="Felipe Add-on Repository">
+		<info compressed="false">http://raw.github.com/felipenaselva/repo.felipe/master/addons.xml</info>
+		<checksum>http://raw.github.com/felipenaselva/repo.felipe/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/felipenaselva/repo.felipe/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Melhores addons reunidos em um so lugar</summary>
+		<description>Felipe.repositorio he uma compilacao dos melhores addons do momento, Tudo em um so lugar</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
