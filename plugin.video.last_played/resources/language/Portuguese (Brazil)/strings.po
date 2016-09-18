@@ -1,0 +1,66 @@
+msgid ""
+msgstr ""
+
+msgctxt "#30001"
+msgid "Number of lines"
+msgstr "Numero de linhas da lista"
+
+msgctxt "#30002"
+msgid "Last Movies"
+msgstr "Ultimos Filmes"
+
+msgctxt "#30003"
+msgid "Last Episodes"
+msgstr "Ultimos Episodios"
+
+msgctxt "#30004"
+msgid "Last Music Videos"
+msgstr "Ultimos Videos de Musica"
+
+msgctxt "#30005"
+msgid "Last Songs"
+msgstr "Ultimas Musicas"
+
+msgctxt "#30006"
+msgid "Last from Addons"
+msgstr "Ultimos de Addons"
+
+msgctxt "#30007"
+msgid "Show Addons"
+msgstr "Mostrar Addons"
+
+msgctxt "#30008"
+msgid "Remove from list"
+msgstr "Remover da lista"
+
+msgctxt "#30009"
+msgid "Group Addons"
+msgstr "Agrupar Addons"
+
+msgctxt "#30010"
+msgid "Show Date"
+msgstr "Mostrar Data"
+
+msgctxt "#30011"
+msgid "Show Time"
+msgstr "Mostrar Hora"
+
+msgctxt "#30012"
+msgid "Other sources"
+msgstr "Outras fontes"
+
+msgctxt "#30013"
+msgid "Enable debug"
+msgstr "Ativar debug"
+
+msgctxt "#30014"
+msgid "Show Addon History List"
+msgstr "Mostrar Lista de Histórico de Addons"
+
+msgctxt "#30015"
+msgid "Delete Addon History List"
+msgstr "Apagar Lista de Histórico de Addons"
+
+msgctxt "#30016"
+msgid "*** There is no Addon History ***"
+msgstr "*** Não Histórico de Addons ***"
