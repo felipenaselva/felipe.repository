@@ -1091,6 +1091,19 @@ Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal
 	</extension>
 </addon>
 
+<addon id="repository.kodil" name=".[COLOR blue]www.Kodisrael.co.il [/COLOR][COLOR white] Repository [/COLOR]" version="1.0.1" provider-name="kodil">
+    <extension point="xbmc.addon.repository" name="www.Kodisrael.co.il Repository ">
+        <info compressed="false">https://raw.githubusercontent.com/kodil/kodil/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/kodil/kodil/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/kodil/kodil/master/repo</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>www.kodisrael.co.il repository</summary>
+        <description>www.kodisrael.co.il offical repository </description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
 <addon id="repository.mdrepo" name="Mucky Ducks Repo" version="1.0.2" provider-name="Mucky Duck">
 	<extension point="xbmc.addon.repository" name="Mucky Ducks Repo">
 		<info compressed="false">https://raw.githubusercontent.com/mucky-duck/mdrepo/master/addons.xml</info>
