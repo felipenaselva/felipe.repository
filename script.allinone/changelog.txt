@@ -1,0 +1,11 @@
+v1.0.2
+   - improved performance on Frodo
+   - added workaround for potential Isengard bugs
+   - improved return behaviour
+
+v1.0.1:
+  - remove duplicate items
+  - block super repo
+
+v1.0.0:
+  - initial release using SWIFT framework

@@ -1268,6 +1268,20 @@ Addons Included
 	</extension>
 </addon>
 
+<addon id="script.allinone" name=".All in One" version="1.0.2" provider-name="Mikey1234, spoyser">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+         <provides>video audio executable image</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+		<summary lang="en">All your addons in one place.</summary>
+		<description lang="en">All your addons in one place. The first publicly released addon Powered by SWIFT - Spoysers Windows Interface Framework Technology - the future of addons.</description>
+		<platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="script.featherence.service" name="Featherence Service" version="0.3.20" provider-name="finalmakerr">
   <requires>
 	<import addon="xbmc.json" version="6.0.0"/>
