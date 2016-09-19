@@ -577,6 +577,31 @@ ainda pode ver as informacoes ou assistir ao trailer do filme no submenu do addo
   </extension>
 </addon>
 
+<addon id="plugin.video.mrpiracy" name="MrPiracy.win" provider-name="MrPiracy.win" version="0.3.5">
+ <requires>
+  <import addon="xbmc.python" version="2.14.0"/>
+  <import addon="script.module.beautifulsoup4" version="4.3.2"/>
+  <import addon="script.module.t0mm0.common" version="1.0.0"/>
+  <import addon="plugin.video.youtube" optional="true" />
+  </requires>
+ <extension library="addon.py" point="xbmc.python.pluginsource">
+  <provides>video</provides>
+ </extension>
+ <extension point="xbmc.addon.metadata">
+    <summary lang="en">MrPiracy.win</summary>
+    <description lang="en">Addon site MrPiracy.win</description>
+    <description lang="en">Filmes e series no Kodi. </description>
+    <disclaimer lang="en">Como desenvolvedor do addon, nada tenho a haver com site. O site pode ser acedido por um browser. Limito-me a ler o seu conteÃºdo disponibilizado e converter em addon.</disclaimer>
+    <language></language>
+    <platform>all</platform>
+    <license></license>
+    <forum></forum>
+    <website></website>
+    <email></email>
+    <source></source>
+ </extension>
+</addon>
+
 <addon id="plugin.video.phstreams" name="Phoenix" version="3.1.9" provider-name="tvaddons.ag">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
