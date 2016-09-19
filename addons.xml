@@ -577,31 +577,6 @@ ainda pode ver as informacoes ou assistir ao trailer do filme no submenu do addo
   </extension>
 </addon>
 
-<addon id="plugin.video.mrpiracy" name="MrPiracy.top" provider-name="MrPiracy.top" version="0.3.1">
- <requires>
-  <import addon="xbmc.python" version="2.14.0"/>
-  <import addon="script.module.beautifulsoup4" version="4.3.2"/>
-  <import addon="script.module.t0mm0.common" version="1.0.0"/>
-  <import addon="plugin.video.youtube" optional="true" />
-  </requires>
- <extension library="addon.py" point="xbmc.python.pluginsource">
-  <provides>video</provides>
- </extension>
- <extension point="xbmc.addon.metadata">
-    <summary lang="en">MrPiracy.top</summary>
-    <description lang="en">Addon site MrPiracy.top</description>
-    <description lang="en">Filmes e series no Kodi. </description>
-    <disclaimer lang="en">Como desenvolvedor do addon, nada tenho a haver com site. O site pode ser acedido por um browser. Limito-me a ler o seu conteÃºdo disponibilizado e converter em addon.</disclaimer>
-    <language></language>
-    <platform>all</platform>
-    <license></license>
-    <forum></forum>
-    <website></website>
-    <email></email>
-    <source></source>
- </extension>
-</addon>
-
 <addon id="plugin.video.phstreams" name="Phoenix" version="3.1.9" provider-name="tvaddons.ag">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
@@ -1136,11 +1111,11 @@ Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal
 	</extension>
 </addon>
 
-<addon id="repository.mrpiracy" name="MrPiracy.top RepositÃ³rio" version="1.0.2" provider-name="MrPiracy.top">
+<addon id="repository.mrpiracy" name="MrPiracy.top RepositÃ³rio" version="1.0.3" provider-name="MrPiracy.top">
 	<extension point="xbmc.addon.repository" name="MrPiracy Repository">
-		<info compressed="false">http://mrpiracy.top/kodi/repository.mrpiracy/addons.xml</info>
-		<checksum>http://mrpiracy.top/kodi//repository.mrpiracy/addons.xml.md5</checksum>
-		<datadir zip="true">http://mrpiracy.top/kodi/repository.mrpiracy/repo/</datadir>
+		<info compressed="false">http://raw.github.com/mrpiracyPT/repository.mrpiracy/master/addons.xml</info>
+		<checksum>http://raw.github.com/mrpiracyPT/repository.mrpiracy/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/mrpiracyPT/repository.mrpiracy/master/repo/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>MrPiracy.top RepositÃ³rio</summary>
