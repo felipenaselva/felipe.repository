@@ -52,6 +52,10 @@ quality=low
 target="(/dload/[^"]+720p.mp4)
 url=%s
 build=http://www.eporner.com%s
+quality=standard
+target="(/dload/[^"]+1080p.mp4)
+url=%s
+build=http://www.eporner.com%s
 quality=high
 ########################################################
 title=2video.de
@@ -100,10 +104,18 @@ url=%s
 quality=standard
 ########################################################
 title=extremetube.com
-target=quality_480p":"(http[^']+[.](mp4|flv)[^"]+)
+target=quality_480p":"(http[^"]+)
 url=%s
 header=Cookie|age_verified=1
 quality=standard
+target=quality_720p":"(http[^"]+)
+url=%s
+header=Cookie|age_verified=1
+quality=high
+target=quality_1080p":"(http[^"]+)
+url=%s
+header=Cookie|age_verified=1
+quality=high
 ########################################################
 title=xvideos.com
 target=flv_url=(http[^"]+?)&amp;
@@ -118,7 +130,8 @@ quality=standard
 title=redtube.com
 target=source src="([^"]+)"
 url=%s
-build=%s&ec_seek=0
+build=http:%s
+action=decode
 quality=standard
 ########################################################
 title=mofosex.com
@@ -153,7 +166,7 @@ build=http://en.clipa.tv%s
 quality=standard
 ########################################################
 title=simple-match
-target=(http://[^"<]+?.(mp4|flv))
+target=(https*://[^"<]+?.(mp4|flv))
 url=%s
 quality=standard
 ########################################################
@@ -210,17 +223,17 @@ url=%s
 quality=high
 ########################################################
 title=m.pornhub.com
-target=quality="([^"]+400[kK][^"]+\.mp4[^"]*)"
+target=quality_[^"]+":"([^"]+480P_[^"]+)
 url=%s
-header=Cookie|platform=mobile
-quality=low
-target=quality="([^"]+600[kK][^"]+\.mp4[^"]*)"
-url=%s
-header=Cookie|platform=mobile
+header=Cookie|platform=tablet
 quality=standard
-target=quality="([^"]+1.00[kK][^"]+\.mp4[^"]*)"
+target=quality_[^"]+":"([^"]+720P_[^"]+)
 url=%s
-header=Cookie|platform=mobile
+header=Cookie|platform=tablet
+quality=high
+target=quality_[^"]+":"([^"]+1080P_[^"]+)
+url=%s
+header=Cookie|platform=tablet
 quality=high
 ########################################################
 #title=viloader.net
@@ -231,36 +244,9 @@ quality=high
 #quality=standard
 ########################################################
 title=empflix.com
-target=flashvars\.config\s*=\s*escape\("([^"]*)"\);
+target=contentUrl" content="([^"]+)
 url=%s
-ext_target=<videoLink>(?:http:|)([^<]+100p.mp4[^<]+)
-ext_url=http:%s
-ext_build=http:%s
-quality=low
-target=flashvars\.config\s*=\s*escape\("([^"]*)"\);
-url=%s
-ext_target=<videoLink>(?:http:|)([^<]+144p.mp4[^<]+)
-ext_url=http:%s
-ext_build=http:%s
-quality=low
-target=flashvars\.config\s*=\s*escape\("([^"]*)"\);
-url=%s
-ext_target=<videoLink>(?:http:|)([^<]+480p.mp4[^<]+)
-ext_url=http:%s
-ext_build=http:%s
 quality=standard
-target=flashvars\.config\s*=\s*escape\("([^"]*)"\);
-url=%s
-ext_target=<videoLink>(?:http:|)([^<]+720p.mp4[^<]+)
-ext_url=http:%s
-ext_build=http:%s
-quality=high
-target=flashvars\.config\s*=\s*escape\("([^"]*)"\);
-url=%s
-ext_target=<videoLink>(?:http:|)([^<]+1080p.mp4[^<]+)
-ext_url=http:%s
-ext_build=http:%s
-quality=high
 ########################################################
 title=tnaflix.com
 target=([^"]+mp4[^"]+)
@@ -320,8 +306,9 @@ url=%s
 quality=standard
 ########################################################
 title=pornburst.xxx
-target=url: '(http://c[^']+)'
+target=source src="([^"]+)
 url=%s
+build=http:%s
 quality=standard
 ########################################################
 title=sexu.com
@@ -338,11 +325,11 @@ url=%s
 quality=standard
 ########################################################
 title=pornhd.com
-target='480p'  : '([^']+)',
+target='480p'\s*:s\s*'([^']+)',
 url=%s
 header=Referer|http://pornhd.com
 quality=standard
-target='720p'  : '([^']+)',
+target='720p'\s*:\s*'([^']+)',
 url=%s
 header=Referer|http://pornhd.com
 quality=high
@@ -352,3 +339,36 @@ target=video_url: '([^']+)',
 url=%s
 quality=standard
 ########################################################
+title=bitporno.com
+target="file":"([^"]+)","label":"(1080p HD|720p)"
+url=%s
+quality=high
+target="file":"([^"]+)","label":"480p"
+url=%s
+quality=standard
+target="file":"([^"]+)","label":"360p"
+url=%s
+quality=low
+target="file":"([^"]+)","label":"[^""]*"(,"default":"true"|)
+url=%s
+quality=fallback
+########################################################
+title=indiangilma.com
+target=new SWFObject.".*?config=([^"]+)"
+url=%s
+ext_target=<html5>([^<]+)<
+ext_url=%s
+quality=standard
+ext_target=<file>([^<]+)<
+ext_url=%s
+quality=fallback
+########################################################
+title=vmasala.com
+target=new SWFObject.".*?config=([^"]+)"
+url=%s
+ext_target=<filehd>([^<]+)<
+ext_url=%s
+quality=high
+ext_target=<file>([^<]+)<
+ext_url=%s
+quality=fallback

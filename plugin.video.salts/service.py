@@ -15,6 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+import sys
 import xbmc
 import xbmcgui
 import xbmcaddon
@@ -23,28 +24,19 @@ import kodi
 import log_utils
 import utils
 from salts_lib import salts_utils
+from salts_lib import image_proxy
 from salts_lib import utils2
 from salts_lib.utils2 import i18n
 from salts_lib.constants import MODES
-from salts_lib.constants import TRIG_DB_UPG
 from salts_lib.db_utils import DB_Connection
 from salts_lib.trakt_api import Trakt_API
 
 COMPONENT = __name__
 
-MAX_ERRORS = 10
-log_utils.log('Service: Installed Version: %s' % (kodi.get_version()), log_utils.LOGNOTICE, COMPONENT)
-db_connection = DB_Connection()
-if kodi.get_setting('use_remote_db') == 'false' or kodi.get_setting('enable_upgrade') == 'true':
-    if TRIG_DB_UPG:
-        db_version = db_connection.get_db_version()
-    else:
-        db_version = kodi.get_version()
-    db_connection.init_database(db_version)
-
 class Service(xbmc.Player):
     def __init__(self, *args, **kwargs):
         log_utils.log('Service: starting...', log_utils.LOGNOTICE, COMPONENT)
+        self.db_connection = DB_Connection()
         xbmc.Player.__init__(self, *args, **kwargs)
         self.win = xbmcgui.Window(10000)
         self.reset()
@@ -125,10 +117,10 @@ class Service(xbmc.Player):
             elif playedTime >= 5:
                 if percent_played <= 98:
                     log_utils.log('Service: Setting bookmark on |%s|%s|%s| to %s seconds' % (self.trakt_id, self.season, self.episode, playedTime), log_utils.LOGDEBUG, COMPONENT)
-                    db_connection.set_bookmark(self.trakt_id, playedTime, self.season, self.episode)
+                    self.db_connection.set_bookmark(self.trakt_id, playedTime, self.season, self.episode)
                     
                 if percent_played >= 75 and self._from_library:
-                    if xbmc.getCondVisibility('System.HasAddon(script.trakt)'):
+                    if kodi.has_addon('script.trakt'):
                         run = 'RunScript(script.trakt, action=sync, silent=True)'
                         xbmc.executebuiltin(run)
             self.reset()
@@ -137,14 +129,8 @@ class Service(xbmc.Player):
         log_utils.log('Service: Playback completed', log_utils.LOGNOTICE, COMPONENT)
         self.onPlayBackStopped()
 
-service = Service()
-salts_utils.do_startup_task(MODES.UPDATE_SUBS)
-salts_utils.do_startup_task(MODES.PRUNE_CACHE)
-
-was_on = False
-def disable_global_cx():
-    global was_on
-    if xbmc.getCondVisibility('System.HasAddon(plugin.program.super.favourites)'):
+def disable_global_cx(was_on):
+    if kodi.has_addon('plugin.program.super.favourites'):
         active_plugin = xbmc.getInfoLabel('Container.PluginName')
         sf = xbmcaddon.Addon('plugin.program.super.favourites')
         if active_plugin == kodi.get_id():
@@ -157,18 +143,28 @@ def disable_global_cx():
             sf.setSetting('CONTEXT', 'true')
             was_on = False
     
-last_label = ''
-begin = 0
-def show_next_up():
-    global last_label
-    global begin
+    return was_on
+    
+def check_cooldown(cd_begin):
+    black_list = ['plugin.video.metalliq', 'plugin.video.meta']
+    active_plugin = xbmc.getInfoLabel('Container.PluginName')
+    if active_plugin in black_list:
+        cd_begin = time.time()
+    
+    active = 'false' if (time.time() - cd_begin) > 30 else 'true'
+    if kodi.get_setting('cool_down') != active:
+        kodi.set_setting('cool_down', active)
+    
+    return cd_begin
+
+def show_next_up(last_label, sf_begin):
     token = kodi.get_setting('trakt_oauth_token')
     if token and xbmc.getInfoLabel('Container.PluginName') == kodi.get_id() and xbmc.getInfoLabel('Container.Content') == 'tvshows':
         if xbmc.getInfoLabel('ListItem.label') != last_label:
-            begin = time.time()
+            sf_begin = time.time()
 
         last_label = xbmc.getInfoLabel('ListItem.label')
-        if begin and (time.time() - begin) >= int(kodi.get_setting('next_up_delay')):
+        if sf_begin and (time.time() - sf_begin) >= int(kodi.get_setting('next_up_delay')):
             liz_url = xbmc.getInfoLabel('ListItem.FileNameAndPath')
             queries = kodi.parse_query(liz_url[liz_url.find('?'):])
             if 'trakt_id' in queries:
@@ -190,32 +186,58 @@ def show_next_up():
                         if next_episode['title']: msg += ' - %s' % (next_episode['title'])
                         duration = int(kodi.get_setting('next_up_duration')) * 1000
                         kodi.notify(header=i18n('next_episode'), msg=msg, duration=duration)
-            begin = 0
+            sf_begin = 0
     else:
         last_label = ''
-
-errors = 0
-while not xbmc.abortRequested:
-    try:
-        isPlaying = service.isPlaying()
-        salts_utils.do_scheduled_task(MODES.UPDATE_SUBS, isPlaying)
-        salts_utils.do_scheduled_task(MODES.PRUNE_CACHE, isPlaying)
-        if service.tracked and service.isPlayingVideo():
-            service._lastPos = service.getTime()
-
-        disable_global_cx()
-        if kodi.get_setting('show_next_up') == 'true':
-            show_next_up()
-    except Exception as e:
-        errors += 1
-        if errors >= MAX_ERRORS:
-            log_utils.log('Service: Error (%s) received..(%s/%s)...Ending Service...' % (e, errors, MAX_ERRORS), log_utils.LOGERROR, COMPONENT)
-            break
-        else:
-            log_utils.log('Service: Error (%s) received..(%s/%s)...Continuing Service...' % (e, errors, MAX_ERRORS), log_utils.LOGERROR, COMPONENT)
-    else:
-        errors = 0
-
-    kodi.sleep(500)
     
-log_utils.log('Service: shutting down...', log_utils.LOGNOTICE, COMPONENT)
+    return last_label, sf_begin
+
+def main(argv=None):  # @UnusedVariable
+    if sys.argv: argv = sys.argv  # @UnusedVariable
+    MAX_ERRORS = 10
+    errors = 0
+    last_label = ''
+    sf_begin = 0
+    cd_begin = 0
+    was_on = False
+    
+    log_utils.log('Service: Installed Version: %s' % (kodi.get_version()), log_utils.LOGNOTICE, COMPONENT)
+    monitor = xbmc.Monitor()
+    proxy = image_proxy.ImageProxy()
+    service = Service()
+    
+    salts_utils.do_startup_task(MODES.UPDATE_SUBS)
+    salts_utils.do_startup_task(MODES.PRUNE_CACHE)
+    
+    while not monitor.abortRequested():
+        try:
+            is_playing = service.isPlaying()
+            salts_utils.do_scheduled_task(MODES.UPDATE_SUBS, is_playing)
+            salts_utils.do_scheduled_task(MODES.PRUNE_CACHE, is_playing)
+            if service.tracked and service.isPlayingVideo():
+                service._lastPos = service.getTime()
+    
+            was_on = disable_global_cx(was_on)
+            cd_begin = check_cooldown(cd_begin)
+            if not proxy.running: proxy.start_proxy()
+            
+            if kodi.get_setting('show_next_up') == 'true':
+                last_label, sf_begin = show_next_up(last_label, sf_begin)
+        except Exception as e:
+            errors += 1
+            if errors >= MAX_ERRORS:
+                log_utils.log('Service: Error (%s) received..(%s/%s)...Ending Service...' % (e, errors, MAX_ERRORS), log_utils.LOGERROR, COMPONENT)
+                break
+            else:
+                log_utils.log('Service: Error (%s) received..(%s/%s)...Continuing Service...' % (e, errors, MAX_ERRORS), log_utils.LOGERROR, COMPONENT)
+        else:
+            errors = 0
+    
+        if monitor.waitForAbort(.5):
+            break
+        
+    proxy.stop_proxy()
+    log_utils.log('Service: shutting down...', log_utils.LOGNOTICE, COMPONENT)
+
+if __name__ == '__main__':
+    sys.exit(main())

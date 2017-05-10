@@ -155,7 +155,7 @@ class Decrypter(BlockFeeder):
 # 8kb blocks
 BLOCK_SIZE = (1 << 13)
 
-def _feed_stream(feeder, in_stream, out_stream, block_size=BLOCK_SIZE):
+def _feed_stream(feeder, in_stream, out_stream, block_size=BLOCK_SIZE):  # @UnusedVariable
     'Uses feeder to read and convert from in_stream and write to out_stream.'
 
     while True:

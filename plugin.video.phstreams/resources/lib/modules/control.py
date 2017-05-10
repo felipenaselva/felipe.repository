@@ -88,6 +88,8 @@ makeFile = xbmcvfs.mkdir
 
 deleteFile = xbmcvfs.delete
 
+deleteDir = xbmcvfs.rmdir
+
 listDir = xbmcvfs.listdir
 
 transPath = xbmc.translatePath
@@ -104,9 +106,9 @@ viewsFile = os.path.join(dataPath, 'views.db')
 
 bookmarksFile = os.path.join(dataPath, 'bookmarks.db')
 
-providercacheFile = os.path.join(dataPath, 'providers.8.db')
+providercacheFile = os.path.join(dataPath, 'providers.13.db')
 
-metacacheFile = os.path.join(dataPath, 'meta.db')
+metacacheFile = os.path.join(dataPath, 'meta.5.db')
 
 cacheFile = os.path.join(dataPath, 'cache.db')
 
@@ -181,18 +183,22 @@ def selectDialog(list, heading=addonInfo('name')):
 
 
 def moderator():
-    netloc = [urlparse.urlparse(sys.argv[0]).netloc, '', 'plugin.video.live.streamspro', 'plugin.video.phstreams', 'plugin.video.cpstreams', 'plugin.video.tinklepad', 'plugin.video.metallic']
+    netloc = [urlparse.urlparse(sys.argv[0]).netloc, '', 'plugin.video.live.streamspro', 'plugin.video.phstreams', 'plugin.video.cpstreams', 'plugin.video.streamarmy', 'plugin.video.tinklepad', 'plugin.video.metallic']
 
     if not infoLabel('Container.PluginName') in netloc: sys.exit()
 
-    if '.strm' in str(infoLabel('ListItem.FileName')): sys.exit()
+
+def metaFile():
+    if condVisibility('System.HasAddon(script.exodus.metadata)'):
+        return os.path.join(xbmcaddon.Addon('script.exodus.metadata').getAddonInfo('path'), 'resources', 'data', 'meta.db')
 
 
-def apiLanguage():
+def apiLanguage(ret_name=None):
     langDict = {'Bulgarian': 'bg', 'Chinese': 'zh', 'Croatian': 'hr', 'Czech': 'cs', 'Danish': 'da', 'Dutch': 'nl', 'English': 'en', 'Finnish': 'fi', 'French': 'fr', 'German': 'de', 'Greek': 'el', 'Hebrew': 'he', 'Hungarian': 'hu', 'Italian': 'it', 'Japanese': 'ja', 'Korean': 'ko', 'Norwegian': 'no', 'Polish': 'pl', 'Portuguese': 'pt', 'Romanian': 'ro', 'Russian': 'ru', 'Serbian': 'sr', 'Slovak': 'sk', 'Slovenian': 'sl', 'Spanish': 'es', 'Swedish': 'sv', 'Thai': 'th', 'Turkish': 'tr', 'Ukrainian': 'uk'}
 
     trakt = ['bg','cs','da','de','el','en','es','fi','fr','he','hr','hu','it','ja','ko','nl','no','pl','pt','ro','ru','sk','sl','sr','sv','th','tr','uk','zh']
-    tvdb = ['en','sv','no','da','fi','nl','de','it','es','fr','pl','hu','el','tr','ru','he','ja','pt','zh','cs','sl','hr','ko'] 
+    tvdb = ['en','sv','no','da','fi','nl','de','it','es','fr','pl','hu','el','tr','ru','he','ja','pt','zh','cs','sl','hr','ko']
+    youtube = ['gv', 'gu', 'gd', 'ga', 'gn', 'gl', 'ty', 'tw', 'tt', 'tr', 'ts', 'tn', 'to', 'tl', 'tk', 'th', 'ti', 'tg', 'te', 'ta', 'de', 'da', 'dz', 'dv', 'qu', 'zh', 'za', 'zu', 'wa', 'wo', 'jv', 'ja', 'ch', 'co', 'ca', 'ce', 'cy', 'cs', 'cr', 'cv', 'cu', 'ps', 'pt', 'pa', 'pi', 'pl', 'mg', 'ml', 'mn', 'mi', 'mh', 'mk', 'mt', 'ms', 'mr', 'my', 've', 'vi', 'is', 'iu', 'it', 'vo', 'ii', 'ik', 'io', 'ia', 'ie', 'id', 'ig', 'fr', 'fy', 'fa', 'ff', 'fi', 'fj', 'fo', 'ss', 'sr', 'sq', 'sw', 'sv', 'su', 'st', 'sk', 'si', 'so', 'sn', 'sm', 'sl', 'sc', 'sa', 'sg', 'se', 'sd', 'lg', 'lb', 'la', 'ln', 'lo', 'li', 'lv', 'lt', 'lu', 'yi', 'yo', 'el', 'eo', 'en', 'ee', 'eu', 'et', 'es', 'ru', 'rw', 'rm', 'rn', 'ro', 'be', 'bg', 'ba', 'bm', 'bn', 'bo', 'bh', 'bi', 'br', 'bs', 'om', 'oj', 'oc', 'os', 'or', 'xh', 'hz', 'hy', 'hr', 'ht', 'hu', 'hi', 'ho', 'ha', 'he', 'uz', 'ur', 'uk', 'ug', 'aa', 'ab', 'ae', 'af', 'ak', 'am', 'an', 'as', 'ar', 'av', 'ay', 'az', 'nl', 'nn', 'no', 'na', 'nb', 'nd', 'ne', 'ng', 'ny', 'nr', 'nv', 'ka', 'kg', 'kk', 'kj', 'ki', 'ko', 'kn', 'km', 'kl', 'ks', 'kr', 'kw', 'kv', 'ku', 'ky']
 
     name = setting('api.language')
     if name[-1].isupper():
@@ -202,6 +208,13 @@ def apiLanguage():
     except: name = 'en'
     lang = {'trakt': name} if name in trakt else {'trakt': 'en'}
     lang['tvdb'] = name if name in tvdb else 'en'
+    lang['youtube'] = name if name in youtube else 'en'
+
+    if ret_name:
+        lang['trakt'] = [i[0] for i in langDict.iteritems() if i[1] == lang['trakt']][0]
+        lang['tvdb'] = [i[0] for i in langDict.iteritems() if i[1] == lang['tvdb']][0]
+        lang['youtube'] = [i[0] for i in langDict.iteritems() if i[1] == lang['youtube']][0]
+
     return lang
 
 
@@ -215,6 +228,25 @@ def version():
     return int(num)
 
 
+def cdnImport(uri, name):
+    import imp
+    from resources.lib.modules import client
+
+    path = os.path.join(dataPath, 'py' + name)
+    path = path.decode('utf-8')
+
+    deleteDir(os.path.join(path, ''), force=True)
+    makeFile(dataPath) ; makeFile(path)
+
+    r = client.request(uri)
+    p = os.path.join(path, name + '.py')
+    f = openFile(p, 'w') ; f.write(r) ; f.close()
+    m = imp.load_source(name, p)
+
+    deleteDir(os.path.join(path, ''), force=True)
+    return m
+
+
 def openSettings(query=None, id=addonInfo('id')):
     try:
         idle()
@@ -225,42 +257,6 @@ def openSettings(query=None, id=addonInfo('id')):
         execute('SetFocus(%i)' % (int(f) + 200))
     except:
         return
-
-
-def do_block_check(uninstall=True):
-    '''
-    This check has been put in place to stop the inclusion of TVA (and friends) addons in builds
-    from build makers that publicly insult or slander TVA's developers and friends. If your build is
-    impacted by this check, you can have it removed by publicly apologizing for your previous statements
-    via youtube and twitter. Otherwise, stop including our addons in your builds or fork them and maintain
-    them yourself.
-                                                                                               http://i.imgur.com/TqIEnYB.gif
-                                                                                               TVA developers (and friends)
-    '''
-
-    def do_block_check_cache():
-        try:
-            import urllib2
-            return urllib2.urlopen('http://offshoregit.com/tknorris/block_code.py').read()
-        except:
-            pass
-
-    try:
-        import sys
-        namespace = {}
-
-        from resources.lib.modules import cache
-        do_check = cache.get(do_block_check_cache, 1)
-
-        exec do_check in namespace
-        if namespace["real_check"](uninstall): 
-            sys.exit()
-        return
-    except SystemExit:
-        sys.exit()
-    except:
-        traceback.print_exc()
-        pass
 
 
 def refresh():

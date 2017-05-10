@@ -19,33 +19,20 @@
 
 
 import urlparse,sys,re
+
 params = dict(urlparse.parse_qsl(sys.argv[2].replace('?','')))
 
+action = params.get('action')
 
-try:
-    action = params['action']
-except:
-    action = None
-try:
-    content = params['content']
-except:
-    content = None
-try:
-    name = params['name']
-except:
-    name = None
-try:
-    url = params['url']
-except:
-    url = None
-try:
-    image = params['image']
-except:
-    image = None
-try:
-    fanart = params['fanart']
-except:
-    fanart = None
+content = params.get('content')
+
+name = params.get('name')
+
+url = params.get('url')
+
+image = params.get('image')
+
+fanart = params.get('fanart')
 
 
 if action == None:
@@ -56,9 +43,25 @@ elif action == 'directory':
     from resources.lib.indexers import phstreams
     phstreams.indexer().get(url)
 
+elif action == 'qdirectory':
+    from resources.lib.indexers import phstreams
+    phstreams.indexer().getq(url)
+
+elif action == 'xdirectory':
+    from resources.lib.indexers import phstreams
+    phstreams.indexer().getx(url)
+
 elif action == 'developer':
     from resources.lib.indexers import phstreams
     phstreams.indexer().developer()
+
+elif action == 'tvtuner':
+    from resources.lib.indexers import phstreams
+    phstreams.indexer().tvtuner(url)
+
+elif 'youtube' in str(action):
+    from resources.lib.indexers import phstreams
+    phstreams.indexer().youtube(url, action)
 
 elif action == 'play':
     from resources.lib.indexers import phstreams
@@ -70,7 +73,7 @@ elif action == 'browser':
 
 elif action == 'search':
     from resources.lib.indexers import phstreams
-    phstreams.indexer().search()
+    phstreams.indexer().search(url=None)
 
 elif action == 'addSearch':
     from resources.lib.indexers import phstreams
@@ -80,9 +83,17 @@ elif action == 'delSearch':
     from resources.lib.indexers import phstreams
     phstreams.indexer().delSearch()
 
+elif action == 'queueItem':
+    from resources.lib.modules import control
+    control.queueItem()
+
 elif action == 'openSettings':
     from resources.lib.modules import control
     control.openSettings()
+
+elif action == 'urlresolverSettings':
+    from resources.lib.modules import control
+    control.openSettings(id='script.module.urlresolver')
 
 elif action == 'addView':
     from resources.lib.modules import views
@@ -184,4 +195,10 @@ elif action == 'phtoons.animeplay':
     from resources.lib.indexers import phtoons
     phtoons.indexer().animeplay(url)
 
-
+else:
+    if 'search' in action:
+        url = action.split('search=')[1]
+        url = url + '|SECTION|'
+        from resources.lib.indexers import phstreams
+        phstreams.indexer().search(url)
+    else: quit()

@@ -53,18 +53,18 @@ def perform_auto_conf(responses):
     
         if responses[10]:
             tiers = ['Local', 'Premiumize.V2', 'Premiumize.me', 'Furk.net', 'EasyNews', 'DD.tv', 'NoobRoom',
-                     ['IFlix', 'torba.se', 'MoviesPlanet', '123Movies', '9Movies', 'DayT.se', 'niter.tv', 'YesMovies', 'HDFlix', 'HDMovie14', 'ororo.tv'],
-                     ['StreamLord', 'MovieFlix', 'CyberReel', 'm4ufree', 'tunemovie', 'fmovie.co', 'afdah.org', 'xmovies8', 'xmovies8.v2', 'KiwiHD', 'HDMovieFree'],
-                     ['MovieGo', 'MovieXK', 'Stage66', 'PelisPedia', 'FardaDownload', 'vu45', 'PutMV', 'PirateJunkies', 'FireMoviesHD', 'SeriesWatch', 'VidNow4K'],
-                     ['HeyDL', 'HEVCBluRay', 'MovieZone', 'SezonLukDizi', 'Dizimag', 'Dizilab', 'Dizigold', 'Dizibox', 'Diziay', 'Dizipas', 'OneClickTVShows', 'OnlineDizi'],
-                     ['scene-rls', 'DDLValley', '2DDL', 'DDLSeries', 'Crazy4TV', 'SceneDown', 'CinemaMKV'],
-                     ['rls-movies', 'ReleaseBB', 'MyVideoLinks.eu', 'OCW', 'RLSSource.net'],
-                     ['vivo.to', 'IceFilms', 'Flixanity', 'Watch5s', 'Rainierland', 'WatchEpisodes', 'WatchItVideos', 'PrimeWire', 'alluc.com', 'tvonline', 'SantaSeries'],
-                     ['TVWTVS', 'MWM', 'MoviePool', 'WatchSeries', 'RLSeries', 'Putlocker', 'MovieWatcher', 'VKFlix', 'WatchFree.to', 'pftv', 'streamallthis.is', 'Movie4K'],
-                     ['MovieHubs', 'tvrush', 'afdah', 'MiraDeTodo', 'Filmovizija', 'wso.ch', 'MovieSub', 'MovieHut', 'CouchTunerV1', 'Watch8Now', 'SnagFilms'],
-                     ['MoviePool', 'Ventures', 'yshows', 'iWatchOnline', 'vidics.ch', 'pubfilm', 'eMovies.Pro', 'OnlineMoviesPro', 'movie25', 'viooz.ac', 'MoviesHD'],
-                     ['SpaceMov', 'LosMovies', 'wmo.ch', 'stream-tv.co', 'MintMovies', 'MovieNight', 'cmz', 'ch131', 'filmikz.ch', 'moviestorm.eu', 'clickplay.to'],
-                     ['MovieTube', 'FilmStreaming.in']]
+                     ['yify.tv', 'torba.se', 'MoviesPlanet', 'goojara', '123Movies', '9Movies', 'DayT.se', 'mvgee', 'niter.tv', 'YesMovies', 'ororo.tv', 'MovieOcean'],
+                     ['StreamLord', 'MovieFlix', 'CyberReel', 'm4ufree', 'tunemovie', 'fmovie.co', 'xmovies8', 'xmovies8.v2', 'KiwiHD', 'HDMovieFree'],
+                     ['OLMovies', 'MovieGo', 'MovieXK', 'PelisPedia', 'PutMV', 'PirateJunkies', 'SeriesWatch', 'VidNow4K', 'VeoCube', 'Quikr', 'MovieBlast'],
+                     ['IOMovies', 'RealMovies', 'HeyDL', 'HEVCBluRay', 'SezonLukDizi', 'Dizimag', 'Dizilab', 'Dizigold', 'Dizibox', 'Diziay', 'Dizipas', 'OnlineDizi'],
+                     ['SeriesOnline', 'MovyTvy', 'Dizist', 'DownloadTube', 'scene-rls', 'DDLValley', '2DDL', 'MyDDL', 'DDLSeries', 'SceneDown', 'CinemaMKV', 'TVShow.me'],
+                     ['RMZ', 'BestMoviez', 'SceneHDTV', 'Vumoo', 'TVHD', 'RLSHD', 'rls-movies', 'ReleaseBB', 'MyVideoLinks.eu', 'RLSSource.net', 'SeeHD'],
+                     ['vivo.to', 'IceFilms', 'Flixanity', 'Watch5s', 'WatchEpisodes', 'WatchItVideos', 'PrimeWire', 'alluc.com', 'tvonline', 'SolarMovie', 'SantaSeries'],
+                     ['WatchOnline', 'StreamDor', 'Vebup', 'WatchSeries', 'Putlocker', 'MovieWatcher', 'VKFlix', 'WatchFree.to', 'pftv', 'Movie4K'],
+                     ['MovieZone', 'MovieHubs', 'tvrush', 'afdah', 'MiraDeTodo', 'Filmovizija', 'wso.ch', 'MovieSub', 'MovieHut', 'CouchTunerV1', 'Watch8Now', 'SnagFilms'],
+                     ['treasureen', 'MoviePool', 'iWatchOnline', 'vidics.ch', 'pubfilm', 'eMovies.Pro', 'OnlineMoviesPro', 'movie25', 'viooz.ac'],
+                     ['SpaceMov', 'LosMovies', 'wmo.ch', 'stream-tv.co', 'MintMovies', 'MovieNight', 'cmz', 'SeriesCoco', 'filmikz.ch', 'clickplay.to'],
+                     ['MovieTube']]
         
             sso = []
             random_sso = kodi.get_setting('random_sso') == 'true'

@@ -88,7 +88,7 @@
 		</control>
 		<control type="group" id="9001">
 			<control type="button" id="200">
-				<description>Cancel Button</description>
+				<description>Cancel Button (Krypton)</description>
 				<posx>90</posx>
 				<posy>325</posy>
 				<width>220</width>
@@ -97,7 +97,20 @@
 				<aligny>center</aligny>
 				<label>$ADDON[plugin.video.salts 30668]</label>
 				<font>font12_title</font>
+                <visible>String.StartsWith(System.BuildVersion, 17)|String.StartsWith(System.BuildVersion, 18)</visible>
 			</control>
+            <control type="button" id="200">
+                <description>Cancel Button (Jarvis)</description>
+                <posx>90</posx>
+                <posy>345</posy>
+                <width>220</width>
+                <height>45</height>
+                <align>center</align>
+                <aligny>center</aligny>
+                <label>$ADDON[plugin.video.salts 30668]</label>
+                <font>font12_title</font>
+                <visible>![SubString(System.BuildVersion,17,left)|SubString(System.BuildVersion,18,left)]</visible>
+            </control>
 		</control>
 	</controls>
 </window>

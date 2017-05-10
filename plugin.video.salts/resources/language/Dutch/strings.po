@@ -2,15 +2,17 @@
 # Addon id: plugin.video.salts
 # Addon Provider: TV Addons
 # Translators:
-# Mike Bike, 2015-2016
+# Jan Schouten, 2016
+# Mike Bike, 2015-2017
 # Rodrigo, 2015
 # tknorris, 2015
+# Youko van der Blom, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: SALTS\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2016-07-10 21:47+0000\n"
-"Last-Translator: Mike Bike\n"
+"PO-Revision-Date: 2017-03-28 19:56+0000\n"
+"Last-Translator: tknorris\n"
 "Language-Team: Dutch (http://www.transifex.com/tv-addons/salts/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +34,7 @@ msgstr "Film"
 
 msgctxt "#30003"
 msgid "TV Show"
-msgstr "TV Show"
+msgstr "TV Serie"
 
 msgctxt "#30004"
 msgid "Settings"
@@ -80,7 +82,7 @@ msgstr "Recent Geüpdate %s"
 
 msgctxt "#30015"
 msgid "Recommended %s"
-msgstr "Aangeraden %s"
+msgstr "Aanbevolen %s"
 
 msgctxt "#30016"
 msgid "My %s Collection"
@@ -128,11 +130,11 @@ msgstr "Zoeken"
 
 msgctxt "#30027"
 msgid "Recent Searches"
-msgstr "Recente Opzoekingen"
+msgstr "Recente gezocht"
 
 msgctxt "#30028"
 msgid "Saved Searches"
-msgstr "Bewaarde Opzoekingen"
+msgstr "Bewaarde zoektermen"
 
 msgctxt "#30029"
 msgid "Force Refresh"
@@ -168,11 +170,11 @@ msgstr "Scraper Uitzetten"
 
 msgctxt "#30037"
 msgid "Move Up"
-msgstr "Hoger Plaatsen"
+msgstr "Omhoog verplaatsen"
 
 msgctxt "#30038"
 msgid "Move Down"
-msgstr "Lager Plaatsen"
+msgstr "Omlaag verplaatsen"
 
 msgctxt "#30039"
 msgid "Move To..."
@@ -180,7 +182,7 @@ msgstr "Verplaatsen Naar..."
 
 msgctxt "#30040"
 msgid "Enter New Position (1 - %s)"
-msgstr "Geef Nieuwe Positie in (1 - %s)"
+msgstr "Geef Nieuwe Positie op (1 - %s)"
 
 msgctxt "#30041"
 msgid "Set Default %s View"
@@ -204,7 +206,7 @@ msgstr "Verwijder [B][COLOR red]VOLLEDIGE[/COLOR][/B] URL Cache"
 
 msgctxt "#30046"
 msgid "This will set some settings to values that have been found to"
-msgstr "Dit zet een aantal instellingen naar waardes dewelke optimaal zijn"
+msgstr "Dit zet een aantal instellingen naar waardes welke optimaal zijn"
 
 msgctxt "#30047"
 msgid "be effective. The following settings will be changed:"
@@ -212,6 +214,8 @@ msgstr "bevonden. De volgende instellingen zullen veranderd worden:"
 
 msgctxt "#30048"
 msgid ""
+"[COLOR red]Scraper Sort Order, Source Sorting, Calendar Start Day, Trakt "
+"Timeout, Scraper Timeout, Watchlist in MNE, Test Direct[/COLOR]"
 msgstr "[COLOR red]Scraper Volgorder, Bron Volgorder, Kalender start dag, Trakt Tijdslimiet, Scraper Tijdslimiet, Volglijst in MNE, Test Direct[/COLOR]"
 
 msgctxt "#30049"
@@ -344,7 +348,7 @@ msgstr "Kies uw stream"
 
 msgctxt "#30081"
 msgid "Set Related Url"
-msgstr "Zet Verwante URL"
+msgstr "Gerelateerde URL instellen"
 
 msgctxt "#30082"
 msgid "Received result from: %s"
@@ -356,7 +360,7 @@ msgstr "Te Wijzigen URL (%s)"
 
 msgctxt "#30084"
 msgid "Related %s url at %s"
-msgstr "Verwante %s URL op %s"
+msgstr "Gerelateerde %s URL op %s"
 
 msgctxt "#30085"
 msgid "[COLOR blue]%s[/COLOR] Related Url Set"
@@ -364,15 +368,15 @@ msgstr "[COLOR blue]%s[/COLOR] Verwante URL Reeks"
 
 msgctxt "#30086"
 msgid "Manual Search"
-msgstr "Manuele Opzoeking"
+msgstr "Handmatig zoeken"
 
 msgctxt "#30087"
 msgid "Select Related"
-msgstr "Kies Verwante"
+msgstr "Kies gerelateerde"
 
 msgctxt "#30088"
 msgid "Enter Search"
-msgstr "Geef Opzoeking in"
+msgstr "Geef zoekterm op"
 
 msgctxt "#30089"
 msgid "Scraper does not support searching"
@@ -380,7 +384,7 @@ msgstr "Zoeken wordt niet ondersteund door Scraper"
 
 msgctxt "#30090"
 msgid "Enter Rating (unrate, or 1-10)"
-msgstr "Geef Beoordeeling in: (verwijder, of 1-10)"
+msgstr "Vul beoordeling in: (verwijder, of 1-10)"
 
 msgctxt "#30091"
 msgid "Input TVShow ID"
@@ -412,7 +416,7 @@ msgstr "Gemarkeerd als %s"
 
 msgctxt "#30098"
 msgid "Updating Subscriptions..."
-msgstr "Bezig met Abonnementen te updaten..."
+msgstr "Abonnementen bijwerken..."
 
 msgctxt "#30099"
 msgid "Next Update in %0.1f hours"
@@ -520,7 +524,7 @@ msgstr "Volgende Week"
 
 msgctxt "#30125"
 msgid "Mark as Unwatched (SALTS)"
-msgstr "Bekeken status Verwijderen (SALTS)"
+msgstr "Markeer als niet bekeken (SALTS)"
 
 msgctxt "#30126"
 msgid "Mark as Watched (SALTS)"
@@ -628,7 +632,7 @@ msgstr "Behoud als actief"
 
 msgctxt "#30152"
 msgid "Disable It"
-msgstr "Desactiveer Het"
+msgstr "Deactiveren"
 
 msgctxt "#30153"
 msgid "Trakt Bookmark Exists"
@@ -931,8 +935,8 @@ msgid "Remove Unusable Indirect sources from results"
 msgstr "Verwijder Onbruikbare Indirecte bronnen van resultaat "
 
 msgctxt "#30239"
-msgid "Show Debrid sources in Green"
-msgstr "Toon Debrid bronnen in het Groen"
+msgid "Highlight Debrid Sources in results"
+msgstr "Highlight Debrid Bronnen in resultaten"
 
 msgctxt "#30240"
 msgid "No Limit on Maximum Source Results"
@@ -964,6 +968,7 @@ msgstr "SALTS Database Fout Herstellen"
 
 msgctxt "#30247"
 msgid ""
+"The SALTS DB has an issue that may be correctable by a forced DB migration."
 msgstr "De SALTS DB heeft een Fout die hersteld kan worden door een DB migratie"
 
 msgctxt "#30248"
@@ -1130,6 +1135,66 @@ msgctxt "#30288"
 msgid "Working..."
 msgstr "Bezig..."
 
+msgctxt "#30289"
+msgid "Re-Scrape All"
+msgstr "Alles Opnieuw Ophalen"
+
+msgctxt "#30290"
+msgid "Manual Search (All Unmatched Only)"
+msgstr "Handmatig Zoeken (Alle Niet Gematchte Resultaten)"
+
+msgctxt "#30291"
+msgid "Torba Account Authorization"
+msgstr "Torba Account Authorisatie"
+
+msgctxt "#30292"
+msgid "Torba Authorization Complete"
+msgstr "Torba Authorisatie Gereed"
+
+msgctxt "#30293"
+msgid "Torba Authorization Failed"
+msgstr "Torba Authorisatie Mislukt"
+
+msgctxt "#30294"
+msgid "Authorize SALTS to access my torba account"
+msgstr "Authoriseer SALTS om mijn torba account te benaderen"
+
+msgctxt "#30295"
+msgid "and login when prompted"
+msgstr "En login wanneer gevraagd wordt"
+
+msgctxt "#30296"
+msgid "Flush Image Cache"
+msgstr "Afbeeldings Cache Legen"
+
+msgctxt "#30297"
+msgid "Are you sure you want to clear the image metadata cache?"
+msgstr "Weet u zeker dat je de Afbeeldings cache wilt legen?"
+
+msgctxt "#30298"
+msgid "The addon will be significantly slower until is is re-cached."
+msgstr "De addon zal iets langzamer werken tot alles weer is re-cached."
+
+msgctxt "#30299"
+msgid "Flush Complete"
+msgstr "Legen Voltooid"
+
+msgctxt "#30300"
+msgid "Refresh Images"
+msgstr "Afbeeldingen verversen"
+
+msgctxt "#30301"
+msgid "Private Scraper Updated: "
+msgstr "Prive Scraper Geupdate:"
+
+msgctxt "#30302"
+msgid "Reset Torba Authorization"
+msgstr "Reset Torba Authorisatie"
+
+msgctxt "#30303"
+msgid "Torba Authorization Reset"
+msgstr "Torba Authorisatie Reset"
+
 msgctxt "#30500"
 msgid "Addon Theme"
 msgstr "Addon Thema"
@@ -1203,8 +1268,8 @@ msgid "Year"
 msgstr "Jaren"
 
 msgctxt "#30518"
-msgid "Activity"
-msgstr "Activteit"
+msgid "Recent Activity"
+msgstr "Recente Activiteit"
 
 msgctxt "#30519"
 msgid "Title"
@@ -1727,8 +1792,8 @@ msgid "All"
 msgstr "Alles"
 
 msgctxt "#30652"
-msgid "Show Debrid Supported Sources in Green"
-msgstr "Toon Bronnen in Groen die gebruikt worden door Debrid "
+msgid "Show Debrid Supported Sources in ..."
+msgstr "Toon Debrid Ondersteunde Bronnen in ..."
 
 msgctxt "#30653"
 msgid "6th Sort Key"
@@ -1941,4 +2006,96 @@ msgstr "Meest Toegevoegd (Maand)"
 msgctxt "#30706"
 msgid "Most Collected (All)"
 msgstr "Meest Toegevoegd (Totaal)"
+
+msgctxt "#30707"
+msgid "Date Format"
+msgstr "Datum Formaat"
+
+msgctxt "#30708"
+msgid "Past Activity"
+msgstr "Laatste Activiteit"
+
+msgctxt "#30709"
+msgid "Always Show Custom Progress Dialogs"
+msgstr "Toon Altijd Custom Voortgang Dialogen"
+
+msgctxt "#30710"
+msgid "Image Metadata API Keys"
+msgstr "Afbeelding Metadata API Sleutel"
+
+msgctxt "#30711"
+msgid "Fanart.tv API Key (Blank = Disable)"
+msgstr "Fanart.tv API Sleutel (Leeg = Uitgeschakeld)"
+
+msgctxt "#30712"
+msgid "TMDB API Key (Blank = Disable)"
+msgstr "TMDB API Sleutel (Leeg = Uitgeschakeld)"
+
+msgctxt "#30713"
+msgid "TVDB API Key (Blank = Disable)"
+msgstr "TVDB API Sleutel (Leeg = Uitgeschakeld)"
+
+msgctxt "#30714"
+msgid "Enable OMDB Images"
+msgstr "Inschakelen OMDB Afbeeldingen"
+
+msgctxt "#30715"
+msgid "Enable TVMaze Images"
+msgstr "Inschakelen TVMaze Afbeeldingen"
+
+msgctxt "#30716"
+msgid "Flush Image Cache..."
+msgstr "Afbeeldingen Cache Legen..."
+
+msgctxt "#30717"
+msgid "Enable Fanart.tv Images"
+msgstr "Inschakelen Fanart.tv Afbeeldingen"
+
+msgctxt "#30718"
+msgid "Fanart.tv Personal API Key"
+msgstr "Fanart.tv Persoonlijke API Sleutel"
+
+msgctxt "#30719"
+msgid "Enable Backgrounds/Fanart"
+msgstr "Inschakelen Achtergronden/Fanart"
+
+msgctxt "#30720"
+msgid "Enable Posters"
+msgstr "Inschakelen Posters"
+
+msgctxt "#30721"
+msgid "Enable Banners"
+msgstr "Inschakelen Banners"
+
+msgctxt "#30722"
+msgid "Enable Clearart"
+msgstr "Inschakelen Clearart"
+
+msgctxt "#30723"
+msgid "Artwork Scraping"
+msgstr "Artwork Scraping"
+
+msgctxt "#30724"
+msgid "Enable Thumbnails"
+msgstr "Inschakelen Thumbnails"
+
+msgctxt "#30725"
+msgid "Artwork Types"
+msgstr "Artwork Types"
+
+msgctxt "#30726"
+msgid "    Use animated posters when available"
+msgstr "Gebruik geanimateerde posters als deze beschikbaar zijn"
+
+msgctxt "#30727"
+msgid "Enable Cast Thumbnails"
+msgstr "Inschakelen Cast Thumbnails"
+
+msgctxt "#30728"
+msgid "    *** Install TMDB API Cache ***"
+msgstr "    *** Installeer TMDB API Cache ***"
+
+msgctxt "#30729"
+msgid "    Debrid Highlight Color"
+msgstr "Debrid Highlight Kleur"
 

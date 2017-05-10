@@ -16,7 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 import re
-import urllib
 import urlparse
 import kodi
 from salts_lib import scraper_utils
@@ -44,39 +43,39 @@ class Scraper(scraper.Scraper):
         return 'WatchFree.to'
 
     def get_sources(self, video):
+        hosters = []
         source_url = self.get_url(video)
-        sources = []
-        if source_url and source_url != FORCE_NO_MATCH:
-            url = urlparse.urljoin(self.base_url, source_url)
-            html = self._http_get(url, cache_limit=.5)
+        if not source_url or source_url == FORCE_NO_MATCH: return hosters
+        url = scraper_utils.urljoin(self.base_url, source_url)
+        html = self._http_get(url, cache_limit=.5)
 
-            pattern = 'href="[^"]+gtfo=([^&"]+)[^>]+>([^<]+)'
-            for match in re.finditer(pattern, html, re.DOTALL | re.I):
-                url, link_name = match.groups()
-                url = url.decode('base-64')
-                host = urlparse.urlsplit(url).hostname
-                match = re.search('Part\s+(\d+)', link_name)
-                if match:
-                    if match.group(1) == '2':
-                        del sources[-1]  # remove Part 1 previous link added
-                    continue
-                
-                source = {'multi-part': False, 'url': url, 'host': host, 'class': self, 'quality': scraper_utils.get_quality(video, host, QUALITIES.HIGH), 'views': None, 'rating': None, 'direct': False}
-                sources.append(source)
+        pattern = 'href="[^"]+gtfo=([^&"]+)[^>]+>([^<]+)'
+        for match in re.finditer(pattern, html, re.DOTALL | re.I):
+            url, link_name = match.groups()
+            url = url.decode('base-64')
+            host = urlparse.urlsplit(url).hostname
+            match = re.search('Part\s+(\d+)', link_name)
+            if match:
+                if match.group(1) == '2':
+                    del hosters[-1]  # remove Part 1 previous link added
+                continue
+            
+            source = {'multi-part': False, 'url': url, 'host': host, 'class': self, 'quality': scraper_utils.get_quality(video, host, QUALITIES.HIGH), 'views': None, 'rating': None, 'direct': False}
+            hosters.append(source)
 
-        return sources
+        return hosters
 
-    def search(self, video_type, title, year, season=''):
+    def search(self, video_type, title, year, season=''):  # @UnusedVariable
+        results = []
         if video_type == VIDEO_TYPES.MOVIE:
             section = '1'
             url_marker = '-movie-online-'
         else:
             section = '2'
             url_marker = '-tv-show-online-'
-        search_url = urlparse.urljoin(self.base_url, '/?keyword=%s&search_section=%s' % (urllib.quote_plus(title), section))
-        html = self._http_get(search_url, cache_limit=.25)
+        params = {'keyword': title, 'search_section': section}
+        html = self._http_get(self.base_url, params=params, cache_limit=1)
 
-        results = []
         for match in re.finditer('class="item".*?href="([^"]+)"\s*title="Watch (.*?)(?:\s+\((\d{4})\))?"', html):
             url, res_title, res_year = match.groups('')
             if url_marker in url and (not year or not res_year or year == res_year):

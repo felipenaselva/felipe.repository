@@ -21,7 +21,7 @@
 
 import re,urllib,urlparse
 import json, time, random, string
-import base64
+import base64, hashlib
 
 from resources.lib.libraries import cleantitle
 from resources.lib.libraries import cache
@@ -32,71 +32,25 @@ from resources.lib import resolvers
 
 class source:
     def __init__(self):
-        self.base_link = 'http://movieshd.watch'
-        self.search_link = '/api/v1/cautare/upd'
+        self.base_link = 'https://cartoonhd.cc'
+        #http://api.cartoonh0A6ru35yevokjaqbb8
+        self.social_lock = '0A6ru35yevokjaqbb8'
+        #http://api.cartoonhd.online/api/v1/0A6ru35yevokjaqbb8
+        self.search_link = '%s/api/v1/%s' % (self.base_link, self.social_lock)
 
 
     def get_movie(self, imdb, title, year):
         try:
-            tk = cache.get(self.movieshd_token, 8)
-
-            st = self.movieshd_set() ; rt = self.movieshd_rt(tk + st)
-
-            tm = int(time.time() * 1000)
-
-            headers = {'X-Requested-With': 'XMLHttpRequest'}
-
-            url = urlparse.urljoin(self.base_link, self.search_link)
-
-            post = {'q': title.lower(), 'limit': '100', 'timestamp': tm, 'verifiedCheck': tk, 'sl': st, 'rt': rt}
-            post = urllib.urlencode(post)
-
-            r = client.request(url, post=post, headers=headers, output='cookie2')
-            r = json.loads(r)
-
-            t = cleantitle.get(title)
-
-            r = [i for i in r if 'year' in i and 'meta' in i]
-            r = [(i['permalink'], i['title'], str(i['year']), i['meta'].lower()) for i in r]
-            r = [i for i in r if 'movie' in i[3]]
-            r = [i[0] for i in r if t == cleantitle.get(i[1]) and year == i[2]][0]
-
-            url = re.findall('(?://.+?|)(/.+)', r)[0]
-            url = client.replaceHTMLCodes(url)
-            url = url.encode('utf-8')
+            url = {'imdb': imdb, 'title': title, 'year': year}
+            url = urllib.urlencode(url)
             return url
         except:
             return
 
     def get_show(self, imdb, tvdb, tvshowtitle, year):
         try:
-            tk = cache.get(self.movieshd_token, 8)
-
-            st = self.movieshd_set() ; rt = self.movieshd_rt(tk + st)
-
-            tm = int(time.time() * 1000)
-
-            headers = {'X-Requested-With': 'XMLHttpRequest'}
-
-
-            url = urlparse.urljoin(self.base_link, self.search_link)
-
-            post = {'q': tvshowtitle.lower(), 'limit': '20', 'timestamp': tm, 'verifiedCheck': tk, 'sl': st, 'rt': rt}
-            post = urllib.urlencode(post)
-
-            r = client.request(url, post=post, headers=headers)
-            r = json.loads(r)
-
-            t = cleantitle.get(tvshowtitle)
-
-            r = [i for i in r if 'year' in i and 'meta' in i]
-            r = [(i['permalink'], i['title'], str(i['year']), i['meta'].lower()) for i in r]
-            r = [i for i in r if 'tv' in i[3]]
-            r = [i[0] for i in r if t == cleantitle.get(i[1]) and year == i[2]][0]
-
-            url = re.findall('(?://.+?|)(/.+)', r)[0]
-            url = client.replaceHTMLCodes(url)
-            url = url.encode('utf-8')
+            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year}
+            url = urllib.urlencode(url)
             return url
         except:
             return
@@ -105,48 +59,79 @@ class source:
         try:
             if url == None: return
 
-            r = '%s/season/%01d/episode/%01d' % (url, int(season), int(episode))
-
-            url = re.findall('(?://.+?|)(/.+)', r)[0]
-            url = client.replaceHTMLCodes(url)
-            url = url.encode('utf-8')
+            url = urlparse.parse_qs(url)
+            url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
+            url['title'], url['premiered'], url['season'], url['episode'] = title, premiered, season, episode
+            url = urllib.urlencode(url)
             return url
         except:
             return
 
     def get_sources(self, url, hosthdDict, hostDict, locDict):
-        try:
+        #            for i in links: sources.append({'source': i['source'], 'quality': i['quality'], 'provider': 'MoviesHD', 'url': i['url']})
+        #try:
             sources = []
 
             if url == None: return sources
 
-            url1 = urlparse.urljoin(self.base_link, url)
+            if not str(url).startswith('http'):
 
-            result, headers, content, cookie = client.request(url1, output='extended')
+                data = urlparse.parse_qs(url)
+                data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
 
-            auth = re.findall('__utmx=(.+)', cookie)[0].split(';')[0]
+                title = data['tvshowtitle'] if 'tvshowtitle' in data else data['title']
+
+                try:imdb = data['imdb']
+                except: imdb = ''
+                year = data['year']
+
+                if 'tvshowtitle' in data:
+                    url = '%s/tv-show/%s/season/%01d/episode/%01d' % (
+                    self.base_link, cleantitle.geturl(title).replace('+','-'), int(data['season']), int(data['episode']))
+                else:
+                    url = '%s/movie/%s' % (self.base_link, cleantitle.geturl(title).replace('+','-'))
+
+                result = client.request(url, limit='5')
+
+                if result == None and not 'tvshowtitle' in data:
+                    url += '-%s' % year
+                    result = client.request(url, limit='5')
+
+                result = client.parseDOM(result, 'title')[0]
+
+                if '%TITLE%' in result: raise Exception()
+
+                r = client.request(url, output='extended')
+
+                if not imdb in r[0]: raise Exception()
+
+
+            else:
+                url = urlparse.urljoin(self.base_link, url)
+
+                r = client.request(url, output='extended')
+
+            cookie = r[4];
+            headers = r[3];
+            result = r[0]
+
+            try:
+                auth = re.findall('__utmx=(.+)', cookie)[0].split(';')[0]
+            except:
+                auth = 'false'
             auth = 'Bearer %s' % urllib.unquote_plus(auth)
-            print cookie
 
             headers['Authorization'] = auth
-            headers['X-Requested-With'] = 'XMLHttpRequest'
-            #headers['Content-Type']='application/x-www-form-urlencoded; charset=UTF-8'
-            #headers['Accept'] = 'application/json, text/javascript, */*; q=0.01'
+            headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+            headers['Accept'] = 'application/json, text/javascript, */*; q=0.01'
             headers['Cookie'] = cookie
+            headers['Referer'] = url
 
-            u = '/ajax/embeds.php'
+            u = '/ajax/tnembeds.php'
+            self.base_link = client.request(self.base_link, output='geturl')
             u = urlparse.urljoin(self.base_link, u)
 
-            #action = 'getEpisodeEmb' if '/episode/' in url else 'getMovieEmb'
-            if '/episode/' in url:
-                url = urlparse.urljoin(self.base_link,  '/tv-series'+ url)
-                action = 'getEpisodeEmb'
-            else:
-                action = 'getMovieEmb'
-                url = urlparse.urljoin(self.base_link, '/tv-series' + url)
-
-            headers['Referer'] = url
-            control.sleep(200)
+            action = 'getEpisodeEmb' if '/episode/' in url else 'getMovieEmb'
 
             elid = urllib.quote(base64.encodestring(str(int(time.time()))).strip())
 
@@ -156,37 +141,35 @@ class source:
 
             post = {'action': action, 'idEl': idEl, 'token': token, 'elid': elid}
             post = urllib.urlencode(post)
-            print post
-            print headers
 
-
-            r = client.request(u, post=post, headers=headers, output='cookie2')
-            print("####",r)
+            r = client.request(u, post=post, XHR=True)
             r = str(json.loads(r))
-            r = client.parseDOM(r, 'iframe', ret='.+?') + client.parseDOM(r, 'IFRAME', ret='.+?')
+            r = re.findall('\'(http.+?)\'', r) + re.findall('\"(http.+?)\"', r)
 
             links = []
 
-            for i in r:
-                try: links += [{'source': 'gvideo', 'quality': client.googletag(i)[0]['quality'], 'url': i}]
-                except: pass
+            links += [{'source': 'gvideo', 'url': i, 'quality': client.googletag(i)[0]['quality']} for i in r if 'google' in i]
+            links += [{'source': 'streamango', 'url': i, 'quality': 'HD'} for i in r if 'streamango' in i]
+            links += [{'source': 'openload.co', 'url': i, 'quality': 'HD'} for i in r if 'openload.co' in i]
 
-            links += [{'source': 'openload', 'quality': 'SD', 'url': i} for i in r if 'openload.co' in i]
-            links += [{'source': 'videomega', 'quality': 'SD', 'url': i} for i in r if 'videomega.tv' in i]
-            for i in links: sources.append({'source': i['source'], 'quality': i['quality'], 'provider': 'MoviesHD', 'url': i['url']})
+            for i in links:
+                sources.append({'source': i['source'], 'quality': i['quality'], 'provider': 'MoviesHD', 'url': i['url']})
 
             return sources
-        except:
-            return sources
+
+        #except Exception as e:
+        #    control.log('ERROR moviesHD %s' % e)
+        #    return sources
 
 
     def resolve(self, url):
         try:
-            control.log('@#@ PUT %s' % url)
-            if 'openload.co' in url or 'videomega.tv' in url:
-                control.log('@#@ PUT resolving ')
-                url = resolvers.request(url)
-            return url
+            if 'openload.co' in url or 'thevideo.me' in url or 'streamango' in url:
+                mylink =  resolvers.request(url)
+                control.log('> Resolve moviesHD %s | %s' % (url,mylink))
+                return mylink
+            else:
+                return client.googlepass(url)
         except:
             return
 
@@ -201,6 +184,9 @@ class source:
 
     def movieshd_set(self):
         return ''.join([random.choice(string.ascii_letters) for _ in xrange(25)])
+
+    def movieshd_sl(self):
+        return hashlib.md5(base64.encodestring('0A6ru35yyi5yn4THYpJqy0X82tE95btV')+self.social_lock).hexdigest()
 
 
     def movieshd_rt(self, s, shift=13):

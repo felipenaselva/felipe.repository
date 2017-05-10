@@ -21,6 +21,7 @@ import urllib
 import socket
 import ssl
 import time
+import threading
 import kodi
 import log_utils
 import utils
@@ -44,7 +45,7 @@ class TraktNotFoundError(Exception):
 class TransientTraktError(Exception):
     pass
 
-BASE_URL = 'api-v2launch.trakt.tv'
+BASE_URL = 'api.trakt.tv'
 V2_API_KEY = 'eb41e95243d8c95152ed72a1fc0394c93cb785cb33aed609fdde1a07454584b4'
 CLIENT_SECRET = '96611f3e712a37bd8d3cac9316c4643e0e5fd0a0c02b4eaf4bba8fd57024c72e'
 REDIRECT_URI = 'urn:ietf:wg:oauth:2.0:oob'
@@ -58,6 +59,8 @@ class Trakt_API():
         self.timeout = None if timeout == 0 else timeout
         self.list_size = list_size
         self.offline = offline
+        self.__db_connection = None
+        self.__worker_id = None
 
     def get_code(self):
         url = '/oauth/device/code'
@@ -88,14 +91,14 @@ class Trakt_API():
             cache_limit = 1  # cache other user's list for one hour
 
         url = '/users/%s/lists/%s/items' % (utils.to_slug(username), slug)
-        params = {'extended': 'full,images'}
+        params = {'extended': 'full'}
         list_data = self.__call_trakt(url, params=params, auth=auth, cache_limit=cache_limit, cached=cached)
         return [item[item['type']] for item in list_data if item['type'] == TRAKT_SECTIONS[section][:-1]]
 
-    def show_watchlist(self, section):
+    def show_watchlist(self, section, cached=True):
         url = '/users/me/watchlist/%s' % (TRAKT_SECTIONS[section])
-        params = {'extended': 'full,images'}
-        cache_limit = self.__get_cache_limit('lists', 'updated_at', cached=True)
+        params = {'extended': 'full'}
+        cache_limit = self.__get_cache_limit('lists', 'updated_at', cached=cached)
         response = self.__call_trakt(url, params=params, cache_limit=cache_limit)
         return [item[TRAKT_SECTIONS[section][:-1]] for item in response]
 
@@ -147,7 +150,7 @@ class Trakt_API():
     def get_trending(self, section, page=None, filters=None):
         if filters is None: filters = {}
         url = '/%s/trending' % (TRAKT_SECTIONS[section])
-        params = {'extended': 'full,images', 'limit': self.list_size}
+        params = {'extended': 'full', 'limit': self.list_size}
         params.update(filters)
         if page: params['page'] = page
         response = self.__call_trakt(url, params=params)
@@ -156,7 +159,7 @@ class Trakt_API():
     def get_anticipated(self, section, page=None, filters=None):
         if filters is None: filters = {}
         url = '/%s/anticipated' % (TRAKT_SECTIONS[section])
-        params = {'extended': 'full,images', 'limit': self.list_size}
+        params = {'extended': 'full', 'limit': self.list_size}
         params.update(filters)
         if page: params['page'] = page
         response = self.__call_trakt(url, params=params)
@@ -165,14 +168,14 @@ class Trakt_API():
     def get_popular(self, section, page=None, filters=None):
         if filters is None: filters = {}
         url = '/%s/popular' % (TRAKT_SECTIONS[section])
-        params = {'extended': 'full,images', 'limit': self.list_size}
+        params = {'extended': 'full', 'limit': self.list_size}
         params.update(filters)
         if page: params['page'] = page
         return self.__call_trakt(url, params=params)
 
     def get_recent(self, section, date, page=None):
         url = '/%s/updates/%s' % (TRAKT_SECTIONS[section], date)
-        params = {'extended': 'full,images', 'limit': self.list_size}
+        params = {'extended': 'full', 'limit': self.list_size}
         if page: params['page'] = page
         response = self.__call_trakt(url, params=params)
         return [item[TRAKT_SECTIONS[section][:-1]] for item in response]
@@ -189,7 +192,7 @@ class Trakt_API():
     def __get_most(self, category, section, period, page, filters):
         if filters is None: filters = {}
         url = '/%s/%s/%s' % (TRAKT_SECTIONS[section], category, period)
-        params = {'extended': 'full,images', 'limit': self.list_size}
+        params = {'extended': 'full', 'limit': self.list_size}
         params.update(filters)
         if page: params['page'] = page
         response = self.__call_trakt(url, params=params)
@@ -201,58 +204,58 @@ class Trakt_API():
 
     def get_recommendations(self, section):
         url = '/recommendations/%s' % (TRAKT_SECTIONS[section])
-        params = {'extended': 'full,images', 'limit': self.list_size}
+        params = {'extended': 'full', 'limit': self.list_size}
         return self.__call_trakt(url, params=params)
 
     def get_premieres(self, start_date=None, days=None, cached=True):
         url = '/calendars/all/shows/premieres'
         if start_date: url += '/%s' % (start_date)
         if days is not None: url += '/%s' % (days)
-        params = {'extended': 'full,images', 'auth': False}
+        params = {'extended': 'full', 'auth': False}
         return self.__call_trakt(url, params=params, auth=False, cache_limit=24, cached=cached)
 
     def get_calendar(self, start_date=None, days=None, cached=True):
         url = '/calendars/all/shows'
         if start_date: url += '/%s' % (start_date)
         if days is not None: url += '/%s' % (days)
-        params = {'extended': 'full,images', 'auth': False}
+        params = {'extended': 'full', 'auth': False}
         return self.__call_trakt(url, params=params, auth=False, cache_limit=24, cached=cached)
 
     def get_my_calendar(self, start_date=None, days=None, cached=True):
         url = '/calendars/my/shows'
         if start_date: url += '/%s' % (start_date)
         if days is not None: url += '/%s' % (days)
-        params = {'extended': 'full,images', 'auth': True}
+        params = {'extended': 'full', 'auth': True}
         return self.__call_trakt(url, params=params, auth=True, cache_limit=24, cached=cached)
 
     def get_seasons(self, show_id):
         url = '/shows/%s/seasons' % (show_id)
-        params = {'extended': 'full,images'}
+        params = {'extended': 'full'}
         return self.__call_trakt(url, params=params, cache_limit=12)
 
     def get_episodes(self, show_id, season):
         url = '/shows/%s/seasons/%s' % (show_id, season)
-        params = {'extended': 'full,images'}
+        params = {'extended': 'full'}
         return self.__call_trakt(url, params=params, cache_limit=1)
 
     def get_show_details(self, show_id):
         url = '/shows/%s' % (show_id)
-        params = {'extended': 'full,images'}
+        params = {'extended': 'full'}
         return self.__call_trakt(url, params=params, cache_limit=24 * 7)
 
     def get_episode_details(self, show_id, season, episode):
         url = '/shows/%s/seasons/%s/episodes/%s' % (show_id, season, episode)
-        params = {'extended': 'full,images'}
+        params = {'extended': 'full'}
         return self.__call_trakt(url, params=params, cache_limit=48)
 
     def get_movie_details(self, show_id):
         url = '/movies/%s' % (show_id)
-        params = {'extended': 'full,images'}
+        params = {'extended': 'full'}
         return self.__call_trakt(url, params=params, cache_limit=48)
 
     def get_people(self, section, show_id, full=False):
         url = '/%s/%s/people' % (TRAKT_SECTIONS[section], show_id)
-        params = {'extended': 'full,images'} if full else None
+        params = {'extended': 'full'} if full else None
         try:
             return self.__call_trakt(url, params=params, cache_limit=24 * 30)
         except TraktNotFoundError:
@@ -262,13 +265,13 @@ class Trakt_API():
         url = '/search/%s' % (TRAKT_SECTIONS[section][:-1])
         params = {'query': query, 'limit': self.list_size}
         if page: params['page'] = page
-        params.update({'extended': 'full,images'})
+        params.update({'extended': 'full'})
         response = self.__call_trakt(url, params=params)
         return [item[TRAKT_SECTIONS[section][:-1]] for item in response]
 
     def get_collection(self, section, full=True, cached=True):
         url = '/users/me/collection/%s' % (TRAKT_SECTIONS[section])
-        params = {'extended': 'full,images'} if full else None
+        params = {'extended': 'full'} if full else None
         media = 'movies' if section == SECTIONS.MOVIES else 'episodes'
         cache_limit = self.__get_cache_limit(media, 'collected_at', cached)
         response = self.__call_trakt(url, params=params, cache_limit=cache_limit, cached=cached)
@@ -282,7 +285,7 @@ class Trakt_API():
 
     def get_watched(self, section, full=False, noseasons=False, cached=True):
         url = '/sync/watched/%s' % (TRAKT_SECTIONS[section])
-        params = {'extended': 'full,images'} if full else {}
+        params = {'extended': 'full'} if full else {}
         if noseasons and params:
             params['extended'] += ',noseasons'
         elif noseasons:
@@ -294,7 +297,7 @@ class Trakt_API():
     def get_history(self, section, full=False, page=None, cached=True):
         url = '/users/me/history/%s' % (TRAKT_SECTIONS[section])
         params = {'limit': self.list_size}
-        if full: params.update({'extended': 'full,images'})
+        if full: params.update({'extended': 'full'})
         if page: params['page'] = page
         media = 'movies' if section == SECTIONS.MOVIES else 'episodes'
         cache_limit = self.__get_cache_limit(media, 'watched_at', cached)
@@ -305,7 +308,7 @@ class Trakt_API():
             cache_limit = self.__get_cache_limit('episodes', 'watched_at', cached)
         url = '/shows/%s/progress/watched' % (show_id)
         params = {}
-        if full: params['extended'] = 'full,images'
+        if full: params['extended'] = 'full'
         if hidden: params['hidden'] = 'true'
         if specials: params['specials'] = 'true'
         return self.__call_trakt(url, params=params, cache_limit=cache_limit, cached=cached)
@@ -316,7 +319,8 @@ class Trakt_API():
         length = -1
         result = []
         while length != 0 or length == HIDDEN_SIZE:
-            hidden = self.__call_trakt(url, params=params, cache_limit=7 * 24, cached=cached)
+            cache_limit = self.__get_cache_limit('shows', 'hidden_at', cached)
+            hidden = self.__call_trakt(url, params=params, cache_limit=cache_limit, cached=cached)
             length = len(hidden)
             result += hidden
             params['page'] += 1
@@ -333,7 +337,7 @@ class Trakt_API():
             url += '/movies'
         elif section == SECTIONS.TV:
             url += '/episodes'
-        params = {'extended': 'full,images'} if full else None
+        params = {'extended': 'full'} if full else None
         return self.__call_trakt(url, params=params, cached=False)
 
     def get_bookmark(self, show_id, season, episode):
@@ -428,6 +432,13 @@ class Trakt_API():
             data[TRAKT_SECTIONS[section]].append(ids)
         return data
 
+    def __get_db_connection(self):
+        worker_id = threading.current_thread().ident
+        if not self.__db_connection or self.__worker_id != worker_id:
+            self.__db_connection = DB_Connection()
+            self.__worker_id = worker_id
+        return self.__db_connection
+    
     def __call_trakt(self, url, method=None, data=None, params=None, auth=True, cache_limit=.25, cached=True):
         res_headers = {}
         if not cached: cache_limit = 0
@@ -439,11 +450,11 @@ class Trakt_API():
             else:
                 db_cache_limit = 8
         json_data = json.dumps(data) if data else None
-        headers = {'Content-Type': 'application/json', 'trakt-api-key': V2_API_KEY, 'trakt-api-version': 2}
+        headers = {'Content-Type': 'application/json', 'trakt-api-key': V2_API_KEY, 'trakt-api-version': 2, 'Accept-Encoding': 'gzip'}
         url = '%s%s%s' % (self.protocol, BASE_URL, url)
-        if params: url = url + '?' + urllib.urlencode(params)
+        if params: url += '?' + urllib.urlencode(params)
 
-        db_connection = DB_Connection()
+        db_connection = self.__get_db_connection()
         created, cached_headers, cached_result = db_connection.get_cached_url(url, json_data, db_cache_limit)
         if cached_result and (self.offline or (time.time() - created) < (60 * 60 * cache_limit)):
             result = cached_result
@@ -463,7 +474,10 @@ class Trakt_API():
                         data = response.read()
                         if not data: break
                         result += data
+
                     res_headers = dict(response.info().items())
+                    if res_headers.get('content-encoding') == 'gzip':
+                        result = utils2.ungz(result)
 
                     db_connection.cache_url(url, result, json_data, response.info().items())
                     break

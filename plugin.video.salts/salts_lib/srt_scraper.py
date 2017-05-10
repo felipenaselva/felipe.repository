@@ -19,18 +19,15 @@ import os
 import time
 import urllib2
 import re
-import HTMLParser
-import socket
 import xbmcvfs
 import log_utils
 import kodi
+from salts_lib import utils2
 from constants import VIDEO_TYPES
 from constants import SRT_SOURCE
 from constants import USER_AGENT
 from db_utils import DB_Connection
 
-MAX_RETRIES = 2
-TEMP_ERRORS = [500, 502, 503, 504]
 BASE_URL = 'http://www.addic7ed.com'
 
 class SRT_Scraper():
@@ -164,8 +161,8 @@ class SRT_Scraper():
             req.add_header('Referer', BASE_URL)
             response = urllib2.urlopen(req, timeout=10)
             body = response.read()
-            parser = HTMLParser.HTMLParser()
-            body = parser.unescape(body)
+            body = utils2.cleanse_title(body)
+            body = body.encode('utf-8')
         except Exception as e:
             kodi.notify(msg='Failed to connect to URL: %s' % (url), duration=5000)
             log_utils.log('Failed to connect to URL %s: (%s)' % (url, e), log_utils.LOGERROR)
@@ -180,7 +177,7 @@ class SRT_Scraper():
         _created, _res_header, html = self.db_connection.get_cached_url(url, cache_limit=cache)
         if html:
             log_utils.log('Returning cached result for: %s' % (url), log_utils.LOGDEBUG)
-            return html
+            return html.decode('utf-8')
 
         log_utils.log('No cached url found for: %s' % url, log_utils.LOGDEBUG)
         req = urllib2.Request(url)
@@ -190,45 +187,15 @@ class SRT_Scraper():
         req.add_header('Host', host)
         req.add_header('Referer', BASE_URL)
         try:
-            body = self.__http_get_with_retry(url, req)
-            body = body.decode('utf-8')
-            parser = HTMLParser.HTMLParser()
-            body = parser.unescape(body)
+            response = urllib2.urlopen(req, timeout=10)
+            html = response.read()
+            html = utils2.cleanse_title(html)
         except Exception as e:
             kodi.notify(msg='Failed to connect to URL: %s' % (url), duration=5000)
             log_utils.log('Failed to connect to URL %s: (%s)' % (url, e), log_utils.LOGERROR)
             return ''
 
-        self.db_connection.cache_url(url, body)
+        self.db_connection.cache_url(url, html)
         after = time.time()
         log_utils.log('Cached Url Fetch took: %.2f secs' % (after - before), log_utils.LOGDEBUG)
-        return body
-
-    def __http_get_with_retry(self, url, request):
-        log_utils.log('Fetching URL: %s' % request.get_full_url(), log_utils.LOGDEBUG)
-        retries = 0
-        html = None
-        while retries <= MAX_RETRIES:
-            try:
-                response = urllib2.urlopen(request, timeout=10)
-                html = response.read()
-                # if no exception, jump out of the loop
-                break
-            except socket.timeout:
-                retries += 1
-                log_utils.log('Retry #%s for URL %s because of timeout' % (retries, url), log_utils.LOGWARNING)
-                continue
-            except urllib2.HTTPError as e:
-                # if it's a temporary code, retry
-                if e.code in TEMP_ERRORS:
-                    retries += 1
-                    log_utils.log('Retry #%s for URL %s because of HTTP Error %s' % (retries, url, e.code), log_utils.LOGWARNING)
-                    continue
-                # if it's not pass it back up the stack
-                else:
-                    raise
-        else:
-            raise
-
-        response.close()
         return html

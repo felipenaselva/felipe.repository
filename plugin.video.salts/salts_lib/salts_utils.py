@@ -15,20 +15,23 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+import os
 import time
 import datetime
 import xbmc
 import xbmcgui
+import xbmcvfs
 import log_utils
 import kodi
 import utils
 import utils2
-from constants import *
+import image_scraper
+from constants import *  # @UnusedWildImport
 from trakt_api import Trakt_API
 from db_utils import DB_Connection
-from scrapers import *  # import all scrapers into this namespace
+from scrapers import *  # import all scrapers into this namespace @UnusedWildImport
 
-_db_connection = None
+db_connection = DB_Connection()
 last_check = datetime.datetime.fromtimestamp(0)
 TOKEN = kodi.get_setting('trakt_oauth_token')
 use_https = kodi.get_setting('use_https') == 'true'
@@ -38,20 +41,14 @@ offline = kodi.get_setting('trakt_offline') == 'true'
 trakt_api = Trakt_API(TOKEN, use_https, list_size, trakt_timeout, offline)
 GENRES = {}
 
-# delay db_connection until needed to force db errors during recovery try: block
-def _get_db_connection():
-    global _db_connection
-    if _db_connection is None:
-        _db_connection = DB_Connection()
-    return _db_connection
-    
 def make_info(item, show=None, people=None):
     if people is None: people = {}
     if show is None: show = {}
     # log_utils.log('Making Info: Show: %s' % (show), log_utils.LOGDEBUG)
     # log_utils.log('Making Info: Item: %s' % (item), log_utils.LOGDEBUG)
     info = {}
-    info['title'] = item['title']
+    info['originaltitle'] = info['title'] = item['title']
+    if 'originaltitle' in item: info['originaltitle'] = item['originaltitle']
     info['mediatype'] = 'tvshow' if 'aired_episodes' in item else 'movie'
     if 'overview' in item: info['plot'] = info['plotoutline'] = item['overview']
     if 'runtime' in item and item['runtime'] is not None: info['duration'] = item['runtime'] * 60
@@ -101,9 +98,21 @@ def get_genres():
         GENRES.update(dict((genre['slug'], genre['name']) for genre in trakt_api.get_genres(SECTIONS.MOVIES)))
     return GENRES
 
+def make_cast(ids, people, cached=True):
+    cast = []
+    cast_enable = kodi.get_setting('cast_enable') == 'true'
+    for person in people.get('cast', []):
+        if cast_enable:
+            art = image_scraper.get_person_images(ids, person, cached)
+        else:
+            art = {'thumb': ''}
+            
+        cast.append({'name': person['person']['name'], 'role': person['character'], 'thumbnail': art['thumb']})
+    
+    return cast
+
 def update_url(video, source, old_url, new_url):
     log_utils.log('Setting Url: %s -> |%s|%s|%s|' % (video, source, old_url, new_url), log_utils.LOGDEBUG)
-    db_connection = _get_db_connection()
     if new_url:
         db_connection.set_related_url(video.video_type, video.title, video.year, source, new_url, video.season, video.episode)
     else:
@@ -120,7 +129,6 @@ def make_source_sort_key():
     sso = kodi.get_setting('source_sort_order')
     # migrate sso to kodi setting
     if not sso:
-        db_connection = _get_db_connection()
         sso = db_connection.get_setting('source_sort_order')
         sso = kodi.set_setting('source_sort_order', sso)
         db_connection.set_setting('source_sort_order', '')
@@ -173,6 +181,7 @@ def parallel_get_sources(scraper, video):
     if hosters is None: hosters = []
     if kodi.get_setting('filter_direct') == 'true':
         hosters = [hoster for hoster in hosters if not hoster['direct'] or utils2.test_stream(hoster)]
+
     found = False
     for hoster in hosters:
         if hoster['host'] is None:
@@ -180,6 +189,8 @@ def parallel_get_sources(scraper, video):
             found = True
         elif not hoster['direct']:
             hoster['host'] = hoster['host'].lower().strip()
+            if isinstance(hoster['host'], unicode):
+                hoster['host'] = hoster['host'].encode('utf-8')
     
     if found:
         hosters = [hoster for hoster in hosters if hoster['host'] is not None]
@@ -195,7 +206,7 @@ def do_startup_task(task):
         log_utils.log('Service: Running startup task [%s]' % (task), log_utils.LOGNOTICE)
         now = datetime.datetime.now()
         xbmc.executebuiltin('RunPlugin(plugin://%s/?mode=%s)' % (kodi.get_id(), task))
-        _get_db_connection().set_setting('%s-last_run' % (task), now.strftime("%Y-%m-%d %H:%M:%S.%f"))
+        db_connection.set_setting('%s-last_run' % (task), now.strftime("%Y-%m-%d %H:%M:%S.%f"))
 
 # Run a recurring scheduled task. Settings and mode values must match task name
 def do_scheduled_task(task, isPlaying):
@@ -219,14 +230,14 @@ def do_scheduled_task(task, isPlaying):
                     log_utils.log('Service: Running Scheduled Task: [%s]' % (task), log_utils.LOGNOTICE)
                     builtin = 'RunPlugin(plugin://%s/?mode=%s)' % (kodi.get_id(), task)
                     xbmc.executebuiltin(builtin)
-                    _get_db_connection().set_setting('%s-last_run' % task, now.strftime("%Y-%m-%d %H:%M:%S.%f"))
+                    db_connection.set_setting('%s-last_run' % task, now.strftime("%Y-%m-%d %H:%M:%S.%f"))
                 else:
                     log_utils.log('Service: Playing... Busy... Postponing [%s]' % (task), log_utils.LOGDEBUG)
             else:
                 log_utils.log('Service: Scanning... Busy... Postponing [%s]' % (task), log_utils.LOGDEBUG)
 
 def get_next_run(task):
-    last_run_string = _get_db_connection().get_setting(task + '-last_run')
+    last_run_string = db_connection.get_setting(task + '-last_run')
     if not last_run_string: last_run_string = LONG_AGO
     last_run = utils2.to_datetime(last_run_string, "%Y-%m-%d %H:%M:%S.%f")
     interval = datetime.timedelta(hours=float(kodi.get_setting(task + '-interval')))
@@ -236,7 +247,7 @@ def keep_search(section, search_text):
     head = int(kodi.get_setting('%s_search_head' % (section)))
     new_head = (head + 1) % SEARCH_HISTORY
     log_utils.log('Setting %s to %s' % (new_head, search_text), log_utils.LOGDEBUG)
-    _get_db_connection().set_setting('%s_search_%s' % (section, new_head), search_text)
+    db_connection.set_setting('%s_search_%s' % (section, new_head), search_text)
     kodi.set_setting('%s_search_head' % (section), str(new_head))
 
 def bookmark_exists(trakt_id, season, episode):
@@ -247,7 +258,7 @@ def bookmark_exists(trakt_id, season, episode):
             bookmark = None
         return bookmark is not None
     else:
-        return _get_db_connection().bookmark_exists(trakt_id, season, episode)
+        return db_connection.bookmark_exists(trakt_id, season, episode)
 
 # returns true if user chooses to resume, else false
 def get_resume_choice(trakt_id, season, episode):
@@ -255,12 +266,12 @@ def get_resume_choice(trakt_id, season, episode):
         resume_point = '%s%%' % (trakt_api.get_bookmark(trakt_id, season, episode))
         header = utils2.i18n('trakt_bookmark_exists')
     else:
-        resume_point = utils.format_time(_get_db_connection().get_bookmark(trakt_id, season, episode))
+        resume_point = utils.format_time(db_connection.get_bookmark(trakt_id, season, episode))
         header = utils2.i18n('local_bookmark_exists')
     question = utils2.i18n('resume_from') % (resume_point)
     dialog = xbmcgui.Dialog()
     try:
-        return dialog.contextmenu([question, utils2.i18n('start_from_beginning'), ]) == 0
+        return dialog.contextmenu([question, utils2.i18n('start_from_beginning')]) == 0
     except:
         return dialog.yesno(header, question, '', '', utils2.i18n('start_from_beginning'), utils2.i18n('resume')) == 1
 
@@ -271,7 +282,7 @@ def get_bookmark(trakt_id, season, episode):
         else:
             bookmark = None
     else:
-        bookmark = _get_db_connection().get_bookmark(trakt_id, season, episode)
+        bookmark = db_connection.get_bookmark(trakt_id, season, episode)
     return bookmark
 
 def relevant_scrapers(video_type=None, include_disabled=False, order_matters=False, as_dict=False):
@@ -310,15 +321,14 @@ def url_exists(video):
 def do_disable_check():
     auto_disable = kodi.get_setting('auto-disable')
     disable_limit = int(kodi.get_setting('disable-limit'))
+    cur_failures = utils2.get_failures()
     for cls in relevant_scrapers():
-        setting = '%s_last_results' % (cls.get_name())
-        fails = kodi.get_setting(setting)
-        fails = int(fails) if fails else 0
+        fails = cur_failures.get(cls.get_name(), 0)
         if fails >= disable_limit:
             if auto_disable == DISABLE_SETTINGS.ON:
                 kodi.set_setting('%s-enable' % (cls.get_name()), 'false')
                 kodi.notify(msg='[COLOR blue]%s[/COLOR] %s' % (cls.get_name(), utils2.i18n('scraper_disabled')), duration=5000)
-                kodi.set_setting(setting, '0')
+                cur_failures[cls.get_name()] = 0
             elif auto_disable == DISABLE_SETTINGS.PROMPT:
                 dialog = xbmcgui.Dialog()
                 line1 = utils2.i18n('disable_line1') % (cls.get_name(), fails)
@@ -327,9 +337,10 @@ def do_disable_check():
                 ret = dialog.yesno('SALTS', line1, line2, line3, utils2.i18n('keep_enabled'), utils2.i18n('disable_it'))
                 if ret:
                     kodi.set_setting('%s-enable' % (cls.get_name()), 'false')
-                    kodi.set_setting(setting, '0')
+                    cur_failures[cls.get_name()] = 0
                 else:
-                    kodi.set_setting(setting, '-1')
+                    cur_failures[cls.get_name()] = -1
+    utils2.store_failures(cur_failures)
 
 def record_sru_failures(fails, total_scrapers, related_list):
     utils2.record_failures(fails)
@@ -340,3 +351,46 @@ def record_sru_failures(fails, total_scrapers, related_list):
         for related in related_list:
             if related['name'] in fails:
                 related['label'] = '[COLOR darkred]%s[/COLOR]' % (related['label'])
+
+def is_salts():
+    plugin_name = xbmc.getInfoLabel('Container.PluginName')
+    log_utils.log('Is_Salts Test (1): |%s|' % (plugin_name))
+    if plugin_name == kodi.get_id():
+        return True
+    elif not plugin_name:
+        path = xbmc.getInfoLabel('ListItem.FileNameAndPath')
+        if not path:
+            path = xbmc.getInfoLabel('ListItem.Path')
+        
+        log_utils.log('Is_Salts Test (2): |%s|' % (path))
+        if path:
+            try:
+                lines = xbmcvfs.File(path).read()
+                log_utils.log('Is_Salts Test (3): |%s|%s|' % (lines, kodi.get_id()))
+                if lines:
+                    return lines.startswith('plugin://%s' % (kodi.get_id()))
+            except:
+                return True
+        return True
+    else:
+        return False
+
+def clear_thumbnails(images):
+    for url in images.itervalues():
+        crc = utils2.crc32(url)
+        for ext in ['jpg', 'png']:
+            file_name = crc + '.' + ext
+            file_path = os.path.join('special://thumbnails', file_name[0], file_name)
+            if xbmcvfs.delete(file_path):
+                break
+            else:
+                try:
+                    file_path = kodi.translate_path(file_path)
+                    os.remove(file_path)
+                    break
+                except OSError:
+                    pass
+        else:
+            continue
+        
+        log_utils.log('Removed thumbnail: %s' % (file_path))

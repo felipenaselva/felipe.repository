@@ -20,16 +20,15 @@
 
 
 import re,urllib,urlparse,json, random, time
-
 from resources.lib.libraries import control
 from resources.lib.libraries import cleantitle
 from resources.lib.libraries import client
-
+import base64
 
 
 class source:
     def __init__(self):
-        self.base_link = 'http://fmovies.to/'
+        self.base_link = 'http://fmovies.se/'
         self.search_link = '/sitemap'
         self.search_link2 = 'http://fmovies.to/ajax/film/search?sort=year%3Adesc&funny=1&keyword=%s'
         self.hash_link = '/ajax/episode/info'
@@ -41,7 +40,7 @@ class source:
             #X - Requested - With:"XMLHttpRequest"
             return url
         except:
-            return None
+            return
 
     def get_show(self, imdb, tvdb, tvshowtitle, year):
 
@@ -49,7 +48,6 @@ class source:
             url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year}
             url = urllib.urlencode(url)
             return url
-            return None
         except:
             return None
 
@@ -61,7 +59,7 @@ class source:
 
             url = urlparse.parse_qs(url)
             url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
-            url['title'],  url['season'], url['episode'] = title, season, episode
+            url['title'],  url['season'], url['episode'], url['premiered'] = title, season, episode, date
             url = urllib.urlencode(url)
             return url
         except:
@@ -93,7 +91,7 @@ class source:
 
         try:
             sources = []
-
+            myts = str(((int(time.time())/3600)*3600))
 
             if url == None: return sources
 
@@ -105,17 +103,14 @@ class source:
                     title = data['tvshowtitle'] if 'tvshowtitle' in data else data['title']
 
                     year = re.findall('(\d{4})', data['premiered'])[0] if 'tvshowtitle' in data else data['year']
-
                     try: episode = data['episode']
                     except: pass
 
                     query = {'keyword': title, 's':''}
-                    #query.update(self.__get_token(query))
                     search_url = urlparse.urljoin(self.base_link, '/search')
                     search_url = search_url + '?' + urllib.urlencode(query)
-                    print("R",search_url)
                     result = client.request(search_url)
-                    print("r", result)
+
 
                     r = client.parseDOM(result, 'div', attrs = {'class': '[^"]*movie-list[^"]*'})[0]
                     r = client.parseDOM(r, 'div', attrs = {'class': 'item'})
@@ -124,33 +119,25 @@ class source:
                     r = [(re.sub('http.+?//.+?/','/', i[0]), re.sub('&#\d*;','', i[1])) for i in r]
 
                     if 'season' in data:
-                        url = [(i[0], re.findall('(.+?) (\d*)$', i[1])) for i in r]
+                        r = [(i[0], re.sub(' \(\w*\)', '', i[1])) for i in r]
+                        #title += '%01d' % int(data['season'])
+                        url = [(i[0], re.findall('(.+?) (\d+)$', i[1])) for i in r]
                         url = [(i[0], i[1][0][0], i[1][0][1]) for i in url if len(i[1]) > 0]
-                        url = [i for i in url if cleantitle.get(title) == cleantitle.get(i[1])]
+                        url = [i for i in url if cleantitle.get(title) in cleantitle.get(i[1])]
+                        for i in url:
+                            print i[2],i[0],i[1]
+                            print '%01d' % int(data['season']) == '%01d' % int(i[2])
+
                         url = [i for i in url if '%01d' % int(data['season']) == '%01d' % int(i[2])]
                     else:
-                        url = [i for i in r if cleantitle.get(title) == cleantitle.get(i[1])]
+                        url = [i for i in r if cleantitle.get(title) in cleantitle.get(i[1])]
+                    #print("r1", cleantitle.get(title),url,r)
 
 
-
-                    """
-                    r = cache.get(self.fmovies_cache, 120)
-
-                    if 'season' in data:
-                        url = [(i[0], re.findall('(.+?) (\d*)$', i[1]), i[2]) for i in r]
-                        url = [(i[0], i[1][0][0], i[1][0][1], i[2]) for i in url if len(i[1]) > 0]
-                        url = [i for i in url if cleantitle.get(title) == cleantitle.get(i[1])]
-                        url = [i for i in url if i[3] == year] + [i for i in url if i[3] == data['year']]
-                        url = [i for i in url if '%01d' % int(data['season']) == '%01d' % int(i[2])]
-                    else:
-                        url = [i for i in r if cleantitle.get(title) == cleantitle.get(i[1]) and i[2] == year]
-
-                    """
                     url = url[0][0]
+
                     url = urlparse.urljoin(self.base_link, url)
-                    print("r2", url)
                     r2 = url.split('.')[-1]
-                    print("r2", r2)
 
 
                 except:
@@ -161,24 +148,31 @@ class source:
             except: pass
 
             referer = url
-            #xtoken = self.__get_xtoken()
-
             result = client.request(url, limit='0')
-            result, headers, content, cookie = client.request(url, limit='0', output='extended')
+            r = client.request(url, limit='0', output='extended')
+            cookie1 = r[4] ; headers = r[3] ; r1 = r[0]
 
-            #xtoken = self.__get_xtoken()
-            print("r22", result)
+            hash_url = urlparse.urljoin(self.base_link, '/user/ajax/menu-bar')
+            # int(time.time())
+            query = {'ts': myts}
+            query.update(self.__get_token(query))
+            hash_url = hash_url + '?' + urllib.urlencode(query)
+            r = client.request(hash_url, limit='0', output='extended', cookie=cookie1)
+            cookie2 = r[4] ; headers = r[3] ; r1 = r[0]
 
             alina = client.parseDOM(result, 'title')[0]
-            print( re.findall('(\d{4})', alina))
 
             atr = [i for i in client.parseDOM(result, 'title') if len(re.findall('(\d{4})', i)) > 0][-1]
             if 'season' in data:
-                result = result if year in atr or data['year'] in atr else None
+                years = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1)]
+                mychk = False
+                for y in years:
+                    if y in atr: mychk = True
+                result = result if mychk ==True else None
             else:
                 result = result if year in atr else None
 
-            print("r3",result)
+            #print("r3",result)
 
             try: quality = client.parseDOM(result, 'span', attrs = {'class': 'quality'})[0].lower()
             except: quality = 'hd'
@@ -187,39 +181,38 @@ class source:
             else: quality = 'SD'
 
             result = client.parseDOM(result, 'ul', attrs = {'data-range-id':"0"})
-            print("r3",result,quality)
 
             servers = []
             #servers = client.parseDOM(result, 'li', attrs = {'data-type': 'direct'})
             servers = zip(client.parseDOM(result, 'a', ret='data-id'), client.parseDOM(result, 'a'))
             servers = [(i[0], re.findall('(\d+)', i[1])) for i in servers]
             servers = [(i[0], ''.join(i[1][:1])) for i in servers]
-            print("r3",servers)
+            #print("r3",servers)
 
             try: servers = [i for i in servers if '%01d' % int(i[1]) == '%01d' % int(episode)]
             except: pass
 
             for s in servers[:4]:
                 try:
-                    #http://fmovies.to/ajax/episode/info?_token=31f2ab5&id=1r12ww&update=0&film=286l
+
                     headers = {'X-Requested-With': 'XMLHttpRequest'}
-                    time.sleep(0.7)
+                    time.sleep(0.2)
                     hash_url = urlparse.urljoin(self.base_link, self.hash_link)
-                    query = {'id': s[0], 'update': '0', 'film': r2}
+                    query = {'ts': myts, 'id': s[0], 'update': '0'}
+
                     query.update(self.__get_token(query))
                     hash_url = hash_url + '?' + urllib.urlencode(query)
                     headers['Referer'] = urlparse.urljoin(url, s[0])
-                    headers['Cookie'] = cookie
+                    headers['Cookie'] = cookie1 + ';' + cookie2 + ';user-info=null; MarketGidStorage=%7B%220%22%3A%7B%22svspr%22%3A%22%22%2C%22svsds%22%3A3%2C%22TejndEEDj%22%3A%22MTQ4MTM2ODE0NzM0NzQ4NTMyOTAx%22%7D%2C%22C48532%22%3A%7B%22page%22%3A1%2C%22time%22%3A1481368147359%7D%2C%22C77945%22%3A%7B%22page%22%3A1%2C%22time%22%3A1481368147998%7D%2C%22C77947%22%3A%7B%22page%22%3A1%2C%22time%22%3A1481368148109%7D%7D'
                     result = client.request(hash_url, headers=headers, limit='0')
                     print("r101 result",result,headers)
 
-                    time.sleep(0.6)
+                    time.sleep(0.3)
                     query = {'id': s[0], 'update': '0'}
                     query.update(self.__get_token(query))
                     url = url + '?' + urllib.urlencode(query)
                     #result = client2.http_get(url, headers=headers)
                     result = json.loads(result)
-                    print("S",s[1],"r102", result)
                     quality = 'SD'
                     if s[1] == '1080': quality = '1080p'
                     if s[1] == '720': quality = 'HD'
@@ -229,15 +222,15 @@ class source:
                     query['mobile'] = '0'
                     query.update(self.__get_token(query))
                     grabber = result['grabber'] + '?' + urllib.urlencode(query)
+                    if not grabber.startswith('http'):
+                        grabber = 'http:'+grabber
 
                     result = client.request(grabber, headers=headers, referer=url, limit='0')
-                    print("r112",result)
 
                     result = json.loads(result)
 
                     result = result['data']
                     result = [i['file'] for i in result if 'file' in i]
-                    print("r122",result)
 
                     for i in result:
                         if 'google' in i:
@@ -268,18 +261,45 @@ class source:
         except:
             return
 
+    def __get_token_item(self, index2, mykey):
+        T = ''
+        # for index2 in data:
+        if not index2.startswith('_'):
+            o = list(range(0, 256))
+            i = 0
+            for r in range(0, 256):
+                i = (i + o[r] + ord(mykey[r % len(mykey)])) % 256
+                n = o[r]
+                o[r] = o[i]
+                o[i] = n
+            r = 0
+            i = 0
+            a = T
+            b = 0
+            for s in range(0, len(index2)):
+                r = (r + 1) % 256
+                i = (i + o[r]) % 256
+                n = o[r]
+                o[r] = o[i]
+                o[i] = n
+                a = a + unichr(ord(index2[s]) ^ (o[(o[r] + o[i]) % 256]))
+                b = b + ord(unichr(ord(index2[s]) ^ (o[(o[r] + o[i]) % 256])))
 
-    def __get_token(self, data):
-        n = 0
-        for key in data:
-            if not key.startswith('_'):
-                for i, c in enumerate(data[key]):
-                    n += ord(c) * 64184 + len(data[key])
-        print("NNN",n,data)
-        return {'_token': hex(n)[2:]}
-        #print ("TOK",hex(n)[2:])
-        #return {'_token': '3c3b375'}
+        print b
+        return b
+        # return T + a
+        # return {'_': str(index1)}
 
+
+    def __get_token(self,data):
+        basickey = base64.decodestring('QlE0QXdCZ1RSenBCYlNLTEI=')
+        c = 0
+        for i in basickey:
+            c = c + ord(i)
+        for i in data:
+            c = c + self.__get_token_item(data[i], basickey + i)
+        # return c
+        return {'_': str(c)}
 
     def __get_xtoken(self):
         url = urlparse.urljoin(self.base_link, 'fghost?%s' % (random.random()))

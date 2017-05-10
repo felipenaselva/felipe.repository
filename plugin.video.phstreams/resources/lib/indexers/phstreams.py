@@ -18,7 +18,7 @@
 '''
 
 
-import os,re,sys,hashlib,urllib,urlparse,json,base64
+import os,re,sys,hashlib,urllib,urlparse,json,base64,random,datetime
 import xbmc
 
 try: from sqlite3 import dbapi2 as database
@@ -26,22 +26,27 @@ except: from pysqlite2 import dbapi2 as database
 
 from resources.lib.modules import cache
 from resources.lib.modules import metacache
-from resources.lib.modules import control
 from resources.lib.modules import client
+from resources.lib.modules import control
+from resources.lib.modules import regex
+from resources.lib.modules import trailer
 from resources.lib.modules import workers
+from resources.lib.modules import youtube
 from resources.lib.modules import views
 
 
 
 class indexer:
     def __init__(self):
-        self.list = []
+        self.list = [] ; self.hash = []
 
 
     def root(self):
         try:
+            regex.clear()
             url = 'http://phoenixtv.offshorepastebin.com/main/main.xml'
             self.list = self.phoenix_list(url)
+            for i in self.list: i.update({'content': 'addons'})
             self.addDirectory(self.list)
             return self.list
         except:
@@ -58,29 +63,137 @@ class indexer:
             pass
 
 
-    def developer(self):
+    def getq(self, url):
         try:
-            url = os.path.join(control.dataPath, 'testings.xml')
-            f = control.openFile(url) ; result = f.read() ; f.close()
-            self.list = self.phoenix_list('', result=result)
+            self.list = self.phoenix_list(url)
+            self.worker()
+            self.addDirectory(self.list, queue=True)
+            return self.list
+        except:
+            pass
+
+
+    def getx(self, url, worker=False):
+        try:
+            r, x = re.findall('(.+?)\|regex=(.+?)$', url)[0]
+            x = regex.fetch(x)
+            r += urllib.unquote_plus(x)
+            url = regex.resolve(r)
+            self.list = self.phoenix_list('', result=url)
             self.addDirectory(self.list)
             return self.list
         except:
             pass
 
 
-    def search(self):
+    def developer(self):
         try:
-            self.list = [{'name': 30702, 'action': 'addSearch'}]
-            self.list += [{'name': 30703, 'action': 'delSearch'}]
+            url = os.path.join(control.dataPath, 'testings.xml')
+            f = control.openFile(url) ; result = f.read() ; f.close()
+            self.list = self.phoenix_list('', result=result)
+            for i in self.list: i.update({'content': 'videos'})
+            self.addDirectory(self.list)
+            return self.list
+        except:
+            pass
+
+
+    def youtube(self, url, action):
+        try:
+            key = trailer.trailer().key_link.split('=', 1)[-1]
+
+            if 'PlaylistTuner' in action:
+                self.list = cache.get(youtube.youtube(key=key).playlist, 1, url)
+            elif 'Playlist' in action:
+                self.list = cache.get(youtube.youtube(key=key).playlist, 1, url, True)
+            elif 'ChannelTuner' in action:
+                self.list = cache.get(youtube.youtube(key=key).videos, 1, url)
+            elif 'Channel' in action:
+                self.list = cache.get(youtube.youtube(key=key).videos, 1, url, True)
+
+            if 'Tuner' in action:
+                for i in self.list: i.update({'name': i['title'], 'poster': i['image'], 'action': 'plugin', 'folder': False})
+                if 'Tuner2' in action: self.list = sorted(self.list, key=lambda x: random.random())
+                self.addDirectory(self.list, queue=True)
+            else:
+                for i in self.list: i.update({'name': i['title'], 'poster': i['image'], 'nextaction': action, 'action': 'play', 'folder': False})
+                self.addDirectory(self.list)
+
+            return self.list
+        except:
+            pass
+
+
+    def tvtuner(self, url):
+        try:
+            preset = re.findall('<preset>(.+?)</preset>', url)[0]
+
+            today = ((datetime.datetime.utcnow() - datetime.timedelta(hours = 5))).strftime('%Y-%m-%d')
+            today = int(re.sub('[^0-9]', '', str(today)))
+
+            url, imdb, tvdb, tvshowtitle, year, thumbnail, fanart = re.findall('<url>(.+?)</url>', url)[0], re.findall('<imdb>(.+?)</imdb>', url)[0], re.findall('<tvdb>(.+?)</tvdb>', url)[0], re.findall('<tvshowtitle>(.+?)</tvshowtitle>', url)[0], re.findall('<year>(.+?)</year>', url)[0], re.findall('<thumbnail>(.+?)</thumbnail>', url)[0], re.findall('<fanart>(.+?)</fanart>', url)[0]
+
+            tvm = client.request('http://api.tvmaze.com/lookup/shows?thetvdb=%s' % tvdb)
+            if tvm  == None: tvm = client.request('http://api.tvmaze.com/lookup/shows?imdb=%s' % imdb)
+            tvm ='http://api.tvmaze.com/shows/%s/episodes' % str(json.loads(tvm).get('id'))
+            items = json.loads(client.request(tvm))
+            items = [(str(i.get('season')), str(i.get('number')), i.get('name').strip(), i.get('airdate')) for i in items]
+
+            if preset == 'tvtuner':
+                choice = random.choice(items)
+                items = items[items.index(choice):] + items[:items.index(choice)]
+                items = items[:100]
+
+            result = ''
+
+            for i in items:
+                try:
+                    if int(re.sub('[^0-9]', '', str(i[3]))) > today: raise Exception()
+                    result += '<item><title> %01dx%02d . %s</title><meta><content>episode</content><imdb>%s</imdb><tvdb>%s</tvdb><tvshowtitle>%s</tvshowtitle><year>%s</year><title>%s</title><premiered>%s</premiered><season>%01d</season><episode>%01d</episode></meta><link><sublink>search</sublink><sublink>searchsd</sublink></link><thumbnail>%s</thumbnail><fanart>%s</fanart></item>' % (int(i[0]), int(i[1]), i[2], imdb, tvdb, tvshowtitle, year, i[2], i[3], int(i[0]), int(i[1]), thumbnail, fanart)
+                except:
+                    pass
+
+            result = re.sub(r'[^\x00-\x7F]+', ' ', result)
+
+            if preset == 'tvtuner':
+                result = result.replace('<sublink>searchsd</sublink>', '')
+
+            self.list = self.phoenix_list('', result=result)
+
+            if preset == 'tvtuner':
+                self.addDirectory(self.list, queue=True)
+            else:
+                self.worker()
+                self.addDirectory(self.list)
+        except:
+            pass
+
+    def search(self, url):
+        try:
+            mark = False
+            if (url == None or url == ''):
+                self.list = [{'name': 30702, 'action': 'addSearch'}]
+                self.list += [{'name': 30703, 'action': 'delSearch'}]
+            else:
+                if '|SECTION|' in url: mark = url.split('|SECTION|')[0]
+                self.list = [{'name': 30702, 'url': url, 'action': 'addSearch'}]
+                self.list += [{'name': 30703, 'action': 'delSearch'}]
 
             try:
                 def search(): return
                 query = cache.get(search, 600000000, table='rel_srch')
 
                 for url in query:
-                    try: self.list += [{'name': '%s...' % url, 'url': url, 'action': 'addSearch'}]
-                    except: pass
+                    
+                    if mark != False:
+                        if mark in url:
+                            name = url.split('|SPLITER|')[0]
+                            try: self.list += [{'name': '%s...' % name, 'url': url, 'action': 'addSearch'}]
+                            except: pass
+                    else:
+                        if not '|SPLITER|' in url:
+                            try: self.list += [{'name': '%s...' % url, 'url': url, 'action': 'addSearch'}]
+                            except: pass
             except:
                 pass
 
@@ -98,31 +211,60 @@ class indexer:
             pass
 
 
-    def addSearch(self, url=None):
-        try:
+    def addSearch(self, url):
+    
+            try:
+                skip = 0
+                if '|SPLITER|' in url:
+                    keep = url
+                    url,matcher = url.split('|SPLITER|')
+                    skip = 1
+                    section = 1
+                elif '|SECTION|' in url:
+                    matcher = url.replace('|SECTION|','')
+                    section = 1
+                else: 
+                    section = 0
+            except: section = 0
+
             link = 'http://phoenixtv.offshorepastebin.com/main/search.xml'
 
-            if (url == None or url == ''):
-                keyboard = control.keyboard('', control.lang(30702).encode('utf-8'))
-                keyboard.doModal()
-                if not (keyboard.isConfirmed()): return
-                url = keyboard.getText()
+            if skip == 0:
+                if section == 1:
+                    keyboard = control.keyboard('', control.lang(30702).encode('utf-8'))
+                    keyboard.doModal()
+                    if not (keyboard.isConfirmed()): return
+                    url = keyboard.getText()
+                    keep = url + '|SPLITER|' + matcher
+                else:
+                    if (url == None or url == ''):
+                        keyboard = control.keyboard('', control.lang(30702).encode('utf-8'))
+                        keyboard.doModal()
+                        if not (keyboard.isConfirmed()): return
+                        url = keyboard.getText()
 
             if (url == None or url == ''): return
 
-            def search(): return [url]
+            if section == 1:
+                input = keep
+            else: 
+                input = url
+            def search(): return [input]
             query = cache.get(search, 600000000, table='rel_srch')
-            def search(): return [x for y,x in enumerate((query + [url])) if x not in (query + [url])[:y]]
+
+            def search(): return [x for y,x in enumerate((query + [input])) if x not in (query + [input])[:y]]
             cache.get(search, 0, table='rel_srch')
 
             links = client.request(link)
             links = re.findall('<link>(.+?)</link>', links)
-            links = [i for i in links if str(i).startswith('http')]
-
+            if section == 0: links = [i for i in links if str(i).startswith('http')]
+            else: links = [i for i in links if str(i).startswith('http') and matcher.lower() in str(i).lower()]
+            
             self.list = [] ; threads = [] 
             for link in links: threads.append(workers.Thread(self.phoenix_list, link))
             [i.start() for i in threads] ; [i.join() for i in threads]
 
+            
             self.list = [i for i in self.list if url.lower() in i['name'].lower()]
 
             for i in self.list:
@@ -134,12 +276,12 @@ class indexer:
                 except:
                     pass
 
-            self.addDirectory(self.list, mode=False)
-        except:
-            pass
+            for i in self.list: i.update({'content': 'videos'})
+            self.addDirectory(self.list)
 
 
     def phoenix_list(self, url, result=None):
+
         try:
             if result == None: result = cache.get(client.request, 0, url)
 
@@ -154,15 +296,6 @@ class indexer:
 
             result = str(result)
 
-            regex = re.compile('<link>(.+?)</link>', re.MULTILINE|re.DOTALL).findall(result)
-            for i in regex:
-                if '</regex>' in i: result = result.replace('<link>'+i+'</link>', '<link>'+urllib.quote_plus(i)+'</link>')
-
-            result = result.replace('\r','').replace('\n','').replace('\t','').replace('&nbsp;','')
-
-            result = self.account_filter(result)
-            result = re.sub('<link></link>|<sublink></sublink>','', result)
-
             info = result.split('<item>')[0].split('<dir>')[0]
 
             try: vip = re.findall('<poster>(.+?)</poster>', info)[0]
@@ -173,69 +306,195 @@ class indexer:
 
             try: fanart = re.findall('<fanart>(.+?)</fanart>', info)[0]
             except: fanart = '0'
+            
+            api_data = client.request(base64.b64decode('aHR0cDovL3Bob2VuaXh0di5vZmZzaG9yZXBhc3RlYmluLmNvbS9hcGkvdG1kYi1hcGkudHh0'), timeout='5')
+            tmdb_api = re.compile('<api>(.+?)</api>').findall(api_data)[0]
 
-            items = re.findall('((?:<item>.+?</item>|<dir>.+?</dir>|<plugin>.+?</plugin>|<info>.+?</info>|<name>[^<]+</name><link>[^<]+</link><thumbnail>[^<]+</thumbnail><mode>[^<]+</mode>|<name>[^<]+</name><link>[^<]+</link><thumbnail>[^<]+</thumbnail><date>[^<]+</date>))', result)
+            items = re.compile('((?:<item>.+?</item>|<dir>.+?</dir>|<plugin>.+?</plugin>|<info>.+?</info>|<name>[^<]+</name><link>[^<]+</link><thumbnail>[^<]+</thumbnail><mode>[^<]+</mode>|<name>[^<]+</name><link>[^<]+</link><thumbnail>[^<]+</thumbnail><date>[^<]+</date>))', re.MULTILINE|re.DOTALL).findall(result)
         except:
             return
 
         for item in items:
-            try:
-                name = item.split('<meta>')[0].split('<regex>')[0]
-                try: name = re.findall('<title>(.+?)</title>', name)[0]
-                except: name = re.findall('<name>(.+?)</name>', name)[0]
-                if '<meta>' in name: raise Exception()
 
-                try: date = re.findall('<date>(.+?)</date>', item)[0]
-                except: date = ''
-                if re.search(r'\d+', date): name += ' [COLOR red] Updated %s[/COLOR]' % date
+            try:
+                regdata = re.compile('(<regex>.+?</regex>)', re.MULTILINE|re.DOTALL).findall(item)
+                regdata = ''.join(regdata)
+                reglist = re.compile('(<listrepeat>.+?</listrepeat>)', re.MULTILINE|re.DOTALL).findall(regdata)
+                regdata = urllib.quote_plus(regdata)
+
+                reghash = hashlib.md5()
+                for i in regdata: reghash.update(str(i))
+                reghash = str(reghash.hexdigest())
+
+                item = item.replace('\r','').replace('\n','').replace('\t','').replace('&nbsp;','').replace('<tmdb_data>true</tmdb_data>','<tmdb_data>all</tmdb_data>')
 
                 try: meta = re.findall('<meta>(.+?)</meta>', item)[0]
                 except: meta = '0'
 
+                try: imdb = re.findall('<imdb>(.+?)</imdb>', meta)[0]
+                except: imdb = '0'
+
+                try: tmdb_get = re.findall('<tmdb_data>(.+?)</tmdb_data>', meta)[0]
+                except: tmdb_get = '0'
+
+                try: tvshowtitle = re.findall('<tvshowtitle>(.+?)</tvshowtitle>', item)[0]
+                except: tvshowtitle = '0'
+                            
+                item = re.sub('<regex>.+?</regex>','', item)
+                item = re.sub('<sublink></sublink>|<sublink\s+name=(?:\'|\").*?(?:\'|\")></sublink>','', item)
+                item = re.sub('<link></link>','', item)
+
+                try: meta = re.findall('<meta>(.+?)</meta>', item)[0]
+                except: meta = '0'
+                
+                if any(f for f in ['all','data','images'] if f == tmdb_get.lower()):         
+                    try:
+                        url_api = 'http://api.themoviedb.org/3/movie/' + imdb + '?api_key=' + tmdb_api
+                        item_json = client.request(url_api, timeout='5')
+
+                        item_json = json.loads(item_json)
+                    except: pass
+
+                    if any(f for f in ['all','data'] if f == tmdb_get.lower()):         
+                        try:
+                            if item_json['original_title'] is not None: 
+                               title = item_json['original_title']
+                               name = title
+                            else:        
+                                name = re.sub('<meta>.+?</meta>','', item)
+                                try: name = re.findall('<title>(.+?)</title>', name)[0]
+                                except: name = re.findall('<name>(.+?)</name>', name)[0]
+                                try: title = name
+                                except: title = '0'
+                                if title == '0' and not tvshowtitle == '0': title = tvshowtitle
+
+                        except:
+                            name = re.sub('<meta>.+?</meta>','', item)
+                            try: name = re.findall('<title>(.+?)</title>', name)[0]
+                            except: name = re.findall('<name>(.+?)</name>', name)[0]
+                            try: title = name
+                            except: title = '0'
+                            
+                            if title == '0' and not tvshowtitle == '0': title = tvshowtitle
+
+                        if '<title></title>' in item:
+                            item = item.replace('<title></title>','<title>'+title+'</title>')
+                                    
+                        try:
+                            if item_json['release_date'] is not None: year = item_json['release_date']; year = year.split('-')[0]; name = title + ' (' + year + ')'
+                            else: 
+                                try: year = re.findall('<year>(.+?)</year>', meta)[0]
+                                except: year = '0'
+                        except:
+                            try: year = re.findall('<year>(.+?)</year>', meta)[0]
+                            except: year = '0'
+                            
+                        if '<year></year>' in item:
+                            item = item.replace('<year></year>','<year>'+title+'</year>')
+                    else:
+                        name = re.sub('<meta>.+?</meta>','', item)
+                        try: name = re.findall('<title>(.+?)</title>', name)[0]
+                        except: name = re.findall('<name>(.+?)</name>', name)[0]
+                        try: title = name
+                        except: title = '0'
+                        if '<title></title>' in item:
+                            item = item.replace('<title></title>','<title>'+title+'</title>')
+                        try: year = re.findall('<year>(.+?)</year>', meta)[0]
+                        except: year = '0'
+                        if '<year></year>' in item:
+                            item = item.replace('<year></year>','<year>'+title+'</year>')
+                    
+                    if any(f for f in ['all','images'] if f == tmdb_get.lower()):         
+
+                        try:
+                            if item_json['backdrop_path'] is not None: fanart2 = 'http://image.tmdb.org/t/p/original/' + item_json['backdrop_path']
+                            else: 
+                                try: fanart2 = re.findall('<fanart>(.+?)</fanart>', item)[0]
+                                except: fanart2 = fanart
+                        except:
+                            try: fanart2 = re.findall('<fanart>(.+?)</fanart>', item)[0]
+                            except: fanart2 = fanart
+                            
+                        try:
+                            if item_json['poster_path'] is not None: image2 = 'http://image.tmdb.org/t/p/original/' + item_json['poster_path']
+                            else: 
+                                try: image2 = re.findall('<thumbnail>(.+?)</thumbnail>', item)[0]
+                                except: image2 = image
+                        except:
+                            try: image2 = re.findall('<thumbnail>(.+?)</thumbnail>', item)[0]
+                            except: image2 = image
+                    else:
+                        try: fanart2 = re.findall('<fanart>(.+?)</fanart>', item)[0]
+                        except: fanart2 = fanart
+                        try: image2 = re.findall('<thumbnail>(.+?)</thumbnail>', item)[0]
+                        except: image2 = image
+                else:
+
+                    name = re.sub('<meta>.+?</meta>','', item)
+                    try: name = re.findall('<title>(.+?)</title>', name)[0]
+                    except: name = re.findall('<name>(.+?)</name>', name)[0]
+                    
+                    try: title = re.findall('<title>(.+?)</title>', meta)[0]
+                    except: title = '0'
+
+                    if title == '0' and not tvshowtitle == '0': title = tvshowtitle
+
+                    try: year = re.findall('<year>(.+?)</year>', meta)[0]
+                    except: year = '0'
+
+                    try: image2 = re.findall('<thumbnail>(.+?)</thumbnail>', item)[0]
+                    except: image2 = image
+
+                    try: fanart2 = re.findall('<fanart>(.+?)</fanart>', item)[0]
+                    except: fanart2 = fanart
+                
+                
+                try: date = re.findall('<date>(.+?)</date>', item)[0]
+                except: date = ''
+                if re.search(r'\d+', date): name += ' [COLOR red] Updated %s[/COLOR]' % date
+                
+                try: meta = re.findall('<meta>(.+?)</meta>', item)[0]
+                except: meta = '0'
                 try: url = re.findall('<link>(.+?)</link>', item)[0]
                 except: url = '0'
                 url = url.replace('>search<', '><preset>search</preset>%s<' % meta)
                 url = '<preset>search</preset>%s' % meta if url == 'search' else url
                 url = url.replace('>searchsd<', '><preset>searchsd</preset>%s<' % meta)
                 url = '<preset>searchsd</preset>%s' % meta if url == 'searchsd' else url
-                url = url.replace('<sublink></sublink>', '')
+                url = re.sub('<sublink></sublink>|<sublink\s+name=(?:\'|\").*?(?:\'|\")></sublink>','', url)
 
                 if item.startswith('<item>'): action = 'play'
                 elif item.startswith('<plugin>'): action = 'plugin'
                 elif item.startswith('<info>') or url == '0': action = '0'
                 else: action = 'directory'
+                if action == 'play' and reglist: action = 'xdirectory'
 
-                if action in ['directory', 'plugin']: folder = True
-                else: folder = False
+                if not regdata == '':
+                    self.hash.append({'regex': reghash, 'response': regdata})
+                    url += '|regex=%s' % reghash
 
-                try: image2 = re.findall('<thumbnail>(.+?)</thumbnail>', item)[0]
-                except: image2 = image
-                if not str(image2).lower().startswith('http'): image2 = '0'
-
-                try: fanart2 = re.findall('<fanart>(.+?)</fanart>', item)[0]
-                except: fanart2 = fanart
-                if not str(fanart2).lower().startswith('http'): fanart2 = '0'
+                if action in ['directory', 'xdirectory', 'plugin']:
+                    folder = True
+                else:
+                    folder = False
 
                 try: content = re.findall('<content>(.+?)</content>', meta)[0]
                 except: content = '0'
+                if content == '0': 
+                    try: content = re.findall('<content>(.+?)</content>', item)[0]
+                    except: content = '0'
                 if not content == '0': content += 's'
 
-                try: imdb = re.findall('<imdb>(.+?)</imdb>', meta)[0]
-                except: imdb = '0'
+                if 'tvshow' in content and not url.strip().endswith('.xml'):
+                    url = '<preset>tvindexer</preset><url>%s</url><thumbnail>%s</thumbnail><fanart>%s</fanart>%s' % (url, image2, fanart2, meta)
+                    action = 'tvtuner'
+
+                if 'tvtuner' in content and not url.strip().endswith('.xml'):
+                    url = '<preset>tvtuner</preset><url>%s</url><thumbnail>%s</thumbnail><fanart>%s</fanart>%s' % (url, image2, fanart2, meta)
+                    action = 'tvtuner'
 
                 try: tvdb = re.findall('<tvdb>(.+?)</tvdb>', meta)[0]
                 except: tvdb = '0'
-
-                try: tvshowtitle = re.findall('<tvshowtitle>(.+?)</tvshowtitle>', meta)[0]
-                except: tvshowtitle = '0'
-
-                try: title = re.findall('<title>(.+?)</title>', meta)[0]
-                except: title = '0'
-
-                if title == '0' and not tvshowtitle == '0': title = tvshowtitle
-
-                try: year = re.findall('<year>(.+?)</year>', meta)[0]
-                except: year = '0'
 
                 try: premiered = re.findall('<premiered>(.+?)</premiered>', meta)[0]
                 except: premiered = '0'
@@ -247,21 +506,13 @@ class indexer:
                 except: episode = '0'
 
                 self.list.append({'name': name, 'vip': vip, 'url': url, 'action': action, 'folder': folder, 'poster': image2, 'banner': '0', 'fanart': fanart2, 'content': content, 'imdb': imdb, 'tvdb': tvdb, 'tmdb': '0', 'title': title, 'originaltitle': title, 'tvshowtitle': tvshowtitle, 'year': year, 'premiered': premiered, 'season': season, 'episode': episode})
+
             except:
-                pass
+                pass            
+
+        regex.insert(self.hash)
 
         return self.list
-
-
-    def account_filter(self, result):
-        if (control.setting('ustvnow_email') == '' or control.setting('ustvnow_pass') == ''):
-            result = re.sub('http(?:s|)://(?:www\.|)ustvnow\.com/.+?<','<', result)
-
-        if (control.setting('streamlive_user') == '' or control.setting('streamlive_pass') == ''):
-            result = re.sub('http(?:s|)://(?:www\.|)streamlive\.to/.+?<','<', result)
-
-        return result
-
 
     def worker(self):
         if not control.setting('metadata') == 'true': return
@@ -272,6 +523,16 @@ class indexer:
 
         self.meta = []
         total = len(self.list)
+        if total == 0: return
+
+        for i in range(0, total): self.list[i].update({'metacache': False})
+        self.list = metacache.fetch(self.list, self.lang)
+
+        multi = [i['imdb'] for i in self.list]
+        multi = [x for y,x in enumerate(multi) if x not in multi[:y]]
+        if len(multi) == 1:
+                self.movie_info(0) ; self.tv_info(0)
+                if self.meta: metacache.insert(self.meta)
 
         for i in range(0, total): self.list[i].update({'metacache': False})
         self.list = metacache.fetch(self.list, self.lang)
@@ -284,7 +545,7 @@ class indexer:
             [i.start() for i in threads]
             [i.join() for i in threads]
 
-        if len(self.meta) > 0: metacache.insert(self.meta)
+        if self.meta: metacache.insert(self.meta)
 
 
     def movie_info(self, i):
@@ -334,6 +595,8 @@ class indexer:
             duration = item['Runtime']
             if duration == None or duration == '' or duration == 'N/A': duration = '0'
             duration = re.sub('[^0-9]', '', str(duration))
+            try: duration = str(int(duration) * 60)
+            except: pass
             duration = duration.encode('utf-8')
             if not duration == '0': self.list[i].update({'duration': duration})
 
@@ -400,12 +663,12 @@ class indexer:
 
             url = self.tvmaze_info_link % tvdb
 
-            item = client.request(url, output='response', error=True, timeout='10')
+            item = client.request(url, output='extended', error=True, timeout='10')
 
-            if item[0] == '404':
+            if item[1] == '404':
                 return self.meta.append({'imdb': '0', 'tmdb': '0', 'tvdb': tvdb, 'lang': self.lang, 'item': {'code': '0'}})
 
-            item = json.loads(item[1])
+            item = json.loads(item[0])
 
             tvshowtitle = item['name']
             tvshowtitle = tvshowtitle.encode('utf-8')
@@ -422,7 +685,8 @@ class indexer:
             imdb = imdb.encode('utf-8')
             if self.list[i]['imdb'] == '0' and not imdb == '0': self.list[i].update({'imdb': imdb})
 
-            studio = item['network']['name']
+            try: studio = item['network']['name']
+            except: studio = '0'
             if studio == '' or studio == None: studio = '0'
             studio = studio.encode('utf-8')
             if not studio == '0': self.list[i].update({'studio': studio})
@@ -436,6 +700,8 @@ class indexer:
             try: duration = str(item['runtime'])
             except: duration = '0'
             if duration == '' or duration == None: duration = '0'
+            try: duration = str(int(duration) * 60)
+            except: pass
             duration = duration.encode('utf-8')
             if not duration == '0': self.list[i].update({'duration': duration})
 
@@ -455,28 +721,35 @@ class indexer:
             pass
 
 
-    def addDirectory(self, items, mode=True):
+    def addDirectory(self, items, queue=False):
         if items == None or len(items) == 0: return
 
         sysaddon = sys.argv[0]
         addonPoster = addonBanner = control.addonInfo('icon')
         addonFanart = control.addonInfo('fanart')
 
+        playlist = control.playlist
+        if not queue == False: playlist.clear()
+
         try: devmode = True if 'testings.xml' in control.listDir(control.dataPath)[1] else False
         except: devmode = False
 
-        if mode == True: mode = [i['content'] for i in items if 'content' in i]
-        else: mode = []
+        mode = [i['content'] for i in items if 'content' in i]
         if 'movies' in mode: mode = 'movies'
         elif 'tvshows' in mode: mode = 'tvshows'
         elif 'seasons' in mode: mode = 'seasons'
         elif 'episodes' in mode: mode = 'episodes'
-        else: mode = None
+        elif 'videos' in mode: mode = 'videos'
+        else: mode = 'addons'
 
         for i in items:
             try:
+                
                 try: name = control.lang(int(i['name'])).encode('utf-8')
                 except: name = i['name']
+                
+                if name == '':
+                    name = i['name']
 
                 url = '%s?action=%s' % (sysaddon, i['action'])
                 try: url += '&url=%s' % urllib.quote_plus(i['url'])
@@ -502,8 +775,6 @@ class indexer:
                 folder = i['folder'] if 'folder' in i else True
 
                 meta = dict((k,v) for k, v in i.iteritems() if not v == '0')
-                try: meta.update({'duration': str(int(meta['duration']) * 60)})
-                except: pass
 
                 cm = []
 
@@ -514,15 +785,21 @@ class indexer:
                 if content in ['movies', 'tvshows', 'seasons', 'episodes']:
                     cm.append((control.lang(30708).encode('utf-8'), 'XBMC.Action(Info)'))
 
+                if (folder == False and not '|regex=' in str(i.get('url'))) or (folder == True and content in ['tvshows', 'seasons']):
+                    cm.append((control.lang(30723).encode('utf-8'), 'RunPlugin(%s?action=queueItem)' % sysaddon))
+
                 if content == 'movies':
-                    try: dfile = '%s (%s)' % (data['title'], data['year'])
+                    try: dfile = '%s (%s)' % (i['title'], i['year'])
                     except: dfile = name
                     try: cm.append((control.lang(30722).encode('utf-8'), 'RunPlugin(%s?action=addDownload&name=%s&url=%s&image=%s)' % (sysaddon, urllib.quote_plus(dfile), urllib.quote_plus(i['url']), urllib.quote_plus(poster))))
                     except: pass
                 elif content == 'episodes':
-                    try: dfile = '%s S%02dE%02d' % (data['tvshowtitle'], int(data['season']), int(data['episode']))
+                    try: dfile = '%s S%02dE%02d' % (i['tvshowtitle'], int(i['season']), int(i['episode']))
                     except: dfile = name
                     try: cm.append((control.lang(30722).encode('utf-8'), 'RunPlugin(%s?action=addDownload&name=%s&url=%s&image=%s)' % (sysaddon, urllib.quote_plus(dfile), urllib.quote_plus(i['url']), urllib.quote_plus(poster))))
+                    except: pass
+                elif content == 'songs':
+                    try: cm.append((control.lang(30722).encode('utf-8'), 'RunPlugin(%s?action=addDownload&name=%s&url=%s&image=%s)' % (sysaddon, urllib.quote_plus(name), urllib.quote_plus(i['url']), urllib.quote_plus(poster))))
                     except: pass
 
                 if mode == 'movies':
@@ -549,16 +826,34 @@ class indexer:
                 elif not addonFanart == None:
                     item.setProperty('Fanart_Image', addonFanart)
 
-                item.setInfo(type='Video', infoLabels = meta)
-                item.addContextMenuItems(cm)
-                control.addItem(handle=int(sys.argv[1]), url=url, listitem=item, isFolder=folder)
+                if queue == False:
+                    item.setInfo(type='Video', infoLabels = meta)
+                    item.addContextMenuItems(cm)
+                    control.addItem(handle=int(sys.argv[1]), url=url, listitem=item, isFolder=folder)
+                else:
+                    item.setInfo(type='Video', infoLabels = meta)
+                    playlist.add(url=url, listitem=item)
             except:
                 pass
 
+        if not queue == False:
+            return control.player.play(playlist)
+
+        try:
+            i = items[0]
+            if i['next'] == '': raise Exception()
+            url = '%s?action=%s&url=%s' % (sysaddon, i['nextaction'], urllib.quote_plus(i['next']))
+            item = control.item(label=control.lang(30500).encode('utf-8'))
+            item.setArt({'addonPoster': addonPoster, 'thumb': addonPoster, 'poster': addonPoster, 'tvshow.poster': addonPoster, 'season.poster': addonPoster, 'banner': addonPoster, 'tvshow.banner': addonPoster, 'season.banner': addonPoster})
+            item.setProperty('addonFanart_Image', addonFanart)
+            control.addItem(handle=int(sys.argv[1]), url=url, listitem=item, isFolder=True)
+        except:
+            pass
+
         if not mode == None: control.content(int(sys.argv[1]), mode)
-        #control.do_block_check(False)
         control.directory(int(sys.argv[1]), cacheToDisc=True)
-        if not mode == None: views.setView(mode)
+        if mode in ['movies', 'tvshows', 'seasons', 'episodes']:
+            views.setView(mode, {'skin.estuary': 55})
 
 
 
@@ -576,7 +871,11 @@ class resolver:
         try:
             url = self.get(url)
             if url == False: return
+
+            control.execute('ActivateWindow(busydialog)')
             url = self.process(url)
+            control.execute('Dialog.Close(busydialog)')
+
             if url == None: return control.infoDialog(control.lang(30705).encode('utf-8'))
             return url
         except:
@@ -585,27 +884,27 @@ class resolver:
 
     def get(self, url):
         try:
-            items = re.compile('<sublink>(.+?)</sublink>').findall(url)
-            if len(items) == 0: items = [url]
-            items = [('Link %s' % (int(items.index(i))+1), i) for i in items]
+            items = re.compile('<sublink(?:\s+name=|)(?:\'|\"|)(.*?)(?:\'|\"|)>(.+?)</sublink>').findall(url)
 
-            if len(items) == 1:
-                url = items[0][1]
-            else:
-                select = control.selectDialog([i[0] for i in items], control.infoLabel('listitem.label'))
-                if select == -1: return False
-                else: url = items[select][1]
+            if len(items) == 0: return url
+            if len(items) == 1: return items[0][1]
 
-            return url
+            items = [('Link %s' % (int(items.index(i))+1) if i[0] == '' else i[0], i[1]) for i in items]
+
+            select = control.selectDialog([i[0] for i in items], control.infoLabel('listitem.label'))
+
+            if select == -1: return False
+            else: return items[select][1]
         except:
             pass
 
 
     def f4m(self, url, name):
             try:
-                if not any(i in url for i in ['.f4m', '.ts']): raise Exception()
+                if not any(i in url for i in ['.f4m', '.ts', '.m3u8']): raise Exception()
                 ext = url.split('?')[0].split('&')[0].split('|')[0].rsplit('.')[-1].replace('/', '').lower()
-                if not ext in ['f4m', 'ts']: raise Exception()
+                if not ext: ext = url
+                if not ext in ['f4m', 'ts', 'm3u8']: raise Exception()
 
                 params = urlparse.parse_qs(url)
 
@@ -624,8 +923,13 @@ class resolver:
                 try: auth_string = params['auth'][0]
                 except: auth_string = ''
 
-                try: streamtype = params['streamtype'][0]
-                except: streamtype = 'TSDOWNLOADER' if ext == 'ts' else 'HDS'
+
+                try:
+                   streamtype = params['streamtype'][0]
+                except:
+                   if ext =='ts': streamtype = 'TSDOWNLOADER'
+                   elif ext =='m3u8': streamtype = 'HLS'
+                   else: streamtype = 'HDS'
 
                 try: swf = params['swf'][0]
                 except: swf = None
@@ -642,35 +946,23 @@ class resolver:
             ext = url.split('?')[0].split('&')[0].split('|')[0].rsplit('.')[-1].replace('/', '').lower()
             if not ext in ['jpg', 'png', 'gif']: raise Exception()
             try:
-                dialog = None
-                dialog = control.progressDialog
-                dialog.create(control.addonInfo('name'), control.lang(30732).encode('utf-8'))
-                dialog.update(0)
                 i = os.path.join(control.dataPath,'img')
                 control.deleteFile(i)
                 f = control.openFile(i, 'w')
                 f.write(client.request(url))
                 f.close()
-                dialog.close()
                 control.execute('ShowPicture("%s")' % i)
-                return True
+                return False
             except:
                 return
         except:
             pass
 
         try:
-            dialog = None
-            dialog = control.progressDialog
-            dialog.create(control.addonInfo('name'), control.lang(30726).encode('utf-8'))
-            dialog.update(0)
-        except:
-            pass
-
-        try:
-            r = urllib.unquote_plus(url)
+            r, x = re.findall('(.+?)\|regex=(.+?)$', url)[0]
+            x = regex.fetch(x)
+            r += urllib.unquote_plus(x)
             if not '</regex>' in r: raise Exception()
-            from resources.lib.modules import regex
             u = regex.resolve(r)
             if not u == None: url = u
         except:
@@ -679,8 +971,6 @@ class resolver:
         try:
             if not url.startswith('rtmp'): raise Exception()
             if len(re.compile('\s*timeout=(\d*)').findall(url)) == 0: url += ' timeout=10'
-            try: dialog.close()
-            except: pass
             return url
         except:
             pass
@@ -689,14 +979,14 @@ class resolver:
             if not any(i in url for i in ['.m3u8', '.f4m', '.ts']): raise Exception()
             ext = url.split('?')[0].split('&')[0].split('|')[0].rsplit('.')[-1].replace('/', '').lower()
             if not ext in ['m3u8', 'f4m', 'ts']: raise Exception()
-            try: dialog.close()
-            except: pass
             return url
         except:
             pass
 
         try:
             preset = re.findall('<preset>(.+?)</preset>', url)[0]
+
+            if not 'search' in preset: raise Exception()
 
             title, year, imdb = re.findall('<title>(.+?)</title>', url)[0], re.findall('<year>(.+?)</year>', url)[0], re.findall('<imdb>(.+?)</imdb>', url)[0]
 
@@ -705,46 +995,25 @@ class resolver:
 
             direct = False
 
-            presetDict = ['primewire_mv_tv', 'watchfree_mv_tv', 'movie4k_mv', 'movie25_mv', 'watchseries_tv', 'pftv_tv', 'afdah_mv', 'dayt_mv', 'dizibox_tv', 'dizigold_tv', 'genvideo_mv', 'mfree_mv', 'miradetodo_mv', 'movieshd_mv_tv', 'onemovies_mv_tv', 'onlinedizi_tv', 'pelispedia_mv_tv', 'pubfilm_mv_tv', 'putlocker_mv_tv', 'rainierland_mv', 'sezonlukdizi_tv', 'tunemovie_mv', 'xmovies_mv']
+            quality = 'HD' if not preset == 'searchsd' else 'SD'
 
-            if preset == 'searchsd': presetDict = ['primewire_mv_tv', 'watchfree_mv_tv', 'movie4k_mv', 'movie25_mv', 'watchseries_tv', 'pftv_tv']
+            from resources.lib.modules import sources
 
-            from resources.lib.sources import sources
+            u = sources.sources().getSources(title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, quality)
 
-            try: dialog.update(0, control.lang(30726).encode('utf-8'), control.lang(30731).encode('utf-8'))
-            except: pass
-
-            u = sources().getSources(title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, presetDict=presetDict, progress=False, timeout=20)
-
-            try: dialog.update(50, control.lang(30726).encode('utf-8'), control.lang(30731).encode('utf-8'))
-            except: pass
-
-            u = sources().sourcesDirect(u, progress=False)
-
-            if not u == None:
-                try: dialog.close()
-                except: pass
-                return u
+            if not u == None: return u
         except:
             pass
 
         try:
-            from resources.lib.sources import sources
+            from resources.lib.modules import sources
 
-            u = sources().getURISource(url)
+            u = sources.sources().getURISource(url)
 
             if not u == False: direct = False
-            if u == None or u == False or u == []: raise Exception()
+            if u == None or u == False: raise Exception()
 
-            try: dialog.update(50, control.lang(30726).encode('utf-8'), control.lang(30731).encode('utf-8'))
-            except: pass
-
-            u = sources().sourcesDirect(u, progress=False)
-
-            if not u == None:
-                try: dialog.close()
-                except: pass
-                return u
+            return u
         except:
             pass
 
@@ -752,8 +1021,6 @@ class resolver:
             if not '.google.com' in url: raise Exception()
             from resources.lib.modules import directstream
             u = directstream.google(url)[0]['url']
-            try: dialog.close()
-            except: pass
             return u
         except:
             pass
@@ -762,8 +1029,6 @@ class resolver:
             if not 'filmon.com/' in url: raise Exception()
             from resources.lib.modules import filmon
             u = filmon.resolve(url)
-            try: dialog.close()
-            except: pass
             return u
         except:
             pass
@@ -771,44 +1036,17 @@ class resolver:
         try:
             import urlresolver
 
-            hmf = urlresolver.HostedMediaFile(url=url, include_disabled=True, include_universal=False)
+            hmf = urlresolver.HostedMediaFile(url=url)
 
             if hmf.valid_url() == False: raise Exception()
 
             direct = False ; u = hmf.resolve()
 
-            if not u == False:
-                try: dialog.close()
-                except: pass
-                return u
+            if not u == False: return u
         except:
             pass
-
-
-        try:
-            try: headers = dict(urlparse.parse_qsl(url.rsplit('|', 1)[1]))
-            except: headers = dict('')
-            if not url.startswith('http'): raise Exception()
-            result = client.request(url.split('|')[0], headers=headers, output='headers', timeout='20')
-            if 'Content-Type' in result and not 'html' in result['Content-Type']: raise Exception()
-
-            import liveresolver
-            if liveresolver.isValid(url) == True: direct = False
-            u = liveresolver.resolve(url)
-
-            if not u == None:
-                try: dialog.close()
-                except: pass
-                return u
-        except:
-            pass
-
 
         if direct == True: return url
-
-        try: dialog.close()
-        except: pass
-
 
 
 class player(xbmc.Player):
@@ -818,12 +1056,17 @@ class player(xbmc.Player):
 
     def play(self, url, content=None):
         try:
+            base = url
+
             url = resolver().get(url)
             if url == False: return
 
+            control.execute('ActivateWindow(busydialog)')
             url = resolver().process(url)
-            if url == None: return control.infoDialog(control.lang(30705).encode('utf-8'))
+            control.execute('Dialog.Close(busydialog)')
 
+            if url == None: return control.infoDialog(control.lang(30705).encode('utf-8'))
+            if url == False: return
 
             meta = {}
             for i in ['title', 'originaltitle', 'tvshowtitle', 'year', 'season', 'episode', 'genre', 'rating', 'votes', 'director', 'writer', 'plot', 'tagline']:
@@ -836,6 +1079,8 @@ class player(xbmc.Player):
 
             self.name = meta['title'] ; self.year = meta['year'] if 'year' in meta else '0'
 
+            self.getbookmark = True if (content == 'movies' or content == 'episodes') else False
+
             self.offset = bookmarks().get(self.name, self.year)
 
             f4m = resolver().f4m(url, self.name)
@@ -847,9 +1092,7 @@ class player(xbmc.Player):
             except: pass
             item.setInfo(type='Video', infoLabels = meta)
             control.player.play(url, item)
-
-            if not (content == 'movies' or content == 'episodes'): return
-
+            control.resolve(int(sys.argv[1]), True, item)
 
             self.totalTime = 0 ; self.currentTime = 0
 
@@ -869,11 +1112,14 @@ class player(xbmc.Player):
 
 
     def onPlayBackStarted(self):
-        if not self.offset == '0': self.seekTime(float(self.offset))
+        control.execute('Dialog.Close(all,true)')
+        if self.getbookmark == True and not self.offset == '0':
+            self.seekTime(float(self.offset))
 
 
     def onPlayBackStopped(self):
-        bookmarks().reset(self.currentTime, self.totalTime, self.name, self.year)
+        if self.getbookmark == True:
+            bookmarks().reset(self.currentTime, self.totalTime, self.name, self.year)
 
 
     def onPlayBackEnded(self):
@@ -937,5 +1183,4 @@ class bookmarks:
             dbcon.commit()
         except:
             pass
-
 

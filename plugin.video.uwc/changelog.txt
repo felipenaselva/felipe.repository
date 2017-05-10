@@ -1,3 +1,111 @@
+[B]Version 1.1.53[/B]
+Fixed: Myfreecams
+Added: Rapidvideo support in utils (for Ero-tik)
+Removed: HDPoz (redirects to Sexix)
+
+
+[B]Version 1.1.52[/B]
+Added: Daftsex (thanks hdgdl)
+Fixed: Xhamster, Chaturbate, Pornhive
+Fixed: some internal stuff
+
+
+[B]Version 1.1.51[/B]
+Fixed: Pornhub, Elreyx, HDZog, Porntrex
+Fixed: xxxstreams(org)
+Changed: Xtheatre is now Krypton only because of ssl
+
+
+[B]Version 1.1.50[/B]
+Fixed: Pornhub, HQporner
+Added: Slow option for Chaturbate
+
+
+[B]Version 1.1.49[/B]
+Fixed: Hentaihaven, Chaturbate
+
+
+[B]Version 1.1.48[/B]
+Fixed: Bubbaporn, Chaturbate, PornAQ, Naked
+Fixed: VPorn, xxxstreams(org)
+
+
+[B]Version 1.1.47[/B]
+Added: HDPoz
+Added: Conformation clearing search words
+Fixed: Pornhub categories, Onelist
+
+
+[B]Version 1.1.46[/B]
+Fixed: Porntrex, Freeomovie
+Fixed: MyFreeCams, Cam4
+Removed: Unused files
+
+
+[B]Version 1.1.45[/B]
+Added: Xhamster (thanks hdgdl)
+Fixed: VPorn, Camsoda, Cam4, Naked, Xtheatre, Porntrex
+Fixed: Bubbaporn, Spankbang, HClips, ParadiseHill
+Removed: Streams, use Ultimate IPTV
+
+
+[B]Version 1.1.44[/B]
+Added: Option to enable/disable differen chaturbate sections
+Added: HD Playback for Pornhub
+Fixed: Datoporn
+Fixed: Refresh favorite images for camsoda/naked
+Fixed: Porntrex categories
+Removed: Hentaicraving
+
+
+[B]Version 1.1.43[/B]
+Added: Remove single keywords from search list (contextmenu)
+Added: Amateur Cool and VPorn (thanks anton40)
+Fixed: Chaturbate next page
+Fixed: Pornhub categories
+Fixed: Freeomovie download
+Fixed: Camsoda (thanks hdgdl)
+Changed: Todayporn -> Bubbaporn
+Changed: Chaturbate playback (see Chaturbate tab in addon settings)
+
+
+[B]Version 1.1.42[/B]
+Fixed: Cam4 (thanks hdgdl)
+Changed: Switched to Urlresolver for Openload
+Changed: Internal changes, could be some bugs, please post them
+Removed: Some offline sites
+
+
+[B]Version 1.1.41[/B]
+Fixed: Pigeon fix
+
+
+[B]Version 1.1.40[/B]
+Fixed: Openload mistake
+
+
+[B]Version 1.1.39[/B]
+Fixed: xxxstreams(org)
+Changed: internal code changes
+
+
+[B]Version 1.1.38[/B]
+Added: Cloudflare support (fixes K18)
+Fixed: CzechHD
+Fixed: xxxstreams(eu) pagination
+Fixed: Openload
+
+
+[B]Version 1.1.37[/B]
+Fixed: Openload
+
+
+[B]Version 1.1.36[/B]
+Fixed: Camsoda/Cam4 (thanks hdgdl)
+Fixed: Openload
+Fixed: FlashX
+
+
 [B]Version 1.1.35[/B]
 Improved: More supported hosts for pornhive
 

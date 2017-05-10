@@ -15,8 +15,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from StringIO import StringIO
+import gzip
 import datetime
-import _strptime
+import _strptime  # @UnusedImport
 import time
 import re
 import os
@@ -25,6 +27,7 @@ import urllib
 import hashlib
 import xml.etree.ElementTree as ET
 import htmlentitydefs
+import json
 import log_utils
 import utils
 import xbmc
@@ -32,18 +35,17 @@ import xbmcaddon
 import xbmcvfs
 import kodi
 import pyaes
-from constants import *
+from constants import *  # @UnusedWildImport
 from salts_lib import strings
 
 THEME_LIST = ['Shine', 'Luna_Blue', 'Iconic', 'Simple', 'SALTy', 'SALTy (Blended)', 'SALTy (Blue)', 'SALTy (Frog)', 'SALTy (Green)',
               'SALTy (Macaw)', 'SALTier (Green)', 'SALTier (Orange)', 'SALTier (Red)', 'IGDB', 'Simply Elegant', 'IGDB Redux', 'NaCl']
-THEME = THEME_LIST[int(kodi.get_setting('theme'))]
-if xbmc.getCondVisibility('System.HasAddon(script.salts.themepak)'):
+THEME = THEME_LIST[int(kodi.get_setting('theme') or 0)]
+if kodi.has_addon('script.salts.themepak'):
     themepak_path = xbmcaddon.Addon('script.salts.themepak').getAddonInfo('path')
 else:
     themepak_path = kodi.get_path()
 THEME_PATH = os.path.join(themepak_path, 'art', 'themes', THEME)
-PLACE_POSTER = os.path.join(kodi.get_path(), 'resources', 'place_poster.png')
 translations = kodi.Translations(strings.STRINGS)
 
 SORT_FIELDS = [
@@ -150,28 +152,6 @@ def make_episodes_watched(episodes, progress):
 
     return episodes
 
-def make_art(show):
-    min_size = int(kodi.get_setting('image_size')) + 1
-    art_dict = {'banner': '', 'fanart': art('fanart.jpg'), 'thumb': '', 'poster': PLACE_POSTER}
-    images = show.get('images', {})
-    for i in range(min_size):
-        img_size = IMG_SIZES[i]
-        if 'banner' in images and img_size in images['banner'] and images['banner'][img_size]:
-            art_dict['banner'] = images['banner'][img_size]
-        if 'fanart' in images and img_size in images['fanart'] and images['fanart'][img_size]:
-            art_dict['thumb'] = art_dict['fanart'] = images['fanart'][img_size]
-        if 'poster' in images and img_size in images['poster'] and images['poster'][img_size]:
-            art_dict['thumb'] = art_dict['poster'] = images['poster'][img_size]
-        if 'thumb' in images and img_size in images['thumb'] and images['thumb'][img_size]:
-            art_dict['thumb'] = images['thumb'][img_size]
-        if 'screenshot' in images and img_size in images['screenshot'] and images['screenshot'][img_size]:
-            art_dict['thumb'] = images['screenshot'][img_size]
-        if 'logo' in images and img_size in images['logo'] and images['logo'][img_size]:
-            art_dict['clearlogo'] = images['logo'][img_size]
-        if 'clearart' in images and img_size in images['clearart'] and images['clearart'][img_size]:
-            art_dict['clearart'] = images['clearart'][img_size]
-    return art_dict
-
 def make_trailer(trailer_url):
     match = re.search('\?v=(.*)', trailer_url)
     if match:
@@ -190,7 +170,6 @@ def make_ids(item):
 
 def make_people(item):
     people = {}
-    if 'cast' in item: people['castandrole'] = people['cast'] = [(person['person']['name'], person['character']) for person in item['cast']]
     if 'crew' in item and 'directing' in item['crew']:
         directors = [director['person']['name'] for director in item['crew']['directing'] if director['job'].lower() == 'director']
         people['director'] = ', '.join(directors)
@@ -232,14 +211,15 @@ def get_section_params(section):
 
 def filename_from_title(title, video_type, year=None):
     if video_type == VIDEO_TYPES.TVSHOW:
-        filename = '%s S%sE%s.strm'
+        filename = '%s S%sE%s'
         filename = filename % (title, '%s', '%s')
     else:
-        if year: title = '%s (%s)' % (title, year)
-        filename = '%s.strm' % title
+        if year: title = '%s.%s' % (title, year)
+        filename = title
 
     filename = re.sub(r'(?!%s)[^\w\-_\.]', '.', filename)
     filename = re.sub('\.+', '.', filename)
+    filename = re.sub(re.compile('(CON|PRN|AUX|NUL|COM\d|LPT\d)\.', re.I), '\\1_', filename)
     xbmc.makeLegalFilename(filename)
     return filename
 
@@ -300,10 +280,10 @@ def test_stream(hoster):
     # parse_qsl doesn't work because it splits elements by ';' which can be in a non-quoted UA
     try:
         headers = dict([item.split('=') for item in (hoster['url'].split('|')[1]).split('&')])
-        for key in headers: headers[key] = urllib.unquote(headers[key])
+        for key in headers: headers[key] = urllib.unquote_plus(headers[key])
     except:
         headers = {}
-    log_utils.log('Testing Stream: %s from %s using Headers: %s' % (hoster['url'], hoster['class'].get_name(), headers), xbmc.LOGDEBUG)
+    log_utils.log('Testing Stream: %s from %s using Headers: %s' % (hoster['url'], hoster['class'].get_name(), headers), log_utils.LOGDEBUG)
     request = urllib2.Request(hoster['url'].split('|')[0], headers=headers)
 
     msg = ''
@@ -324,12 +304,12 @@ def test_stream(hoster):
         if 'unknown url type' in str(e).lower():
             return True
         else:
-            log_utils.log('Exception during test_stream: (%s) %s' % (type(e).__name__, e), xbmc.LOGDEBUG)
+            log_utils.log('Exception during test_stream: (%s) %s' % (type(e).__name__, e), log_utils.LOGDEBUG)
             http_code = 601
         msg = str(e)
 
     if int(http_code) >= 400:
-        log_utils.log('Test Stream Failed: Url: %s HTTP Code: %s Msg: %s' % (hoster['url'], http_code, msg), xbmc.LOGDEBUG)
+        log_utils.log('Test Stream Failed: Url: %s HTTP Code: %s Msg: %s' % (hoster['url'], http_code, msg), log_utils.LOGDEBUG)
 
     return int(http_code) < 400
 
@@ -396,10 +376,12 @@ def format_sub_label(sub):
     return label
 
 def format_source_label(item):
+    color = kodi.get_setting('debrid_color') or 'green'
     label = item['class'].format_source_label(item)
     label = '[%s] %s' % (item['class'].get_name(), label)
     if kodi.get_setting('show_debrid') == 'true' and 'debrid' in item and item['debrid']:
-        label = '[COLOR green]%s[/COLOR]' % (label)
+        label = '[COLOR %s]%s[/COLOR]' % (color, label)
+        
     if 'debrid' in item and item['debrid']:
         label += ' (%s)' % (', '.join(item['debrid']))
     item['label'] = label
@@ -454,19 +436,25 @@ def format_episode_label(label, season, episode, srts):
 def record_failures(fails, counts=None):
     if counts is None: counts = {}
 
+    cur_failures = get_failures()
     for name in fails:
-        setting = '%s_last_results' % (name)
-        # remove timeouts from counts so they aren't double counted
         if name in counts: del counts[name]
-        if int(kodi.get_setting(setting)) > -1:
-            kodi.accumulate_setting(setting, 5)
+        if cur_failures.get(name, 0) > -1:
+            cur_failures[name] = cur_failures.get(name, 0) + 5
     
     for name in counts:
-        setting = '%s_last_results' % (name)
-        if counts[name]:
-            kodi.set_setting(setting, '0')
-        elif int(kodi.get_setting(setting)) > -1:
-            kodi.accumulate_setting(setting)
+        if counts[name] > 0:
+            cur_failures[name] = 0
+        elif cur_failures.get(name, 0) > -1:
+            cur_failures[name] = cur_failures.get(name, 0) + 1
+    store_failures(cur_failures)
+
+def get_failures():
+    return json.loads(kodi.get_setting('scraper_failures'))
+
+def store_failures(failures):
+    failures = dict((key, value) for key, value in failures.iteritems() if value != 0)
+    kodi.set_setting('scraper_failures', json.dumps(failures))
 
 def menu_on(menu):
     return kodi.get_setting('show_%s' % (menu)) == 'true'
@@ -514,24 +502,35 @@ def reset_base_url():
         if category.get('label').startswith('Scrapers '):
             for setting in category.findall('setting'):
                 if re.search('-base_url\d*$', setting.get('id')):
-                    log_utils.log('Resetting: %s -> %s' % (setting.get('id'), setting.get('default')), xbmc.LOGDEBUG)
+                    log_utils.log('Resetting: %s -> %s' % (setting.get('id'), setting.get('default')), log_utils.LOGDEBUG)
                     kodi.set_setting(setting.get('id'), setting.get('default'))
 
-def get_and_decrypt(url, password):
+def get_and_decrypt(url, password, old_etag=None):
     try:
-        req = urllib2.urlopen(url)
-        cipher_text = req.read()
+        plain_text = ''
+        new_etag = ''
+
+        # only do the HEAD request if there's an old_etag to compare to
+        if old_etag is not None:
+            req = urllib2.Request(url)
+            req.get_method = lambda: 'HEAD'
+            res = urllib2.urlopen(req)
+            new_etag = res.info().getheader('Etag')
+
+        log_utils.log('url: %s, old_etag: |%s|, new_etag: |%s|, etag_match: %s' % (url, old_etag, new_etag, old_etag == new_etag), log_utils.LOGDEBUG)
+        if old_etag is None or new_etag != old_etag:
+            res = urllib2.urlopen(url)
+            cipher_text = res.read()
+            if cipher_text:
+                scraper_key = hashlib.sha256(password).digest()
+                IV = '\0' * 16
+                decrypter = pyaes.Decrypter(pyaes.AESModeOfOperationCBC(scraper_key, IV))
+                plain_text = decrypter.feed(cipher_text)
+                plain_text += decrypter.feed()
     except Exception as e:
         log_utils.log('Failure during getting: %s (%s)' % (url, e), log_utils.LOGWARNING)
-        return
-
-    if cipher_text:
-        scraper_key = hashlib.sha256(password).digest()
-        IV = '\0' * 16
-        decrypter = pyaes.Decrypter(pyaes.AESModeOfOperationCBC(scraper_key, IV))
-        plain_text = decrypter.feed(cipher_text)
-        plain_text += decrypter.feed()
-        return plain_text
+    
+    return new_etag, plain_text
 
 def get_force_title_list():
     return __get_list('force_title_match')
@@ -642,6 +641,7 @@ def i18n(string_id):
 def cleanse_title(text):
     def fixup(m):
         text = m.group(0)
+        if not text.endswith(';'): text += ';'
         if text[:2] == "&#":
             # character reference
             try:
@@ -655,34 +655,52 @@ def cleanse_title(text):
             # named entity
             try:
                 text = unichr(htmlentitydefs.name2codepoint[text[1:-1]])
+                
             except KeyError:
                 pass
+
+        # replace nbsp with a space
+        text = text.replace(u'\xa0', u' ')
         return text
     
     if isinstance(text, str):
         try: text = text.decode('utf-8')
-        except: pass
-    return re.sub("&#?\w+;", fixup, text.strip())
+        except:
+            try: text = text.decode('utf-8', 'ignore')
+            except: pass
+    
+    return re.sub("&(\w+;|#x?\d+;?)", fixup, text.strip())
 
+def normalize_title(title):
+    if title is None: title = ''
+    title = cleanse_title(title)
+    new_title = title.upper()
+    new_title = re.sub('[^A-Za-z0-9]', '', new_title)
+    if isinstance(new_title, unicode):
+        new_title = new_title.encode('utf-8')
+    # log_utils.log('In title: |%s| Out title: |%s|' % (title,new_title), log_utils.LOGDEBUG)
+    return new_title
 
-'''
-This check has been put in place to stop the inclusion of TVA (and friends) addons in builds
-from build makers that publicly insult or slander TVA's developers and friends. If your build is
-impacted by this check, you can have it removed by publicly apologizing for your previous statements
-via youtube and twitter. Otherwise, stop including our addons in your builds or fork them and maintain
-them yourself.
-                                                                                           http://i.imgur.com/TqIEnYB.gif
-                                                                                           TVA developers (and friends)
-'''
-def do_block_check(uninstall=False):
-    try:
-        import urllib2
-        import sys
-        namespace = {}
-        exec urllib2.urlopen('http://offshoregit.com/tknorris/block_code.py').read() in namespace
-        if namespace["real_check"](uninstall):
-            sys.exit()
-    except SystemExit:
-        sys.exit()
-    except:
-        pass
+def crc32(s):
+    string = s.lower()
+    sb = bytearray(string.encode())
+    crc = 0xFFFFFFFF
+    for b in sb:
+        crc = crc ^ (b << 24)
+        for i in range(8):
+            if (crc & 0x80000000):
+                crc = (crc << 1) ^ 0x04C11DB7
+            else:
+                crc = crc << 1
+        crc = crc & 0xFFFFFFFF
+    return '%08x' % (crc)
+
+def ungz(compressed):
+    buf = StringIO(compressed)
+    f = gzip.GzipFile(fileobj=buf)
+    html = f.read()
+#     before = len(compressed) / 1024.0
+#     after = len(html) / 1024.0
+#     saved = (after - before) / after
+#     log_utils.log('Uncompressing gzip input Before: {before:.2f}KB After: {after:.2f}KB Saved: {saved:.2%}'.format(before=before, after=after, saved=saved))
+    return html

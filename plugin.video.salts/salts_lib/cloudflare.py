@@ -34,7 +34,7 @@ MAX_TRIES = 3
 COMPONENT = __name__
 
 class NoRedirection(urllib2.HTTPErrorProcessor):
-    def http_response(self, request, response):
+    def http_response(self, request, response):  # @UnusedVariable
         log_utils.log('Stopping Redirect', log_utils.LOGDEBUG, COMPONENT)
         return response
 
@@ -47,7 +47,8 @@ def solve_equation(equation):
     except:
         pass
 
-def solve(url, cj, user_agent=None, wait=True):
+def solve(url, cj, user_agent=None, wait=True, extra_headers=None):
+    if extra_headers is None: extra_headers = {}
     if user_agent is None: user_agent = USER_AGENT
     headers = {'User-Agent': user_agent, 'Referer': url}
     if cj is not None:
@@ -112,7 +113,7 @@ def solve(url, cj, user_agent=None, wait=True):
                 xbmc.sleep(5000)
                 
         url = '%s://%s/cdn-cgi/l/chk_jschl?jschl_vc=%s&jschl_answer=%s&pass=%s' % (scheme, domain, vc, result, urllib.quote(password))
-        log_utils.log('url: %s' % (url), log_utils.LOGDEBUG, COMPONENT)
+        log_utils.log('url: |%s| headers: |%s|' % (url, headers), log_utils.LOGDEBUG, COMPONENT)
         request = urllib2.Request(url)
         for key in headers: request.add_header(key, headers[key])
         try:
@@ -129,9 +130,11 @@ def solve(url, cj, user_agent=None, wait=True):
                     redir_url = urlparse.urljoin(base_url, redir_url)
                     
                 request = urllib2.Request(redir_url)
+                headers.update(extra_headers)
                 for key in headers: request.add_header(key, headers[key])
                 if cj is not None:
                     cj.add_cookie_header(request)
+                log_utils.log('redir url: |%s| headers: |%s|' % (redir_url, headers), log_utils.LOGDEBUG, COMPONENT)
                     
                 response = urllib2.urlopen(request)
             final = response.read()

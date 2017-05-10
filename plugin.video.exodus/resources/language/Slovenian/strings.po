@@ -1,8 +1,39 @@
 # Addon Name: Exodus
 # Addon id: plugin.video.exodus
 # Addon Provider: Exodus
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# djkidy123, 2016
+# Gregor Kovač, 2017
+# Gregor Kovač, 2017
+# lambda81, 2016
 msgid ""
 msgstr ""
+"Project-Id-Version: Exodus\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-04-10 19:36+0000\n"
+"Last-Translator: Gregor Kovač\n"
+"Language-Team: Slovenian (http://www.transifex.com/tv-addons/exodus/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 msgctxt "#32001"
 msgid "Movies"
@@ -10,23 +41,23 @@ msgstr "Filmi"
 
 msgctxt "#32002"
 msgid "TV Shows"
-msgstr "TV Oddaje"
+msgstr "TV oddaje"
 
 msgctxt "#32003"
 msgid "My Movies"
-msgstr "Moji Filmi"
+msgstr "Moji filmi"
 
 msgctxt "#32004"
 msgid "My TV Shows"
-msgstr "Moje TV Oddaje"
+msgstr "Moje TV oddaje"
 
 msgctxt "#32005"
 msgid "New Movies"
-msgstr "Novi Filmi"
+msgstr "Novi filmi"
 
 msgctxt "#32006"
 msgid "New Episodes"
-msgstr "Nove Serije"
+msgstr "Nove serije"
 
 msgctxt "#32007"
 msgid "Channels"
@@ -70,15 +101,15 @@ msgstr "Omrežja"
 
 msgctxt "#32017"
 msgid "People Watching"
-msgstr "Ljudje Gledajo"
+msgstr "Ljudje gledajo"
 
 msgctxt "#32018"
 msgid "Most Popular"
-msgstr "Najbolj Popularni"
+msgstr "Najbolj popularni"
 
 msgctxt "#32019"
 msgid "Most Voted"
-msgstr "Najboljše Glasovani"
+msgstr "Z največ glasovi"
 
 msgctxt "#32020"
 msgid "Box Office"
@@ -86,43 +117,43 @@ msgstr "Box Office"
 
 msgctxt "#32021"
 msgid "Oscar Winners"
-msgstr "Oskarjem Nagrajeni"
+msgstr "Z Oskarjem nagrajeni"
 
 msgctxt "#32022"
 msgid "In Theaters"
-msgstr "V Kinematografih"
+msgstr "V kinematografih"
 
 msgctxt "#32023"
 msgid "Highly Rated"
-msgstr "Najboljše Ocenjeni"
+msgstr "Najboljše ocenjeni"
 
 msgctxt "#32024"
 msgid "Airing today"
-msgstr "Danes Predvajano"
+msgstr "Danes predvajano"
 
 msgctxt "#32025"
 msgid "Returning TV Shows"
-msgstr "Povrnjene TV Serije"
+msgstr "Povrnjene TV serije"
 
 msgctxt "#32026"
 msgid "New TV Shows"
-msgstr "Nove TV Serije"
+msgstr "Nove TV serije"
 
 msgctxt "#32027"
 msgid "TV Calendar"
-msgstr "TV Kolendar"
+msgstr "TV koledar"
 
 msgctxt "#32028"
 msgid "People Search"
-msgstr "Iskanje Igralcev"
+msgstr "Iskanje igralcev"
 
 msgctxt "#32029"
 msgid "People (Movies)"
-msgstr "Igralci"
+msgstr "Filmski igralci"
 
 msgctxt "#32030"
 msgid "People (TV)"
-msgstr "Igralci"
+msgstr "TV igralci"
 
 msgctxt "#32031"
 msgid "Discover"
@@ -158,39 +189,39 @@ msgstr "Serije"
 
 msgctxt "#32039"
 msgid "Movie Lists"
-msgstr "Seznam Filmov"
+msgstr "Seznam filmov"
 
 msgctxt "#32040"
 msgid "TV Show Lists"
-msgstr "Seznam TV Serij"
+msgstr "Seznam TV serij"
 
 msgctxt "#32041"
 msgid "Episode Lists"
-msgstr "Seznam Serij"
+msgstr "Seznam serij"
 
 msgctxt "#32042"
 msgid "No Trakt or IMDb account found."
-msgstr "Ni najden Trakt ali IMDb račun."
+msgstr "Trakt ali IMDb račun ni najden."
 
 msgctxt "#32043"
 msgid "[B]SETTINGS[/B] : General"
-msgstr "[B]SETTINGS[/B] : Osnovno"
+msgstr "[B]NASTAVITVE[/B] : Osnovno"
 
 msgctxt "#32044"
 msgid "[B]SETTINGS[/B] : Accounts"
-msgstr "[B]SETTINGS[/B] : Računi"
+msgstr "[B]NASTAVITVE[/B] : Računi"
 
 msgctxt "#32045"
 msgid "[B]SETTINGS[/B] : Playback"
-msgstr "[B]SETTINGS[/B] : Predvajanje"
+msgstr "[B]NASTAVITVE[/B] : Predvajanje"
 
 msgctxt "#32046"
 msgid "[B]SETTINGS[/B] : Subtitles"
-msgstr "[B]SETTINGS[/B] : Podnapisi"
+msgstr "[B]NASTAVITVE[/B] : Podnapisi"
 
 msgctxt "#32047"
 msgid "[B]SETTINGS[/B] : Providers"
-msgstr "[B]SETTINGS[/B] : Ponudniki"
+msgstr "[B]NASTAVITVE[/B] : Ponudniki"
 
 msgctxt "#32048"
 msgid "[B]EXODUS[/B] : Downloads"
@@ -214,7 +245,7 @@ msgstr "[B]EXODUS[/B] : Počisti predpomnilnik..."
 
 msgctxt "#32053"
 msgid "[I]Next Page[/I]"
-msgstr "[I]Naslednja Stran[/I]"
+msgstr "[I]Naslednja stran[/I]"
 
 msgctxt "#32054"
 msgid "Seasons"
@@ -230,7 +261,7 @@ msgstr "Si prepričan?"
 
 msgctxt "#32057"
 msgid "Process Complete"
-msgstr "Proces Končan"
+msgstr "Proces končan"
 
 msgctxt "#32058"
 msgid "This will slow down things until they are re-cached!"
@@ -241,7 +272,8 @@ msgid "CLICK HERE TO SAVE VIEW"
 msgstr "KLIKNI, DA SHRANIŠ POGLED"
 
 msgctxt "#32060"
-msgid "January|February|March|April|May|June|July|August|September|October|November|December"
+msgid ""
+"January|February|March|April|May|June|July|August|September|October|November|December"
 msgstr "Januar|Februar|Marec|April|Maj|Junij|Juli|Avgust|September|Oktober|November|December"
 
 msgctxt "#32061"
@@ -254,7 +286,7 @@ msgstr "[B]%s[/B] : %s"
 
 msgctxt "#32063"
 msgid "Play using..."
-msgstr "Predaja z uporabo..."
+msgstr "Predvaja z uporabo..."
 
 msgctxt "#32064"
 msgid "Auto Play"
@@ -262,7 +294,7 @@ msgstr "Samodejno predvajanje"
 
 msgctxt "#32065"
 msgid "Queue item"
-msgstr "Na Čakanju"
+msgstr "Dodaj v playlist-o"
 
 msgctxt "#32066"
 msgid "Watched in Exodus"
@@ -282,15 +314,23 @@ msgstr "Negledan v Trakt"
 
 msgctxt "#32070"
 msgid "Trakt Manager"
-msgstr "Trakt Upravljalec"
+msgstr "Trakt upravljalec"
 
 msgctxt "#32071"
 msgid "Browse Series"
-msgstr "Brskanje Serij"
+msgstr "Brskanje serij"
 
 msgctxt "#32072"
 msgid "Refresh"
 msgstr "Osveži"
+
+msgctxt "#32073"
+msgid "[B]HELP[/B] : www.tvaddons.ag"
+msgstr "[B]POMOČ[/B] : www.tvaddons.ag"
+
+msgctxt "#32074"
+msgid "[B]HELP[/B]"
+msgstr "[B]POMOČ[/B]"
 
 msgctxt "#32301"
 msgid "Enabled"
@@ -354,7 +394,7 @@ msgstr "Trakt"
 
 msgctxt "#32316"
 msgid "Info Language"
-msgstr "Jezik Informacij"
+msgstr "Jezik informacij"
 
 msgctxt "#32317"
 msgid "Flatten TV seasons"
@@ -362,7 +402,7 @@ msgstr "Flatten TV sezone"
 
 msgctxt "#32318"
 msgid "Enable Fanart"
-msgstr "Omogoči Fanart"
+msgstr "Omogoči fanart"
 
 msgctxt "#32319"
 msgid "Menu"
@@ -370,7 +410,7 @@ msgstr "Meni"
 
 msgctxt "#32320"
 msgid "New Movies"
-msgstr "Novi Filmi"
+msgstr "Novi filmi"
 
 msgctxt "#32321"
 msgid "Featured"
@@ -378,19 +418,19 @@ msgstr "Izpostavljeno"
 
 msgctxt "#32322"
 msgid "People Watching"
-msgstr "Ljudje Gledajo"
+msgstr "Ljudje gledajo"
 
 msgctxt "#32323"
 msgid "Most Popular"
-msgstr "Najbolj Priljubljeno"
+msgstr "Najbolj priljubljeno"
 
 msgctxt "#32324"
 msgid "In Theaters"
-msgstr "V Kinematografih"
+msgstr "V kinematografih"
 
 msgctxt "#32325"
 msgid "New Episodes"
-msgstr "Nove Serije"
+msgstr "Nove serije"
 
 msgctxt "#32326"
 msgid "Episodes"
@@ -398,15 +438,15 @@ msgstr "Serije"
 
 msgctxt "#32327"
 msgid "Trakt Progress"
-msgstr "Trakt Napredek"
+msgstr "Trakt napredek"
 
 msgctxt "#32328"
 msgid "Trakt Episodes"
-msgstr "Trakt Serije"
+msgstr "Trakt serije"
 
 msgctxt "#32329"
 msgid "My Lists"
-msgstr "Moj Seznam"
+msgstr "Moj seznam"
 
 msgctxt "#32330"
 msgid "Playback"
@@ -426,11 +466,11 @@ msgstr "Direktorij"
 
 msgctxt "#32334"
 msgid "Auto Play"
-msgstr "Samodejno Predvajanje"
+msgstr "Samodejno predvajanje"
 
 msgctxt "#32335"
 msgid "Progress Dialog"
-msgstr "Dialog Napredka"
+msgstr "Dialog napredka"
 
 msgctxt "#32336"
 msgid "Foreground"
@@ -442,15 +482,15 @@ msgstr "Ozadje"
 
 msgctxt "#32338"
 msgid "File Hosting Filters"
-msgstr "Filtri Ponudnikov"
+msgstr "Filtri ponudnikov"
 
 msgctxt "#32339"
 msgid "Max Quality"
-msgstr "Najvišja Kvaliteta"
+msgstr "Najvišja kvaliteta"
 
 msgctxt "#32340"
 msgid "SD Hosters in Auto Play"
-msgstr "SD Ponudniki v Samodejnem Predvajanju"
+msgstr "SD ponudniki v samodejnem predvajanju"
 
 msgctxt "#32341"
 msgid "Hosters with captchas"
@@ -458,7 +498,7 @@ msgstr "Ponudniki z captchas"
 
 msgctxt "#32342"
 msgid "Sort by Provider"
-msgstr "Razvrsti po Ponudnikih"
+msgstr "Razvrsti po ponudnikih"
 
 msgctxt "#32343"
 msgid "When playback starts..."
@@ -466,7 +506,7 @@ msgstr "Kadar predvajanje prične..."
 
 msgctxt "#32344"
 msgid "Resume Playback"
-msgstr "Nadaljuj Predvajanje"
+msgstr "Nadaljuj predvajanje"
 
 msgctxt "#32345"
 msgid "Providers"
@@ -514,11 +554,11 @@ msgstr "Pretvori podnapise v UTF-8"
 
 msgctxt "#32356"
 msgid "Primary Language"
-msgstr "Osnovni Jezik"
+msgstr "Osnovni jezik"
 
 msgctxt "#32357"
 msgid "Secondary Language"
-msgstr "Pomožni Jezik"
+msgstr "Pomožni jezik"
 
 msgctxt "#32358"
 msgid "Subtitles could be unavailable or out of sync."
@@ -527,6 +567,10 @@ msgstr "Podnapisi so lahko nedostopni ali nesinhronizirani."
 msgctxt "#32359"
 msgid "In that case use your own subtitles."
 msgstr "V tem slučaju uporabi svoje podnapise."
+
+msgctxt "#32360"
+msgid "Providers Language"
+msgstr "Jezik ponudnikov"
 
 msgctxt "#32401"
 msgid "No stream available"
@@ -558,7 +602,7 @@ msgstr "Si prepričan?"
 
 msgctxt "#32408"
 msgid "Process Complete"
-msgstr "Proces Zaključen"
+msgstr "Proces zaključen"
 
 msgctxt "#32501"
 msgid "Start from beginning"
@@ -590,7 +634,7 @@ msgstr "2) Na zahtevano vnesi : [COLOR skyblue]%s[/COLOR]"
 
 msgctxt "#32515"
 msgid "Trakt Manager"
-msgstr "Trakt Upravljalec"
+msgstr "Trakt upravljalec"
 
 msgctxt "#32516"
 msgid "Add to [B]Collection[/B]"
@@ -635,3 +679,28 @@ msgstr "1) Obišči : [COLOR skyblue]%s[/COLOR]"
 msgctxt "#32534"
 msgid "2) When prompted enter : [COLOR skyblue]%s[/COLOR]"
 msgstr "2) Na zahtevo vnesi : [COLOR skyblue]%s[/COLOR]"
+
+msgctxt "#32535"
+msgid "Play Random"
+msgstr "Naključno predvajanje"
+
+msgctxt "#32536"
+msgid "Playing"
+msgstr "Predvajanje"
+
+msgctxt "#32537"
+msgid "Nothing found to play"
+msgstr "Nič najdenega za predvajanje"
+
+msgctxt "#32538"
+msgid "DEBRID-SERVICE"
+msgstr "Storitev Debrid"
+
+msgctxt "#32539"
+msgid "Configure Debrid Services in URLResolver Settings."
+msgstr "Nastavi storitev Debrid v nastavitvah URLResolver-ja"
+
+msgctxt "#32540"
+msgid "URLResolver Settings"
+msgstr "URLResolver nastavitve"
+

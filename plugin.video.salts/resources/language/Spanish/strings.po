@@ -2,14 +2,15 @@
 # Addon id: plugin.video.salts
 # Addon Provider: TV Addons
 # Translators:
-# Achaw Gomez <achaw.ar@gmail.com>, 2015-2016
-# Achaw Gomez <achaw.ar@gmail.com>, 2016
+# Achaw Gomez, 2015-2016
+# Achaw Gomez, 2016
+# Irene Royster, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: SALTS\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2016-07-25 12:01+0000\n"
-"Last-Translator: Achaw Gomez <achaw.ar@gmail.com>\n"
+"PO-Revision-Date: 2017-04-07 17:24+0000\n"
+"Last-Translator: Irene Royster\n"
 "Language-Team: Spanish (http://www.transifex.com/tv-addons/salts/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +24,7 @@ msgstr "Peliculas"
 
 msgctxt "#30001"
 msgid "TV Shows"
-msgstr "Series de TV"
+msgstr "Series"
 
 msgctxt "#30002"
 msgid "Movie"
@@ -31,7 +32,7 @@ msgstr "Película"
 
 msgctxt "#30003"
 msgid "TV Show"
-msgstr "Serie de TV"
+msgstr "Serie"
 
 msgctxt "#30004"
 msgid "Settings"
@@ -211,7 +212,9 @@ msgstr "sea efectivo. Las siguientes configuraciones seran cambiadas:"
 
 msgctxt "#30048"
 msgid ""
-msgstr "[COLOR red]Definir orden de Scraper, Fuentes Definidas, Día de inicio en Calendario, Tiempo de espera de Trakt, Tiempo de espera de Scraper, Lista de seguimiento MNE, Testear Direct[/COLOR]"
+"[COLOR red]Scraper Sort Order, Source Sorting, Calendar Start Day, Trakt "
+"Timeout, Scraper Timeout, Watchlist in MNE, Test Direct[/COLOR]"
+msgstr "[COLOR red]Definir orden de Scrapers, Fuentes Definidas, Día de inicio en Calendario, Tiempo de espera de Trakt, Tiempo de espera de Scraper, Lista de seguimiento MNE, Testear Direct[/COLOR]"
 
 msgctxt "#30049"
 msgid "Go Back"
@@ -319,11 +322,11 @@ msgstr "Búsquedas guardadas eliminadas: %s"
 
 msgctxt "#30075"
 msgid "Scraper Timeouts: %s/%s"
-msgstr "Tiempo de Espera de Fuente: %s/%s"
+msgstr "Tiempo de Espera de Scraper agotado: %s/%s"
 
 msgctxt "#30076"
 msgid "No Useable Sources Found%s"
-msgstr "No se encontraron fuentes usables: %s"
+msgstr "No se encontraron fuentes válidas: %s"
 
 msgctxt "#30077"
 msgid "Choose a subtitle to download"
@@ -375,7 +378,7 @@ msgstr "Ingresar Búsqueda"
 
 msgctxt "#30089"
 msgid "Scraper does not support searching"
-msgstr "El scraper no soporta búsquedas"
+msgstr "El Scraper no soporta búsquedas"
 
 msgctxt "#30090"
 msgid "Enter Rating (unrate, or 1-10)"
@@ -383,7 +386,7 @@ msgstr "Ingresar Rating (unrate, or 1-10)"
 
 msgctxt "#30091"
 msgid "Input TVShow ID"
-msgstr "Ingresa ID de Serie de TV"
+msgstr "Ingresa ID de la Serie"
 
 msgctxt "#30092"
 msgid "Item Added to Collection"
@@ -435,7 +438,7 @@ msgstr "Eliminar"
 
 msgctxt "#30104"
 msgid "Flush web cache"
-msgstr "Eliminar cache web"
+msgstr "Limpiar cache web"
 
 msgctxt "#30105"
 msgid "DB Reset Successful"
@@ -455,7 +458,7 @@ msgstr "Ingresa el nombre de archivo a exportar"
 
 msgctxt "#30109"
 msgid "Export Successful"
-msgstr "Se exporto con éxito"
+msgstr "La BD se ha exportado con éxito"
 
 msgctxt "#30110"
 msgid "Exported to %s"
@@ -475,7 +478,7 @@ msgstr "Seleccione el archivo a importar"
 
 msgctxt "#30114"
 msgid "Import Success"
-msgstr "Se importo con éxito"
+msgstr "La BD se ha importado con éxito"
 
 msgctxt "#30115"
 msgid "Imported from %s"
@@ -607,11 +610,11 @@ msgstr "No existen listas para el usuario: %s"
 
 msgctxt "#30147"
 msgid "Scraper Automatically Disabled"
-msgstr "Fuente desactivada automáticamente"
+msgstr "Scraper desactivado automáticamente"
 
 msgctxt "#30148"
 msgid "[COLOR blue]%s[/COLOR]'s FL of %s is over your Failure Level threshold"
-msgstr "[COLOR blue]%s[/COLOR]'s LF de %s supera el nivel de fallas permitido"
+msgstr "[COLOR blue]%s[/COLOR]'s NF de %s supera el nivel de fallas permitido"
 
 msgctxt "#30149"
 msgid "Disabling it avoids wasting time and resources"
@@ -679,7 +682,7 @@ msgstr "Url base"
 
 msgctxt "#30176"
 msgid "Include in Page Existence checks?"
-msgstr "Incluir en chequeo de Page Existence"
+msgstr "Chequear que la página existe"
 
 msgctxt "#30177"
 msgid "Username"
@@ -743,7 +746,7 @@ msgstr "Error al escribir archivo"
 
 msgctxt "#30192"
 msgid "Reset All Scraper Base Urls to Default"
-msgstr "Reiniciar todas las base de url de scraper a valores por defecto"
+msgstr "Reiniciar todas las base de url de scrapers a valores por defecto"
 
 msgctxt "#30193"
 msgid "Base Url Reset Complete"
@@ -819,11 +822,11 @@ msgstr "Existe Localmente"
 
 msgctxt "#30211"
 msgid "Scraper Download Url"
-msgstr "Url de descarga para Scraper"
+msgstr "Url de descarga para scraper"
 
 msgctxt "#30212"
 msgid "Scraper Decryption Key"
-msgstr "Key de descifrado para Scraper"
+msgstr "Key de descifrado para scraper"
 
 msgctxt "#30213"
 msgid "Trakt On Deck"
@@ -871,11 +874,11 @@ msgstr "Mi Historial de Vistos"
 
 msgctxt "#30224"
 msgid "Trying Sources for Auto-Play"
-msgstr "Intentando Reprod. Automática de Fuentes"
+msgstr "Reproducción Automática: Probando Fuentes"
 
 msgctxt "#30225"
 msgid "Trying: [%s] %s from %s"
-msgstr "Intentando: [%s] %s desde %s"
+msgstr "Probando: [%s] %s desde %s"
 
 msgctxt "#30226"
 msgid "Failed: [%s] %s from %s"
@@ -883,7 +886,7 @@ msgstr "Falló: [%s] %s desde %s"
 
 msgctxt "#30227"
 msgid "Scraper Timeouts: [COLOR blue]%s[/COLOR]"
-msgstr "Tiempo de  espera agotado de Scraper: [COLOR blue]%s[/COLOR]"
+msgstr "Tiempo de  espera de scraper agotado [COLOR blue]%s[/COLOR]"
 
 msgctxt "#30228"
 msgid "Reset Failures"
@@ -915,7 +918,7 @@ msgstr "Mostrar dia de emisión de episodio en Calendario"
 
 msgctxt "#30235"
 msgid "Set Scraper timeout to 20 seconds"
-msgstr "Definir tiempo de espera de Scraper en 20 segs."
+msgstr "Definir tiempo de espera de scraper en 20 segs."
 
 msgctxt "#30236"
 msgid "Include Watchlist in My Next Episodes"
@@ -930,8 +933,8 @@ msgid "Remove Unusable Indirect sources from results"
 msgstr "Eliminar fuentes indirectas/inutilizables de los resultados"
 
 msgctxt "#30239"
-msgid "Show Debrid sources in Green"
-msgstr "Mostrar fuentes de DEBRID en verde"
+msgid "Highlight Debrid Sources in results"
+msgstr "Marcar Fuentes Debrid en los resultados"
 
 msgctxt "#30240"
 msgid "No Limit on Maximum Source Results"
@@ -943,11 +946,11 @@ msgstr "Definir tipo de ordenación de Fuentes a valores por defecto"
 
 msgctxt "#30242"
 msgid "Set Scraper Sort Order to default"
-msgstr "Definir orden de clasificación de Scraper a valores por defecto"
+msgstr "Definir orden de clasificación de fuente a valores por defecto"
 
 msgctxt "#30243"
 msgid "Reset All Scraper Base Urls to Default"
-msgstr "Reiniciar todas las base de url de scraper a valores por defecto"
+msgstr "Reiniciar todas las base de url de scrapers a valores por defecto"
 
 msgctxt "#30244"
 msgid "Select All/None"
@@ -963,6 +966,7 @@ msgstr "Recuperación de problemas de BD de SALTS"
 
 msgctxt "#30247"
 msgid ""
+"The SALTS DB has an issue that may be correctable by a forced DB migration."
 msgstr "La BD de SALTS tuvo un problema que puede ser solucionado forzando una migración de BD."
 
 msgctxt "#30248"
@@ -1129,6 +1133,78 @@ msgctxt "#30288"
 msgid "Working..."
 msgstr "Cargando..."
 
+msgctxt "#30289"
+msgid "Re-Scrape All"
+msgstr "Re-Scrapear Todo"
+
+msgctxt "#30290"
+msgid "Manual Search (All Unmatched Only)"
+msgstr "Búsqueda Manual (Solo no emparejados)"
+
+msgctxt "#30291"
+msgid "Torba Account Authorization"
+msgstr "Autorización de cuenta Torba"
+
+msgctxt "#30292"
+msgid "Torba Authorization Complete"
+msgstr "Autorización de cuenta Torba finalizada"
+
+msgctxt "#30293"
+msgid "Torba Authorization Failed"
+msgstr "Falló la autorización de cuenta en Torba"
+
+msgctxt "#30294"
+msgid "Authorize SALTS to access my torba account"
+msgstr "Autorizar a SALTS a acceder a mi cuenta de Torba"
+
+msgctxt "#30295"
+msgid "and login when prompted"
+msgstr "y cuando pregunte, loguearse"
+
+msgctxt "#30296"
+msgid "Flush Image Cache"
+msgstr "Limpiar Cache de Imágenes"
+
+msgctxt "#30297"
+msgid "Are you sure you want to clear the image metadata cache?"
+msgstr "¿Estas seguro que deseas eliminar la cache de imágenes?"
+
+msgctxt "#30298"
+msgid "The addon will be significantly slower until is is re-cached."
+msgstr "El addon funcionara significativamente mas lento, hasta que todo sea re-cacheado nuevamente."
+
+msgctxt "#30299"
+msgid "Flush Complete"
+msgstr "Limpieza realizada."
+
+msgctxt "#30300"
+msgid "Refresh Images"
+msgstr "Recargar Imágenes"
+
+msgctxt "#30301"
+msgid "Private Scraper Updated: "
+msgstr "Scraper Privado Actualizado:"
+
+msgctxt "#30302"
+msgid "Reset Torba Authorization"
+msgstr "Restaurar Autorización de Torba"
+
+msgctxt "#30303"
+msgid "Torba Authorization Reset"
+msgstr "Autorización de Torba Restaurada"
+
+msgctxt "#30304"
+msgid "Repair URLResolver"
+msgstr "Reparar URLResolver"
+
+msgctxt "#30305"
+msgid "Restart Kodi and then Run Repair URLResolver again"
+msgstr "Reiniciar Kodi y vuelve a reparar URLResolver"
+
+msgctxt "#30306"
+msgid "URLResolver failed to load. Try Settings->Repair URLResolver"
+msgstr "URLResolver no ha cargado. Intenta Ajustes>Reparar URLResolver"
+
 msgctxt "#30500"
 msgid "Addon Theme"
 msgstr "Tema:"
@@ -1143,7 +1219,7 @@ msgstr "Dia de Inicio de Calendario (0=Hoy)"
 
 msgctxt "#30503"
 msgid "Show air time on calendars"
-msgstr "Mostrar tiempo de emisión en calendarios"
+msgstr "Mostrar horario de emisión en calendarios"
 
 msgctxt "#30504"
 msgid "My Collection Sort Order"
@@ -1202,8 +1278,8 @@ msgid "Year"
 msgstr "Año"
 
 msgctxt "#30518"
-msgid "Activity"
-msgstr "Actividad"
+msgid "Recent Activity"
+msgstr "Actividad Reciente"
 
 msgctxt "#30519"
 msgid "Title"
@@ -1355,7 +1431,7 @@ msgstr "Integración de Colección"
 
 msgctxt "#30558"
 msgid "TV Show Folder"
-msgstr "Directorio de Series de TV"
+msgstr "Directorio de Series"
 
 msgctxt "#30559"
 msgid "Movie Folder"
@@ -1427,7 +1503,7 @@ msgstr "    Mostrar Progreso de Descargas"
 
 msgctxt "#30576"
 msgid "    TV Show Download Folder"
-msgstr "Directorio de Descarga de Series de TV"
+msgstr "Directorio de Descarga de Series"
 
 msgctxt "#30577"
 msgid "    Movie Download Folder"
@@ -1435,7 +1511,7 @@ msgstr "Directorio de Descarga de Películas"
 
 msgctxt "#30578"
 msgid "Scraper Timeout (seconds) (0=No Limit)"
-msgstr "Tiempo de Espera de Scraper (segundos) (0=Sin Límite)"
+msgstr "Tiempo de Espera de Fuente (segundos) (0=Sin Límite)"
 
 msgctxt "#30579"
 msgid "Maximum Source Results (0=No Limit)"
@@ -1451,7 +1527,7 @@ msgstr "Lista de exclusión de fuentes"
 
 msgctxt "#30582"
 msgid "Maximum Allowed TV Show Quality"
-msgstr "Calidad máxima permitida para Series de TV"
+msgstr "Calidad máxima permitida para Series"
 
 msgctxt "#30583"
 msgid "Maximum Allowed Movie Quality"
@@ -1575,7 +1651,7 @@ msgstr "Incluir en chequeo de Page Existence"
 
 msgctxt "#30614"
 msgid "Subtitles work only for TV Shows currently"
-msgstr "Los Subtítulos solo funcionan para Series de TV por ahora"
+msgstr "Los Subtítulos solo funcionan para Series (por ahora)"
 
 msgctxt "#30615"
 msgid "Enable Subtitles"
@@ -1639,7 +1715,7 @@ msgstr "    Actualizar BD durante el inicio de KODI"
 
 msgctxt "#30630"
 msgid "Flush webpage cache..."
-msgstr "Eliminar cache de webpage..."
+msgstr "Limpiar cache de webpage..."
 
 msgctxt "#30631"
 msgid "Reset SALTS DB ([COLOR red]SQLITE Only[/COLOR])"
@@ -1726,8 +1802,8 @@ msgid "All"
 msgstr "Todo"
 
 msgctxt "#30652"
-msgid "Show Debrid Supported Sources in Green"
-msgstr "Mostrar fuentes soportadas por Debrid en verde"
+msgid "Show Debrid Supported Sources in ..."
+msgstr "Mostrar Fuentes Compatibles con Debrid en..."
 
 msgctxt "#30653"
 msgid "6th Sort Key"
@@ -1811,7 +1887,7 @@ msgstr "Vista por defecto de Fuentes (0 = Ninguna)"
 
 msgctxt "#30673"
 msgid "Scraper Last Update"
-msgstr "Ultima actualización de Scraper"
+msgstr "Ultima actualización de scraper"
 
 msgctxt "#30674"
 msgid "Trakt API Offline Mode"
@@ -1855,7 +1931,7 @@ msgstr "Mostrar \"Mirar de Nuevo\""
 
 msgctxt "#30684"
 msgid "Show air time in MNE"
-msgstr "Mostrar tiempo de emisión en Mis Próximos Episodios"
+msgstr "Mostrar horario de emisión en Mis Próximos Episodios"
 
 msgctxt "#30686"
 msgid "Show Next Episode Notification"
@@ -1891,7 +1967,7 @@ msgstr "Lista de Peliculas por Género"
 
 msgctxt "#30694"
 msgid "TV Genre List"
-msgstr "Lista de Series de Tv por Género"
+msgstr "Lista de Series por Género"
 
 msgctxt "#30695"
 msgid "Trending"
@@ -1899,7 +1975,7 @@ msgstr "Tendencia"
 
 msgctxt "#30696"
 msgid "Popular"
-msgstr "Popular"
+msgstr "Populares"
 
 msgctxt "#30697"
 msgid "Anticipated"
@@ -1940,4 +2016,108 @@ msgstr "Mas recolectadas (Mes)"
 msgctxt "#30706"
 msgid "Most Collected (All)"
 msgstr "Mas recolectadas (Todas)"
+
+msgctxt "#30707"
+msgid "Date Format"
+msgstr "Formato de Fecha"
+
+msgctxt "#30708"
+msgid "Past Activity"
+msgstr "Actividad Anterior"
+
+msgctxt "#30709"
+msgid "Always Show Custom Progress Dialogs"
+msgstr "Sempre mostrar dialogo de progreso customizado"
+
+msgctxt "#30710"
+msgid "Image Metadata API Keys"
+msgstr "API Keys para Metadata de Imágenes"
+
+msgctxt "#30711"
+msgid "Fanart.tv API Key (Blank = Disable)"
+msgstr "Api Key de Fanart.tv (Vacío = Desactivado)"
+
+msgctxt "#30712"
+msgid "TMDB API Key (Blank = Disable)"
+msgstr "Api Key de TMDB (Vacío = Desactivado)"
+
+msgctxt "#30713"
+msgid "TVDB API Key (Blank = Disable)"
+msgstr "Api Key de TVDB (Vacío = Desactivado)"
+
+msgctxt "#30714"
+msgid "Enable OMDB Images"
+msgstr "Activar Imágenes de OMDB"
+
+msgctxt "#30715"
+msgid "Enable TVMaze Images"
+msgstr "Activar Imágenes de TVMaze"
+
+msgctxt "#30716"
+msgid "Flush Image Cache..."
+msgstr "Limpiar Cache de Imágen..."
+
+msgctxt "#30717"
+msgid "Enable Fanart.tv Images"
+msgstr "Activar Imágenes de Fanart.tv"
+
+msgctxt "#30718"
+msgid "Fanart.tv Personal API Key"
+msgstr "Api Key propia de Fanart.tv"
+
+msgctxt "#30719"
+msgid "Enable Backgrounds/Fanart"
+msgstr "Activar Backgrounds/Fanart"
+
+msgctxt "#30720"
+msgid "Enable Posters"
+msgstr "Activar Posters"
+
+msgctxt "#30721"
+msgid "Enable Banners"
+msgstr "Activar Banners"
+
+msgctxt "#30722"
+msgid "Enable Clearart"
+msgstr "Activar Clearart"
+
+msgctxt "#30723"
+msgid "Artwork Scraping"
+msgstr "Scraping de Artwork"
+
+msgctxt "#30724"
+msgid "Enable Thumbnails"
+msgstr "Activar Thumbnails"
+
+msgctxt "#30725"
+msgid "Artwork Types"
+msgstr "Tipos de Artwork"
+
+msgctxt "#30726"
+msgid "    Use animated posters when available"
+msgstr "Usar posters animados (si están disponibles)"
+
+msgctxt "#30727"
+msgid "Enable Cast Thumbnails"
+msgstr "Activar thumbnails de actores"
+
+msgctxt "#30728"
+msgid "    *** Install TMDB API Cache ***"
+msgstr "***Instalar TMDB API Cache ***"
+
+msgctxt "#30729"
+msgid "    Debrid Highlight Color"
+msgstr "Color de Debrid"
+
+msgctxt "#30730"
+msgid "Image Proxy [COLOR red][B](Experimental)[/B][/COLOR]"
+msgstr "Imagen de Proxy [COLOR red][B](Experimental)[/B][/COLOR]"
+
+msgctxt "#30731"
+msgid "Enable Image Proxy"
+msgstr "Activar Imagen de Proxy"
+
+msgctxt "#30732"
+msgid "Image Proxy Port"
+msgstr "Imagen de Puerto Proxy"
 

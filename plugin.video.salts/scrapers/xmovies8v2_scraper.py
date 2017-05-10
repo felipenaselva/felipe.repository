@@ -16,23 +16,20 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 import re
-import urllib
 import urlparse
 import time
 import kodi
-import log_utils
-import dom_parser
+import log_utils  # @UnusedImport
+import dom_parser2
 from salts_lib import scraper_utils
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import VIDEO_TYPES
 from salts_lib.constants import QUALITIES
-from salts_lib.constants import Q_ORDER
 from salts_lib.constants import XHR
 import scraper
 
-BASE_URL = 'http://xmovies8.tv'
-PLAYER_URL = '/ajax/movie/load_player_v2'
-EPISODES_URL = '/ajax/movie/load_episodes'
+BASE_URL = 'https://xmovies8.ru'
+PLAYER_URL = '/ajax/movie/load_player_v3'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL
@@ -50,99 +47,106 @@ class Scraper(scraper.Scraper):
         return 'xmovies8.v2'
 
     def get_sources(self, video):
-        source_url = self.get_url(video)
         hosters = []
         sources = {}
-        if source_url and source_url != FORCE_NO_MATCH:
-            page_url = urlparse.urljoin(self.base_url, source_url)
-            html = self._http_get(page_url, cache_limit=.5)
-            html = self.__get_players(html, page_url)
-            players = list(set(re.findall("load_player\(\s*'([^']+)'\s*,\s*'?(\d+)\s*'?", html)))
-            player_url = urlparse.urljoin(self.base_url, PLAYER_URL)
-            for link_id, height in players:
-                params = {'id': link_id, 'quality': height, '_': int(time.time() * 1000)}
-                player_url2 = player_url + '?' + urllib.urlencode(params)
-                headers = {'Referer': page_url, 'Accept-Encoding': 'gzip, deflate', 'Server': 'cloudflare-nginx', 'Accept-Formating': 'application/json, text/javascript'}
-                headers.update(XHR)
-                html = self._http_get(player_url2, headers=headers, cache_limit=0)
-                js_data = scraper_utils.parse_json(html, player_url)
-                if 'link' in js_data and js_data['link']:
-                    link_url = js_data['link']
-                    if 'player_v2.php' in link_url:
-                        headers = {'Referer': page_url}
-                        html = self._http_get(link_url, headers=headers, allow_redirect=False, method='HEAD', cache_limit=.25)
-                        if html.startswith('http'):
-                            if self._get_direct_hostname(html) == 'gvideo':
-                                quality = scraper_utils.gv_get_quality(html)
-                                sources[html] = {'quality': quality, 'direct': True}
-                            else:
-                                if height != '0':
-                                    quality = scraper_utils.height_get_quality(height)
-                                else:
-                                    quality = QUALITIES.HIGH
-                                sources[html] = {'quality': quality, 'direct': False}
-                            if not kodi.get_setting('scraper_url') and Q_ORDER[quality] >= Q_ORDER[QUALITIES.HD720]: break
-                    
-            for source in sources:
-                direct = sources[source]['direct']
-                quality = sources[source]['quality']
-                if direct:
-                    host = self._get_direct_hostname(source)
+        source_url = self.get_url(video)
+        if not source_url or source_url == FORCE_NO_MATCH: return hosters
+        page_url = scraper_utils.urljoin(self.base_url, source_url)
+        html = self._http_get(page_url, cache_limit=.5)
+        match = re.search("load_player\('([^']+)", html)
+        if not match: return hosters
+        
+        headers = {'Referer': page_url, 'Server': 'cloudflare-nginx', 'Accept': 'text/html, */*; q=0.01',
+                   'Accept-Language': 'en-US,en;q=0.5', 'Accept-Formating': 'application/json, text/javascript', 'Accept-Encoding': 'gzip, deflate'}
+        headers.update(XHR)
+        params = {'id': match.group(1)}
+        player_url = scraper_utils.urljoin(self.base_url, PLAYER_URL)
+        html = self._http_get(player_url, params=params, headers=headers, cache_limit=1)
+        js_data = scraper_utils.parse_json(html, player_url)
+        pl_url = js_data.get('value') or js_data.get('download')
+        if not pl_url: return hosters
+        
+        headers = {'Referer': page_url}
+        if pl_url.startswith('//'): pl_url = 'https:' + pl_url
+        html = self._http_get(pl_url, headers=headers, allow_redirect=False, cache_limit=0)
+        if html.startswith('http'):
+            streams = [(html, '')]
+        else:
+            js_data = scraper_utils.parse_json(html, pl_url)
+            try: streams = [(source['file'], source.get('label', '')) for source in js_data['playlist'][0]['sources']]
+            except: streams = []
+            
+        for stream in streams:
+            stream_url, label = stream
+            if scraper_utils.get_direct_hostname(self, stream_url) == 'gvideo':
+                sources[stream_url] = {'quality': scraper_utils.gv_get_quality(stream_url), 'direct': True}
+            else:
+                if label:
+                    quality = scraper_utils.height_get_quality(label)
                 else:
-                    host = urlparse.urlparse(source).hostname
-                stream_url = source + '|User-Agent=%s' % (scraper_utils.get_ua())
-                hoster = {'multi-part': False, 'host': host, 'class': self, 'quality': quality, 'views': None, 'rating': None, 'url': stream_url, 'direct': direct}
-                hosters.append(hoster)
+                    quality = QUALITIES.HIGH
+                sources[stream_url] = {'quality': quality, 'direct': False}
+                    
+        for source, value in sources.iteritems():
+            direct = value['direct']
+            quality = value['quality']
+            if direct:
+                host = scraper_utils.get_direct_hostname(self, source)
+            else:
+                host = urlparse.urlparse(source).hostname
+
+            stream_url = source + scraper_utils.append_headers({'User-Agent': scraper_utils.get_ua()})
+            hoster = {'multi-part': False, 'host': host, 'class': self, 'quality': quality, 'views': None, 'rating': None, 'url': stream_url, 'direct': direct}
+            hosters.append(hoster)
             
         return hosters
-
-    def __get_players(self, html, page_url):
-        url = urlparse.urljoin(self.base_url, EPISODES_URL)
-        match = re.search("data\s*:\s*{\s*id:\s*(\d+),\s*episode_id:\s*(\d+),\s*link_id:\s*(\d+),\s*from:\s*'([^']+)", html)
-        if match:
-            show_id, ep_id, link_id, from_id = match.groups()
-            data = {'id': show_id, 'episode_id': ep_id, 'link_id': link_id, 'from': from_id}
-            headers = {'Referer': page_url, 'Accept-Formating': 'application/json, text/javascript', 'Server': 'cloudflare-nginx'}
-            headers.update(XHR)
-            html = self._http_get(url, data=data, headers=headers, cache_limit=1)
-        return html
     
+    def __make_token(self):
+        token = int(time.time()) / 60 * 60
+        token = token * 1000 + (token % 1000)
+        return token
+        
     def _get_episode_url(self, season_url, video):
-        season_url = urlparse.urljoin(self.base_url, season_url)
+        season_url = scraper_utils.urljoin(self.base_url, season_url)
         html = self._http_get(season_url, cache_limit=.5)
-        html = self.__get_players(html, season_url)
-        episode_pattern = 'href="([^"]+)[^>]+class="[^"]*btn-episode[^>]*>(?:Episode)?\s*0*%s<' % (video.episode)
-        match = re.search(episode_pattern, html)
-        if match:
-            return scraper_utils.pathify_url(match.group(1))
+        fragment = dom_parser2.parse_dom(html, 'div', {'class': 'ep_link'})
+        if not fragment: return
+        
+        episode_pattern = 'href="([^"]+)[^>]+>(?:Episode)?\s*0*%s<' % (video.episode)
+        match = re.search(episode_pattern, fragment[0].content)
+        if not match: return
+        
+        return scraper_utils.pathify_url(match.group(1))
 
     def search(self, video_type, title, year, season=''):
         results = []
-        search_url = urlparse.urljoin(self.base_url, '/movies/search?s=%s' % urllib.quote_plus(title))
-        html = self._http_get(search_url, cache_limit=8)
-        for item in dom_parser.parse_dom(html, 'div', {'class': '[^"]*c-content-product-2[^"]*'}):
-            match_title_year = dom_parser.parse_dom(item, 'h2', {'class': '[^"]*c-title[^"]*'})
-            match_url = dom_parser.parse_dom(item, 'a', ret='href')
-            if match_title_year and match_url:
-                match_title_year = match_title_year[0]
-                match_url = match_url[0]
-                is_season = re.search('Season\s+\d+', match_title_year, re.I)
-                if (video_type == VIDEO_TYPES.MOVIE and not is_season) or (video_type == VIDEO_TYPES.SEASON and is_season):
-                    match_year = ''
-                    if video_type == VIDEO_TYPES.SEASON:
-                        match_title = match_title_year
-                        if season and not re.search('Season\s+(%s)\s+' % (season), match_title_year, re.I):
-                            continue
-                    else:
-                        match = re.search('(.*?)\s+\((\d{4})\)', match_title_year)
-                        if match:
-                            match_title, match_year = match.groups()
-                        else:
-                            match_title = match_title_year
-                            match_year = ''
-        
-                    match_url = urlparse.urljoin(match_url, 'watching.html')
-                    if not year or not match_year or year == match_year:
-                        result = {'url': scraper_utils.pathify_url(match_url), 'title': scraper_utils.cleanse_title(match_title), 'year': match_year}
-                        results.append(result)
+        search_url = scraper_utils.urljoin(self.base_url, '/movies/search')
+        html = self._http_get(search_url, params={'s': title}, cache_limit=8)
+        for _attrs, item in dom_parser2.parse_dom(html, 'div', {'class': 'item_movie'}):
+            match = dom_parser2.parse_dom(item, 'a', req=['href', 'title'])
+            if not match: continue
+            
+            match_title_year = match[0].attrs['title']
+            match_url = match[0].attrs['href']
+            is_season = re.search('Season\s+(\d+)', match_title_year, re.I)
+            match_vt = video_type == (VIDEO_TYPES.MOVIE and not is_season) or (video_type == VIDEO_TYPES.SEASON and is_season)
+            match_year = ''
+            if video_type == VIDEO_TYPES.SEASON:
+                if not season and not match_vt: continue
+                if match_vt:
+                    if season and int(is_season.group(1)) != int(season): continue
+                else:
+                    if season and int(season) != 1: continue
+                    site_title, site_year = scraper_utils.extra_year(match_title_year)
+                    if scraper_utils.normalize_title(site_title) not in scraper_utils.normalize_title(title) or year != site_year: continue
+                    
+                match_title = match_title_year
+            else:
+                if not match_vt: continue
+                match_title, match_year = scraper_utils.extra_year(match_title_year)
+
+            match_url = scraper_utils.urljoin(match_url, 'watching.html')
+            if not year or not match_year or year == match_year:
+                result = {'url': scraper_utils.pathify_url(match_url), 'title': scraper_utils.cleanse_title(match_title), 'year': match_year}
+                results.append(result)
         return results

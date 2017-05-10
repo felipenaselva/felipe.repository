@@ -19,7 +19,7 @@
 '''
 
 
-import urlparse,sys
+import urlparse,sys,urllib
 
 params = dict(urlparse.parse_qsl(sys.argv[2].replace('?','')))
 
@@ -114,6 +114,10 @@ elif action == 'clearCache':
     from resources.lib.indexers import navigator
     navigator.navigator().clearCache()
 
+elif action == 'infoCheck':
+    from resources.lib.indexers import navigator
+    navigator.navigator().infoCheck('')
+
 elif action == 'movies':
     from resources.lib.indexers import movies
     movies.movies().get(url)
@@ -185,6 +189,10 @@ elif action == 'tvGenres':
 elif action == 'tvNetworks':
     from resources.lib.indexers import tvshows
     tvshows.tvshows().networks()
+
+elif action == 'tvLanguages':
+    from resources.lib.indexers import tvshows
+    tvshows.tvshows().languages()
 
 elif action == 'tvCertificates':
     from resources.lib.indexers import tvshows
@@ -266,35 +274,76 @@ elif action == 'authTrakt':
     from resources.lib.modules import trakt
     trakt.authTrakt()
 
-elif action == 'rdAuthorize':
-    from resources.lib.modules import debrid
-    debrid.rdAuthorize()
+elif action == 'smuSettings':
+    try: import urlresolver
+    except: pass
+    urlresolver.display_settings()
 
 elif action == 'download':
     import json
-    from resources.lib.sources import sources
+    from resources.lib.modules import sources
     from resources.lib.modules import downloader
-    try: downloader.download(name, image, sources().sourcesResolve(json.loads(source)[0], True))
+    try: downloader.download(name, image, sources.sources().sourcesResolve(json.loads(source)[0], True))
     except: pass
 
 elif action == 'play':
-    from resources.lib.sources import sources
-    sources().play(title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, meta, select)
+    from resources.lib.modules import sources
+    sources.sources().play(title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, meta, select)
 
 elif action == 'addItem':
-    from resources.lib.sources import sources
-    sources().addItem(title)
+    from resources.lib.modules import sources
+    sources.sources().addItem(title)
 
 elif action == 'playItem':
-    from resources.lib.sources import sources
-    sources().playItem(title, source)
+    from resources.lib.modules import sources
+    sources.sources().playItem(title, source)
 
 elif action == 'alterSources':
-    from resources.lib.sources import sources
-    sources().alterSources(url, meta)
+    from resources.lib.modules import sources
+    sources.sources().alterSources(url, meta)
 
 elif action == 'clearSources':
-    from resources.lib.sources import sources
-    sources().clearSources()
+    from resources.lib.modules import sources
+    sources.sources().clearSources()
 
-
+elif action == 'random':
+    rtype = params.get('rtype')
+    if rtype == 'movie':
+        from resources.lib.indexers import movies
+        rlist = movies.movies().get(url, create_directory=False)
+        r = sys.argv[0]+"?action=play"
+    elif rtype == 'episode':
+        from resources.lib.indexers import episodes
+        rlist = episodes.episodes().get(tvshowtitle, year, imdb, tvdb, season, create_directory=False)
+        r = sys.argv[0]+"?action=play"
+    elif rtype == 'season':
+        from resources.lib.indexers import episodes
+        rlist = episodes.seasons().get(tvshowtitle, year, imdb, tvdb, create_directory=False)
+        r = sys.argv[0]+"?action=random&rtype=episode"
+    elif rtype == 'show':
+        from resources.lib.indexers import tvshows
+        rlist = tvshows.tvshows().get(url, create_directory=False)
+        r = sys.argv[0]+"?action=random&rtype=season"
+    from resources.lib.modules import control
+    from random import randint
+    import json
+    try:
+        rand = randint(1,len(rlist))-1
+        for p in ['title','year','imdb','tvdb','season','episode','tvshowtitle','premiered','select']:
+            if rtype == "show" and p == "tvshowtitle":
+                try: r += '&'+p+'='+urllib.quote_plus(rlist[rand]['title'])
+                except: pass
+            else:
+                try: r += '&'+p+'='+urllib.quote_plus(rlist[rand][p])
+                except: pass
+        try: r += '&meta='+urllib.quote_plus(json.dumps(rlist[rand]))
+        except: r += '&meta='+urllib.quote_plus("{}")
+        if rtype == "movie":
+            try: control.infoDialog(rlist[rand]['title'], control.lang(32536).encode('utf-8'), time=30000)
+            except: pass
+        elif rtype == "episode":
+            try: control.infoDialog(rlist[rand]['tvshowtitle']+" - Season "+rlist[rand]['season']+" - "+rlist[rand]['title'], control.lang(32536).encode('utf-8'), time=30000)
+            except: pass
+        control.execute('RunPlugin(%s)' % r)
+    except:
+        control.infoDialog(control.lang(32537).encode('utf-8'), time=8000)
