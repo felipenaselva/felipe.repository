@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.watchtvbrasil"
-       name="[COLOR orange][B]Watch TV Brasil[/B][/COLOR]"
-       version="[COLOR orange][B] 2.0 [/B][/COLOR]"
-       provider-name="[COLOR orange][B] Fabio Toledo [/B][/COLOR]">
+       name="Watch TV Brasil"
+       version="2.0"
+       provider-name="Fabio Toledo">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.t0mm0.common" version="2.0.0"/>
@@ -25,7 +25,7 @@
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">[COLOR orange][B]Add-On Watch TV Brasil[/B][/COLOR]</summary>
+    <summary lang="en">Add-On Watch TV Brasil</summary>
     <description lang="en">[COLOR orange][B] Assista a Filmes, Séries, Desenhos, Canais de TV e muito mais com o Watch TV Brasil, o Add-On mais completo do Brasil. [/B][/COLOR]</description>
     <platform>all</platform>
   </extension>
