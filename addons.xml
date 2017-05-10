@@ -389,31 +389,6 @@
 	</extension>
 </addon>
 
-<addon id="plugin.video.mrpiracy" name="MrPiracy.win" provider-name="MrPiracy.win" version="0.3.5">
- <requires>
-  <import addon="xbmc.python" version="2.14.0"/>
-  <import addon="script.module.beautifulsoup4" version="4.3.2"/>
-  <import addon="script.module.t0mm0.common" version="1.0.0"/>
-  <import addon="plugin.video.youtube" optional="true" />
-  </requires>
- <extension library="addon.py" point="xbmc.python.pluginsource">
-  <provides>video</provides>
- </extension>
- <extension point="xbmc.addon.metadata">
-    <summary lang="en">MrPiracy.win</summary>
-    <description lang="en">Addon site MrPiracy.win</description>
-    <description lang="en">Filmes e series no Kodi. </description>
-    <disclaimer lang="en">Como desenvolvedor do addon, nada tenho a haver com site. O site pode ser acedido por um browser. Limito-me a ler o seu conteÃºdo disponibilizado e converter em addon.</disclaimer>
-    <language></language>
-    <platform>all</platform>
-    <license></license>
-    <forum></forum>
-    <website></website>
-    <email></email>
-    <source></source>
- </extension>
-</addon>
-
 <addon id="plugin.video.phstreams" name="Phoenix" version="3.3.1" provider-name="tvaddons.ag">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
@@ -770,38 +745,6 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     <summary>Play videos from different adult streaming sites</summary>
     <description>This addon plays videos from YouPorn, Tube8, Boysfood, MoviesAnd, PornoTube, xHamster, KeezMovies and some other adult streaming sites. It contains explicit adult material. You may only view this addon if you are at least 18 years of age, or at least the age of majority in the jurisdiction where you reside or from which you access this content. If you do not meet these requirements, then you do not have permission to use this addon. </description>
     <disclaimer>The author does not host or distribute any of the content displayed by this addon. The author does not have any affiliation with the content provider.</disclaimer>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.watchtvbrasil"
-       name="[COLOR orange][B]Watch TV Brasil[/B][/COLOR]"
-       version="[COLOR orange][B] 2.0 [/B][/COLOR]"
-       provider-name="[COLOR orange][B] Fabio Toledo [/B][/COLOR]">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.t0mm0.common" version="2.0.0"/>
-    <import addon="script.module.beautifulsoup" version="3.2.1"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.beautifulsoup4"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.requests" />
-    <import addon="script.module.httplib2" />
-    <import addon="script.module.youtube.dl" optional="true"/>
-    <import addon="plugin.video.youtube" version="3.0.0"/>
-    <import addon="script.module.urlresolver"/>
-    <import addon="script.module.simplejson" />
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-    <import addon="script.module.metahandler" version="2.5.1"/>
-	<import addon="script.module.livestreamer" optional="true"/>
-
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">[COLOR orange][B]Add-On Watch TV Brasil[/B][/COLOR]</summary>
-    <description lang="en">[COLOR orange][B] Assista a Filmes, SÃ©ries, Desenhos, Canais de TV e muito mais com o Watch TV Brasil, o Add-On mais completo do Brasil. [/B][/COLOR]</description>
     <platform>all</platform>
   </extension>
 </addon>
