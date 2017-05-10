@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="felipe.repository" 
-       name="[COLOR orange]Felipe repository[/COLOR]"
+       name="Felipe repository"
        version="2.2"
        provider-name="felipenaselva">
 	<extension point="xbmc.addon.repository" name="Felipe Add-on Repository">
