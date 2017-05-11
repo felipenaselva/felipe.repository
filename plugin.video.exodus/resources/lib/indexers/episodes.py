@@ -28,6 +28,7 @@ from resources.lib.modules import cache
 from resources.lib.modules import playcount
 from resources.lib.modules import workers
 from resources.lib.modules import views
+from resources.lib.modules import utils
 
 import os,sys,re,json,zipfile,StringIO,urllib,urllib2,urlparse,datetime
 
@@ -1221,6 +1222,7 @@ class episodes:
             except:
                 pass
 
+                self.list = sorted(self.list, key=lambda k: utils.title_key(k['name']))
         return self.list
 
 

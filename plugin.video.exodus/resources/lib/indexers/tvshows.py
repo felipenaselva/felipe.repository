@@ -110,6 +110,9 @@ class tvshows:
                 except:
                     self.list = cache.get(self.trakt_list, 0, url, self.trakt_user)
 
+                if '/users/me/' in url and '/collection/' in url:
+                    self.list = sorted(self.list, key=lambda k: utils.title_key(k['title']))
+
                 if idx == True: self.worker()
 
             elif u in self.trakt_link and self.search_link in url:
@@ -497,6 +500,7 @@ class tvshows:
             except:
                 pass
 
+        self.list = sorted(self.list, key=lambda k: utils.title_key(k['name']))
         return self.list
 
 

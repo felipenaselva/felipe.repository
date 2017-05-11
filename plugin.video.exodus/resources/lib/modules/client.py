@@ -24,6 +24,7 @@ import re,sys,cookielib,urllib,urllib2,urlparse,gzip,StringIO,HTMLParser,time,ra
 from resources.lib.modules import cache
 from resources.lib.modules import workers
 from resources.lib.modules import dom_parser
+from resources.lib.modules import log_utils
 
 
 def request(url, close=True, redirect=True, error=False, proxy=None, post=None, headers=None, mobile=False, XHR=False, limit=None, referer=None, cookie=None, compression=True, output='', timeout='30'):
@@ -127,12 +128,12 @@ def request(url, close=True, redirect=True, error=False, proxy=None, post=None, 
                     _add_request_header(request, headers)
 
                     response = urllib2.urlopen(request, timeout=int(timeout))
-
-                elif error == False:
-                    return
-
-            elif error == False:
-                return
+                else:
+                    log_utils.log('Request-Error (%s): %s' % (str(response.code), url), log_utils.LOGDEBUG)
+                    if error == False: return
+            else:
+                log_utils.log('Request-Error (%s): %s' % (str(response.code), url), log_utils.LOGDEBUG)
+                if error == False: return
 
 
         if output == 'cookie':
@@ -217,7 +218,8 @@ def request(url, close=True, redirect=True, error=False, proxy=None, post=None, 
         else:
             if close == True: response.close()
             return result
-    except:
+    except Exception as e:
+        log_utils.log('Request-Error: (%s) => %s' % (str(e), url), log_utils.LOGDEBUG)
         return
 
 
