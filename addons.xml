@@ -667,11 +667,10 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     </extension>
 </addon>
 
-    <addon id="plugin.video.velocity" version="1.0.7" name="Velocity" provider-name="Blazetamer">
+    <addon id="plugin.video.velocity" version="1.1.1" name="Velocity" provider-name="Blazetamer">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.urlresolver"  version="2.1.2"/>
-        <import addon="script.module.t0mm0.common" version="2.0.0"/>
         <import addon="script.module.autoupdate" version="2.0.0" />
 
 
@@ -681,14 +680,27 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>Stream Videos from multiple sources</summary>
-        <description>Stream Videos from multiple sources via Information obtained from Trakt.tv, and or your Trakt Account</description>
+        <description>Stream Videos from multiple sources via Information obtained from Trakt.tv, and or your Trakt Account
+        This addon is developed and supported at [COLOR blue]www.tvaddons.ag[/COLOR]
+        </description>
         <disclaimer>The author does not host or distribute any of the content displayed by this addon. The author does not have any affiliation with the content providers.</disclaimer>
         <language>en</language>
         <platform>all</platform>
         <forum>https://forums.tvaddons.ag/blazetamer-s-repository/39658-velocity-20.html</forum>
         <website>https://offshoregit.com/Blazetamer/velocity.html</website>
-        <source></source>
-        <email></email>
+        <assets>
+		  <icon>icon.png</icon>
+		  <fanart>fanart.jpg</fanart>
+		  <screenshot>resources/screenshots/ScreenShot1.png</screenshot>
+          <screenshot>resources/screenshots/ScreenShot2.png</screenshot>
+          <screenshot>resources/screenshots/ScreenShot3.png</screenshot>
+          <screenshot>resources/screenshots/ScreenShot4.png</screenshot>
+		</assets>
+        <news>Added Source Sorting
+              Extra Providers
+              Code Cleanup
+              Dialog Progress on source searches
+              Other code cleanup</news>
     </extension>
 </addon>
 
@@ -1041,6 +1053,24 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     <email></email>
     <source></source>
   </extension>
+</addon>
+
+<addon id="script.module.autoupdate" name="autoupdate" version="2.0.1" provider-name="Blazetamer">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+  </requires>
+ <extension point="xbmc.python.module" library="lib"/>
+    <extension point="xbmc.addon.metadata">
+    <summary lang="en">AutoUpdate Add-On at launch</summary>
+    <description lang="en">Allows AutoUpdate of Add-on/Repo at time of add-on launch</description>
+    <language></language>
+    <platform>all</platform>
+        <license>GPLv2</license>
+        <forum></forum>
+        <website>http://cliqaddon.com</website>
+        <email>blazetamer@gmail.com</email>
+        <source></source>
+    </extension>
 </addon>
 
 <addon id="script.module.beautifulsoup"

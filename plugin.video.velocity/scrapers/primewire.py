@@ -1,134 +1,102 @@
-import urllib2,urllib,re,os
-import sys
-import xbmcplugin,xbmcgui,xbmc, xbmcaddon, downloader, extract, time
-import tools
-from libs import kodi,trakt_auth
-from tm_libs import dom_parser
-from libs.trans_utils import i18n
+import re
+import urllib
+import urlparse
 from libs import log_utils
-from t0mm0.common.net import Net
-from t0mm0.common.addon import Addon
-import urlresolver
+from libs import kodi
+import scraper_utils
+import scrapeit
 import main_scrape
-from urllib2 import Request, build_opener, HTTPCookieProcessor, HTTPHandler
-import cookielib
-net = Net()
-addon_id=kodi.addon_id
-addon = Addon(addon_id, sys.argv)
-ADDON = xbmcaddon.Addon(id=kodi.addon_id)
-
-#COOKIE STUFF
-tools.create_directory(tools.AOPATH, "All_Cookies/PrimeWire")
-cookiepath = xbmc.translatePath(os.path.join('special://home','addons',addon_id,'All_Cookies','PrimeWire/'))
-cookiejar = os.path.join(cookiepath,'cookies.lwp')
-cj = cookielib.LWPCookieJar()
-cookie_file = os.path.join(cookiepath,'cookies.lwp')
-
-base_url = kodi.get_setting('primewire_base_url')
-#base_url = 'http://www.primewire.ag/'
 
 
-def LogNotify(title,message,times,icon):
-		xbmc.executebuiltin("XBMC.Notification("+title+","+message+","+times+","+icon+")")
+def __enum(**enums):
+    return type('Enum', (), enums)
 
-def OPEN_URL(url):
-  req=urllib2.Request(url)
-  req.add_header('User-Agent', 'Mozilla/5.0 (Linux; U; Android 4.2.2; en-us; AFTB Build/JDQ39) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30')
-  response=urllib2.urlopen(req)
-  link=response.read()
-  cj.save(cookie_file, ignore_discard=True)
-  response.close()
-  return link
-
-def primewire(name):
-    try:
-            sources = []
-            searchUrl = base_url+'index.php?search_keywords='
-            movie_name = name[:-6]
-            movie_name_short = name[:-7]
-            movie_year_full = name[-6:]
-            movie_year = movie_year_full.replace('(','').replace(')','')
-            sname = movie_name.replace(" ","+")
-            primename = sname[:-1]
-            movie_match =movie_name.replace(" ","_")+movie_year
-            surl = searchUrl + primename
-            link = OPEN_URL(surl)
-            full_match  = movie_name+movie_year_full
-            match=re.compile('<a href="/(.+?)" title="Watch (.+?)">').findall(link)
-            for url, name in match:
-                if full_match == name:
-                    link = OPEN_URL(base_url+url)
-                    container_pattern = r'<table[^>]+class="movie_version[ "][^>]*>(.*?)</table>'
-                    item_pattern = (
-                        r'quality_(?!sponsored|unknown)([^>]*)></span>.*?'
-                        r'url=([^&]+)&(?:amp;)?domain=([^&]+)&(?:amp;)?(.*?)'
-                        r'"version_veiws"> ([\d]+) views</')
-                    max_index = 0
-                    max_views = -1
-                    for container in re.finditer(container_pattern, link, re.DOTALL | re.IGNORECASE):
-                        for i, source in enumerate(re.finditer(item_pattern, container.group(1), re.DOTALL)):
-                            qual, url, host, parts, views = source.groups()
-                            if kodi.get_setting('debug') == "true":
-                                print"PrimeWire Debug:"
-                                print "Quality is " + qual
-                                print "URL IS " + url.decode('base-64')
-                                print "HOST IS  "+host.decode('base-64')
-                                print "VIEWS ARE " +views
-                            if host == 'ZnJhbWVndGZv': continue  # filter out promo hosts
-                            #host = tools.get_hostname(host.decode('base-64'))
-                            source = {'hostname':'PrimeWire','url': url.decode('base-64'), 'host': host.decode('base-64'),'views':views,'quality':qual,'direct':False}
-                            sources.append(source)
-            #print "MOVIE SOURCES ARE = "+str(sources)
-            sources = main_scrape.apply_urlresolver(sources)
-            return sources
-    except Exception as e:
-        sources =[]
-        log_utils.log('Error [%s]  %s' % (str(e), ''), xbmc.LOGERROR)
-        if kodi.get_setting('error_notify') == "true":
-            kodi.notify(header='PrimeWire',msg='(error) %s  %s' % (str(e), ''),duration=5000,sound=None)
-        return sources
+FORCE_NO_MATCH = '***FORCE_NO_MATCH***'
+QUALITIES = __enum(LOW='Low', MEDIUM='Medium', HIGH='High', HD720='HD720', HD1080='HD1080')
+VIDEO_TYPES = __enum(TVSHOW='TV Show', MOVIE='Movie', EPISODE='Episode', SEASON='Season')
+########ALL NEED ABOVE#############
 
 
+QUALITY_MAP = {'DVD': QUALITIES.HIGH, 'TS': QUALITIES.MEDIUM, 'CAM': QUALITIES.LOW}
 
-def primewire_tv(name,movie_title):
-    #print "SEARCHING TITLE IS =" +movie_title
-    #print "EPISODE REAL NAME IS = "+name
-    tvso = []
-    seasons=re.compile('S(.+?)E(.+?) ').findall(name)
-    for sea,epi in seasons:
+BASE_URL = kodi.get_setting('primewire_base_url')
 
+class Scraper(scrapeit.Scraper):
+    base_url = BASE_URL
 
-        movie_name = movie_title[:-7]
-        tv_title=movie_name.replace(' ','+')
-        #print "TV REAL TITLE IS = "+tv_title
-        searchUrl = 'http://www.primewire.ag/index.php?search_keywords='
-        surl = searchUrl + tv_title            ###########CHANGE THIS
-        #print "SEARCH URL PRIME IS + " +surl
-        link = OPEN_URL(surl+'&search_section=2')
-        match=re.compile('<a href="/(.+?)" title="Watch (.+?)">').findall(link)
-        for url, name in match:
-            if movie_title == name:
-                url = url.replace('watch','tv').replace('-online-free','')
-                link = OPEN_URL(base_url+url+'/season-'+sea+'-episode-'+epi)
-                container_pattern = r'<table[^>]+class="movie_version[ "][^>]*>(.*?)</table>'
-                item_pattern = (
-                    r'quality_(?!sponsored|unknown)([^>]*)></span>.*?'
-                    r'url=([^&]+)&(?:amp;)?domain=([^&]+)&(?:amp;)?(.*?)'
-                    r'"version_veiws"> ([\d]+) views</')
-                max_index = 0
-                max_views = -1
-                for container in re.finditer(container_pattern, link, re.DOTALL | re.IGNORECASE):
-                    for i, source in enumerate(re.finditer(item_pattern, container.group(1), re.DOTALL)):
-                        qual, url, host, parts, views = source.groups()
-                        if kodi.get_setting('debug') == "true":
-                            print"PrimeWire Debug:"
-                            print "Quality is " + qual
-                            print "URL IS " + url.decode('base-64')
-                            print "HOST IS  "+host.decode('base-64')
-                            print "VIEWS ARE " +views
-                        if host == 'ZnJhbWVndGZv': continue  # filter out promo hosts
-                        #host = tools.get_hostname(host.decode('base-64'))
-                        source = {'url': url.decode('base-64'), 'host':host.decode('base-64'),'view':views,'quality':qual,'direct':False}
-                        tvso.append(source)
-        tvso = main_scrape.apply_urlresolver(tvso)
-        return tvso
+    def __init__(self, timeout=scrapeit.DEFAULT_TIMEOUT):
+        self.timeout = timeout
+        self.base_url = kodi.get_setting('primewire_base_url')
+
+    @classmethod
+    def provides(cls):
+        return frozenset([VIDEO_TYPES.TVSHOW, VIDEO_TYPES.EPISODE, VIDEO_TYPES.MOVIE])
+
+    @classmethod
+    def get_name(cls):
+        return 'PrimeWire'
+
+    def format_source_label(self, item):
+        label = super(self.__class__, self).format_source_label(item)
+        if item['verified']: label = '[COLOR yellow]%s[/COLOR]' % (label)
+        return label
+
+    def get_sources(self, video):
+        source_url = self.get_url(video)
+        hosters = []
+        if source_url and source_url != FORCE_NO_MATCH:
+            url = urlparse.urljoin(self.base_url, source_url)
+            html = self._http_get(url, cache_limit=.5)
+            #kodi.log("Source HTML  is : " + html)
+            container_pattern = r'<table[^>]+class="movie_version[ "][^>]*>(.*?)</table>'
+            item_pattern = (
+                r'quality_(?!sponsored|unknown)([^>]*)></span>.*?'
+                r'url=([^&]+)&(?:amp;)?domain=([^&]+)&(?:amp;)?(.*?)'
+                r'"version_veiws"> ([\d]+) views</')
+            max_index = 0
+            max_views = -1
+            for container in re.finditer(container_pattern, html, re.DOTALL | re.IGNORECASE):
+                for i, source in enumerate(re.finditer(item_pattern, container.group(1), re.DOTALL)):
+                    qual, url, host, parts, views = source.groups()
+
+                    if host == 'ZnJhbWVndGZv': continue  # filter out promo hosts
+                    source = {'hostname': 'PrimeWire', 'url': url.decode('base-64'),'class': '', 'host': host.decode('base-64'),'views': views, 'quality': qual, 'direct': False}
+                    hosters.append(source)
+
+            # if max_views > 0:
+            #     for i in xrange(0, max_index):
+            #         hosters[i]['rating'] = hosters[i]['views'] * 100 / max_views
+        fullsource = main_scrape.apply_urlresolver(hosters)
+        return fullsource
+
+    def search(self, video_type, title, year, season=''):
+        search_url = urlparse.urljoin(self.base_url, '/index.php?search_keywords=')
+        search_url += urllib.quote_plus(title)
+        search_url += '&year=' + urllib.quote_plus(str(year))
+        if video_type == 'shows':
+            search_url += '&search_section=2'
+        else:
+            search_url += '&search_section=1'
+        results = []
+        html = self. _http_get(self.base_url, cache_limit=0)
+        #kodi.log("HTML is : " + html)
+        match = re.search('input type="hidden" name="key" value="([0-9a-f]*)"', html)
+        if match:
+            key = match.group(1)
+            search_url += '&key=' + key
+
+            html = self._http_get(search_url, cache_limit=.25)
+            pattern = r'class="index_item.+?href="(.+?)" title="Watch (.+?)"?\(?([0-9]{4})?\)?"?>'
+            for match in re.finditer(pattern, html):
+                url, title, year = match.groups('')
+                result = {'url': scraper_utils.pathify_url(url), 'title': scraper_utils.cleanse_title(title), 'year': year}
+                results.append(result)
+        else:
+            log_utils.log('Unable to locate PW search key', log_utils.LOGWARNING)
+        return results
+
+    def _get_episode_url(self, show_url, video, sea, epi):
+        episode_pattern = '"tv_episode_item">[^>]+href="([^"]+/season-%s-episode-%s)">' % (sea,epi)
+        title_pattern = 'class="tv_episode_item".*?href="(?P<url>[^"]+).*?class="tv_episode_name">\s+-\s+(?P<title>[^<]+)'
+        airdate_pattern = 'class="tv_episode_item">\s*<a\s+href="([^"]+)(?:[^<]+<){3}span\s+class="tv_episode_airdate">\s+-\s+{year}-{p_month}-{p_day}'
+        return self._default_get_episode_url(show_url, video, episode_pattern, title_pattern, airdate_pattern)

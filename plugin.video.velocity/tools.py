@@ -179,7 +179,7 @@ def get_host(self):
 DATABASE_DIR=create_directory(DATA_PATH, "Database")
 # SOURCE_DIR = create_directory(DATA_PATH, "Data_Logging/Sources")
 # MISC_DIR = create_directory(DATA_PATH, "Misc")
-COOKIE_PATH = create_directory(AOPATH, "All_Cookies")
+#COOKIE_PATH = create_directory(AOPATH, "All_Cookies")
 
 #append_file(settings.DATA_PATH +"Misc","testfile.txt",file_content)
 		
