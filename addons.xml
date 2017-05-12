@@ -1202,6 +1202,17 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
   </extension>
 </addon>
 
+<addon id="script.module.tknorris.shared" name="TKNorris Common Libraries" version="0.0.21" provider-name="tknorris">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0" />
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">Reusable Modules used by several of tknorris's addons</summary>
+	</extension>
+</addon>
+
 <addon id="script.module.urlresolver" name="URLResolver" version="3.0.31" provider-name="tvaddons.ag, Eldorado">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
