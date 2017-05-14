@@ -38,7 +38,7 @@ def OPEN_URL(url):
 def wizard(name,url,description):
     path = xbmc.translatePath(os.path.join('special://home/addons','packages'))
     dp = xbmcgui.DialogProgress()
-    dp.create("[COLOR=orange]SkinXonf Wizard[/COLOR]","[COLOR=orange]BAIXANDO[/COLOR]",'', '[COLOR=orange]Por favor, aguarde...[/COLOR]')
+    dp.create("[COLOR=orange]SkinXonf Wizard[/COLOR]","[COLOR=orange]DOWNLOADING[/COLOR]",'', '[COLOR=orange]Please Wait[/COLOR]')
     lib=os.path.join(path, name+'.zip')
     try:
        os.remove(lib)
@@ -92,7 +92,7 @@ def killxbmc():
         except: pass
         try: os.system('adb shell am force-stop org.xbmc')
         except: pass        
-        dialog.ok("[COLOR=orange][B]ANDROID DETECTADO[/COLOR][/B]", "você deverá encerrar o Kodi manualmente para concluir a instalação!", "[COLOR=orange][B]VOCÊ DEVE[/COLOR][/B] forçar o encerramento do Kodi. [COLOR=orange]NÃO[/COLOR] clique no botão exit do menu.","feche o programa através do gerenciador de tarefas do android, ou simplesmente reinicie o aparelho.")
+        dialog.ok("[COLOR=orange][B]WARNING  !!![/COLOR][/B]", "Your system has been detected as Android, you ", "[COLOR=orange][B]MUST[/COLOR][/B] force close XBMC/Kodi. [COLOR=orange]DO NOT[/COLOR] exit cleanly via the menu.","Either close using Task Manager (If unsure pull the plug).")
     elif myplatform == 'windows': # Windows
         print "############   try windows force close  #################"
         try:
