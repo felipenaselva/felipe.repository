@@ -92,7 +92,7 @@ def killxbmc():
         except: pass
         try: os.system('adb shell am force-stop org.xbmc')
         except: pass        
-        dialog.ok("[COLOR=orange][B]ATENCAO  !!![/COLOR][/B]", "Para concluir a instalacao voce devera fechar o Kodi manualmente ", "[COLOR=orange][B]OU SEJA[/COLOR][/B] utilizando o gerenciador de tarefas  [COLOR=orange]NAO[/COLOR] utilize o botao exit do menu.","caso nao saiba como reinicie o aparelho para concluir a instalacao.")
+        dialog.ok("[COLOR=orange][B]ATENCAO  !!![/COLOR][/B]", "Para concluir a instalacao voce devera fechar o Kodi manualmente ", "[COLOR=orange][B]OU SEJA[/COLOR][/B] utilizando o gerenciador de tarefas  [COLOR=orange]NAO[/COLOR] utilize o botao exit do menu.","caso nao saiba como", "reinicie o aparelho para concluir a instalacao.")
     elif myplatform == 'windows': # Windows
         print "############   try windows force close  #################"
         try:
