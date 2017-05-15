@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.SkinXonfLite" name="Wizard SkinXonf Lite" version="1.1.0" provider-name="Felipenaselva">
+<addon id="plugin.video.SkinXonfLite" name="Wizard SkinXonf [COLOR lime][B]LITE[/B][/COLOR]" version="1.1.0" provider-name="Felipenaselva">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
@@ -7,8 +7,8 @@
         <provides>executable</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">Skin Xonfluence modificada incluindo os melhores addons do momento. IPTV ativado. Retirado o addon quasar para ficar mais leve em relacao a versao full</summary>
-    <description lang="en">Skin Xonfluence customizada. Inclui os melhores addons do momento. Retirado o addon quasar para ficar mais leve em relacao a versao full SkinXonf</description>
+    <summary lang="en">Skin Xonfluence modificada incluindo os melhores addons do momento. IPTV ativado. Retirado o addon quasar.</summary>
+    <description lang="en">Skin Xonfluence customizada. Inclui os melhores addons da atualidade. Retirado o addon quasar para ficar mais leve em relacao a versao SkinXonf Full.</description>
 	<website></website>
     <platform>all</platform>
   </extension>
