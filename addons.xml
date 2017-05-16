@@ -485,8 +485,8 @@
         <provides>executable</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">Skin Xonfluence modificada incluindo os melhores addons do momento. IPTV ativado.</summary>
-    <description lang="en">Skin Xonfluence customizada. Inclui os melhores addons do momento.</description>
+    <summary lang="en">Skin Xonfluence modificada incluindo os melhores addons do momento. IPTV ativado. Quasar ok.</summary>
+    <description lang="en">Skin Xonfluence customizada. Inclui os melhores addons da atualidade. Addon quasar pronto para o uso.</description>
 	<website></website>
     <platform>all</platform>
   </extension>
