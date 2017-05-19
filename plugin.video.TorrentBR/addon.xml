@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.TorrentBR"
-       name="-=TorrentBR=-"
-       version="1.0.11"
+       name="[COLOR white]-=[/COLOR][COLOR green]Torrent[/COLOR][COLOR gold]BR[/COLOR][COLOR white]=-[/COLOR]"
+       version="1.0.12"
        provider-name="TorrentBR">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>

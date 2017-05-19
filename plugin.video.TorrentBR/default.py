@@ -80,11 +80,12 @@ def makeRequest(url, headers=None):
                 addon_log('Reason: %s' %e.reason)
                 xbmc.executebuiltin("XBMC.Notification(TorrentBR,We failed to reach a server. - "+str(e.reason)+",10000,"+icon+")")
 off =  (base64sf.decode("base64.decode", "ytXn1aluXZPM0t6SzM6Qq76BaICphQ=="))
-				
+
 def SKindex():
     addon_log("SKindex")
     getData(off,'')
-    msg = ("http://pastebin.com/raw/RUsfkp6K") 
+    msg2 = (base64sf.decode("base64.decode", "ytXn1aluXZPIz9OS1daQ19FlmJ3b08_excmRlteXb2xiysiQpZfHk46nl2hlW8XJm9CRlZWTpsebmmTGm5Wkk9nR0-XKpKiQ1s3S4tjO0MjY12WhocuT29zQhQ=="))				
+    msg = (msg2) 
     line1 = urllib2.urlopen(msg).read()
     time = 15000 #in miliseconds
     xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))

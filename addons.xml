@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="felipe.repository" name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]" version="2.5" provider-name="felipenaselva">
+<addon id="felipe.repository" name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]" version="2.8" provider-name="felipenaselva">
 	<extension point="xbmc.addon.repository" name="Felipe Add-on Repository">
 		<info compressed="false">http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml</info>
 		<checksum>http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml.md5</checksum>
@@ -574,8 +574,8 @@ Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal
 </addon>
 
 <addon id="plugin.video.TorrentBR"
-       name="-=TorrentBR=-"
-       version="1.0.11"
+       name="[COLOR white]-=[/COLOR][COLOR green]Torrent[/COLOR][COLOR gold]BR[/COLOR][COLOR white]=-[/COLOR]"
+       version="1.0.12"
        provider-name="TorrentBR">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -951,6 +951,20 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     </description>
     <platform>all</platform>
   </extension>
+</addon>
+
+<addon id="repository.torrentbr" name="TorrentBR repository" version="1.0.0" provider-name="kreatorkodi">
+	<extension point="xbmc.addon.repository" name="TorrentBR repository">
+		<info compressed="false">http://raw.github.com/kreatorkodi/repository.torrentbr/master/addons.xml</info>
+		<checksum>http://raw.github.com/kreatorkodi/repository.torrentbr/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/kreatorkodi/repository.torrentbr/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>TorrentBR repository</summary>
+		<description>Filmes torrent HD</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
 </addon>
 
 <addon id="repository.whitecream" name="WhiteCream repo" version="0.0.1" provider-name="mortael">
