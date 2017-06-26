@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<settings>
-    <category label="PLAYERS">
-	<setting label="[B][COLOR blue]ABAIXO SEU GERENCIADOR DE TORRENT:[/B][/COLOR]" type="lsep" /> 
-        <setting type="sep" />
-        <setting id="plugin" type="labelenum" values="Pulsar|Quasar|AceStream" label="[B][COLOR gold]Selecione o player desejado para assistir[/B][/COLOR]" default="Pulsar" />		
-	</category>	
-</settings>
