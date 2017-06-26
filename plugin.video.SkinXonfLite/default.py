@@ -19,7 +19,7 @@ PATH = "SkinXonfLite"
 
     
 def CATEGORIES():
-    link = OPEN_URL('http://felipenaselva.pe.hu/build/wizardlite.html').replace('\n','').replace('\r','')
+    link = OPEN_URL('http://seu.site11.com/all/build/wizardlite.html').replace('\n','').replace('\r','')
     match = re.compile('name="(.+?)".+?rl="(.+?)".+?mg="(.+?)".+?anart="(.+?)".+?escription="(.+?)"').findall(link)
     for name,url,iconimage,fanart,description in match:
         addDir(name,url,1,iconimage,fanart,description)
