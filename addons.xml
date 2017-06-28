@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="felipe.repository" name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]" version="2.8.7" provider-name="felipenaselva">
+<addon id="felipe.repository" name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]" version="2.8.8" provider-name="felipenaselva">
 	<extension point="xbmc.addon.repository" name="Felipe Add-on Repository">
 		<info compressed="false">http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml</info>
 		<checksum>http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml.md5</checksum>
@@ -1012,6 +1012,29 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
                 <website>http://www.tvaddons.ag/</website>
 	</extension>
 </addon>
+
+<addon id="script.areswizard" name="[COLOR black].[/COLOR] Ares Wizard" provider-name="AresTeam" version="0.0.57">
+<requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+ <extension library="default.py" point="xbmc.python.pluginsource">
+ <provides>executable</provides>
+ </extension>
+ <extension point="xbmc.service" library="resources/aresservice.py" start="startup" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Ares Wizard - Your one stop for Kodi setup + maintenance</summary>
+    <description lang="en">Ares Wizard</description>
+    <platform>all</platform>
+  </extension>
+  <extension point="kodi.context.item">
+	  <menu id="kodi.core.main">
+		<item library="resources/uploadlog.py">
+		  <label>Upload Kodi Log via Ares Project</label>
+		  <visible>true</visible>
+		</item>
+	  </menu>
+	</extension>
+ </addon>
 
 <addon id="script.common.plugin.cache" name="Common plugin cache" provider-name="TheCollective" version="2.5.8">
   <requires>
