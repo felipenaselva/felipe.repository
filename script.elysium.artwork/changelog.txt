@@ -1,0 +1,8 @@
+[B]2017.06.27[/B]
+- Added extra theme (thanks Will Martins)
+
+[B]2017.06.08[/B]
+- Rebrand Zen to Elysium
+
+[B]1.0.0[/B]
+- Initial version
