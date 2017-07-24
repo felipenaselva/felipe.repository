@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="felipe.repository" name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]" version="2.8.8" provider-name="felipenaselva">
+<addon id="felipe.repository" name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]" version="2.8.9" provider-name="felipenaselva">
 	<extension point="xbmc.addon.repository" name="Felipe Add-on Repository">
 		<info compressed="false">http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml</info>
 		<checksum>http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml.md5</checksum>
@@ -168,6 +168,25 @@
     </extension>
 </addon>
 
+<addon id="plugin.video.AtTheFlix" name="[COLOR red]At The Flix[/COLOR]" version="1.7" provider-name="Maverick">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0" />
+		<import addon="script.module.pyxbmct" version="1.1.4" />
+		<import addon="script.module.urlresolver" />
+		<import addon="plugin.video.youtube" version="3.0.0"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">At The Flix</summary>
+		<description lang="en">At The Flix</description>
+		<platform>all</platform>
+		<forum>At The Flix</forum>
+		<website>At The Flix</website>
+	</extension>
+</addon>
+
 <addon id="plugin.video.exodus" version="3.1.11" name="Exodus" provider-name="Exodus">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
@@ -272,6 +291,45 @@
         <description>Plays music and video from your Google Drive account.  Not affiliated with Google.</description>
         <platform>all</platform>
     </extension>
+</addon>
+
+<addon id="plugin.video.globo.com"
+		name="Globo.com"
+		version="0.1.40"
+		provider-name="vitorhirota, lucasrokam">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.beautifulsoup" version="3.2.1"/>
+		<import addon="script.module.requests" version="0.13.2"/>
+		<import addon="script.module.xbmcswift2" version="1.1.1"/>
+		<import addon="script.common.plugin.cache" version="0.9.1"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Globo.com videos for subscribers: Globo+ and Globosat Play</summary>
+		<summary language="pt">Globo+ e Globosat Play no Kodi</summary>
+		<summary language="pt-BR">Globo+ e Globosat Play no Kodi</summary>
+		<description>
+				Globo+ and Globosat Play on Kodi.
+
+				NOTE: before watching the globosat play videos, you need to access the webpage, accept the service use policy and create a profile. This addon will select automatically the first available profile.
+    </description>
+		<description language="pt">
+				Globo+ e Globosat Play no Kodi.
+
+				AVISO: antes de poder assistir aos vÃ­deos do globosat play, vocÃª deve acessar a pÃ¡gina web, aceitar a polÃ­tica de uso do serviÃ§o e criar um perfil. Este addon selecionarÃ¡ automaticamente o primeiro da lista.
+    </description>
+		<description language="pt-BR">
+				Globo+ e Globosat Play no Kodi.
+
+				AVISO: antes de poder assistir aos vÃ­deos do globosat play, vocÃª deve acessar a pÃ¡gina web, aceitar a polÃ­tica de uso do serviÃ§o e criar um perfil. Este addon selecionarÃ¡ automaticamente o primeiro da lista.
+		</description>
+		<platform>all</platform>
+		<license>GPL3</license>
+		<source>https://bitbucket.org/vitorhirota/repository.brazilian.xbmc-addons</source>
+	</extension>
 </addon>
 
 <addon id="plugin.video.kmusictube"
@@ -539,6 +597,37 @@ Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal
   </extension>
 </addon>
 
+<addon id="plugin.video.TheBlackHat"
+       name="The Black Hat"
+       version="1.5"
+       provider-name="TheBlackHat">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" />
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">The Black Hat</summary>
+    <description lang="en">The Black Hat</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.TorrentBR"
        name="[COLOR white]-=[/COLOR][COLOR green]Torrent[/COLOR][COLOR gold]BR[/COLOR][COLOR white]=-[/COLOR]"
        version="1.0.12"
@@ -700,6 +789,25 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 	</extension>
 </addon>
 
+<addon id="plugin.video.you.jizz"
+       name="YouJizz.com"
+       version="1.0.16"
+       provider-name="xbmc-adult">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource"
+               library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <license>GPL 2.0</license>
+        <summary lang="en">YouJizz.com</summary>
+        <description lang="en">****ADULT CONTENT***** Watch erotic and sexy videos from YouJizz.com</description>
+    </extension>
+</addon>
+
 <addon id="plugin.video.zen" version="2017.05.05" name=" Zen" provider-name="Zen">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
@@ -754,6 +862,30 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     <forum>http://forums.tvaddons.ag</forum>
     <platform>all</platform>
   </extension>
+</addon>
+
+<addon id="repository.elysium" version="2017.06.10" name="Elysium repository" provider-name="Elysium">
+	<requires>
+		<import addon="xbmc.python" version="2.19.0" />
+	</requires>
+	<extension point="xbmc.addon.repository" name="Elysium repository">
+		<dir minversion="14.0.0">
+			<info compressed="false">https://github.com/OpenELEQ/repository.elysium/raw/master/elysium.xml</info>
+			<checksum>https://github.com/OpenELEQ/repository.elysium/raw/master/elysium.xml.md5</checksum>
+			<datadir zip="true">https://raw.github.com/OpenELEQ/repository.elysium/master/</datadir>
+		</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Elysium repository</summary>
+		<description lang="en">This repository contains Elysium and required dependencies.</description>
+		<disclaimer lang="en">The Author does not host or share any content, nor is he affiliated with any of the content providers.</disclaimer>
+		<platform>all</platform>
+		<news>Rebrand from Zen to Elysium / Disabled Cinemabox</news>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
 </addon>
 
 <addon id="repository.featherence" name="Featherence repository" version="1.2.0" provider-name="finalmakerr">
@@ -1242,6 +1374,28 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
    </extension>
 </addon>
 
+<addon id="script.module.pyxbmct"
+   name="PyXBMCt"
+   version="1.2.0"
+   provider-name="Roman V.M.">
+  <requires>
+    <import addon="xbmc.python" version="2.20.0"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">PyXBMCt UI framework</summary>
+    <description lang="en">PyXBMCt is a mini-framework for simple XBMC addon UI buliding. It is similar to PyQt and provides parent windows, a number of UI controls (widgets) and a grid layout manager to place controls.</description>
+    <disclaimer lang="en"></disclaimer>
+    <language></language>
+    <license>GNU GPL v.3</license>
+    <forum>http://forum.xbmc.org/showthread.php?tid=174859</forum>
+    <website>http://romanvm.github.io/PyXBMCt</website>
+    <email>romanvm@yandex.ua</email>
+    <source>https://github.com/romanvm/script.module.pyxbmct</source>
+  </extension>
+</addon>
+
 <addon id="script.module.requests"
        name="requests"
        version="2.12.4"
@@ -1373,6 +1527,17 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 		<summary lang="en">Resolve common video host URL's to be playable in XBMC/Kodi.</summary>
 		<description lang="en">Resolve common video host URL's to be playable in XBMC/Kodi, simplify addon development of video plugins requiring multi video hosts.</description>
 	</extension>
+</addon>
+
+<addon id="script.module.xbmcswift2" name="xbmcswift2" provider-name="Jonathan Beluch (jbel)" version="2.4.0">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+  </requires>
+  <extension library="lib" point="xbmc.python.module" />
+  <extension point="xbmc.addon.metadata">
+    <language />
+    <platform>all</platform>
+  </extension>
 </addon>
 
 <addon id="script.mrknow.urlresolver" name="Mrknow URLResolver" version="2017.04.06.1" provider-name="mrknow" >
