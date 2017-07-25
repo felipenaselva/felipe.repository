@@ -18,9 +18,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from __generic_resolver__ import GenericResolver
+from lib import helpers
+from urlresolver.resolver import UrlResolver, ResolverError
 
-class SpeedVidResolver(GenericResolver):
+class SpeedVidResolver(UrlResolver):
     name = "SpeedVid"
     domains = ['speedvid.net']
     pattern = '(?://|\.)(speedvid\.net)/(?:embed-)?([0-9a-zA-Z-]+)'
+    
+    def get_media_url(self, host, media_id):
+        return helpers.get_media_url(self.get_url(host, media_id), patterns=['''file:["'](?P<url>(?!http://s13)[^"']+)''']).replace(' ', '%20')
+        
+    def get_url(self, host, media_id):
+        return self._default_get_url(host, media_id, 'http://www.{host}/embed-{media_id}.html')

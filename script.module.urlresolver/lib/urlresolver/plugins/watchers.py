@@ -18,9 +18,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-
 import re
-from lib import jsunpack
+from lib import jsunpack, helpers
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
@@ -44,21 +43,11 @@ class WatchersResolver(UrlResolver):
             else:
                 js = html
 
-            video_url = None
-
-            link = re.search('([^"]*.m3u8)', js)
-            if link:
-                video_url = link.group(1)
-                common.log_utils.log_debug('watchers.to Link Found: %s' % video_url)
-
-            if not video_url:
-                link = re.search('([^"]*.mp4)', js)
-                if link:
-                    video_url = link.group(1)
-                    common.log_utils.log_debug('watchers.to Link Found: %s' % video_url)
-
-            if video_url:
-                return video_url
+            sources = re.findall('''file\s*:\s*["']([^"']+\.(?:(m3u8|mp4)))''', js)
+            if sources:
+                headers = {'User-Agent': common.RAND_UA, 'Referer': web_url}
+                sources = [(b, a) for a, b in sources]
+                return helpers.pick_source(sources) + helpers.append_headers(headers)
 
         raise ResolverError('No playable video found.')
 

@@ -48,7 +48,7 @@ class VshareEuResolver(UrlResolver):
         html = response.content
         headers = {'Cookie': response.get_headers(as_dict=True).get('Set-Cookie', ''),
                    'User-Agent': common.FF_USER_AGENT}
-        sources = helpers.scrape_sources(html)
+        sources = helpers.scrape_sources(html, patterns=['''(?:file|url)\s*[:=]\s*["'](?P<url>[^"']+)'''])
         return helpers.pick_source(sources) + helpers.append_headers(headers)
 
     def get_url(self, host, media_id):
