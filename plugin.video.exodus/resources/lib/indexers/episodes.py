@@ -51,7 +51,6 @@ class seasons:
         self.tvdb_info_link = 'http://thetvdb.com/api/%s/series/%s/all/%s.zip' % (self.tvdb_key.decode('base64'), '%s', '%s')
         self.tvdb_by_imdb = 'http://thetvdb.com/api/GetSeriesByRemoteID.php?imdbid=%s'
         self.tvdb_by_query = 'http://thetvdb.com/api/GetSeries.php?seriesname=%s'
-        self.imdb_by_query = 'http://www.omdbapi.com/?t=%s&y=%s'
         self.tvdb_image = 'http://thetvdb.com/banners/'
         self.tvdb_poster = 'http://thetvdb.com/banners/_cache/'
 
@@ -72,14 +71,15 @@ class seasons:
     def tvdb_list(self, tvshowtitle, year, imdb, tvdb, lang, limit=''):
         try:
             if imdb == '0':
-                url = self.imdb_by_query % (urllib.quote_plus(tvshowtitle), year)
+                try:
+                    imdb = trakt.SearchTVShow(tvshowtitle, year, full=False)[0]
+                    imdb = imdb.get('show', '0')
+                    imdb = imdb.get('ids', {}).get('imdb', '0')
+                    imdb = 'tt' + re.sub('[^0-9]', '', str(imdb))
 
-                imdb = client.request(url, timeout='10')
-                try: imdb = json.loads(imdb)['imdbID']
-                except: imdb = '0'
-
-                if imdb == None or imdb == '' or imdb == 'N/A': imdb = '0'
-
+                    if not imdb: imdb = '0'
+                except:
+                    imdb = '0'
 
             if tvdb == '0' and not imdb == '0':
                 url = self.tvdb_by_imdb % imdb
@@ -419,6 +419,7 @@ class seasons:
 
         playRandom = control.lang(32535).encode('utf-8')
 
+        addToLibrary = control.lang(32551).encode('utf-8')
 
         for i in items:
             try:
@@ -467,6 +468,7 @@ class seasons:
                 if isOld == True:
                     cm.append((control.lang2(19033).encode('utf-8'), 'Action(Info)'))
 
+                cm.append((addToLibrary, 'RunPlugin(%s?action=tvshowToLibrary&tvshowtitle=%s&year=%s&imdb=%s&tvdb=%s)' % (sysaddon, systitle, year, imdb, tvdb)))
 
                 item = control.item(label=label)
 
@@ -537,7 +539,6 @@ class episodes:
         self.traktlists_link = 'http://api.trakt.tv/users/me/lists'
         self.traktlikedlists_link = 'http://api.trakt.tv/users/likes/lists?limit=1000000'
         self.traktlist_link = 'http://api.trakt.tv/users/%s/lists/%s/items'
-        self.trakt_lang_link = 'https://api.trakt.tv/shows/%s/seasons/%s/episodes/%s/translations/%s'
 
 
     def get(self, tvshowtitle, year, imdb, tvdb, season=None, episode=None, idx=True, create_directory=True):
@@ -682,7 +683,7 @@ class episodes:
                 url = url.replace('date[%s]' % i, (self.datetime - datetime.timedelta(days = int(i))).strftime('%Y-%m-%d'))
 
             q = dict(urlparse.parse_qsl(urlparse.urlsplit(url).query))
-            q.update({'extended': 'full,images'})
+            q.update({'extended': 'full'})
             q = (urllib.urlencode(q)).replace('%2C', ',')
             u = url.replace('?' + urlparse.urlparse(url).query, '') + '?' + q
 
@@ -757,17 +758,12 @@ class episodes:
                 try:
                     if self.lang == 'en': raise Exception()
 
-                    url = self.trakt_lang_link % (imdb, season, episode, self.lang)
+                    item = trakt.getTVShowTranslation(imdb, lang=self.lang, season=season, episode=episode,  full=True)
 
-                    item = trakt.getTraktAsJson(url)[0]
+                    title = item.get('title') or title
+                    plot = item.get('overview') or plot
 
-                    t = item.get('title')
-                    if t:
-                        title = t
-
-                    t = item.get('overview')
-                    if t:
-                        plot = t
+                    tvshowtitle = trakt.getTVShowTranslation(imdb, lang=self.lang) or tvshowtitle
                 except:
                     pass
 
@@ -1377,6 +1373,7 @@ class episodes:
 
         tvshowBrowserMenu = control.lang(32071).encode('utf-8')
 
+        addToLibrary = control.lang(32551).encode('utf-8')
 
         for i in items:
             try:
@@ -1448,6 +1445,7 @@ class episodes:
                 if isOld == True:
                     cm.append((control.lang2(19033).encode('utf-8'), 'Action(Info)'))
 
+                cm.append((addToLibrary, 'RunPlugin(%s?action=tvshowToLibrary&tvshowtitle=%s&year=%s&imdb=%s&tvdb=%s)' % (sysaddon, systvshowtitle, year, imdb, tvdb)))
 
                 item = control.item(label=label)
 

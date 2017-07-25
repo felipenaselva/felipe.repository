@@ -306,8 +306,11 @@ class sources:
         content = 'movie' if tvshowtitle == None else 'episode'
         if content == 'movie':
             sourceDict = [(i[0], i[1], getattr(i[1], 'movie', None)) for i in sourceDict]
+            genres = trakt.getGenre('movie', 'imdb', imdb)
         else:
             sourceDict = [(i[0], i[1], getattr(i[1], 'tvshow', None)) for i in sourceDict]
+            genres = trakt.getGenre('show', 'tvdb', tvdb)
+        sourceDict = [(i[0], i[1], i[2]) for i in sourceDict if not hasattr(i[1], 'genre_filter') or not i[1].genre_filter or any(x in i[1].genre_filter for x in genres)]
         sourceDict = [(i[0], i[1]) for i in sourceDict if not i[2] == None]
 
         language = self.getLanguage()
@@ -443,6 +446,7 @@ class sources:
             sources = []
             sources = call.sources(url, self.hostDict, self.hostprDict)
             if sources == None or sources == []: raise Exception()
+            sources = [json.loads(t) for t in set(json.dumps(d, sort_keys=True) for d in sources)]
             for i in sources: i.update({'provider': source})
             self.sources.extend(sources)
             dbcur.execute("DELETE FROM rel_src WHERE source = '%s' AND imdb_id = '%s' AND season = '%s' AND episode = '%s'" % (source, imdb, '', ''))
@@ -511,6 +515,7 @@ class sources:
             sources = []
             sources = call.sources(ep_url, self.hostDict, self.hostprDict)
             if sources == None or sources == []: raise Exception()
+            sources = [json.loads(t) for t in set(json.dumps(d, sort_keys=True) for d in sources)]
             for i in sources: i.update({'provider': source})
             self.sources.extend(sources)
             dbcur.execute("DELETE FROM rel_src WHERE source = '%s' AND imdb_id = '%s' AND season = '%s' AND episode = '%s'" % (source, imdb, season, episode))
@@ -860,7 +865,7 @@ class sources:
 
 
     def getLanguage(self):
-        langDict = {'English': ['en'], 'German': ['de'], 'German+English': ['en', 'de'], 'French': ['fr'], 'French+English': ['en', 'fr'], 'Portuguese': ['pt'], 'Portuguese+English': ['en', 'pt'], 'Polish': ['pl'], 'Polish+English': ['en', 'pl'], 'Korean': ['ko'], 'Korean+English': ['en', 'ko']}
+        langDict = {'English': ['en'], 'German': ['de'], 'German+English': ['en', 'de'], 'French': ['fr'], 'French+English': ['en', 'fr'], 'Portuguese': ['pt'], 'Portuguese+English': ['en', 'pt'], 'Polish': ['pl'], 'Polish+English': ['en', 'pl'], 'Korean': ['ko'], 'Korean+English': ['en', 'ko'], 'Russian': ['ru'], 'Russian+English': ['en', 'ru']}
         name = control.setting('providers.lang')
         return langDict.get(name, ['en'])
 
@@ -889,7 +894,7 @@ class sources:
             return []
 
     def _getPrimaryLang(self):
-        langDict = {'German': 'de', 'German+English': 'de', 'French': 'fr', 'French+English': 'fr', 'Portuguese': 'pt', 'Portuguese+English': 'pt', 'Polish': 'pl', 'Polish+English': 'pl', 'Korean': 'ko', 'Korean+English': 'ko'}
+        langDict = {'English': 'en', 'German': 'de', 'German+English': 'de', 'French': 'fr', 'French+English': 'fr', 'Portuguese': 'pt', 'Portuguese+English': 'pt', 'Polish': 'pl', 'Polish+English': 'pl', 'Korean': 'ko', 'Korean+English': 'ko', 'Russian': 'ru', 'Russian+English': 'ru'}
         name = control.setting('providers.lang')
         lang = langDict.get(name)
         return lang
@@ -904,14 +909,9 @@ class sources:
 
         self.metaProperty = 'plugin.video.exodus.container.meta'
 
-        from resources.lib.sources import sources as sources
-        from resources.lib.sources_de import sources as sources_de
-        from resources.lib.sources_fr import sources as sources_fr
-        from resources.lib.sources_pt import sources as sources_pt
-        from resources.lib.sources_pl import sources as sources_pl
-        from resources.lib.sources_ko import sources as sources_ko
+        from resources.lib.sources import sources
 
-        self.sourceDict = sources() + sources_de() + sources_fr() + sources_pt() + sources_pl() + sources_ko()
+        self.sourceDict = sources()
 
         try:
             self.hostDict = urlresolver.relevant_resolvers(order_matters=True)
@@ -925,7 +925,7 @@ class sources:
 
         self.hostcapDict = ['hugefiles.net', 'kingfiles.net', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'vidup.me', 'streamin.to', 'torba.se']
 
-        self.hosthqDict = ['openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'rapidvideo.com', 'raptu.com', 'filez.tv']
+        self.hosthqDict = ['gvideo', 'google.com', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'rapidvideo.com', 'raptu.com', 'filez.tv', 'uptobox.com', 'uptobox.com', 'uptostream.com', 'xvidstage.com', 'streamango.com']
 
         self.hostblockDict = []
 

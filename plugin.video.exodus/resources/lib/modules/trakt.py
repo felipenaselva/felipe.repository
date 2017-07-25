@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
     Exodus Add-on
     Copyright (C) 2016 Exodus
 
@@ -16,21 +16,25 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 
-import re,json,urlparse,time
+import json
+import re
+import time
+import urllib
+import urlparse
 
 from resources.lib.modules import cache
-from resources.lib.modules import control
 from resources.lib.modules import cleandate
 from resources.lib.modules import client
-from resources.lib.modules import utils
+from resources.lib.modules import control
 from resources.lib.modules import log_utils
+from resources.lib.modules import utils
 
 BASE_URL = 'http://api.trakt.tv'
-V2_API_KEY = 'c029c80fd3d3a5284ee820ba1cf7f0221da8976b8ee5e6c4af714c22fc4f46fa'
-CLIENT_SECRET = '90a1840447a1e39d350023263902fe7010338d19789e6260f18df56a8b07a68a'
+V2_API_KEY = 'd4161a7a106424551add171e5470112e4afdaf2438e6ef2fe0548edc75924868'
+CLIENT_SECRET = 'b5fcd7cb5d9bb963784d11bbf8535bc0d25d46225016191eb48e50792d2155c0'
 REDIRECT_URI = 'urn:ietf:wg:oauth:2.0:oob'
 
 def __getTrakt(url, post=None):
@@ -48,14 +52,14 @@ def __getTrakt(url, post=None):
         resp_header = result[2]
         result = result[0]
 
-        if resp_code in [500, 502, 503, 504, 520, 521, 522, 524]:
+        if resp_code in ['500', '502', '503', '504', '520', '521', '522', '524']:
             log_utils.log('Temporary Trakt Error: %s' % resp_code, log_utils.LOGWARNING)
             return
-        elif resp_code in [404]:
+        elif resp_code in ['404']:
             log_utils.log('Object Not Found : %s' % resp_code, log_utils.LOGWARNING)
             return
 
-        if resp_code not in [401, 405]:
+        if resp_code not in ['401', '405']:
             return result, resp_header
 
         oauth = urlparse.urljoin(BASE_URL, '/oauth/token')
@@ -71,7 +75,7 @@ def __getTrakt(url, post=None):
 
         headers['Authorization'] = 'Bearer %s' % token
 
-        result = client.request(url, post=post, headers=headers, output='extended')
+        result = client.request(url, post=post, headers=headers, output='extended', error=True)
         return result[0], result[2]
     except Exception as e:
         log_utils.log('Unknown Trakt Error: %s' % e, log_utils.LOGWARNING)
@@ -81,8 +85,8 @@ def getTraktAsJson(url, post=None):
     try:
         r, res_headers = __getTrakt(url, post)
         r = utils.json_loads_as_str(r)
-        if 'x-sort-by' in res_headers and 'x-sort-how' in res_headers:
-            r = sort_list(res_headers['x-sort-by'], res_headers['x-sort-how'], r)
+        if 'X-Sort-By' in res_headers and 'X-Sort-How' in res_headers:
+            r = sort_list(res_headers['X-Sort-By'], res_headers['X-Sort-How'], r)
         return r
     except:
         pass
@@ -371,16 +375,26 @@ def markEpisodeAsNotWatched(tvdb, season, episode):
     return __getTrakt('/sync/history/remove', {"shows": [{"seasons": [{"episodes": [{"number": episode}], "number": season}], "ids": {"tvdb": tvdb}}]})[0]
 
 
-def getMovieTranslation(id, lang):
+def getMovieTranslation(id, lang, full=False):
     url = '/movies/%s/translations/%s' % (id, lang)
-    try: return getTraktAsJson(url)[0]['title']
-    except: pass
+    try:
+        item = getTraktAsJson(url)[0]
+        return item if full else item.get('title')
+    except:
+        pass
 
 
-def getTVShowTranslation(id, lang):
-    url = '/shows/%s/translations/%s' % (id, lang)
-    try: return getTraktAsJson(url)[0]['title']
-    except: pass
+def getTVShowTranslation(id, lang, season=None, episode=None, full=False):
+    if season and episode:
+        url = '/shows/%s/seasons/%s/episodes/%s/translations/%s' % (id, season, episode, lang)
+    else:
+        url = '/shows/%s/translations/%s' % (id, lang)
+
+    try:
+        item = getTraktAsJson(url)[0]
+        return item if full else item.get('title')
+    except:
+        pass
 
 
 def getMovieAliases(id):
@@ -393,13 +407,64 @@ def getTVShowAliases(id):
     except: return []
 
 
-def getMovieSummary(id):
-    return __getTrakt('/movies/%s' % id)[0]
+def getMovieSummary(id, full=True):
+    try:
+        url = '/movies/%s' % id
+        if full: url += '?extended=full'
+        return getTraktAsJson(url)
+    except:
+        return
 
 
-def getTVShowSummary(id):
-    return __getTrakt('/shows/%s' % id)[0]
+def getTVShowSummary(id, full=True):
+    try:
+        url = '/shows/%s' % id
+        if full: url += '?extended=full'
+        return getTraktAsJson(url)
+    except:
+        return
 
+
+def getPeople(id, content_type, full=True):
+    try:
+        url = '/%s/%s/people' % (content_type, id)
+        if full: url += '?extended=full'
+        return getTraktAsJson(url)
+    except:
+        return
+
+def SearchAll(title, year, full=True):
+    try:
+        return SearchMovie(title, year, full) + SearchTVShow(title, year, full)
+    except:
+        return
+
+def SearchMovie(title, year, full=True):
+    try:
+        url = '/search/movie?query=%s' % urllib.quote_plus(title)
+
+        if year: url += '&year=%s' % year
+        if full: url += '&extended=full'
+        return getTraktAsJson(url)
+    except:
+        return
+
+def SearchTVShow(title, year, full=True):
+    try:
+        url = '/search/show?query=%s' % urllib.quote_plus(title)
+
+        if year: url += '&year=%s' % year
+        if full: url += '&extended=full'
+        return getTraktAsJson(url)
+    except:
+        return
+
+def IdLookup(content, type, type_id):
+    try:
+        r = getTraktAsJson('/search/%s/%s?type=%s' % (type, type_id, content))
+        return r[0].get(content, {}).get('ids', [])
+    except:
+        return {}
 
 def getGenre(content, type, type_id):
     try:

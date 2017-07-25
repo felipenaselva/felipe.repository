@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Exodus\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2017-05-02 21:42+0000\n"
+"PO-Revision-Date: 2017-06-06 06:03+0000\n"
 "Last-Translator: Jonatan Nyberg\n"
 "Language-Team: Swedish (http://www.transifex.com/tv-addons/exodus/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -352,7 +352,7 @@ msgstr "ID"
 
 msgctxt "#32306"
 msgid "Authorization..."
-msgstr "Godkänner..."
+msgstr "Auktorisation..."
 
 msgctxt "#32307"
 msgid "Password"
@@ -701,4 +701,106 @@ msgstr "Konfigurera Debridtjänster i URLResolver inställningar."
 msgctxt "#32540"
 msgid "URLResolver Settings"
 msgstr "URLResolver inställningar"
+
+msgctxt "#32541"
+msgid "Library"
+msgstr "Bibliotek"
+
+msgctxt "#32542"
+msgid ""
+"Exodus folders will be imported to library if they are added to media "
+"sources."
+msgstr "Exodus-mappar importeras till biblioteket om de läggs till i mediekällor."
+
+msgctxt "#32543"
+msgid "Movies"
+msgstr "Filmer"
+
+msgctxt "#32544"
+msgid "TV"
+msgstr "TV"
+
+msgctxt "#32545"
+msgid "Auto update TV Shows"
+msgstr "Uppdatera automatiskt TV-serier"
+
+msgctxt "#32546"
+msgid "Show notifications during update"
+msgstr "Visa aviseringar under uppdateringen"
+
+msgctxt "#32547"
+msgid "Update library after adding content"
+msgstr "Uppdatera biblioteket efter att ha lagt till innehåll"
+
+msgctxt "#32548"
+msgid "Avoid creating duplicate content"
+msgstr "Undvik att skapa dubbletter"
+
+msgctxt "#32549"
+msgid "Check movie before adding it"
+msgstr "Kontrollera filmen innan du lägger till den"
+
+msgctxt "#32550"
+msgid "Check first episode of season before adding it"
+msgstr "Kontrollera första episoden av säsong innan du lägger till den"
+
+msgctxt "#32551"
+msgid "Add to Library"
+msgstr "Lägg till bibliotek"
+
+msgctxt "#32552"
+msgid "Adding to library..."
+msgstr "Lägger till bibliotek..."
+
+msgctxt "#32553"
+msgid "Updating TV shows..."
+msgstr "Uppdaterar TV-serier..."
+
+msgctxt "#32554"
+msgid "Process Complete"
+msgstr "Process färdig"
+
+msgctxt "#32555"
+msgid "Are you sure?"
+msgstr "Är du säker?"
+
+msgctxt "#32556"
+msgid "[B]EXODUS[/B] : Library"
+msgstr "[B]EXODUS[/B] : Bibliotek"
+
+msgctxt "#32557"
+msgid "[B]LIBRARY[/B] : Settings"
+msgstr "[B]BIBLIOTEK[/B] : Inställningar"
+
+msgctxt "#32558"
+msgid "[B]EXODUS[/B] : Update library..."
+msgstr "[B]EXODUS[/B] : Uppdatera bibliotek..."
+
+msgctxt "#32559"
+msgid "[B]EXODUS[/B] : Movie folder..."
+msgstr "[B]EXODUS[/B] : Filmmapp..."
+
+msgctxt "#32560"
+msgid "[B]EXODUS[/B] : TV folder..."
+msgstr "[B]EXODUS[/B] : TV-mapp..."
+
+msgctxt "#32561"
+msgid "[B]TRAKT[/B] : Import Collection..."
+msgstr "[B]TRAKT[/B] : Importera samlingar..."
+
+msgctxt "#32562"
+msgid "[B]TRAKT[/B] : Import Watchlist..."
+msgstr "[B]TRAKT[/B] : Import titta senare lista..."
+
+msgctxt "#32563"
+msgid "[B]TRAKT[/B] : Import TV Collection..."
+msgstr "[B]TRAKT[/B] : Importera TV-samling..."
+
+msgctxt "#32564"
+msgid "[B]TRAKT[/B] : Import TV Watchlist..."
+msgstr "[B]TRAKT[/B] : Importera titta senare lista för TV..."
+
+msgctxt "#32565"
+msgid "Include episodes with unknown air dates"
+msgstr "Inkludera episoder med okända sändningsdatum"
 
