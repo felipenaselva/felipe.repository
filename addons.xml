@@ -271,7 +271,7 @@
 	</extension>
 </addon>
 
-ï»¿<addon id="plugin.video.exodus" version="3.1.22" name="Exodus" provider-name="Exodus">
+ï»¿<addon id="plugin.video.exodus" version="3.1.25" name="Exodus" provider-name="Exodus">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="script.exodus.artwork" version="1.0.5" />
@@ -289,7 +289,7 @@
 		<forum></forum>
 		<website></website>
 		<source></source>
-		<news>Last Version Made From The TVA Guys, If anything changes will be listed here, this version should fix install errors</news>
+		<news>This is the Last Version Made From [COLOR red][B]C0LD[/B][/COLOR][COLOR turquoise][B]FIRE[/B][/COLOR]. He'll not continue maintaining EXODUS anymore! Fixed missing sources, updated scrapers!</news>
 	</extension>
 </addon>
 
@@ -1568,6 +1568,29 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 		<description>Metadata for Exodus+ are maintained separately to make distribution of the the addon itself easier/faster.</description>
 		<platform>all</platform>
 	</extension>
+</addon>
+
+<addon id="script.ezmaintenance"
+       name="EZ Maintenance"
+       version="1.1.0"
+       provider-name="SchisM">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+ 	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video executable</provides>
+	</extension>
+  <extension point="xbmc.service" library="service.py" start="startup" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>Maintenance</summary>
+    <description>Your one stop tool for clearing your device.</description>
+    <language></language>
+    <license></license>
+    <source></source>
+    <forum></forum>
+    <website></website>
+  </extension>
 </addon>
 
 <addon id="script.featherence.service" name="Featherence Service" version="0.3.74" provider-name="finalmakerr">
