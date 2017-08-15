@@ -1,3 +1,3 @@
 import xbmcaddon
-MainBase = 'https://goo.gl/BLF7o4'
+MainBase = 'https://goo.gl/gnz9QA'
 addon = xbmcaddon.Addon('plugin.video.MegaBoxTV')

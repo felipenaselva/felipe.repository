@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.MegaBoxTV"
-       name="[COLOR white]-=.[/COLOR][COLOR darkgoldenrod]Megabox[/COLOR][COLOR dodgerblue]TV[/COLOR][COLOR white].=-[/COLOR]"
-       version="2.2.1"
+       name="[B][COLOR red]-=.[/COLOR][/B][B][COLOR gold]Megabox[/COLOR][/B][B][COLOR white]TV[/COLOR][B][COLOR red].=-[/COLOR][/B]"
+       version="2.3.0"
        provider-name="facebook.com/MegaBoxtvKODI">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
