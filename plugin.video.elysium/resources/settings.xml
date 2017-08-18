@@ -4,7 +4,7 @@
 		<setting id="appearance.alt" type="action" label="32311" default="" option="close" action="ActivateWindow(videos,plugin://script.elysium.artwork)" visible="!System.HasAddon(script.elysium.artwork)"/>
 		<setting id="appearance.1" type="select" label="32311" values="Zen|Default" default="Default" visible="System.HasAddon(script.elysium.artwork)"/>
 		<setting id="scrapers.timeout.1" type="slider" label="32312" default="45" range="10,60" option="int"/>
-		<setting id="trakt.user" type="text" default="" visible="false"/>
+<!--		<setting id="trakt.user" label="Trakt username" type="text" default="" visible="true"/>-->
 		<setting id="inprogress_db" type="bool" label="Enable In Progress Database" default="true"/>
 		<setting id="inprogress_limit" type="slider" label="In Progress Items" default="100" range="5,200" option="int" visible="!eq(-1,false)"/>
 		<setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="false"/>
@@ -40,8 +40,8 @@
 		<setting id="alluc_max_results" type="slider" label="Max Results for Search" default="100" range="5,200" option="int" visible="!eq(-4,false)"/>
 		<setting type="lsep" label="TMDB API KEY"/>
 		<setting id="tmdb_apikey" type="text" label="api key" default="" visible="true"/>
-		<setting type="lsep" label="Trakt"/>
-<!--		<setting id="trakt.user" type="action" label="32306" option="close" action="RunPlugin(plugin://plugin.video.elysium/?action=authTrakt)"/>
+<!--		<setting type="lsep" label="Trakt"/>
+		<setting id="trakt.user" type="action" label="32306" option="close" action="RunPlugin(plugin://plugin.video.elysium/?action=authTrakt)"/>
 		<setting id="trakt.token" type="text" option="hidden" visible="false" label="" default=""/>
 		<setting id="trakt.refresh" type="text" option="hidden" visible="false" label="" default=""/>-->
 	</category>

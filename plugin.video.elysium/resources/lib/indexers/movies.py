@@ -32,7 +32,7 @@ class movies:
 		self.imdb_link            = 'http://www.imdb.com'
 		self.tmdb_key             = control.setting('tmdb_apikey')
 		if self.tmdb_key == '' or self.tmdb_key == None:
-			self.tmdb_key         = base64.b64decode('Mjg2ZTdkYmI1M2IxODc3NGQ4MmMxODQzOTg0M2Q3OTQ=')
+			self.tmdb_key         = base64.b64decode('YjkxOTBhZWFmZGEyOWQ3OWM4MWIyZmI1MWNlOWM0NzA=')
 		self.datetime             = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
 		self.systime              = (self.datetime).strftime('%Y%m%d%H%M%S%f')
 		self.trakt_user           = control.setting('trakt.user').strip()
@@ -76,7 +76,7 @@ class movies:
 		self.trending_link        = 'http://api.trakt.tv/movies/trending?&limit=40&page=1'
 		self.premiere_link        = 'http://api.themoviedb.org/3/discover/movie?api_key=%s&first_air_date.gte=%s&first_air_date.lte=%s&page=1' % ('%s', self.year_date, self.today_date)
 		self.tmdbmarvel_link      = 'http://api.themoviedb.org/3/list/11332?api_key=%s' % (self.tmdb_key)
-		self.tmdboscars_link      = 'http://api.themoviedb.org/3/list/11334?api_key=%s' % (self.tmdb_key)
+		self.tmdboscars_link      = 'http://api.themoviedb.org/3/list/28?api_key=%s' % (self.tmdb_key)
 		self.tmdbdisney_link      = 'http://api.themoviedb.org/3/list/11338?api_key=%s' % (self.tmdb_key)
 		self.tmdbxmas_link        = 'http://api.themoviedb.org/3/list/12944?api_key=%s' % (self.tmdb_key)
 		self.mycustomlist1_link   = 'http://api.themoviedb.org/3/list/%s?api_key=%s' % (self.tmdbmovielist1_link, self.tmdb_key)

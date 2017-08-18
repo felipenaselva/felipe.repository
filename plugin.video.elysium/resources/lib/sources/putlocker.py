@@ -32,7 +32,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['putlocker.systems', 'putlocker-movies.tv', 'putlocker.yt', 'cartoonhd.website', 'cartoonhd.online']
-        self.base_link = 'http://cartoonhd.online'
+        self.base_link = 'https://cartoonhd.global'
 
 
     def movie(self, imdb, title, year):
@@ -120,7 +120,7 @@ class source:
             headers['Referer'] = url
 
 
-            u = '/ajax/tnembeds.php'
+            u = '/ajax/tnembedr.php'
             self.base_link = client.request(self.base_link, output='geturl')
             u = urlparse.urljoin(self.base_link, u)
 
