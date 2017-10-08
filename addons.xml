@@ -1297,8 +1297,8 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 
 <addon id="plugin.video.worldofseries"
        name="[B][COLOR white]WORLD OF SERIES[/COLOR][/B]"
-       version="[B][COLOR gold]1.0[/COLOR][/B]"
-       provider-name="[B][COLOR gold]EQUIPE : WORLD OF SERIES[/COLOR][/B]">
+       version="[B][COLOR lime]1.0[/COLOR][/B]"
+       provider-name="[B][COLOR lime]EQUIPE: WORLD OF SERIES[/COLOR][/B]">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.t0mm0.common" version="2.0.0"/>
