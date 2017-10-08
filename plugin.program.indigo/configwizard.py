@@ -14,24 +14,24 @@ from libs import addon_able
 from libs import kodi
 
 AddonTitle = kodi.addon.getAddonInfo('name')
-SiteDomain = 'TVADDONS.AG'
-TeamName = 'Indigo'
-wizlink = "http://indigo.tvaddons.ag/wizard/updates.txt"
-cutslink = "http://indigo.tvaddons.ag/wizard/shortcuts.txt"
+SiteDomain = 'TVADDONS.CO'
+
+wizlink = "http://indigo.tvaddons.co/wizard/updates.txt"
+cutslink = "http://indigo.tvaddons.co/wizard/shortcuts.txt"
 
 
-# ==========================Help WIZARD=====================================================================================================
+# ========================== Help WIZARD ===============================================================================
 def HELPCATEGORIES():
     filetype = 'main'
     link = OPEN_URL(wizlink).replace('\n', '').replace('\r', '').replace('\a', '').strip()
     HELPWIZARD('configwiz', link, '', 'main', )
 
 
-## ### ##
+# # ### ##
 def HELPWIZARD(name, url, description, filetype):
     path = xbmc.translatePath(os.path.join('special://home', 'addons', 'packages'))
     confirm = xbmcgui.Dialog().yesno("Please Confirm",
-                                     "                Please confirm that you wish to automatically                     ",
+                                     "                Please confirm that you wish to automatically",
                                      "            configure Kodi with all the best addons and tweaks!",
                                      "              ", "Cancel", "Install")
     filetype = filetype.lower()
@@ -44,7 +44,7 @@ def HELPWIZARD(name, url, description, filetype):
             os.remove(lib)
         except:
             pass
-        ### ## ... ##
+        # ## ## ... ##
         # kodi.log(url)
         if str(url).endswith('[error]'):
             print url
@@ -57,6 +57,8 @@ def HELPWIZARD(name, url, description, filetype):
             dialog.ok("Error!", url)
             return
         downloader.download(url, lib, dp)
+        if not os.path.exists(lib):
+            return
         if filetype == 'main':
             addonfolder = xbmc.translatePath('special://home')
         elif filetype == 'addon':
@@ -70,6 +72,15 @@ def HELPWIZARD(name, url, description, filetype):
         extract.all(lib, addonfolder, dp)
         xbmc.executebuiltin("XBMC.UpdateLocalAddons()")
         addon_able.setall_enable()
+        try:
+            addon_able.set_enabled("inputstream.adaptive")
+        except:
+            pass
+        xbmc.sleep(4000)
+        try:
+            addon_able.set_enabled("inputstream.rtmp")
+        except:
+            pass
         try:
             os.remove(lib)
         except:
@@ -87,11 +98,19 @@ def HELPWIZARD(name, url, description, filetype):
         xbmc.sleep(4000)
         xbmc.executebuiltin('XBMC_UpdateLocalAddons()')
         addon_able.setall_enable()
-
+        try:
+            addon_able.set_enabled("inputstream.adaptive")
+        except:
+            pass
+        xbmc.sleep(4000)
+        try:
+            addon_able.set_enabled("inputstream.rtmp")
+        except:
+            pass
         kodi.set_setting("wizardran", 'true')
 
         dialog = xbmcgui.Dialog()
-        dialog.ok(TeamName, "Installation Complete!", "", "Click OK to exit Kodi and then restart to complete .")
+        dialog.ok(AddonTitle, "Installation Complete!", "", "Click OK to exit Kodi and then restart to complete .")
         xbmc.executebuiltin('ShutDown')
 
 

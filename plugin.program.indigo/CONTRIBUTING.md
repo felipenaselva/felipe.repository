@@ -13,7 +13,7 @@ Contribution
 
 We are really glad you're reading this, because we need volunteer developers to help allof our project come to fruition.
 
-If you haven't already, come find us in the forums [TVADDONS Forum](https://www.tvaddons.ag/forums). We want you working on things you're excited about
+If you haven't already, come find us in the forums [TVADDONS Forum](https://www.tvaddons.co/forums). We want you working on things you're excited about
 
 Please send a  Pull Request to TVADDONS with a clear list of what you've done  We can always use more test coverage. 
 

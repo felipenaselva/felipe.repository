@@ -1,20 +1,19 @@
 # Config Wizard By: Blazetamer 2013-2016
-import downloader
-import extract
 import os
 import re
 import urllib2
+
+import downloader
+import extract
 import xbmc
 import xbmcgui
-
 from libs import addon_able, kodi
 
 AddonTitle = kodi.addon.getAddonInfo('name')
-SiteDomain = 'TVADDONS.AG'
-TeamName = 'Indigo'
+SiteDomain = 'TVADDONS.CO'
 
-wizlink = "http://indigo.tvaddons.ag/wizard/updates.txt"
-cutslink = "http://indigo.tvaddons.ag/wizard/shortcuts.txt"
+wizlink = "http://indigo.tvaddons.co/wizard/updates.txt"
+cutslink = "http://indigo.tvaddons.co/wizard/shortcuts.txt"
 
 
 def JUVWIZARD():
@@ -23,7 +22,7 @@ def JUVWIZARD():
     path = xbmc.translatePath(os.path.join('special://home', 'addons', 'packages'))
     url = link
     confirm = xbmcgui.Dialog().yesno("Please Confirm",
-                                     "                Please confirm that you wish to automatically                     ",
+                                     "                Please confirm that you wish to automatically",
                                      "            configure Kodi with all the best addons and tweaks!",
                                      "              ", "Cancel", "Install")
     filetype = filetype.lower()
@@ -36,7 +35,7 @@ def JUVWIZARD():
             os.remove(lib)
         except:
             pass
-        ### ## ... ##
+        # ## ## ... ##
         # kodi.log(url)
         if str(url).endswith('[error]'):
             print url
@@ -63,6 +62,15 @@ def JUVWIZARD():
         xbmc.executebuiltin("XBMC.UpdateLocalAddons()")
         addon_able.setall_enable()
         try:
+            addon_able.set_enabled("inputstream.adaptive")
+        except:
+            pass
+        xbmc.sleep(4000)
+        try:
+            addon_able.set_enabled("inputstream.rtmp")
+        except:
+            pass
+        try:
             os.remove(lib)
         except:
             pass
@@ -79,11 +87,19 @@ def JUVWIZARD():
         xbmc.sleep(4000)
         xbmc.executebuiltin('XBMC_UpdateLocalAddons()')
         addon_able.setall_enable()
-
+        try:
+            addon_able.set_enabled("inputstream.adaptive")
+        except:
+            pass
+        xbmc.sleep(4000)
+        try:
+            addon_able.set_enabled("inputstream.rtmp")
+        except:
+            pass
         # kodi.set_setting("wizardran",'true')
 
         dialog = xbmcgui.Dialog()
-        dialog.ok(TeamName, "Installation Complete.", "", "Click OK to exit Kodi and then restart to complete .")
+        dialog.ok(AddonTitle, "Installation Complete.", "", "Click OK to exit Kodi and then restart to complete .")
         xbmc.executebuiltin('ShutDown')
 
 

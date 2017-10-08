@@ -1,4 +1,13 @@
-Official Indigo addon For Kodi
+V3.0.0
+-Code Cleanup
+- Addod Install from Online Source
+- New TVADDONS.CO Source
+
+V2.0.0
+Natively Install Dependencies
+Timeouts for bad servers
+More Dialog to inform user of status
+Code Cleanup
 
 V 1.0.4
 Echo Additions

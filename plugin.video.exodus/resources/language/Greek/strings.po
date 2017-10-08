@@ -17,21 +17,14 @@
 # Translators:
 # Translators:
 # Translators:
-# Translators:
-# Maiko77, 2016
-# Costis V, 2017
-# lambda81, 2016
-# lambda81, 2016
-# Maiko77, 2016
-# Marios Ioannou, 2017
-# Stefanos Chatz, 2017
+
 msgid ""
 msgstr ""
 "Project-Id-Version: Exodus\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2017-05-30 09:11+0000\n"
 "Last-Translator: Viper2k4\n"
-"Language-Team: Greek (http://www.transifex.com/tv-addons/exodus/language/el/)\n"
+"Language-Team: Greek (http://www.transifex.com/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -275,8 +268,7 @@ msgid "CLICK HERE TO SAVE VIEW"
 msgstr "ΠΑΤΗΣΤΕ ΕΔΩ ΓΙΑ ΝΑ ΑΠΟΘΗΚΕΥΤΕΙ Η ΠΡΟΒΟΛΗ"
 
 msgctxt "#32060"
-msgid ""
-"January|February|March|April|May|June|July|August|September|October|November|December"
+msgid "January|February|March|April|May|June|July|August|September|October|November|December"
 msgstr "Ιανουαρίου|Φεβρουαρίου|Μαρτίου|Απριλίου|Μαΐου|Ιουνίου|Ιουλίου|Αυγούστου|Σεπτεμβρίου|Οκτωβρίου|Νοεμβρίου|Δεκεμβρίου"
 
 msgctxt "#32061"
@@ -328,8 +320,8 @@ msgid "Refresh"
 msgstr "Ανανέωση"
 
 msgctxt "#32073"
-msgid "[B]HELP[/B] : www.tvaddons.ag"
-msgstr "[B]ΒΟΗΘΕΙΑ[/B] : www.tvaddons.ag"
+msgid "[B]TRAKT[/B] : Authorize"
+msgstr "[B]TRAKT[/B]: Εξουσιοδότηση"
 
 msgctxt "#32074"
 msgid "[B]HELP[/B]"
@@ -686,8 +678,121 @@ msgstr "2) Όταν σας ζητηθεί εισάγετε : [COLOR skyblue]%s[/
 msgctxt "#32535"
 msgid "Play Random"
 msgstr "Τυχαία αναπαραγωγή"
+msgctxt "#32536"
+msgid "Playing"
+msgstr "Αναπαραγωγή"
+
+msgctxt "#32537"
+msgid "Nothing found to play"
+msgstr "Δεν βρέθηκε τίποτε προς αναπαραγωγή"
+
+msgctxt "#32538"
+msgid "DEBRID-SERVICE"
+msgstr "ΥΠΗΡΕΣΙΑ-DEBRID"
+
+msgctxt "#32539"
+msgid "Configure Debrid Services in URLResolver Settings."
+msgstr "Ρύθμισε τις υπηρεσίες Debrid στις ρυθμίσεις του URLResolver"
 
 msgctxt "#32540"
 msgid "URLResolver Settings"
 msgstr "Ρυθμίσεις URLResolver"
+msgctxt "#32541"
+msgid "Library"
+msgstr "Βιβλιοθήκη"
 
+msgctxt "#32542"
+msgid "Exodus folders will be imported to library if they are added to media sources."
+msgstr "Οι φάκελοι του Exodus θα εισαχθούν στην βιβλιοθήκη όταν προστεθούν στις πηγές πολυμέσων"
+
+msgctxt "#32543"
+msgid "Movies"
+msgstr "Ταινίες"
+
+msgctxt "#32544"
+msgid "TV"
+msgstr "Τηλεόραση"
+
+msgctxt "#32545"
+msgid "Auto update TV Shows"
+msgstr "Αυτόματη ενημέρωση των σειρών τηλεόρασης"
+
+msgctxt "#32546"
+msgid "Show notifications during update"
+msgstr "Δείξε ειδοποιήσεις κατά τις αναβαθμίσεις"
+
+msgctxt "#32547"
+msgid "Update library after adding content"
+msgstr "Ενημέρωση βιβλιοθήκης αφότου προστεθεί περιεχόμενο"
+
+msgctxt "#32548"
+msgid "Avoid creating duplicate content"
+msgstr "Αποφυγή προσθήκης περιεχομένου δυο φορές"
+
+msgctxt "#32549"
+msgid "Check movie before adding it"
+msgstr "Έλεγχος ταινίας προτού προστεθεί"
+
+msgctxt "#32550"
+msgid "Check first episode of season before adding it"
+msgstr "Έλεγχος πρώτου επεισοδίου προτού προστεθεί"
+
+msgctxt "#32551"
+msgid "Add to Library"
+msgstr "Προσθήκη στην βιβλιοθήκη"
+
+msgctxt "#32552"
+msgid "Adding to library..."
+msgstr "Γίνεται προσθήκη στην βιβλιοθήκη..."
+
+msgctxt "#32553"
+msgid "Updating TV shows..."
+msgstr "Ενημέρωση σειρών τηλεόρασης..."
+
+msgctxt "#32554"
+msgid "Process Complete"
+msgstr "Διαδικασία ολοκληρώθηκε"
+
+msgctxt "#32555"
+msgid "Are you sure?"
+msgstr "Είστε σίγουροι;"
+
+msgctxt "#32556"
+msgid "[B]EXODUS[/B] : Library"
+msgstr "[B]EXODUS[/B] : Βιβλιοθήκη"
+
+msgctxt "#32557"
+msgid "[B]LIBRARY[/B] : Settings"
+msgstr "[B]ΒΙΒΛΙΟΘΗΚΗ[/B] : Ρυθμίσεις"
+
+msgctxt "#32558"
+msgid "[B]EXODUS[/B] : Update library..."
+msgstr "[B]EXODUS[/B] : Ενημέρωση βιβλιοθήκης..."
+
+msgctxt "#32559"
+msgid "[B]EXODUS[/B] : Movie folder..."
+msgstr "[B]EXODUS[/B] : Φάκελος ταινιών..."
+
+msgctxt "#32560"
+msgid "[B]EXODUS[/B] : TV folder..."
+msgstr "[B]EXODUS[/B] : Φάκελος τηλεόρασης..."
+
+msgctxt "#32561"
+msgid "[B]TRAKT[/B] : Import Collection..."
+msgstr "[B]TRAKT[/B] : Εισαγωγή συλλογής..."
+
+msgctxt "#32562"
+msgid "[B]TRAKT[/B] : Import Watchlist..."
+msgstr "[B]TRAKT[/B] : Εισαγωγή λίστας παρακολούθησης..."
+
+msgctxt "#32563"
+msgid "[B]TRAKT[/B] : Import TV Collection..."
+msgstr "[B]TRAKT[/B] : Εισαγωγή συλλογής τηλεόρασης..."
+
+msgctxt "#32564"
+msgid "[B]TRAKT[/B] : Import TV Watchlist..."
+msgstr "[B]TRAKT[/B] : Εισαγωγή λίστας παρακολούθησης τηλεόρασης..."
+
+msgctxt "#32565"
+msgid "Include episodes with unknown air dates"
+msgstr "Συμπερίλαβε επεισόδια με άγνωστη ημερομηνία προβολής"

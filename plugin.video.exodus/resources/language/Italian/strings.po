@@ -1,6 +1,3 @@
-# Addon Name: Exodus
-# Addon id: plugin.video.exodus
-# Addon Provider: Exodus
 # Translators:
 # Translators:
 # Translators:
@@ -30,7 +27,7 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2017-05-30 09:11+0000\n"
 "Last-Translator: Viper2k4\n"
-"Language-Team: Italian (http://www.transifex.com/tv-addons/exodus/language/it/)\n"
+"Language-Team: Italian (http://www.transifex.com/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -187,7 +184,7 @@ msgstr "Avanzamento"
 
 msgctxt "#32038"
 msgid "Episodes"
-msgstr "Epsiodi"
+msgstr "Episodi"
 
 msgctxt "#32039"
 msgid "Movie Lists"
@@ -327,8 +324,8 @@ msgid "Refresh"
 msgstr "Aggiorna"
 
 msgctxt "#32073"
-msgid "[B]HELP[/B] : www.tvaddons.ag"
-msgstr "[B]HELP[/B] : www.tvaddons.ag"
+msgid "[B]TRAKT[/B] : Authorize"
+msgstr "[B]TRAKT[/B]: Autorizzazione"
 
 msgctxt "#32074"
 msgid "[B]HELP[/B]"
@@ -706,3 +703,134 @@ msgctxt "#32540"
 msgid "URLResolver Settings"
 msgstr "Impostazioni URLResolver"
 
+msgctxt "#32541"
+msgid "Library"
+msgstr "Libreria"
+
+msgctxt "#32542"
+msgid "Exodus folders will be imported to library if they are added to media sources."
+msgstr "Le cartelle di Exodus verranno importate nella libreria se verranno aggiunte su Sorgenti Media."
+
+msgctxt "#32543"
+msgid "Movies"
+msgstr "Film"
+
+msgctxt "#32544"
+msgid "TV"
+msgstr "TV"
+
+msgctxt "#32545"
+msgid "Auto update TV Shows"
+msgstr "Aggiornamento automatico Serie TV"
+
+msgctxt "#32546"
+msgid "Show notifications during update"
+msgstr "Visualizza notifiche durante l'aggiornamento"
+
+msgctxt "#32547"
+msgid "Update library after adding content"
+msgstr "Aggiorna libreria dopo l'aggiunta del contenuto"
+
+msgctxt "#32548"
+msgid "Avoid creating duplicate content"
+msgstr "Evita la creazione di contenuti duplicati"
+
+msgctxt "#32549"
+msgid "Check movie before adding it"
+msgstr "Controlla film prima di aggiungerlo"
+
+msgctxt "#32550"
+msgid "Check first episode of season before adding it"
+msgstr "Controlla primo epidodio della stagione prima di aggiungerlo"
+
+msgctxt "#32551"
+msgid "Add to Library"
+msgstr "Aggiungi a Libreria"
+
+msgctxt "#32552"
+msgid "Adding to library..."
+msgstr "Sto aggiungendo alla libreria..."
+
+msgctxt "#32553"
+msgid "Updating TV shows..."
+msgstr "Sto aggiornando le Serie TV..."
+
+msgctxt "#32554"
+msgid "Process Complete"
+msgstr "Processo completato"
+
+msgctxt "#32555"
+msgid "Are you sure?"
+msgstr "Sei sicuro?"
+
+msgctxt "#32556"
+msgid "[B]EXODUS[/B] : Library"
+msgstr "[B]EXODUS[/B] : Libreria"
+
+msgctxt "#32557"
+msgid "[B]LIBRARY[/B] : Settings"
+msgstr "[B]LIBRERIA[/B] : Impostazioni"
+
+msgctxt "#32558"
+msgid "[B]EXODUS[/B] : Update library..."
+msgstr "[B]EXODUS[/B] : Aggiorna libreria..."
+
+msgctxt "#32559"
+msgid "[B]EXODUS[/B] : Movie folder..."
+msgstr "[B]EXODUS[/B] : Cartella film..."
+
+msgctxt "#32560"
+msgid "[B]EXODUS[/B] : TV folder..."
+msgstr "[B]EXODUS[/B] : Cartella Serie TV..."
+
+msgctxt "#32561"
+msgid "[B]TRAKT[/B] : Import Collection..."
+msgstr "[B]TRAKT[/B] : Importa Collezione..."
+
+msgctxt "#32562"
+msgid "[B]TRAKT[/B] : Import Watchlist..."
+msgstr "[B]TRAKT[/B] : Importa Watchlist..."
+
+msgctxt "#32563"
+msgid "[B]TRAKT[/B] : Import TV Collection..."
+msgstr "[B]TRAKT[/B] : Importa Collezione TV"
+
+msgctxt "#32564"
+msgid "[B]TRAKT[/B] : Import TV Watchlist..."
+msgstr "[B]TRAKT[/B] : Importa Watchlist TV..."
+
+msgctxt "#32565"
+msgid "Include episodes with unknown air dates"
+msgstr "Includi episodi con data di trasmissione sconosciuta"
+
+msgctxt "#32570"
+msgid "Show unaired seasons/episodes"
+msgstr "Visualizza stagioni/episodi non tramessi"
+
+msgctxt "#32571"
+msgid "Hide movies in cinema"
+msgstr "Nascondi film nei cinema"
+
+msgctxt "#32372"
+msgid "When playback ends..."
+msgstr "Quando la riproduzione finisce..."
+
+msgctxt "#32373"
+msgid "Force container refresh"
+msgstr "Forza aggiornamento container"
+
+msgctxt "#32580"
+msgid "Films/TV Movies"
+msgstr "Film/Film TV"
+
+msgctxt "#32581"
+msgid "Results Limit"
+msgstr "Limite risultati"
+
+msgctxt "#32582"
+msgid "Personal API keys provide quicker API responses."
+msgstr "Le chiavi API personali forniscono risultati più rapidi."
+
+msgctxt "#32583"
+msgid "Become a VIP member for many benefits at: https://fanart.tv/vip"
+msgstr "Diventa un utente VIP per ottenere maggiori benefici su: https://fanart.tv/vip"
