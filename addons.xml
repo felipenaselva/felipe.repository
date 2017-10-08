@@ -1296,9 +1296,9 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 </addon>
 
 <addon id="plugin.video.worldofseries"
-       name="[B][COLOR white]WORLD OF SÃ‰RIES[/COLOR][/B]"
+       name="[B][COLOR white]WORLD OF SERIES[/COLOR][/B]"
        version="[B][COLOR gold]1.0[/COLOR][/B]"
-       provider-name="[B][COLOR gold]EQUIPE : WORLD OF SÃ‰RIES[/COLOR][/B]">
+       provider-name="[B][COLOR gold]EQUIPE : WORLD OF SERIES[/COLOR][/B]">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.t0mm0.common" version="2.0.0"/>
@@ -1318,9 +1318,9 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>[B][COLOR white]Um Vasto ConteÃºdo Em Um SÃ³ Lugar, Instale O Addon WORLD OF SÃ‰RIES[/COLOR][/B]</summary>
-    <description lang="en">[B][COLOR white]WORLD OF SÃ‰RIES Ã‰ Apenas Um AGREGADOR De Links E, Assim Como O Google.com, Apenas Agrega E Organiza Os Links Externos. NÃ£o Somos ResponsÃ¡veis Pelos Arquivos Aqui encontrados.[/COLOR][/B]</description>
-    <disclaimer lang="en">[B][COLOR gold]DOAÃ‡Ã•ES MANTEM O ADDON ATUALIZADO > DOAÃ‡Ã•ES:[/COLOR] [COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
+    <summary>[B][COLOR white]Um Vasto Conteudo Em Um So Lugar, Instale O Addon WORLD OF SERIES[/COLOR][/B]</summary>
+    <description lang="en">[B][COLOR white]WORLD OF SERIES E Apenas Um AGREGADOR De Links E, Assim Como O Google.com, Apenas Agrega E Organiza Os Links Externos. NÃ£o Somos ResponsÃ¡veis Pelos Arquivos Aqui encontrados.[/COLOR][/B]</description>
+    <disclaimer lang="en">[B][COLOR gold]DOACOES MANTEM O ADDON ATUALIZADO > DOACOES:[/COLOR] [COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
 	<platform>all</platform>
     <assets>
 	<icon>icon.png</icon>
