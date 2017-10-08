@@ -1265,7 +1265,7 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 </addon>
 
 <addon id="plugin.video.worldofseries"
-       name="[B][COLOR white]WORLD OF SERIES[/COLOR][/B]"
+       name="[B][COLOR lime]WORLD OF SERIES[/COLOR][/B]"
        version="[B][COLOR lime]1.0[/COLOR][/B]"
        provider-name="[B][COLOR lime]EQUIPE: WORLD OF SERIES[/COLOR][/B]">
   <requires>
