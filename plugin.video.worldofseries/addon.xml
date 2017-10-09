@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.worldofseries"
-       name="[B][COLOR lime]WORLD OF SERIES[/COLOR][/B]"
-       version="[B][COLOR lime]1.0[/COLOR][/B]"
-       provider-name="[B][COLOR lime]EQUIPE: WORLD OF SERIES[/COLOR][/B]">
+       name="WORLD OF SERIES"
+       version="1.0"
+       provider-name="EQUIPE: WORLD OF SERIES">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.t0mm0.common" version="2.0.0"/>
@@ -23,7 +23,7 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>[B][COLOR white]Um Vasto Conteudo Em Um So Lugar, Instale O Addon WORLD OF SERIES[/COLOR][/B]</summary>
-    <description lang="en">[B][COLOR white]WORLD OF SERIES E Apenas Um AGREGADOR De Links E, Assim Como O Google.com, Apenas Agrega E Organiza Os Links Externos. Não Somos Responsáveis Pelos Arquivos Aqui encontrados.[/COLOR][/B]</description>
+    <description lang="en">[B][COLOR white]WORLD OF SÉRIES E Apenas Um AGREGADOR De Links E, Assim Como O Google.com, Apenas Agrega E Organiza Os Links Externos. Não Somos Responsáveis Pelos Arquivos Aqui encontrados.[/COLOR][/B]</description>
     <disclaimer lang="en">[B][COLOR gold]DOACOES MANTEM O ADDON ATUALIZADO > DOACOES:[/COLOR] [COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
 	<platform>all</platform>
     <assets>

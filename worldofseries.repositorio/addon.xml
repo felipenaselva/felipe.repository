@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="worldofseries.repositorio" name="[COLOR white][B]World of Series[/B][/COLOR] [COLOR white][B]Repository[/B][/COLOR]" version="1.0.2" provider-name="Equipe World of Series">
+	<extension point="xbmc.addon.repository" name="World of Series Add-on Repository">
+		<info compressed="false">http://raw.github.com/worldofseries/wos.repositorio/master/addons.xml</info>
+		<checksum>http://raw.github.com/worldofseries/wos.repositorio/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/worldofseries/wos.repositorio/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>[B][COLOR white]Um Vasto Conteudo Em Um So Lugar, Instale O Addon WORLD OF SERIES[/COLOR][/B]</summary>
+		<description>[B][COLOR white]WORLD OF SERIES E Apenas Um AGREGADOR De Links E, Assim Como O Google.com, Apenas Agrega E Organiza Os Links Externos. Não Somos Responsáveis Pelos Arquivos Aqui encontrados.[/COLOR][/B]</description>
+		<disclaimer>[B][COLOR gold]DOACOES MANTEM O ADDON ATUALIZADO > DOACOES:[/COLOR] [COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
