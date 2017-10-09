@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="felipe.repository" name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]" version="3.2.3" provider-name="felipenaselva">
+<addon id="felipe.repository" name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]" version="3.2.4" provider-name="felipenaselva">
 	<extension point="xbmc.addon.repository" name="Felipe Add-on Repository">
 		<info compressed="false">http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml</info>
 		<checksum>http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml.md5</checksum>
@@ -255,9 +255,9 @@
 </addon>
 
 <addon id="plugin.video.BrazucaPlay"
-       name="[B][COLOR white]BRAZUCA PLAY[/COLOR][/B]"
-       version="[B][COLOR gold]5.2[/COLOR][/B]"
-       provider-name="[B][COLOR gold]Lucas Cardoso[/COLOR][/B]">
+       name="BRAZUCA PLAY"
+       version="5.2"
+       provider-name="Lucas Cardoso">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.t0mm0.common" version="2.0.0"/>
@@ -279,7 +279,7 @@
   <extension point="xbmc.addon.metadata">
     <summary>[B][COLOR white]TV, Filmes, SÃ©ries, Desenhos e Animes.[/COLOR]</summary>
     <description lang="pt">[B][COLOR white]Brazuca Play Ã© apenas um AGREGADOR de links e, assim como o Google.com, apenas agrega e organiza os links externos. NÃ£o somos responsÃ¡veis pelos arquivos aqui encontrados.[/COLOR][/B]</description>
-    <disclaimer lang="en">[B][COLOR white]DOAÃ‡Ã•ES MANTEM O ADDON ATUALIZADO > DOAÃ‡Ã•ES: [/COLOR][COLOR gold]BIT.LY/DOARBRPLAY[/COLOR][/B]</disclaimer>
+    <disclaimer lang="en">[B][COLOR white]DOACOES MANTEM O ADDON ATUALIZADO > DOACOES: [/COLOR][COLOR gold]BIT.LY/DOARBRPLAY[/COLOR][/B]</disclaimer>
 	<platform>all</platform>
     <assets>
 	<icon>icon.png</icon>
@@ -674,7 +674,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.MIKA FILMES 2.0"
+<addon id="plugin.video.MIKA.FILMES.2.0"
        name="MIKA FILMES 2.0"
        version="2.0"
        provider-name="MIKAEL ALVES">
