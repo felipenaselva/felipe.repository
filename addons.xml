@@ -204,25 +204,6 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.AtTheFlix" name="[COLOR red]At The Flix[/COLOR]" version="1.7" provider-name="Maverick">
-	<requires>
-		<import addon="xbmc.python" version="2.1.0" />
-		<import addon="script.module.pyxbmct" version="1.1.4" />
-		<import addon="script.module.urlresolver" />
-		<import addon="plugin.video.youtube" version="3.0.0"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">At The Flix</summary>
-		<description lang="en">At The Flix</description>
-		<platform>all</platform>
-		<forum>At The Flix</forum>
-		<website>At The Flix</website>
-	</extension>
-</addon>
-
 <addon id="plugin.video.bennu" name="Bennu" version="17.10.5" provider-name="Bennu">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
@@ -331,33 +312,6 @@
 		<news>0.0.9
 - Experimental Adaptive HLS playback (live streaming)
         </news>
-	</extension>
-</addon>
-
-<addon id="plugin.video.elysium" version="2017.08.08" name="Elysium" provider-name="Elysium">
-	<requires>
-		<import addon="xbmc.python" version="2.19.0"/>
-		<import addon="script.elysium.artwork" version="2017.06.27"/>
-		<import addon="script.module.urlresolver"/>
-		<import addon="script.module.metahandler"/>
-		<import addon="script.module.requests"/>
-		<import addon="script.module.beautifulsoup"/>
-		<import addon="script.module.schism.common"/>
-		<import addon="script.module.futures"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="elysium.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">Elysium movies and TV shows</summary>
-		<description lang="en">Watch movies and TV shows in high quality! Please note that this addon is not an official part of the Kodi media player and is therefore not to be mentioned within Kodi's official support channels. This addon has nothing to do with the media player itself, nor its intended use, it is simply a third party plugin which has been added to your system.</description>
-		<disclaimer lang="en">The author does not host any content, nor is he affiliated with any of the content providers.</disclaimer>
-		<platform>all</platform>
-		<news>Fixed error on opening addon</news>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.jpg</fanart>
-		</assets>
 	</extension>
 </addon>
 
@@ -482,6 +436,37 @@
 - Free movies
 - Free TV Shows</news>
 	</extension>
+</addon>
+
+<addon id="plugin.video.FLIXPLAY"
+       name="[COLOR red][B]FLIXPLAY[/B][/COLOR]"
+       version="1.0"
+       provider-name="[COLOR white][B]FLIXPLAY PRODUCOES[/B][/COLOR]">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+    </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>[COLOR white][B]FLIXPLAY ADDON DE FILMES,SERIES,DESENHOS,ANIMES E MUITO MAIS TUDDO ISSO EM HD PARA SUA DIVERSAO[/B][/COLOR]</summary>
+    <description lang="pt">[COLOR green][B]NAO HOSPEDAMOS NENHUM CONTEUDO EXPOSTO TODOS OS CONTEUDOS SAO DE RESPONSABILIDADE DE QUEM HOSPEDA NOS SITES[/B][/COLOR]</description>
+    <platform>all</platform>
+  </extension>
 </addon>
 
 <addon id="plugin.video.footballreplays" name="Football Replays" version="1.4.5" provider-name="catchup4kodi">
@@ -870,32 +855,6 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.specto" name="Specto - ... Fork"  version="2017.04.27.1" provider-name="mrknow" >
-	<requires>
-		<import addon="xbmc.python" version="2.1.0" />
-		<import addon="script.module.requests" />
-		<import addon="script.module.metahandler" />
-		<import addon="plugin.video.youtube" optional="true" />
-		<import addon="script.mrknow.urlresolver" />
-		<import addon="script.specto.media" />
-
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.service" library="service.py" start="startup" />
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">Mrknow fork of ...</summary>
-		<description lang="en">Specto - ... Fork. Website http://filmkodi.com . Our suport forum https://github.com/mrknow/filmkodi/issues.</description>
-		<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon. The author does not have any affiliation with the content provider.
-		</disclaimer>
-		<forum>https://github.com/mrknow/filmkodi/issues</forum>
-		<source>http://filmkodi.com/repository/</source>
-		<website>http://filmkodi.com/en/wtyczka-specto-fork-genesis/</website>
-		<platform>all</platform>
-	</extension>
-</addon>
-
 <addon
   id="plugin.video.SportsDevil"
   version="2017.06.30.NL"
@@ -1020,37 +979,6 @@ Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal
   </extension>
 </addon>
 
-<addon id="plugin.video.TheBlackHat"
-       name="The Black Hat"
-       version="1.5"
-       provider-name="TheBlackHat">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.t0mm0.common" version="2.0.0"/>
-    <import addon="script.module.beautifulsoup" version="3.2.1"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.beautifulsoup4" />
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.requests" />
-    <import addon="script.module.httplib2" />
-    <import addon="script.module.youtube.dl" optional="true"/>
-    <import addon="plugin.video.youtube" version="3.0.0"/>
-    <import addon="script.module.urlresolver" />
-    <import addon="script.module.simplejson" />
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-    <import addon="script.module.metahandler" version="2.5.1"/>
-
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">The Black Hat</summary>
-    <description lang="en">The Black Hat</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
 <addon id="plugin.video.TorrentBR"
        name="[COLOR white]-=[/COLOR][COLOR green]Torrent[/COLOR][COLOR gold]BR[/COLOR][COLOR white]=-[/COLOR]"
        version="1.0.12"
@@ -1111,49 +1039,6 @@ Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal
     <forum>http://forums.tvaddons.ag/forums/113-TVADDONS-AG-ADDON-REPOSITORY</forum>
     <website>http://www.tvaddons.ag/</website>
   </extension>
-</addon>
-
-
-<addon id="plugin.video.ukturk" name="UK Turk Playlists" version="3.0.31" provider-name="MetalKettle">
-
-  <requires>
-
-    <import addon="script.module.simplejson" version="3.3.0"/>
-
-    <import addon="xbmc.python" version="2.1.0"/>
-
-    <import addon="script.module.t0mm0.common" version="2.0.0"/>
-
-    <import addon="plugin.video.youtube" version="3.0.0"/>
-
-    <import addon="script.module.urlresolver"  version="2.1.2"/>
-
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-
-    <import addon="script.module.metahandler" version="2.5.1"/>
-
-    <import addon="script.video.F4mProxy" version="2.5.3"/>
-
-    <import addon="script.module.liveresolver" version="0.1.24"/>
-
-  </requires>
-
-  <extension point="xbmc.python.pluginsource" library="default.py">
-
-        <provides>video</provides>
-
-  </extension>
-
-  <extension point="xbmc.addon.metadata">
-
-    <summary lang="en">Free Playlists courtesy of @uk_turk</summary>
-
-    <description lang="en">Free Playlists courtesy of @uk_turk</description>
-
-    <platform>all</platform>
-
-  </extension>
-
 </addon>
 
 <addon id="plugin.video.usbwizard" name="USB-SDCARD WIZARD" version="1.1.6" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
@@ -1246,22 +1131,6 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     <description lang="en">Com o Add-On Watch TV Brasil vocÃª assisti Filmes, SÃ©ries, Canais Ao Vivo, ouve RÃ¡dios e muito mais.</description>
     <platform>all</platform>
   </extension>
-</addon>
-
-<addon id="plugin.video.woodrocket" name="Wood Rocket" version="0.4" provider-name="ptom">
-	<extension point="xbmc.python.pluginsource" library="default.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">Wood Rocket</summary>
-		<description lang="en">Pulling all the best porn from WoodRocket.com</description>
-        <news>Wood Rocket v0.4 (19th February 2017
-         - Resolved playback issues
-         - Added Newest Parodies and Newest Shows to menu</news>
-		<platform>all</platform>
-		<language>en</language>
-		<email>ptom98@gmail.com</email>
-	</extension>
 </addon>
 
 <addon id="plugin.video.worldofseries"
@@ -1689,21 +1558,6 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     <summary lang="en">Common caching api for xbmc plugins.</summary>
   </extension>
   <extension library="lib" point="xbmc.python.module" />
-</addon>
-
-<addon id="script.elysium.artwork" version="2017.06.27" name="Elysium Artwork" provider-name="Elysium">
-	<requires>
-		<import addon="xbmc.python" version="2.19.0"/>
-	</requires>
-	<extension point="xbmc.python.script" library="default.py">
-		<provides>executable</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Themes for the Elysium Addon</summary>
-		<description></description>
-		<platform>all</platform>
-		<news>Added extra theme (thanks Will Martins)</news>
-	</extension>
 </addon>
 
 <addon id="script.exodus.artwork" version="1.0.6" name="Exodus Artwork" provider-name="Exodus">
@@ -2212,20 +2066,6 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     </extension>
 </addon>
 
-<addon id="script.specto.media" version="2016.07.07" name="Specto Themepak" provider-name="mrknow" >
-	<requires>
-		<import addon="xbmc.python" version="2.19.0"/>
-	</requires>
-	<extension point="xbmc.python.script" library="default.py">
-		<provides>executable</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Themes for Specto</summary>
-		<description>Themes for Specto.</description>
-		<platform>all</platform>
-	</extension>
-</addon>
-
 <addon id="script.video.F4mProxy"
 	     name="F4mProxy"
 	     version="2.8.6"
@@ -2276,14 +2116,14 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 	</extension>
 </addon>
 
-<addon id="worldofseries.repositorio" name="[COLOR white][B]World of Series[/B][/COLOR] [COLOR white][B]Repository[/B][/COLOR]" version="1.0.2" provider-name="Equipe World of Series">
+<addon id="worldofseries.repositorio" name="[COLOR white][B]WORLD OF SERIES[/B][/COLOR] [COLOR lime][B]REPOSITORY[/B][/COLOR]" version="1.0.4" provider-name="Equipe World of Series">
 	<extension point="xbmc.addon.repository" name="World of Series Add-on Repository">
 		<info compressed="false">http://raw.github.com/worldofseries/wos.repositorio/master/addons.xml</info>
 		<checksum>http://raw.github.com/worldofseries/wos.repositorio/master/addons.xml.md5</checksum>
 		<datadir zip="true">http://raw.github.com/worldofseries/wos.repositorio/master/repo/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary>[B][COLOR white]Um Vasto Conteudo Em Um So Lugar, Instale O Addon WORLD OF SERIES[/COLOR][/B]</summary>
+		<summary>Lar do addon World Of Series</summary>
 		<description>[B][COLOR white]WORLD OF SERIES E Apenas Um AGREGADOR De Links E, Assim Como O Google.com, Apenas Agrega E Organiza Os Links Externos. NÃ£o Somos ResponsÃ¡veis Pelos Arquivos Aqui encontrados.[/COLOR][/B]</description>
 		<disclaimer>[B][COLOR gold]DOACOES MANTEM O ADDON ATUALIZADO > DOACOES:[/COLOR] [COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
 		<platform>all</platform>
