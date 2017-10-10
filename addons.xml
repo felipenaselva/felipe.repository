@@ -665,7 +665,7 @@
 <addon id="plugin.video.megaboxtv"
        name="MegaboxTV"
        version="2.3.0"
-       provider-name="facebook.com/MegaBoxtvKODI">
+       provider-name="megaboxtv">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.t0mm0.common" version="2.0.0"/>
