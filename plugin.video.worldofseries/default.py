@@ -10,6 +10,8 @@ import xbmcvfs
 import traceback
 import cookielib
 import base64
+import reportar
+
 from BeautifulSoup import BeautifulStoneSoup, BeautifulSoup, BeautifulSOAP
 viewmode=None
 try:
@@ -48,7 +50,7 @@ __addonname__ = __addon__.getAddonInfo('name')
 __icon__ = __addon__.getAddonInfo('icon')		
 		
 addon = xbmcaddon.Addon('plugin.video.worldofseries')
-addonname = '[COLOR lime][B]World Of Séries[/B][/COLOR]'
+addonname = '[COLOR lime][B]WORLD OF SERIES[/B][/COLOR]'
 addon_version = addon.getAddonInfo('version')
 profile = xbmc.translatePath(addon.getAddonInfo('profile').decode('utf-8'))
 home = xbmc.translatePath(addon.getAddonInfo('path').decode('utf-8'))
@@ -80,12 +82,14 @@ CHBase = base64.decodestring(calc)
 
 def CHIndex():
     addon_log("CHIndex")
-
+    dialog = xbmcgui.Dialog()
+    ok = dialog.ok('BEM-VINDOS '+addonname,'[COLOR white][B]ADDON GRATUITO PROIBIDO SUA VENDA!                                                             [/B][/COLOR][COLOR green][B]----------------------------------------------------------------------------------------[/B][/COLOR][COLOR red][B] OBRIGADO POR TER BAIXADO NOSSO NOVO PROJETO VOCES TERAM O MELHOR DO CINEMA EM SUA CASA![/B][/COLOR]')
+    addDir('[COLOR white][B]Reportar Erros filmes e Series[/B][/COLOR] ','100',100,icon,FANART,'','','','')
     getData(CHBase,'')
-    msg = ("https://pastebin.com/raw/CC7HLRz1") 
-    line1 = urllib2.urlopen(msg).read()
-    time = 8000 #in miliseconds
-    xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
+   # msg = ("https://pastebin.com/raw/CC7HLRz1") 
+     #line1 = urllib2.urlopen(msg).read()
+    #time = 5000 #in miliseconds
+    #xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
     xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def get_data_listas(url):
@@ -2877,4 +2881,8 @@ elif mode==54:
 if not viewmode==None:
    print 'setting view mode'
    xbmc.executebuiltin("Container.SetViewMode(%s)"%viewmode)
-    
+
+
+elif mode==100:
+    reportar.report()
+    xbmcplugin.endOfDirectory(int(sys.argv[1]))

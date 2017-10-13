@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.2" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.worldofseries"
        name="WORLD OF SERIES"
-       version="1.0"
-       provider-name="EQUIPE: WORLD OF SERIES">
+       version="1.2"
+       provider-name="Equipe World Of Séries">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.t0mm0.common" version="2.0.0"/>
@@ -22,16 +22,16 @@
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>[B][COLOR white]Um Vasto Conteudo Em Um So Lugar, Instale O Addon WORLD OF SERIES[/COLOR][/B]</summary>
-    <description lang="en">[B][COLOR white]WORLD OF SÉRIES E Apenas Um AGREGADOR De Links E, Assim Como O Google.com, Apenas Agrega E Organiza Os Links Externos. Não Somos Responsáveis Pelos Arquivos Aqui encontrados.[/COLOR][/B]</description>
-    <disclaimer lang="en">[B][COLOR gold]DOACOES MANTEM O ADDON ATUALIZADO > DOACOES:[/COLOR] [COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
+    <summary>Um vasto conteudo em um so lugar.</summary>
+    <description lang="en">[B][COLOR white]World Of Series é apenas um AGREGADOR de links e, assim como o Google.com, apenas agrega e organiza os links externos. Não somos responsáveis pelos arquivos aqui encontrados.[/COLOR][/B]</description>
+    <disclaimer lang="en">[B][COLOR gold]DOAÇÕES MANTEM O ADDON ATUALIZADO > DOAÇÕES: [/COLOR][COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
 	<platform>all</platform>
     <assets>
 	<icon>icon.png</icon>
     <fanart>fanart.jpg</fanart>
-    <screenshot>resources/screenshots/home.png</screenshot>
-    <screenshot>resources/screenshots/movies.png</screenshot>
-    <screenshot>resources/screenshots/series.png</screenshot>
+    <screenshot>resources/screenshots/01.jpg</screenshot>
+    <screenshot>resources/screenshots/02.jpg</screenshot>
+    <screenshot>resources/screenshots/03.jpg</screenshot>
 	</assets>
   </extension>
 </addon>
