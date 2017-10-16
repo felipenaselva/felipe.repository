@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window>
+	<defaultcontrol>9000</defaultcontrol>
+	<allowoverlays>true</allowoverlays>
+	<controls>
+	
+	<control type="image" id="1">
+      <left>40</left>
+      <top>140</top>
+      <width>1200</width>
+      <height>490</height>
+      <visible>Control.IsVisible(201)</visible>
+      <colordiffuse>FFFFFFFF</colordiffuse>
+      <fadetime>200</fadetime>
+      <texture>mirror_box.png</texture>
+      <!-- <aspectratio>keep</aspectratio> -->
+	</control>
+		
+	  <control type="list" id="201">
+			  <description></description>
+			  <left>200</left>
+			  <top>270</top>
+			  <width>850</width>
+			  <height>420</height>
+			  <visible>true</visible>
+			  <onup>2</onup>
+			  <ondown>3</ondown>
+			  <onleft>1</onleft>
+			  <onright>1</onright>
+			  <viewtype label="3D list">list</viewtype>
+			  <orientation>vertical</orientation>
+			  <pagecontrol>105</pagecontrol>
+			  <scrolltime tween="sine" easing="out">200</scrolltime>
+			  <itemlayout width="850" height="38">
+						<control type="image">
+								<width>850</width>
+								<height>38</height>
+								<left>0</left>
+								<top>0</top>
+								<!-- <visible>Control.HasFocus(106)</visible> -->
+								<texture>list2.png</texture>
+						</control>
+						<control type="label">
+								<left>50</left>
+								<top>8</top>
+								<width>600</width>
+								<height>22</height>
+								<font>font13</font>
+								<aligny>center</aligny>
+								<selectedcolor>green</selectedcolor>
+								<align>left</align>
+								<!-- <label>This will be on the first line</label> -->
+								<info>ListItem.Label</info>
+						</control>
+						<control type="label">
+								<left>550</left>
+								<top>8</top>
+								<width>auto</width>
+								<height>22</height>
+								<font>font13</font>
+								<aligny>center</aligny>
+								<selectedcolor>green</selectedcolor>
+								<!--textcolor>grey</textcolor-->
+								<align>right</align>
+								<info>ListItem.Label2</info>
+						</control>
+			  </itemlayout>
+			  <focusedlayout height="38" width="850">
+						<control type="image">
+								<width>850</width>
+								<height>38</height>
+								<left>0</left>
+								<top>0</top>
+								<!-- <visible>Control.HasFocus(106)</visible> -->
+								<texture>list2b.png</texture>
+						</control>
+						<control type="label">
+								<left>50</left>
+								<top>8</top>
+								<width>600</width>
+								<height>22</height>
+								<font>font13</font>
+								<aligny>center</aligny>
+								<selectedcolor>green</selectedcolor>
+								<align>left</align>
+								<info>ListItem.Label</info>
+						</control>
+						<control type="label">
+								<left>550</left>
+								<top>8</top>
+								<width>auto</width>
+								<height>22</height>
+								<font>font13</font>
+								<aligny>center</aligny>
+								<selectedcolor>green</selectedcolor>
+								<!--textcolor>grey</textcolor-->
+								<align>right</align>
+								<info>ListItem.Label2</info>
+						</control>
+			  </focusedlayout>
+		</control>
+	
+	
+	
+	
+	
+	</controls>
+</window>

@@ -2,6 +2,11 @@
     <category label="General">
 		<setting id="firstrun" type="bool" label="firstrun" default="true" visible="false"/>
 		<setting id="runonce" type="text" label="runonce" default="1" visible="false"/>
+		<setting id="username" type="text" label="Username" default=""/>
+		<setting id="deviceid" type="text" label="DeviceID"  enable="false"/>
+		<setting id="accountstatus" type="text" label="Account Status"  default="not registered" enable="false"/>
+		<setting id="Subends" type="text" label="Expiry Date"  enable="false"/>
+		<setting id="activationsleft" type="text" label="Activations remaining"  enable="false"/>
 	</category>
 	<category label="Backup">
 		<setting type="lsep" label="[CR]Select backup destination folder:[CR]"/>
