@@ -1468,6 +1468,20 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
   </extension>
 </addon>
 
+<addon id="repositorio.worldofseries" name="[COLOR white][B]World of Series[/B][/COLOR] [COLOR lime][B]Repositorio[/B][/COLOR]" version="1.0.4" provider-name="Equipe World of Series">
+	<extension point="xbmc.addon.repository" name="World of Series Add-on Repository">
+		<info compressed="false">http://raw.github.com/worldofseries/wos.repositorio/master/addons.xml</info>
+		<checksum>http://raw.github.com/worldofseries/wos.repositorio/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/worldofseries/wos.repositorio/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Lar do addon World Of Series</summary>
+		<description>[B][COLOR white]WORLD OF SERIES E Apenas Um AGREGADOR De Links E, Assim Como O Google.com, Apenas Agrega E Organiza Os Links Externos. NÃ£o Somos ResponsÃ¡veis Pelos Arquivos Aqui encontrados.[/COLOR][/B]</description>
+		<disclaimer>[B][COLOR gold]DOACOES MANTEM O ADDON ATUALIZADO > DOACOES:[/COLOR] [COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
 <addon id="repository.aresproject" name="[COLOR blue]A[/COLOR][COLOR white]res Project[/COLOR]" version="0.1.0" provider-name="Ares Team">
 	<extension point="xbmc.addon.repository" name="AresRepo">
 	<dir>
@@ -2364,20 +2378,6 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 		<summary>Super Milton Add-on Repository</summary>
 		<description>Repositorio de Addons do Milton Guedes</description>
 		<disclaimer></disclaimer>
-		<platform>all</platform>
-	</extension>
-</addon>
-
-<addon id="worldofseries.repositorio" name="[COLOR white][B]WORLD OF SERIES[/B][/COLOR] [COLOR lime][B]REPOSITORY[/B][/COLOR]" version="1.0.4" provider-name="Equipe World of Series">
-	<extension point="xbmc.addon.repository" name="World of Series Add-on Repository">
-		<info compressed="false">http://raw.github.com/worldofseries/wos.repositorio/master/addons.xml</info>
-		<checksum>http://raw.github.com/worldofseries/wos.repositorio/master/addons.xml.md5</checksum>
-		<datadir zip="true">http://raw.github.com/worldofseries/wos.repositorio/master/repo/</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Lar do addon World Of Series</summary>
-		<description>[B][COLOR white]WORLD OF SERIES E Apenas Um AGREGADOR De Links E, Assim Como O Google.com, Apenas Agrega E Organiza Os Links Externos. NÃ£o Somos ResponsÃ¡veis Pelos Arquivos Aqui encontrados.[/COLOR][/B]</description>
-		<disclaimer>[B][COLOR gold]DOACOES MANTEM O ADDON ATUALIZADO > DOACOES:[/COLOR] [COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
 		<platform>all</platform>
 	</extension>
 </addon>
