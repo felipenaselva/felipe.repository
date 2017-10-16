@@ -2,7 +2,7 @@
 <addons>
 <addon id="felipe.repository"
        name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]"
-	   version="3.2.7"
+	   version="3.2.9"
 	   provider-name="felipenaselva">
 	<extension point="xbmc.addon.repository" name="Felipe Add-on Repository">
 		<info compressed="false">http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml</info>
@@ -181,6 +181,33 @@
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Movies and Clips Adult</summary>
     <description lang="en">Movies and Clips Adult</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.Anima.PT"
+       name="Anima.PT"
+       version="1.0.1"
+       provider-name="AnimaÃ§Ã£o PT">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.beautifulsoup" version="3.2.1"/>
+	<import addon="script.module.simple.downloader" version="0.9.4"/>
+	<import addon="script.module.beautifulsoup4"/>
+	<import addon="script.module.requests"/>
+	<import addon="script.module.httplib2"/>
+    <import addon="script.module.simplejson" version="3.3.0"/>
+    <import addon="script.module.urlresolver"  version="2.1.2"/>
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+    <import addon="plugin.video.youtube" optional="true" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Desenhos animados em PortuguÃªs</summary>
+    <description lang="en">Criado para vocÃªs! Obrigado por estarem nas nossas vidas.</description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -847,6 +874,26 @@ Nota: esse addon so funciona com Player gerenciador de torrents como o Quasar,YA
   </extension>
 </addon>
 
+<addon id="plugin.video.pornhub" name="   [COLOR aqua]Porn Hub[/COLOR]" version="1.0.0" provider-name="Merlin Project">
+    <requires>
+    </requires>
+    <extension point="xbmc.python.pluginsource"
+               library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>The Best Porn From The Best Site!</summary>
+        <description>Watch Daily Popular Videos Or Brows A Huge Number Of Categories!</description>
+		<disclaimer>[COLOR red][B]XXX - OVER 18's ONLY![/B][/COLOR]</disclaimer>
+		<platform>all</platform>
+		<license>http://www.gnu.org/licenses/</license>
+		<forum></forum>
+		<website></website>
+		<email></email>
+		<source></source>
+    </extension>
+</addon>
+
 <addon id="plugin.video.PowerBuild" name="Wizard Power Build" version="2.1.2" provider-name="Felipenaselva">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -1117,6 +1164,37 @@ Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal
 	</extension>
 </addon>
 
+<addon id="plugin.video.jico"
+       name="TÃºnel do tempo"
+       version="1.0"
+       provider-name="jico">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">TÃºnel do Tempo</summary>
+    <description lang="en">O addon TÃºnel do Tempo Ã© voltado a SÃ©ries e Desenhos Antigos</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.UFC"
 	name="UFC"
 	version="1.0.8"
@@ -1136,6 +1214,49 @@ Se voce gostou do meu trabalho e quiser fazer uma doacao,aqui esta o link PayPal
     <forum>http://forums.tvaddons.ag/forums/113-TVADDONS-AG-ADDON-REPOSITORY</forum>
     <website>http://www.tvaddons.ag/</website>
   </extension>
+</addon>
+
+
+<addon id="plugin.video.ukturk" name="UK Turk Playlists" version="4.0.15" provider-name="UKTurk">
+
+  <requires>
+
+    <import addon="script.module.simplejson" version="3.3.0"/>
+
+    <import addon="xbmc.python" version="2.1.0"/>
+
+    <import addon="script.module.t0mm0.common" version="2.0.0"/>
+
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+
+    <import addon="script.module.urlresolver"  version="2.1.2"/>
+
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+    <import addon="script.video.F4mProxy" version="2.5.3"/>
+
+    <import addon="script.module.liveresolver" version="0.1.24"/>
+
+  </requires>
+
+  <extension point="xbmc.python.pluginsource" library="default.py">
+
+        <provides>video</provides>
+
+  </extension>
+
+  <extension point="xbmc.addon.metadata">
+
+    <summary lang="en">Free Playlists courtesy of @uk_turk</summary>
+
+    <description lang="en">Free Playlists courtesy of @uk_turk</description>
+
+    <platform>all</platform>
+
+  </extension>
+
 </addon>
 
 <addon id="plugin.video.usbwizard" name="USB-SDCARD WIZARD" version="1.1.6" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
@@ -1255,7 +1376,7 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
   <extension point="xbmc.addon.metadata">
     <summary>Um vasto conteudo em um so lugar.</summary>
     <description lang="en">[B][COLOR white]World Of Series Ã© apenas um AGREGADOR de links e, assim como o Google.com, apenas agrega e organiza os links externos. NÃ£o somos responsÃ¡veis pelos arquivos aqui encontrados.[/COLOR][/B]</description>
-    <disclaimer lang="en">[B][COLOR gold]DOAÃ‡Ã•ES MANTEM O ADDON ATUALIZADO > DOAÃ‡Ã•ES: [/COLOR][COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
+    <disclaimer lang="en">[B][COLOR gold]DOACOES MANTEM O ADDON ATUALIZADO > DOACOES: [/COLOR][COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
 	<platform>all</platform>
     <assets>
 	<icon>icon.png</icon>
@@ -1345,6 +1466,26 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     <forum>http://forums.tvaddons.ag</forum>
     <platform>all</platform>
   </extension>
+</addon>
+
+<addon id="repository.aresproject" name="[COLOR blue]A[/COLOR][COLOR white]res Project[/COLOR]" version="0.1.0" provider-name="Ares Team">
+	<extension point="xbmc.addon.repository" name="AresRepo">
+	<dir>
+        <info compressed="false">https://raw.githubusercontent.com/Colossal1/repository.colossus.common/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/Colossal1/repository.colossus.common/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/Colossal1/repository.colossus.common/master/</datadir>
+	</dir>
+    <dir>
+		<info compressed="false">https://raw.githubusercontent.com/ares-fortress/repo/master/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/ares-fortress/repo/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/ares-fortress/repo/master/</datadir>
+    </dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>AresProject.</summary>
+		<description>Ares-Project Addons Source. Visit Us At https://ares-project.uk</description>
+		<platform>all</platform>
+	</extension>
 </addon>
 
 <addon id="repository.colossus" name="Colossus Repository" version="999.999.6" provider-name="Colossal">
@@ -1509,6 +1650,20 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 	<extension point="xbmc.addon.metadata">
 		<summary>MrPiracy.top RepositÃ³rio</summary>
 		<description>Addon Description</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.pancas" name="Pancas repository" version="1.0.7" provider-name="Pancas">
+	<extension point="xbmc.addon.repository" name="Pancas Add-on Repository">
+		<info compressed="false">http://raw.github.com/Sup3Roque/Pancas/master/addons.xml</info>
+		<checksum>http://raw.github.com/Sup3Roque/Pancas/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/Sup3Roque/Pancas/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Pancas Repo</summary>
+		<description>TV para todos sempre ao melhor preÃ§o</description>
 		<disclaimer></disclaimer>
 		<platform>all</platform>
 	</extension>
