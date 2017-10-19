@@ -93,14 +93,15 @@ class MetaData:
     '''  
 
      
-    def __init__(self, prepack_images=False, preparezip=False, tmdb_api_key='af95ef8a4fe1e697f86b8c194f2e5e11'):
+    def __init__(self, prepack_images=False, preparezip=False, tmdb_api_key=common.addon.get_setting('tmdb_api_key'), omdb_api_key=common.addon.get_setting('omdb_api_key')):
 
         #Check if a path has been set in the addon settings
         settings_path = common.addon.get_setting('meta_folder_location')
         
         # TMDB constants
         self.tmdb_image_url = ''
-        self.tmdb_api_key = tmdb_api_key
+        self.tmdb_api_key = common.addon.get_setting('tmdb_api_key') if common.addon.get_setting('override_keys') == 'true' else tmdb_api_key
+        self.omdb_api_key = omdb_api_key
                
         if settings_path:
             self.path = xbmc.translatePath(settings_path)
@@ -777,7 +778,7 @@ class MetaData:
         if (not tmdb_image_url or not tmdb_config_timestamp) or age > expire:
             common.addon.log('No cached config data found or cache expired, requesting from TMDB', 0)
 
-            tmdb = TMDB(api_key=self.tmdb_api_key, lang=self.__get_tmdb_language())
+            tmdb = TMDB(tmdb_api_key=self.tmdb_api_key, omdb_api_key=self.omdb_api_key, lang=self.__get_tmdb_language())
             config_data = tmdb.call_config()
 
             if config_data:
@@ -1351,7 +1352,7 @@ class MetaData:
             these "None found" entries otherwise we hit tmdb alot.
         '''        
         
-        tmdb = TMDB(api_key=self.tmdb_api_key, lang=self.__get_tmdb_language())
+        tmdb = TMDB(tmdb_api_key=self.tmdb_api_key, omdb_api_key=self.omdb_api_key, lang=self.__get_tmdb_language())
         meta = tmdb.tmdb_lookup(name,imdb_id,tmdb_id, year)
         
         if meta is None:
@@ -1510,8 +1511,8 @@ class MetaData:
         if tvdb_id == '':
             try:
                 #If year is passed in, add it to the name for better TVDB search results
-                if year:
-                    name = name + ' ' + year
+                #if year:
+                #    name = name + ' ' + year
                 show_list=tvdb.get_matching_shows(name)
             except Exception, e:
                 common.addon.log('************* Error retreiving from thetvdb.com: %s ' % e, 4)
@@ -1519,22 +1520,25 @@ class MetaData:
                 pass
             common.addon.log('Found TV Show List: %s' % show_list, 0)
             tvdb_id=''
-            prob_id=''
             for show in show_list:
                 (junk1, junk2, junk3) = show
-                #if we match imdb_id or full name (with year) then we know for sure it is the right show
-                if junk3==imdb_id or self._string_compare(self._clean_string(junk2),self._clean_string(name)):
-                    tvdb_id=self._clean_string(junk1)
-                    if not imdb_id:
-                        imdb_id=self._clean_string(junk3)
-                    break
-                #if we match just the cleaned name (without year) keep the tvdb_id
-                elif self._string_compare(self._clean_string(junk2),self._clean_string(name)):
-                    prob_id = junk1
-                    if not imdb_id:
-                        imdb_id = self_clean_string(junk3)
-            if tvdb_id == '' and prob_id != '':
-                tvdb_id = self._clean_string(prob_id)
+                try:
+                    #if we match imdb_id or full name (with year) then we know for sure it is the right show
+                    if (imdb_id and junk3==imdb_id) or (year and self._string_compare(self._clean_string(junk2),self._clean_string(name + year))):
+                        tvdb_id = self._clean_string(junk1)
+                        if not imdb_id:
+                            imdb_id = self._clean_string(junk3)
+                        name = junk2
+                        break
+                    #if we match just the cleaned name (without year) keep the tvdb_id
+                    elif self._string_compare(self._clean_string(junk2),self._clean_string(name)):
+                        tvdb_id = self._clean_string(junk1)
+                        if not imdb_id:
+                            imdb_id = self._clean_string(junk3)
+                        break
+                        
+                except Exception, e:
+                    common.addon.log('************* Error retreiving from thetvdb.com: %s ' % e, 4)
 
         if tvdb_id:
             common.addon.log('Show *** ' + name + ' *** found in TVdb. Getting details...', 0)
@@ -1579,7 +1583,7 @@ class MetaData:
 
                 if meta['plot'] == 'None' or meta['plot'] == '' or meta['plot'] == 'TBD' or meta['plot'] == 'No overview found.' or meta['rating'] == 0 or meta['duration'] == 0 or meta['cover_url'] == '':
                     common.addon.log(' Some info missing in TVdb for TVshow *** '+ name + ' ***. Will search imdb for more', 0)
-                    tmdb = TMDB(api_key=self.tmdb_api_key, lang=self.__get_tmdb_language())
+                    tmdb = TMDB(tmdb_api_key=self.tmdb_api_key, omdb_api_key=self.omdb_api_key, lang=self.__get_tmdb_language())
                     imdb_meta = tmdb.search_imdb(name, imdb_id)
                     if imdb_meta:
                         imdb_meta = tmdb.update_imdb_meta(meta, imdb_meta)
@@ -1596,7 +1600,7 @@ class MetaData:
 
                 return meta
             else:
-                tmdb = TMDB(api_key=self.tmdb_api_key, lang=self.__get_tmdb_language())
+                tmdb = TMDB(tmdb_api_key=self.tmdb_api_key, omdb_api_key=self.omdb_api_key, lang=self.__get_tmdb_language())
                 imdb_meta = tmdb.search_imdb(name, imdb_id)
                 if imdb_meta:
                     meta = tmdb.update_imdb_meta(meta, imdb_meta)
@@ -1621,7 +1625,7 @@ class MetaData:
         ''' 
         common.addon.log('---------------------------------------------------------------------------------------', 0)
         common.addon.log('Meta data refresh - searching for movie: %s' % name, 0)
-        tmdb = TMDB(api_key=self.tmdb_api_key, lang=self.__get_tmdb_language())
+        tmdb = TMDB(tmdb_api_key=self.tmdb_api_key, omdb_api_key=self.omdb_api_key, lang=self.__get_tmdb_language())
         movie_list = []
         meta = tmdb.tmdb_search(name)
         if meta:
@@ -1655,7 +1659,7 @@ class MetaData:
         ''' 
         common.addon.log('---------------------------------------------------------------------------------------', 0)
         common.addon.log('TMDB - requesting similar movies: %s' % tmdb_id, 0)
-        tmdb = TMDB(api_key=self.tmdb_api_key, lang=self.__get_tmdb_language())
+        tmdb = TMDB(tmdb_api_key=self.tmdb_api_key, omdb_api_key=self.omdb_api_key, lang=self.__get_tmdb_language())
         movie_list = []
         meta = tmdb.tmdb_similar_movies(tmdb_id, page)
         if meta:
