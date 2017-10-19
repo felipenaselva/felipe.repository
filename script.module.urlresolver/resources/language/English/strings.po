@@ -1,9 +1,9 @@
 # Addon Name: URLResolver
 # Addon id: script.module.urlresolver
-# Addon Provider: TV Addons
+# Addon Provider:
 msgid ""
 msgstr ""
-"Project-Id-Version: TV Addons Addons\n"
+"Project-Id-Version: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: English\n"

@@ -18,8 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-import re
-from lib import jsunpack, helpers
+from lib import helpers
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
@@ -30,26 +29,20 @@ class WatchersResolver(UrlResolver):
 
     def __init__(self):
         self.net = common.Net()
-
+    
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
-        response = self.net.http_GET(web_url)
-        html = response.content
-
+        headers = {'User-Agent': common.RAND_UA}
+        html = self.net.http_GET(web_url, headers=headers).content
+        
         if html:
-            packed = re.search('(eval\(function.*?)\s*</script>', html, re.DOTALL)
-            if packed:
-                js = jsunpack.unpack(packed.group(1))
-            else:
-                js = html
-
-            sources = re.findall('''file\s*:\s*["']([^"']+\.(?:(m3u8|mp4)))''', js)
-            if sources:
-                headers = {'User-Agent': common.RAND_UA, 'Referer': web_url}
-                sources = [(b, a) for a, b in sources]
-                return helpers.pick_source(sources) + helpers.append_headers(headers)
-
-        raise ResolverError('No playable video found.')
+            packed = helpers.get_packed_data(html)
+            headers.update({'Referer': web_url})
+            sources = helpers.parse_sources_list(packed)
+            
+            if sources: return helpers.pick_source(sources) + helpers.append_headers(headers)
+            
+        raise ResolverError('File not found')
 
     def get_url(self, host, media_id):
         return self._default_get_url(host, media_id)

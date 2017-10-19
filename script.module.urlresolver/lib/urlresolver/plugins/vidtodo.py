@@ -15,6 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+import re
 from lib import helpers, jsunpack
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
@@ -31,17 +32,20 @@ class VidToDoResolver(UrlResolver):
         web_url = self.get_url(host, media_id)
         headers = {'User-Agent': common.FF_USER_AGENT}
         html = self.net.http_GET(web_url, headers=headers).content
-        data = helpers.get_hidden(html)
-        common.kodi.sleep(1000)
-        headers.update({'Referer': web_url})
-        html = self.net.http_POST(web_url, headers=headers, form_data=data).content
         
         if html:
-            packed = jsunpack.unpack(html)
-            sources = helpers.scrape_sources(packed, patterns=["""file:\s*["'](?P<url>[^"']+)"""], result_blacklist=[".smil"])
-            if sources: return helpers.pick_source(sources) + helpers.append_headers(headers)
+            try:
+                packed = jsunpack.unpack(html)
+                smil = re.search("""file:\s*["'](.+?\.smil.*?)["']""", packed).groups()[0]
+                headers.update({'Referer': web_url})
+                smil = self.net.http_GET(smil, headers=headers).content
+                sources = helpers.parse_smil_source_list(smil)
+                
+                if sources: return helpers.pick_source(sources) + helpers.append_headers(headers)
+            except:
+                raise ResolverError('Unable to locate video')
             
         raise ResolverError('Unable to locate video')
         
     def get_url(self, host, media_id):
-        return self._default_get_url(host, media_id, template='http://{host}/{media_id}')
+        return self._default_get_url(host, media_id)

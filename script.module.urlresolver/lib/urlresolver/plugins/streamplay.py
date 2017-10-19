@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-import urlparse
+import re, urlparse
 from lib import helpers
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
@@ -32,25 +32,36 @@ class StreamplayResolver(UrlResolver):
         web_url = self.get_url(host, media_id)
         headers = {'User-Agent': common.RAND_UA}
         html = self.net.http_GET(web_url, headers=headers).content
-        html = html.encode("utf-8")
+        data = helpers.get_hidden(html)
+        common.kodi.sleep(5000)
+        headers.update({'Referer': web_url})
+        html = self.net.http_POST(web_url, headers=headers, form_data=data).content
         
-        sources = helpers.scrape_sources(html, patterns=['''file:\s*["'](?P<url>(?!rtmp://)[^"']+)'''])
-        if sources:
-            i = 0
-            headers.update({'Referer': web_url})
-            for source in sources:
-                try:
-                    src = urlparse.urlparse(source[1])
-                    l = list(src)
-                    b = l[2].split("/")[1:]
-                    b[0] = self.decrypt(b[0], 'streamplayembedf')
-                    l[2] = "/".join(b)
-                    sources[i] = (source[0], urlparse.urlunparse(l))
-                    i += 1
-                except:
-                    i += 1
-                
-            return helpers.pick_source(sources) + helpers.append_headers(headers)
+        if html:
+            packed = helpers.get_packed_data(html)
+            sources = helpers.scrape_sources(packed, patterns=['''file:\s*["'](?P<url>(?!rtmp://)[^"']+)'''])
+            data = re.findall("""_[^=]+=\[([^\]]+)\];""", html, re.DOTALL)
+            if sources and data:
+                data = data[2].replace('\\x', '').split(",")
+                data = [x.replace('"', '').replace(' ', '').decode("hex") for x in data]
+                key = "".join(data[7:9])
+                if key.startswith("embed"):
+                    key = key[6:]+key[:6]
+                i = 0
+                headers.update({'Referer': web_url})
+                for source in sources:
+                    try:
+                        src = urlparse.urlparse(source[1])
+                        l = list(src)
+                        b = l[2].split("/")[1:]
+                        b[0] = self.decrypt(b[0], key)
+                        l[2] = "/".join(b)
+                        sources[i] = (source[0], urlparse.urlunparse(l))
+                        i += 1
+                    except:
+                        i += 1
+                    
+                return helpers.pick_source(sources) + helpers.append_headers(headers)
         
         raise ResolverError('File not found')
         
@@ -157,4 +168,4 @@ class StreamplayResolver(UrlResolver):
         return h
 
     def get_url(self, host, media_id):
-        return self._default_get_url(host, media_id, template='http://streamplay.club/player-{media_id}.html')
+        return self._default_get_url(host, media_id, template='http://streamplay.club/{media_id}')

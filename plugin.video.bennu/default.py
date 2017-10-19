@@ -28,11 +28,15 @@ content = params.get('content')
 
 name = params.get('name')
 
+title = params.get('title')
+
 url = params.get('url')
 
 image = params.get('image')
 
 fanart = params.get('fanart')
+
+source = params.get('source')
 
 try: worker = params.get('worker')
 except: worker = '0'
@@ -43,6 +47,17 @@ windowedtrailer = int(windowedtrailer) if windowedtrailer in ("0","1") else 0
 if action == None:
     from resources.lib.indexers import bennustreams
     bennustreams.indexer().root()
+    
+    try:
+        import xbmc,xbmcaddon
+        import common as Common
+
+        ADDON = xbmcaddon.Addon(id='plugin.video.bennu')
+
+        if ADDON.getSetting('first.info') == "true":
+            TypeOfMessage="t"; (NewImage,NewMessage)=Common.FetchNews()
+            Common.CheckNews(TypeOfMessage,NewImage,NewMessage,False)
+    except: pass
     
 elif action == 'directory':
     from resources.lib.indexers import bennustreams
@@ -57,6 +72,18 @@ elif action == 'xdirectory':
     if worker == '1': bennustreams.indexer().getx(url, worker=True)
     else: bennustreams.indexer().getx(url)
 
+elif action == 'imdb_list':
+    from resources.lib.indexers import bennustreams
+    bennustreams.indexer().getimdb(url)
+
+elif action == 'trakt_list':
+    from resources.lib.indexers import bennustreams
+    bennustreams.indexer().gettrakt(url)
+    
+elif action == 'rotten_list':
+    from resources.lib.indexers import bennustreams
+    bennustreams.indexer().getrotten(url)
+    
 elif action == 'developer':
     from resources.lib.indexers import bennustreams
     bennustreams.indexer().developer()
@@ -80,6 +107,14 @@ elif 'youtube' in str(action):
 elif action == 'play':
     from resources.lib.indexers import bennustreams
     bennustreams.player().play(url, content)
+    
+elif action == 'addItem':
+    from resources.lib.modules import sources
+    sources.sources().addItem(title)
+    
+elif action == 'playItem':
+    from resources.lib.modules import sources
+    sources.sources().playItem(title, source)
 
 elif action == 'browser':
     from resources.lib.indexers import bennustreams

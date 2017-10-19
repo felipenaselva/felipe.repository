@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.bennu" name="Bennu" version="17.10.5" provider-name="Bennu">
+<addon id="plugin.video.bennu" name="Bennu" version="17.10.19" provider-name="Bennu">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
         <import addon="repository.colossus" /> 
@@ -16,6 +16,7 @@
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">Bennu</summary>
 		<description lang="en">We Rise From The Ashes</description>
+		<description lang="hr">Podigli smo se iz pepela</description>
 		<platform>all</platform>
 		<forum></forum>
 		<website></website>

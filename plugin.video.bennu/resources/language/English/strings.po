@@ -146,6 +146,10 @@ msgctxt "#30735"
 msgid "Clear all..."
 msgstr ""
 
+msgctxt "#30736"
+msgid "Notification on launch"
+msgstr ""
+
 msgctxt "#30401"
 msgid "Are you sure?"
 msgstr ""
@@ -199,7 +203,7 @@ msgid "PIN"
 msgstr ""
 
 msgctxt "#32309"
-msgid "API"
+msgid "TMDb API"
 msgstr ""
 
 msgctxt "#32312"
@@ -296,4 +300,64 @@ msgstr ""
 
 msgctxt "#32581"
 msgid "Results Limit"
+msgstr ""
+
+msgctxt "#32582"
+msgid "Enable service notification"
+msgstr ""
+
+msgctxt "#32587"
+msgid "Show Extra Source Info"
+msgstr ""
+
+msgctxt "#32588"
+msgid "Getting genre informtaion from trakt."
+msgstr ""
+
+msgctxt "#32589"
+msgid "Blue"
+msgstr ""
+
+msgctxt "#32590"
+msgid "Red"
+msgstr ""
+
+msgctxt "#32591"
+msgid "Yellow"
+msgstr ""
+
+msgctxt "#32592"
+msgid "Deep Pink"
+msgstr ""
+
+msgctxt "#32593"
+msgid "Cyan"
+msgstr ""
+
+msgctxt "#32594"
+msgid "Lawn Green"
+msgstr ""
+
+msgctxt "#32595"
+msgid "Gold"
+msgstr ""
+
+msgctxt "#32596"
+msgid "Magenta"
+msgstr ""
+
+msgctxt "#32597"
+msgid "Yellow Green"
+msgstr ""
+
+msgctxt "#32598"
+msgid "No Color"
+msgstr ""
+
+msgctxt "#32599"
+msgid "Getting genre information from Trakt"
+msgstr ""
+
+msgctxt "#32600"
+msgid "Preparing sources"
 msgstr ""

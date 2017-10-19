@@ -15,41 +15,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-
 from lib import helpers
-from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
-
 
 class VshareEuResolver(UrlResolver):
     name = "vshare.eu"
     domains = ['vshare.eu']
     pattern = '(?://|\.)(vshare\.eu)/(?:embed-|)?([0-9a-zA-Z/]+)'
 
-    def __init__(self):
-        self.net = common.Net()
-
     def get_media_url(self, host, media_id):
-        web_url = self.get_url(host, media_id)
-
-        headers = {
-            'Upgrade-Insecure-Requests': '1',
-            'User-Agent': common.FF_USER_AGENT
-        }
-
-        html = self.net.http_GET(web_url, headers=headers).content
-
-        if '404 Not Found' in html or 'Has Been Removed' in html:
-            raise ResolverError('The requested video was not found.')
-
-        data = helpers.get_hidden(html)
-        headers['Referer'] = web_url
-        response = self.net.http_POST(web_url, data, headers=headers)
-        html = response.content
-        headers = {'Cookie': response.get_headers(as_dict=True).get('Set-Cookie', ''),
-                   'User-Agent': common.FF_USER_AGENT}
-        sources = helpers.scrape_sources(html, patterns=['''(?:file|url)\s*[:=]\s*["'](?P<url>[^"']+)'''])
-        return helpers.pick_source(sources) + helpers.append_headers(headers)
+        return helpers.get_media_url(self.get_url(host, media_id), patterns=['''config:\s*{file\s*:\s*["'](?P<url>[^"']+)'''], generic_patterns=False).replace(' ', '%20')
 
     def get_url(self, host, media_id):
-        return 'http://vshare.eu/%s' % (media_id)
+        return self._default_get_url(host, media_id)

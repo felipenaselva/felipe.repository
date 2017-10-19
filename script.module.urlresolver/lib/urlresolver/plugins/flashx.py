@@ -16,20 +16,20 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-import os
-import fx_gmu
+import os, fx_gmu
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError  # @UnusedImport
 
 logger = common.log_utils.Logger.get_logger(__name__)
 logger.disable()
-FX_SOURCE = 'https://offshoregit.com/tvaresolvers/fx_gmu.py'
+FX_SOURCE = 'https://raw.githubusercontent.com/jsergio123/script.module.urlresolver/master/lib/urlresolver/plugins/fx_gmu.py'
 FX_PATH = os.path.join(common.plugins_path, 'fx_gmu.py')
+
 
 class FlashxResolver(UrlResolver):
     name = "flashx"
     domains = ["flashx.tv"]
-    pattern = '(?://|\.)(flashx\.tv)/(?:embed-|dl\?|embed.php\?c=)?([0-9a-zA-Z/-]+)'
+    pattern = '(?://|\.)(flashx\.tv)/(?:embed-|dl\?|embed.php\?c=)?([0-9a-zA-Z]+)'
 
     def __init__(self):
         self.net = common.Net()
@@ -45,7 +45,7 @@ class FlashxResolver(UrlResolver):
             raise
         
     def get_url(self, host, media_id):
-        return self._default_get_url(host, media_id, 'https://{host}/embed.php?c={media_id}')
+        return self._default_get_url(host, media_id, template='https://www.{host}/embed.php?c={media_id}')
 
     @classmethod
     def get_settings_xml(cls):
