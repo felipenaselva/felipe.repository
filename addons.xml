@@ -1369,43 +1369,6 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
   </extension>
 </addon>
 
-<addon id="plugin.video.worldofseries"
-       name="WORLD OF SERIES"
-       version="1.2"
-       provider-name="Equipe World Of SÃ©ries">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.t0mm0.common" version="2.0.0"/>
-    <import addon="script.module.beautifulsoup" version="3.2.1"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.beautifulsoup4" />
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.requests" />
-    <import addon="script.module.httplib2" />
-    <import addon="script.module.urlresolver" optional="true"/>
-    <import addon="script.module.simplejson" />
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-    <import addon="script.module.metahandler" version="2.5.1"/>
-
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>Um vasto conteudo em um so lugar.</summary>
-    <description lang="en">[B][COLOR white]World Of Series Ã© apenas um AGREGADOR de links e, assim como o Google.com, apenas agrega e organiza os links externos. NÃ£o somos responsÃ¡veis pelos arquivos aqui encontrados.[/COLOR][/B]</description>
-    <disclaimer lang="en">[B][COLOR gold]DOACOES MANTEM O ADDON ATUALIZADO > DOACOES: [/COLOR][COLOR gold]FB/WorldOfSeries[/COLOR][/B]</disclaimer>
-	<platform>all</platform>
-    <assets>
-	<icon>icon.png</icon>
-    <fanart>fanart.jpg</fanart>
-    <screenshot>resources/screenshots/01.jpg</screenshot>
-    <screenshot>resources/screenshots/02.jpg</screenshot>
-    <screenshot>resources/screenshots/03.jpg</screenshot>
-	</assets>
-  </extension>
-</addon>
-
 <addon id="plugin.video.xxx-o-dus"
 	     name="XXX-O-DUS"
 	     version="3.00.013"
@@ -2422,6 +2385,19 @@ unshortenit v0.3.0 from https://github.com/jkehler/unshortenit :
 		<summary lang="en">Resolve common video host URL's to be playable in XBMC/Kodi.</summary>
 		<description lang="en">Resolve common video host URL's to be playable in XBMC/Kodi, simplify addon development of video plugins requiring multi video hosts.</description>
         <source>https://github.com/jsergio123/script.module.urlresolver</source>
+	</extension>
+</addon>
+
+<addon id="script.module.urlresolver.xxx" version="1.0.09" name="Adult Resolver SMU Extension" provider-name="jsergio, Echo Coder">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+        	<import addon="script.module.urlresolver" version="3.0.38" />
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Resolve adult video host URL's to be playable in XBMC/Kodi.</summary>
+		<description lang="en">Resolve adult video host URL's to be playable in XBMC/Kodi.</description>
+		<platform>all</platform>
 	</extension>
 </addon>
 
