@@ -2,6 +2,7 @@ __author__ = 'bromix'
 
 __all__ = ['run']
 
+import copy
 from .impl import Runner
 from .impl import Context
 
@@ -11,7 +12,6 @@ __RUNNER__ = Runner()
 def run(provider, context=None):
     if not context:
         context = Context(plugin_id='plugin.video.youtube')
-        pass
 
     context.log_debug('Starting Kodion framework by bromix...')
     python_version = 'Unknown version of Python'
@@ -25,19 +25,21 @@ def run(provider, context=None):
         pass
 
     version = context.get_system_version()
-    context.log_notice(
-        'Running: %s (%s) on %s with %s' % (context.get_name(), context.get_version(), version, python_version))
-    context.log_debug('Path: "%s' % context.get_path())
+    name = context.get_name()
+    addon_version = context.get_version()
     redacted = '<redacted>'
-    context_params = context.get_params().copy()
+    context_params = copy.deepcopy(context.get_params())
     if 'api_key' in context_params:
         context_params['api_key'] = redacted
     if 'client_id' in context_params:
         context_params['client_id'] = redacted
     if 'client_secret' in context_params:
         context_params['client_secret'] = redacted
-    context.log_debug('Params: "%s"' % unicode(context_params))
+
+    context.log_notice('Running: %s (%s) on %s with %s\n\tPath: %s\n\tParams: %s' %
+                       (name, addon_version, version, python_version,
+                        context.get_path(), str(context_params)))
+
     __RUNNER__.run(provider, context)
     provider.tear_down(context)
     context.log_debug('Shutdown of Kodion')
-    pass

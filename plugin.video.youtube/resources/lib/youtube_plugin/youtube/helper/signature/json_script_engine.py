@@ -1,17 +1,17 @@
 __author__ = 'bromix'
+from six.moves import range
 
 
 class JsonScriptEngine(object):
     def __init__(self, json_script):
         self._json_script = json_script
-        pass
 
     def execute(self, signature):
         _signature = signature
 
         _actions = self._json_script['actions']
         for action in _actions:
-            func = '_'+action['func']
+            func = '_' + action['func']
             params = action['params']
 
             if func == '_return':
@@ -23,39 +23,40 @@ class JsonScriptEngine(object):
                     param = _signature
                     params[i] = param
                     break
-                pass
 
             method = getattr(self, func)
             if method:
                 _signature = method(*params)
-                pass
             else:
                 raise Exception("Unknown method '%s'" % func)
-            pass
 
         return _signature
 
-    def _join(self, signature):
+    @staticmethod
+    def _join(signature):
         return ''.join(signature)
 
-    def _list(self, signature):
+    @staticmethod
+    def _list(signature):
         return list(signature)
 
-    def _slice(self, signature, b):
+    @staticmethod
+    def _slice(signature, b):
         del signature[b:]
         return signature
 
-    def _splice(self, signature, a, b):
+    @staticmethod
+    def _splice(signature, a, b):
         del signature[a:b]
         return signature
 
-    def _reverse(self, signature):
+    @staticmethod
+    def _reverse(signature):
         return signature[::-1]
 
-    def _swap(self, signature, b):
+    @staticmethod
+    def _swap(signature, b):
         c = signature[0]
         signature[0] = signature[b % len(signature)]
         signature[b] = c
         return signature
-
-    pass

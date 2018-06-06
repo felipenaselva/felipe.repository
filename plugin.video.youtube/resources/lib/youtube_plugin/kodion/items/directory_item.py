@@ -4,16 +4,13 @@ from .base_item import BaseItem
 class DirectoryItem(BaseItem):
     def __init__(self, name, uri, image=u'', fanart=u''):
         BaseItem.__init__(self, name, uri, image, fanart)
-        self._plot = unicode(name)
-        pass
+        self._plot = name
 
     def set_name(self, name):
-        self._name = unicode(name)
-        pass
+        self._name = name
 
     def set_plot(self, plot):
-        self._plot = unicode(plot)
-        pass
+        self._plot = plot
 
     def get_plot(self):
         return self._plot

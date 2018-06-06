@@ -1,6 +1,6 @@
 __author__ = 'bromix'
 
-__all__ = ['Settings', 'Context']
+__all__ = ['Settings', 'Context', 'Logger', 'ContextUI', 'Runner']
 
 try:
     from .xbmc.xbmc_logger import XbmcLogger as Logger
@@ -14,4 +14,3 @@ except ImportError:
     from .mock.mock_context import MockContext as Context
     from .mock.mock_context_ui import MockContextUI as ContextUI
     from .mock.mock_runner import MockRunner as Runner
-    pass

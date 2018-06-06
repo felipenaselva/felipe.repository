@@ -1,7 +1,8 @@
 __author__ = 'bromix'
 
+from six.moves import urllib
+
 import re
-import urlparse
 from ...kodion.items import VideoItem, DirectoryItem
 from . import utils
 
@@ -22,68 +23,50 @@ class UrlToItemConverter(object):
         self._channel_id_dict = {}
         self._channel_items = []
         self._channel_ids = []
-        pass
 
     def add_url(self, url, provider, context):
-        url_components = urlparse.urlparse(url)
+        url_components = urllib.parse.urlparse(url)
         if url_components.hostname.lower() == 'youtube.com' or url_components.hostname.lower() == 'www.youtube.com':
-            params = dict(urlparse.parse_qsl(url_components.query))
+            params = dict(urllib.parse.parse_qsl(url_components.query))
             if url_components.path.lower() == '/watch':
                 video_id = params.get('v', '')
                 if video_id:
                     plugin_uri = context.create_uri(['play'], {'video_id': video_id})
                     video_item = VideoItem('', plugin_uri)
                     self._video_id_dict[video_id] = video_item
-                    pass
 
                 playlist_id = params.get('list', '')
                 if playlist_id:
                     if self._flatten:
                         self._playlist_ids.append(playlist_id)
-                        pass
                     else:
                         playlist_item = DirectoryItem('', context.create_uri(['playlist', playlist_id]))
                         playlist_item.set_fanart(provider.get_fanart(context))
                         self._playlist_id_dict[playlist_id] = playlist_item
-                        pass
-                    pass
-                pass
             elif url_components.path.lower() == '/playlist':
                 playlist_id = params.get('list', '')
                 if playlist_id:
                     if self._flatten:
                         self._playlist_ids.append(playlist_id)
-                        pass
                     else:
                         playlist_item = DirectoryItem('', context.create_uri(['playlist', playlist_id]))
                         playlist_item.set_fanart(provider.get_fanart(context))
                         self._playlist_id_dict[playlist_id] = playlist_item
-                        pass
-                    pass
-                pass
             elif self.RE_CHANNEL_ID.match(url_components.path):
                 re_match = self.RE_CHANNEL_ID.match(url_components.path)
                 channel_id = re_match.group('channel_id')
                 if self._flatten:
                     self._channel_ids.append(channel_id)
-                    pass
                 else:
                     channel_item = DirectoryItem('', context.create_uri(['channel', channel_id]))
                     channel_item.set_fanart(provider.get_fanart(context))
                     self._channel_id_dict[channel_id] = channel_item
-                    pass
-                pass
             else:
                 context.log_debug('Unknown path "%s"' % url_components.path)
-                pass
-            pass
-        pass
 
     def add_urls(self, urls, provider, context):
         for url in urls:
             self.add_url(url, provider, context)
-            pass
-        pass
 
     def get_items(self, provider, context):
         result = []
@@ -98,7 +81,6 @@ class UrlToItemConverter(object):
                                           context.create_resource_path('media', 'playlist.png'))
             channels_item.set_fanart(provider.get_fanart(context))
             result.append(channels_item)
-            pass
 
         if self._flatten and len(self._playlist_ids) > 0:
             # remove duplicates
@@ -110,15 +92,12 @@ class UrlToItemConverter(object):
                                            context.create_resource_path('media', 'playlist.png'))
             playlists_item.set_fanart(provider.get_fanart(context))
             result.append(playlists_item)
-            pass
 
         if not self._flatten:
             result.extend(self.get_channel_items(provider, context))
-            pass
 
         if not self._flatten:
             result.extend(self.get_playlist_items(provider, context))
-            pass
 
         # add videos
         result.extend(self.get_video_items(provider, context))
@@ -135,9 +114,6 @@ class UrlToItemConverter(object):
                 video_item = self._video_id_dict[key]
                 if video_item.get_title():
                     self._video_items.append(video_item)
-                    pass
-                pass
-            pass
 
         return self._video_items
 
@@ -151,9 +127,6 @@ class UrlToItemConverter(object):
                 playlist_item = self._playlist_id_dict[key]
                 if playlist_item.get_name():
                     self._playlist_items.append(playlist_item)
-                    pass
-                pass
-            pass
 
         return self._playlist_items
 
@@ -166,10 +139,5 @@ class UrlToItemConverter(object):
                 channel_item = self._channel_id_dict[key]
                 if channel_item.get_name():
                     self._channel_items.append(channel_item)
-                    pass
-                pass
-            pass
 
         return self._channel_items
-
-    pass

@@ -1,6 +1,6 @@
+from six.moves import urllib
+
 import sys
-import urllib
-import urlparse
 import weakref
 import datetime
 import json
@@ -26,8 +26,7 @@ class XbmcContext(AbstractContext):
         if plugin_id:
             self._addon = xbmcaddon.Addon(id=plugin_id)
         else:
-            self._addon = xbmcaddon.Addon()
-            pass
+            self._addon = xbmcaddon.Addon(id='plugin.video.youtube')
 
         self._system_version = None
 
@@ -39,8 +38,8 @@ class XbmcContext(AbstractContext):
         # first the path of the uri
         if override:
             self._uri = sys.argv[0]
-            comps = urlparse.urlparse(self._uri)
-            self._path = urllib.unquote(comps.path).decode('utf-8')
+            comps = urllib.parse.urlparse(self._uri)
+            self._path = urllib.parse.unquote(comps.path)
 
             # after that try to get the params
             if len(sys.argv) > 2:
@@ -49,13 +48,10 @@ class XbmcContext(AbstractContext):
                     self._uri = self._uri + '?' + params
 
                     self._params = {}
-                    params = dict(urlparse.parse_qsl(params))
+                    params = dict(urllib.parse.parse_qsl(params))
                     for _param in params:
                         item = params[_param]
-                        self._params[_param] = item.decode('utf-8')
-                        pass
-                    pass
-                pass
+                        self._params[_param] = item
 
         self._ui = None
         self._video_playlist = None
@@ -74,19 +70,15 @@ class XbmcContext(AbstractContext):
         """
         self._data_path = xbmc.translatePath('special://profile/addon_data/%s' % self._plugin_id)
         if isinstance(self._data_path, str):
-            self._data_path = self._data_path.decode('utf-8')
-            pass
+            self._data_path = self._data_path
         if not xbmcvfs.exists(self._data_path):
             xbmcvfs.mkdir(self._data_path)
-            pass
-        pass
 
     def format_date_short(self, date_obj):
         date_format = xbmc.getRegion('dateshort')
         _date_obj = date_obj
         if isinstance(_date_obj, datetime.date):
             _date_obj = datetime.datetime(_date_obj.year, _date_obj.month, _date_obj.day)
-            pass
 
         return _date_obj.strftime(date_format)
 
@@ -95,7 +87,6 @@ class XbmcContext(AbstractContext):
         _time_obj = time_obj
         if isinstance(_time_obj, datetime.time):
             _time_obj = datetime.time(_time_obj.hour, _time_obj.minute, _time_obj.second)
-            pass
 
         return _time_obj.strftime(time_format)
 
@@ -117,44 +108,37 @@ class XbmcContext(AbstractContext):
         except Exception, ex:
             self.log_error('Failed to get system language (%s)', ex.__str__())
             return 'en-US'
-        pass
         """
 
     def get_system_version(self):
         if not self._system_version:
             self._system_version = XbmcSystemVersion(version='', releasename='', appname='')
-            pass
 
         return self._system_version
 
     def get_video_playlist(self):
         if not self._video_playlist:
             self._video_playlist = XbmcPlaylist('video', weakref.proxy(self))
-            pass
         return self._video_playlist
 
     def get_audio_playlist(self):
         if not self._audio_playlist:
             self._audio_playlist = XbmcPlaylist('audio', weakref.proxy(self))
-            pass
         return self._audio_playlist
 
     def get_video_player(self):
         if not self._video_player:
             self._video_player = XbmcPlayer('video', weakref.proxy(self))
-            pass
         return self._video_player
 
     def get_audio_player(self):
         if not self._audio_player:
             self._audio_player = XbmcPlayer('audio', weakref.proxy(self))
-            pass
         return self._audio_player
 
     def get_ui(self):
         if not self._ui:
             self._ui = XbmcContextUI(self._addon, weakref.proxy(self))
-            pass
         return self._ui
 
     def get_handle(self):
@@ -180,8 +164,6 @@ class XbmcContext(AbstractContext):
                 result = xbmc.getLocalizedString(text_id)
                 if result is not None and result:
                     return utils.to_unicode(result)
-                pass
-            pass
 
         result = self._addon.getLocalizedString(int(text_id))
         if result is not None and result:
@@ -192,22 +174,17 @@ class XbmcContext(AbstractContext):
     def set_content_type(self, content_type):
         self.log_debug('Setting content-type: "%s" for "%s"' % (content_type, self.get_path()))
         xbmcplugin.setContent(self._plugin_handle, content_type)
-        pass
 
     def add_sort_method(self, *sort_methods):
         for sort_method in sort_methods:
             xbmcplugin.addSortMethod(self._plugin_handle, sort_method)
-            pass
-        pass
 
     def clone(self, new_path=None, new_params=None):
         if not new_path:
             new_path = self.get_path()
-            pass
 
         if not new_params:
             new_params = self.get_params()
-            pass
 
         new_context = XbmcContext(path=new_path, params=new_params, plugin_name=self._plugin_name,
                                   plugin_id=self._plugin_id, override=False)
@@ -224,11 +201,9 @@ class XbmcContext(AbstractContext):
 
     def execute(self, command):
         xbmc.executebuiltin(command)
-        pass
 
     def sleep(self, milli_seconds):
         xbmc.sleep(milli_seconds)
-        pass
 
     def addon_enabled(self, addon_id):
         rpc_request = json.dumps({"jsonrpc": "2.0",
@@ -263,3 +238,55 @@ class XbmcContext(AbstractContext):
             error = 'Requested |%s| received error |%s| and code: |%s|' % (rpc_request, message, code)
             xbmc.log(error, xbmc.LOGDEBUG)
             return False
+
+    def send_notification(self, method, data):
+        data = json.dumps(data)
+        self.log_debug('send_notification: |%s| -> |%s|' % (method, data))
+        data = '\\"[\\"%s\\"]\\"' % urllib.parse.quote(data)
+        self.execute('NotifyAll(plugin.video.youtube,%s,%s)' % (method, data))
+
+    def use_inputstream_adaptive(self):
+        addon_enabled = self.addon_enabled('inputstream.adaptive')
+        if self._settings.use_dash() and not addon_enabled:
+            if self._ui.on_yes_no_input(self.get_name(), self.localize(30579)):
+                use_dash = self.set_addon_enabled('inputstream.adaptive')
+            else:
+                use_dash = False
+        elif self._settings.use_dash() and addon_enabled:
+            use_dash = True
+        else:
+            use_dash = False
+        return use_dash
+
+    def inputstream_adaptive_capabilities(self, capability=None):
+        # return a list inputstream.adaptive capabilities, if capability set return version required
+
+        use_dash = self.use_inputstream_adaptive()
+        if not use_dash and capability is not None:
+            return None
+        if not use_dash and capability is None:
+            return []
+
+        if capability is None:
+            try:
+                inputstream_version = xbmcaddon.Addon('inputstream.adaptive').getAddonInfo('version')
+            except RuntimeError:
+                return []
+
+            capabilities = []
+            ia_loose_version = utils.loose_version(inputstream_version)
+            if ia_loose_version >= utils.loose_version('2.0.12'):
+                capabilities.append('live')
+            if ia_loose_version >= utils.loose_version('2.2.12'):
+                capabilities.append('drm')
+            if ia_loose_version >= utils.loose_version('2.2.0'):
+                capabilities.append('webm')
+            return capabilities
+        elif capability == 'live':
+            return '2.0.12'
+        elif capability == 'drm':
+            return '2.2.12'
+        elif capability == 'webm':
+            return '2.2.0'
+        else:
+            return None

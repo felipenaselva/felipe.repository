@@ -1,27 +1,68 @@
 __author__ = 'bromix'
 
+from datetime import datetime
+import time
+
 from youtube_plugin.kodion.impl import Context
-from youtube_plugin.kodion.constants import setting
+from youtube_plugin.kodion.utils import YouTubeMonitor, YouTubePlayer
 
-if __name__ == '__main__':
-    context = Context(plugin_id='plugin.video.youtube')
+context = Context(plugin_id='plugin.video.youtube')
 
-    context.log_debug('YouTube settings startup initialization...')
-    version = context.get_system_version().get_version()
-    application = context.get_system_version().get_app_name()
-    settings = context.get_settings()
+context.log_debug('YouTube settings startup initialization...')
+version = context.get_system_version().get_version()
+settings = context.get_settings()
 
-    mpd_addon = False
-    mpd_builtin = False
 
-    if version >= (17, 0):
-        mpd_addon = True
-    elif version >= (16, 5) and application == 'SPMC':
-        mpd_builtin = True
-    else:
-        settings.set_bool(setting.USE_DASH, False)
+def strptime(stamp, stamp_fmt):
+    import _strptime
+    try:
+        time.strptime('01 01 2012', '%d %m %Y')  # dummy call
+    except:
+        pass
+    return time.strptime(stamp, stamp_fmt)
 
-    settings.set_bool(setting.DASH_SUPPORT_BUILTIN, mpd_builtin)
-    settings.set_bool(setting.DASH_SUPPORT_ADDON, mpd_addon)
-    context.log_notice('Startup: detected %s, setting DASH_SUPPORT_BUILTIN = %s, DASH_SUPPORT_ADDON = %s' %
-        (context.get_system_version(), mpd_builtin, mpd_addon))
+
+def get_stamp_diff(current_stamp):
+    stamp_format = '%Y-%m-%d %H:%M:%S.%f'
+    current_datetime = datetime.now()
+    if not current_stamp: return 86400  # 24 hrs
+    try:
+        stamp_datetime = datetime(*(strptime(current_stamp, stamp_format)[0:6]))
+    except ValueError:  # current_stamp has no microseconds
+        stamp_format = '%Y-%m-%d %H:%M:%S'
+        stamp_datetime = datetime(*(strptime(current_stamp, stamp_format)[0:6]))
+
+    time_delta = current_datetime - stamp_datetime
+    total_seconds = 0
+    if time_delta:
+        total_seconds = ((time_delta.seconds + time_delta.days * 24 * 3600) * 10 ** 6) // (10 ** 6)
+    return total_seconds
+
+
+sleep_time = 10
+ping_delay_time = 60
+ping_timestamp = None
+first_run = True
+
+player = YouTubePlayer(context=context)
+monitor = YouTubeMonitor()
+
+monitor.remove_temp_dir()
+
+while not monitor.abortRequested():
+
+    ping_diff = get_stamp_diff(ping_timestamp)
+
+    if (ping_timestamp is None) or (ping_diff >= ping_delay_time):
+        ping_timestamp = str(datetime.now())
+
+        if monitor.httpd and not monitor.ping_httpd():
+            monitor.restart_httpd()
+
+    if first_run:
+        first_run = False
+
+    if monitor.waitForAbort(sleep_time):
+        if monitor.httpd:
+            monitor.shutdown_httpd()
+        break

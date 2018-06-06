@@ -1,5 +1,7 @@
 __author__ = 'bromix'
 
+from six import string_types
+
 import xbmc
 import xbmcgui
 
@@ -18,7 +20,6 @@ class XbmcContextUI(AbstractContextUI):
 
         self._context = context
         self._view_mode = None
-        pass
 
     def create_progress_dialog(self, heading, text=None, background=False):
         if background and self._context.get_system_version().get_version() > (12, 3):
@@ -27,12 +28,10 @@ class XbmcContextUI(AbstractContextUI):
         return XbmcProgressDialog(heading, text)
 
     def set_view_mode(self, view_mode):
-        if isinstance(view_mode, basestring):
+        if isinstance(view_mode, string_types):
             view_mode = self._context.get_settings().get_int(constants.setting.VIEW_X % view_mode, 50)
-            pass
 
         self._view_mode = view_mode
-        pass
 
     def get_view_mode(self):
         if self._view_mode is not None:
@@ -53,7 +52,6 @@ class XbmcContextUI(AbstractContextUI):
                 return True, text
             else:
                 return False, u''
-            pass
 
         # Starting with Gotham (13.X > ...)
         dialog = xbmcgui.Dialog()
@@ -72,20 +70,20 @@ class XbmcContextUI(AbstractContextUI):
 
         return False, None
 
-    def on_yes_no_input(self, title, text):
+    def on_yes_no_input(self, title, text, nolabel='', yeslabel=''):
         dialog = xbmcgui.Dialog()
-        return dialog.yesno(title, text)
+        return dialog.yesno(title, text, nolabel=nolabel, yeslabel=yeslabel)
 
     def on_ok(self, title, text):
         dialog = xbmcgui.Dialog()
         return dialog.ok(title, text)
 
     def on_remove_content(self, content_name):
-        text = self._context.localize(constants.localize.REMOVE_CONTENT) % content_name
+        text = self._context.localize(constants.localize.REMOVE_CONTENT) % utils.to_unicode(content_name)
         return self.on_yes_no_input(self._context.localize(constants.localize.CONFIRM_REMOVE), text)
 
     def on_delete_content(self, content_name):
-        text = self._context.localize(constants.localize.DELETE_CONTENT) % content_name
+        text = self._context.localize(constants.localize.DELETE_CONTENT) % utils.to_unicode(content_name)
         return self.on_yes_no_input(self._context.localize(constants.localize.CONFIRM_DELETE), text)
 
     def on_select(self, title, items=[]):
@@ -96,14 +94,11 @@ class XbmcContextUI(AbstractContextUI):
             if isinstance(item, tuple):
                 _dict[i] = item[1]
                 _items.append(item[0])
-                pass
             else:
                 _dict[i] = i
                 _items.append(item)
-                pass
 
             i += 1
-            pass
 
         dialog = xbmcgui.Dialog()
         result = dialog.select(title, _items)
@@ -113,29 +108,41 @@ class XbmcContextUI(AbstractContextUI):
         _header = header
         if not _header:
             _header = self._context.get_name()
-            pass
         _header = utils.to_utf8(_header)
 
         _image = image_uri
         if not _image:
             _image = self._context.get_icon()
-            pass
 
-        _message = utils.to_unicode(message)
-        _message = _message.replace(',', ' ')
-        _message = utils.to_utf8(_message)
-        _message = _message.replace('\n', ' ')
+        _message = utils.to_utf8(message)
+        try:
+            _message = _message.replace(',', ' ')
+            _message = _message.replace('\n', ' ')
+        except TypeError:
+            _message = _message.replace(b',', b' ')
+            _message = _message.replace(b'\n', b' ')
+            _message = utils.to_unicode(_message)
+            _header = utils.to_unicode(_header)
 
-        xbmc.executebuiltin(
-            "Notification(%s, %s, %d, %s)" % (_header, _message, time_milliseconds, _image))
-        pass
+        xbmc.executebuiltin("Notification(%s, %s, %d, %s)" % (_header, _message, time_milliseconds, _image))
 
     def open_settings(self):
         self._xbmc_addon.openSettings()
-        pass
 
     def refresh_container(self):
         xbmc.executebuiltin("Container.Refresh")
-        pass
 
-    pass
+    @staticmethod
+    def set_home_window_property(property_id, value):
+        property_id = 'plugin.video.youtube-' + property_id
+        xbmcgui.Window(10000).setProperty(property_id, value)
+
+    @staticmethod
+    def get_home_window_property(property_id):
+        property_id = 'plugin.video.youtube-' + property_id
+        return xbmcgui.Window(10000).getProperty(property_id) or None
+
+    @staticmethod
+    def clear_home_window_property(property_id):
+        property_id = 'plugin.video.youtube-' + property_id
+        xbmcgui.Window(10000).clearProperty(property_id)

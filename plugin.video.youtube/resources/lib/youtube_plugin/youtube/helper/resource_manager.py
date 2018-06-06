@@ -11,11 +11,9 @@ class ResourceManager(object):
         self._video_data = {}
         self._playlist_data = {}
         self._enable_channel_fanart = context.get_settings().get_bool('youtube.channel.fanart.show', True)
-        pass
 
     def clear(self):
         self._context.get_function_cache().clear()
-        pass
 
     def _get_channel_data(self, channel_id):
         return self._channel_data.get(channel_id, {})
@@ -28,77 +26,68 @@ class ResourceManager(object):
 
     def _update_channels(self, channel_ids):
         result = {}
+        json_data = {}
 
         channel_ids_to_update = []
         function_cache = self._context.get_function_cache()
         for channel_id in channel_ids:
-            channel_data = function_cache.get_cached_only(self._get_channel_data, unicode(channel_id))
+            channel_data = function_cache.get_cached_only(self._get_channel_data, str(channel_id))
             if channel_data is None:
                 self._context.log_debug("No data for channel '%s' cached" % channel_id)
                 channel_ids_to_update.append(channel_id)
-                pass
             else:
                 self._context.log_debug("Found cached data for channel '%s'" % channel_id)
                 result[channel_id] = channel_data
-                pass
-            pass
 
         if len(channel_ids_to_update) > 0:
-            json_data = self._context.get_function_cache().get(FunctionCache.ONE_WEEK, self._youtube_client.get_channels,
-                                                               channel_ids_to_update)
+            json_data = function_cache.get(FunctionCache.ONE_WEEK, self._youtube_client.get_channels, channel_ids_to_update)
             yt_items = json_data.get('items', [])
             for yt_item in yt_items:
-                channel_id = unicode(yt_item['id'])
+                channel_id = str(yt_item['id'])
                 self._channel_data[channel_id] = yt_item
 
                 # this will cache the channel data
-                result[channel_id] = self._context.get_function_cache().get(FunctionCache.ONE_WEEK,
-                                                                            self._get_channel_data, channel_id)
-                pass
-            pass
+                result[channel_id] = function_cache.get(FunctionCache.ONE_WEEK, self._get_channel_data, channel_id)
+
+        if self.handle_error(json_data):
+            return result
 
         return result
 
     def _update_videos(self, video_ids):
         result = {}
+        json_data = {}
 
         video_ids_to_update = []
         function_cache = self._context.get_function_cache()
         for video_id in video_ids:
-            video_data = function_cache.get_cached_only(self._get_video_data, unicode(video_id))
+            video_data = function_cache.get_cached_only(self._get_video_data, str(video_id))
             if video_data is None:
                 self._context.log_debug("No data for video '%s' cached" % video_id)
                 video_ids_to_update.append(video_id)
-                pass
             else:
                 self._context.log_debug("Found cached data for video '%s'" % video_id)
                 result[video_id] = video_data
-                pass
-            pass
 
         if len(video_ids_to_update) > 0:
-            json_data = self._context.get_function_cache().get(FunctionCache.ONE_MONTH, self._youtube_client.get_videos,
-                                                               video_ids_to_update)
+            json_data = function_cache.get(FunctionCache.ONE_MONTH, self._youtube_client.get_videos, video_ids_to_update)
             yt_items = json_data.get('items', [])
             for yt_item in yt_items:
-                video_id = unicode(yt_item['id'])
+                video_id = str(yt_item['id'])
                 self._video_data[video_id] = yt_item
 
                 # this will cache the channel data
-                result[video_id] = self._context.get_function_cache().get(FunctionCache.ONE_MONTH,
-                                                                          self._get_video_data, video_id)
-                pass
-            pass
+                result[video_id] = function_cache.get(FunctionCache.ONE_MONTH, self._get_video_data, video_id)
 
-        return result
+        if self.handle_error(json_data):
+            return result
 
     def _make_list_of_50(self, list_of_ids):
         list_of_50 = []
         pos = 0
         while pos < len(list_of_ids):
-            list_of_50.append(list_of_ids[pos:pos+50])
+            list_of_50.append(list_of_ids[pos:pos + 50])
             pos += 50
-            pass
         return list_of_50
 
     def get_videos(self, video_ids):
@@ -107,42 +96,35 @@ class ResourceManager(object):
         result = {}
         for list_of_50 in list_of_50s:
             result.update(self._update_videos(list_of_50))
-            pass
         return result
 
     def _update_playlists(self, playlists_ids):
         result = {}
+        json_data = {}
 
         playlist_ids_to_update = []
         function_cache = self._context.get_function_cache()
         for playlist_id in playlists_ids:
-            playlist_data = function_cache.get_cached_only(self._get_playlist_data, unicode(playlist_id))
+            playlist_data = function_cache.get_cached_only(self._get_playlist_data, str(playlist_id))
             if playlist_data is None:
                 self._context.log_debug("No data for playlist '%s' cached" % playlist_id)
                 playlist_ids_to_update.append(playlist_id)
-                pass
             else:
                 self._context.log_debug("Found cached data for playlist '%s'" % playlist_id)
                 result[playlist_id] = playlist_data
-                pass
-            pass
 
         if len(playlist_ids_to_update) > 0:
-            json_data = self._context.get_function_cache().get(FunctionCache.ONE_DAY,
-                                                               self._youtube_client.get_playlists,
-                                                               playlist_ids_to_update)
+            json_data = function_cache.get(FunctionCache.ONE_DAY, self._youtube_client.get_playlists, playlist_ids_to_update)
             yt_items = json_data.get('items', [])
             for yt_item in yt_items:
-                playlist_id = unicode(yt_item['id'])
+                playlist_id = str(yt_item['id'])
                 self._playlist_data[playlist_id] = yt_item
 
                 # this will cache the channel data
-                result[playlist_id] = self._context.get_function_cache().get(FunctionCache.ONE_DAY,
-                                                                             self._get_playlist_data, playlist_id)
-                pass
-            pass
+                result[playlist_id] = function_cache.get(FunctionCache.ONE_DAY, self._get_playlist_data, playlist_id)
 
-        return result
+        if self.handle_error(json_data):
+            return result
 
     def get_playlists(self, playlists_ids):
         list_of_50s = self._make_list_of_50(playlists_ids)
@@ -150,7 +132,6 @@ class ResourceManager(object):
         result = {}
         for list_of_50 in list_of_50s:
             result.update(self._update_playlists(list_of_50))
-            pass
         return result
 
     def get_related_playlists(self, channel_id):
@@ -160,12 +141,10 @@ class ResourceManager(object):
         item = None
         if channel_id != 'mine':
             item = result.get(channel_id, {})
-            pass
         else:
             for key in result:
                 item = result[key]
                 break
-            pass
 
         if item is None:
             return {}
@@ -178,7 +157,6 @@ class ResourceManager(object):
         result = {}
         for list_of_50 in list_of_50s:
             result.update(self._update_channels(list_of_50))
-            pass
         return result
 
     def get_fanarts(self, channel_ids):
@@ -188,7 +166,7 @@ class ResourceManager(object):
         result = self._update_channels(channel_ids)
 
         # transform
-        for key in result.keys():
+        for key in list(result.keys()):
             item = result[key]
 
             # set an empty url
@@ -200,9 +178,20 @@ class ResourceManager(object):
                 if image:
                     result[key] = image
                     break
-                pass
-            pass
 
         return result
 
-    pass
+    def handle_error(self, json_data):
+        context = self._context
+        if json_data and 'error' in json_data:
+            message = json_data['error'].get('message', '')
+            reason = json_data['error']['errors'][0].get('reason', '')
+            title = '%s: %s' % (context.get_name(), reason)
+            message_timeout = 5000
+            if reason == 'quotaExceeded' or reason == 'dailyLimitExceeded':
+                message_timeout = 7000
+            context.get_ui().show_notification(message, title, time_milliseconds=message_timeout)
+            error_message = 'Error reason: |%s| with message: |%s|' % (reason, message)
+            raise Exception(error_message)
+
+        return True

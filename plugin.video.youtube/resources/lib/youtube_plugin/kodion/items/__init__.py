@@ -1,8 +1,8 @@
-__all__ = ['BaseItem', 'AudioItem', 'DirectoryItem', 'VideoItem', 'ImageItem', 'WatchLaterItem', 'FavoritesItem',
+__all__ = ['BaseItem', 'AudioItem', 'DirectoryItem', 'VideoItem', 'AudioVideoItem', 'ImageItem', 'WatchLaterItem', 'FavoritesItem',
            'SearchItem', 'NewSearchItem', 'SearchHistoryItem', 'NextPageItem', 'UriItem',
            'from_json', 'to_json', 'to_jsons']
 
-from utils import to_json, from_json, to_jsons
+from .utils import to_json, from_json, to_jsons
 
 from .uri_item import UriItem
 from .base_item import BaseItem
@@ -16,3 +16,4 @@ from .search_history_item import SearchHistoryItem
 from .next_page_item import NextPageItem
 from .video_item import VideoItem
 from .image_item import ImageItem
+from .audiovideo_item import AudioVideoItem
