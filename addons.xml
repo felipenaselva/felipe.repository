@@ -226,55 +226,6 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.Anima.PT"
-       name="Anima.PT"
-       version="1.0.1"
-       provider-name="AnimaÃ§Ã£o PT">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.beautifulsoup" version="3.2.1"/>
-	<import addon="script.module.simple.downloader" version="0.9.4"/>
-	<import addon="script.module.beautifulsoup4"/>
-	<import addon="script.module.requests"/>
-	<import addon="script.module.httplib2"/>
-    <import addon="script.module.simplejson" version="3.3.0"/>
-    <import addon="script.module.urlresolver"  version="2.1.2"/>
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-    <import addon="script.module.metahandler" version="2.5.1"/>
-    <import addon="plugin.video.youtube" optional="true" />
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">Desenhos animados em PortuguÃªs</summary>
-    <description lang="en">Criado para vocÃªs! Obrigado por estarem nas nossas vidas.</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.animesonlineq" name="ANIMESONLINEQ" version="0.0.1" provider-name="Bruno holanda">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-		<import addon="script.module.urlresolver" version="2.10.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="addon.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en"></summary>
-    <description lang="en"></description>
-    <disclaimer lang="en"></disclaimer>
-    <language></language>
-    <platform>all</platform>
-    <license></license>
-    <forum></forum>
-    <website></website>
-    <email></email>
-    <source></source>
-  </extension>
-</addon>
-
 <addon id="plugin.video.BrazucaPlay"
        name="BRAZUCA PLAY"
        version="5.2"
@@ -324,66 +275,6 @@
     <description lang="en">FILMES DUBLADOS EM PT-BR</description>
     <platform>all</platform>
   </extension>
-</addon>
-
-<addon id="plugin.video.brplay" version="0.0.10" name="BR play" provider-name="brplayer">
-	<requires>
-		<import addon="xbmc.python" version="2.1.0" />
-		<import addon="script.module.beautifulsoup" version="3.2.1"/>
-		<import addon="script.module.requests" version="0.13.2"/>
-		<import addon="script.module.buggalo" version="1.1.6"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Globo Play, Globosat Play and Premium Channels on Kodi</summary>
-		<description>Brazilian video streaming services for subscribers</description>
-		<platform>all</platform>
-		<license>GPL3</license>
-		<source>https://github.com/olavopeixoto/plugin.video.brplay</source>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.jpg</fanart>
-			<screenshot>resources/screenshots/screenshot-01.jpg</screenshot>
-			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
-			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
-		</assets>
-		<news>0.0.9
-- Experimental Adaptive HLS playback (live streaming)
-        </news>
-	</extension>
-</addon>
-
-<addon id="plugin.video.extreme.com" version="1.1.0" name="Extreme Sports" provider-name="lambda">
-	<requires>
-		<import addon="xbmc.python" version="2.24.0" />
-		<import addon="script.module.lamlib" version="1.0.0" />
-		<import addon="plugin.video.youtube" version="5.2.1" optional="true" />
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">Extreme Sports addon for Kodi</summary>
-		<description lang="en">Extreme Sports Channel: The Home of Action Sports</description>
-		<disclaimer lang="en">This addon is not published nor endorsed by extreme.com</disclaimer>
-		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
-		<source>https://github.com/lambda81/plugin.video.extreme.com</source>
-		<website>http://extreme.com/</website>
-		<news>- Tweaked sections[CR]- Tweaked images[CR]- Added add-on screenshots</news>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.jpg</fanart>
-			<screenshot>resources/screenshots/screenshot-01.jpg</screenshot>
-			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
-			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
-		</assets>
-		<platform>all</platform>
-		<language></language>
-		<forum></forum>
-		<email></email>
-	</extension>
 </addon>
 
 <addon id="plugin.video.f4mTester" version="2.7.1" name="f4mTester" provider-name="Shani">
@@ -467,22 +358,6 @@
   <extension point="xbmc.addon.metadata">
     <summary>[COLOR white][B]FLIXPLAY ADDON DE FILMES,SERIES,DESENHOS,ANIMES E MUITO MAIS TUDDO ISSO EM HD PARA SUA DIVERSAO[/B][/COLOR]</summary>
     <description lang="pt">[COLOR green][B]NAO HOSPEDAMOS NENHUM CONTEUDO EXPOSTO TODOS OS CONTEUDOS SAO DE RESPONSABILIDADE DE QUEM HOSPEDA NOS SITES[/B][/COLOR]</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.footballreplays" name="Football Replays" version="1.4.5" provider-name="catchup4kodi">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.urlresolver" version="0.0.1"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">Football Replays</summary>
-    <description lang="en">Football Replays</description>
-    <disclaimer lang="en">Watch football replays from around the globe</disclaimer>
     <platform>all</platform>
   </extension>
 </addon>
@@ -723,26 +598,6 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.motorreplays" name="[B][COLORorange]Motor Replays[/COLOR][/B]" version="2.3" provider-name="@Aleighty80">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.simplejson" version="3.3.0"/>
-    <import addon="script.module.urlresolver"  version="2.1.2"/>
-    <import addon="script.module.liveresolver" version="0.1.43"/>
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-    <import addon="script.module.metahandler" version="2.5.1"/>
-    <import addon="plugin.video.youtube" optional="true" />
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">[B][COLOR orange]Motor Replays[/COLOR][/B]</summary>
-    <description lang="en">The Official Home of MOTOR REPLAYS by @Aleighty80, If you like Motorsports of any typr this is the addon for you</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
 <addon id="plugin.video.mrpiracy" name="MrPiracy" provider-name="MrPiracy" version="0.7.8">
  <requires>
   <import addon="xbmc.python" version="2.14.0"/>
@@ -856,26 +711,6 @@ This is a Non-profit resource, organized solely for educational purposes which i
   </extension>
 </addon>
 
-<addon id="plugin.video.pornhub" name="   [COLOR aqua]Porn Hub[/COLOR]" version="1.0.0" provider-name="Merlin Project">
-    <requires>
-    </requires>
-    <extension point="xbmc.python.pluginsource"
-               library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>The Best Porn From The Best Site!</summary>
-        <description>Watch Daily Popular Videos Or Brows A Huge Number Of Categories!</description>
-		<disclaimer>[COLOR red][B]XXX - OVER 18's ONLY![/B][/COLOR]</disclaimer>
-		<platform>all</platform>
-		<license>http://www.gnu.org/licenses/</license>
-		<forum></forum>
-		<website></website>
-		<email></email>
-		<source></source>
-    </extension>
-</addon>
-
 <addon id="plugin.video.quasar" name="Quasar" version="0.9.50" provider-name="scakemyer">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
@@ -955,26 +790,6 @@ For updates check the readme.
   </extension>
 </addon>
 
-<addon id="plugin.video.sportsextreme" version="1.0.1" name="[B][COLOR red]SPORTS [COLOR yellow]EXTREME[/B][/COLOR]" provider-name="FOLIVER FOR KODI">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.addon.common" version="2.0.0"/>
-    <import addon="plugin.video.youtube" version="5.0.0"/>
-  </requires>
-
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">Xgames</summary>
-    <description lang="en">Esse addon contem os melhores e mais famos canais de esportes radicais, com centenas de videos e playlists !!!</description>
-    <platform>all</platform>
-    <forum></forum>
-    <website></website>
-  </extension>
-</addon>
-
 <addon id="plugin.video.streamhub" name="[COLOR ffff0000][B]StreamHub[/B][/COLOR]" version="3.1.8" provider-name="sClarke">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
@@ -1044,58 +859,6 @@ For updates check the readme.
 		<disclaimer></disclaimer>
 		<platform>all</platform>
 	</extension>
-</addon>
-
-<addon id="plugin.video.jico"
-       name="TÃºnel do tempo"
-       version="1.0"
-       provider-name="jico">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.t0mm0.common" version="2.0.0"/>
-    <import addon="script.module.beautifulsoup" version="3.2.1"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.beautifulsoup4" />
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.requests" />
-    <import addon="script.module.httplib2" />
-    <import addon="script.module.youtube.dl" optional="true"/>
-    <import addon="plugin.video.youtube" version="3.0.0"/>
-    <import addon="script.module.urlresolver" optional="true"/>
-    <import addon="script.module.simplejson" />
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-    <import addon="script.module.metahandler" version="2.5.1"/>
-
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">TÃºnel do Tempo</summary>
-    <description lang="en">O addon TÃºnel do Tempo Ã© voltado a SÃ©ries e Desenhos Antigos</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.UFC"
-	name="UFC"
-	version="1.0.8"
-	provider-name="tvaddons.ag">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.addon.common" version="2.0.0"/>
-    <import addon="plugin.video.youtube" version="5.0.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">UFC</summary>
-    <description lang="en">Watch all Live Pay-Per-Views on YOUTUBE in Standard or High Definition.</description>
-    <platform>all</platform>
-    <forum>http://forums.tvaddons.ag/forums/113-TVADDONS-AG-ADDON-REPOSITORY</forum>
-    <website>http://www.tvaddons.ag/</website>
-  </extension>
 </addon>
 
 
@@ -1230,90 +993,6 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
     <summary lang="en">Add-On Watch TV Brasil </summary>
     <description lang="en">Com o Add-On Watch TV Brasil vocÃª assisti Filmes, SÃ©ries, Canais Ao Vivo, ouve RÃ¡dios e muito mais.</description>
     <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.xxx-o-dus"
-	     name="XXX-O-DUS"
-	     version="3.00.013"
-	     provider-name="Xibalba">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.xibalba"/>
-    <import addon="script.xxxodus.artwork"/>
-    <import addon="script.xxxodus.scrapers"/>
-    <import addon="script.module.urlresolver"/>
-    <import addon="script.module.urlresolver.xxx"/>
-    <import addon="script.module.pyxbmct"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.service" library="service.py" start="startup">
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <summary lang="en">[B]Massive Credit to @_PYDEV_ KingKong for the pyxbmct work to provide a stunning interface to view the dialogs in this addon and the GitHub issues! Also A huge credit to jokstergfx for the icons and fanarts in this addon and many others! Thank you![/B]</summary>
-    <description lang="en">[COLOR white]XXX-O-DUS scrapes many websites to bring you hundreds of thousands of videos. Features of the addon include, history monitoring, favourites, downloadable videos, parental controls and more![/COLOR]
-
-[COLOR white]Websites Include: Porn.com, PornHD.com, Chaturbate.com, RedTube.com, Xhamster.com, YouPorn.com, PornFun.com, Motherless.com,Porn00.org, Spankbang.com, Virtualpornstars.com, Watchxxxfree.com, Perfectgirls.net, XNXX.com and many more.[/COLOR]</description>
-    <disclaimer lang="en">The pages of this addon are designed for ADULTS only and may include pictures and materials that some viewers may find offensive. If you are under the age of 18, if such material offends you or if it is illegal to view such material in your community please exit the addon.</disclaimer>
-    <language></language>
-    <platform>all</platform>
-    <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
-    <website>https://github.com/xibalba10/</website>
-    <forum>https://github.com/xibalba10/</forum>
-    <assets>
-        <icon>icon.png</icon>
-        <fanart>fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
-
-<addon id="plugin.video.you.jizz"
-       name="YouJizz.com"
-       version="1.0.16"
-       provider-name="xbmc-adult">
-    <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource"
-               library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <license>GPL 2.0</license>
-        <summary lang="en">YouJizz.com</summary>
-        <description lang="en">****ADULT CONTENT***** Watch erotic and sexy videos from YouJizz.com</description>
-    </extension>
-</addon>
-
-<addon id="plugin.video.youporn"
-	     name="YouPorn"
-	     version="3.00.001"
-	     provider-name="Echo Coder">
-  <requires>
-	<import addon="xbmc.python" version="2.1.0" />
-    <import addon="script.module.urlresolver" />
-    <import addon="script.module.urlresolver.xxx"/>
-  </requires>
-  <extension point="xbmc.python.script" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <summary lang="en">OVER 18 ONLY - Support is available https://github.com/Colossal1/plugin.video.youporn/issues</summary>
-    <description lang="en">YouPorn Scraping by Echo Coder
-
-Skin and code for skin by Demonstratorz</description>
-    <disclaimer lang="en"></disclaimer>
-    <language></language>
-    <platform>all</platform>
-    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-    <forum>https://github.com/Colossal1/plugin.video.youporn</forum>
-    <website>https://github.com/Colossal1/plugin.video.youporn</website>
-    <email>echocoderxbmc@protonmail.com</email>
   </extension>
 </addon>
 
