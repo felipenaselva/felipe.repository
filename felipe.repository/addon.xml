@@ -8,10 +8,15 @@
 		<checksum>http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml.md5</checksum>
 		<datadir zip="true">http://raw.github.com/felipenaselva/felipe.repository/master/repo/</datadir>
 		<dir>
-        <info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
-        <checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
-        <datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
+            <info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
         </dir>
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/mrblamo/Mr-Blamo-Repo/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/mrblamo/Mr-Blamo-Repo/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/mrblamo/Mr-Blamo-Repo/master/</datadir>
+		</dir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Melhores addons reunidos em um so lugar.</summary>
