@@ -1,7 +1,0 @@
-[
-    {
-        "url": "http://pastebin.com/raw/QZyq7kPt", 
-        "image": "", 
-        "name": "Filmes do Youtube"
-    }
-]
