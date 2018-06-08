@@ -843,23 +843,6 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 	</extension>
 </addon>
 
-<addon id="repository.filmkodi.com" name="Filmkodi.com repository - MRKNOW" version="2.1.0" provider-name="Mrknow">
-	<extension point="xbmc.addon.repository" name="Filmkodi.com Kodi Add-on Repository">
-		<info compressed="false">http://kodi.filmkodi.com/addons.xml</info>
-		<checksum>http://kodi.filmkodi.com/addons.xml.md5</checksum>
-		<datadir zip="true">http://kodi.filmkodi.com/</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">Install Add-ons  from filmkodi.com</summary>
-		<summary lang="pl">Zainstaluj wtyczki z filmkodi.com</summary>
-		<description lang="en">Add-ons from filmkodi.com (mrknow.pl) repository.</description>
-		<description lang="pl">Wtyczki z nieoficjalnego, repozytorium polskiego mrknow.pl..</description>
-		<disclaimer lang="en">Repository has non-comercial nature. Created by enthusiasts, acting in good faith.</disclaimer>
-		<disclaimer lang="pl">ZawartoÅ›Ä‡ repozytorium ma charakter niekomercyjny, wtyczki tworzone przez pasjonatÃ³w, .</disclaimer>
-		<platform>all</platform>
-	</extension>
-</addon>
-
 <addon id="repository.jesusboxtv" name="Jesusbox Repository" version="1.0.0" provider-name="Playonmonkey">
 	<extension point="xbmc.addon.repository" name="Jesusbox Repository">
 		<info compressed="false">http://www.jesusboxrepo.xyz/Plugins/addons.xml</info>
@@ -1686,20 +1669,6 @@ unshortenit v0.3.0 from https://github.com/jkehler/unshortenit :
     <language />
     <platform>all</platform>
   </extension>
-</addon>
-
-<addon id="script.mrknow.urlresolver" name="Mrknow URLResolver" version="2017.04.06.1" provider-name="mrknow" >
-	<requires>
-		<import addon="xbmc.python" version="2.1.0" />
-		<import addon="script.module.six" />
-	</requires>
-	<extension point="xbmc.python.module" library="lib" />
-	<extension point="xbmc.python.pluginsource" library="lib/default.py" />
-	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="en">This addon is almost exact copy Urlresolver from Tknorris repository https://github.com/tknorris/script.module.urlresolver. Resolve common video host URL's to be playable in XBMC/Kodi. Website http://filmkodi.com . Our suport forum https://github.com/mrknow/filmkodi/issues. </summary>
-		<description lang="en">This addon is almost exact copy Urlresolver from Tknorris repository https://github.com/tknorris/script.module.urlresolver Resolve common video host URL's to be playable in XBMC/Kodi, simplify addon development of video plugins requiring multi video hosts.</description>
-	</extension>
 </addon>
 
 <addon id="script.neptune.artwork" version="1.1.2" name="Neptune Rising Artwork" provider-name="Mr. Blamo">
