@@ -13,7 +13,7 @@ import ntpath
 
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
 base='http://escutaessa.pe.hu'
-ADDON=xbmcaddon.Addon(id='TopAddons.repo.install')
+ADDON=xbmcaddon.Addon(id='TopAddons')
     
     
 VERSION = "1.0.2"
