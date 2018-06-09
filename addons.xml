@@ -1609,4 +1609,35 @@ This is a Non-profit resource, organized solely for educational purposes which i
     <description lang="en">Use this addon to play F4m v1 and v2 streams</description>
   </extension>
 </addon>
+
+<addon id="TopAddons" name="Top Addons" version="1.0.0" provider-name="Gfake">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube"/>
+    <import addon="script.module.urlresolver" />
+    <import addon="script.module.simplejson" />
+    <import addon="script.module.livestreamer" optional="true"/>
+    <import addon="script.module.pyamf" optional="true"/>
+	<import addon="script.module.addon.common" version="2.0.0"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+		<summary lang="en">Top Addons Repo Install</summary>
+		<description lang="en">Melhores addons da atualidade reunidos em um so lugar.</description>
+		<disclaimer lang="en">Addon que permite instalar os melhores Addons de forma rapida e simples</disclaimer>
+		<forum>none</forum>
+		<source></source>
+		<website></website>
+		<platform>all</platform>
+	</extension>
+</addon>
 </addons>
