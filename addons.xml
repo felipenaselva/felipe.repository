@@ -1630,7 +1630,23 @@ This is a Non-profit resource, organized solely for educational purposes which i
     <import addon="script.module.livestreamer" optional="true"/>
     <import addon="script.module.pyamf" optional="true"/>
 	<import addon="script.module.addon.common" version="2.0.0"/>
-
+	<import addon="script.module.futures" />
+	<import addon="script.module.idna" />
+	<import addon="script.module.metahandler" />
+	<import addon="script.module.myconnpy" />
+	<import addon="script.module.resolveurl" />
+	<import addon="script.module.schism.common" />
+	<import addon="script.module.six" />
+	<import addon="script.module.universalscrapers" />
+	<import addon="script.module.urllib3" />
+	<import addon="script.neptune.artwork" />
+	<import addon="script.neptune.metadata" />
+	<import addon="script.module.placenta" />
+	<import addon="script.placenta.artwork" />
+	<import addon="script.placenta.metadata" />
+	<import addon="script.common.plugin.cache" />
+	<import addon="script.module.parsedom" />
+	<import addon="script.module.t0mm0.common" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
