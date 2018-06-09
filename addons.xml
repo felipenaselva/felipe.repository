@@ -955,48 +955,6 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
   <extension library="lib" point="xbmc.python.module" />
 </addon>
 
-<addon id="script.ezmaintenance"
-       name="EZ Maintenance"
-       version="1.1.0"
-       provider-name="SchisM">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-  </requires>
- 	<extension point="xbmc.python.pluginsource" library="default.py">
-		<provides>video executable</provides>
-	</extension>
-  <extension point="xbmc.service" library="service.py" start="startup" />
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <summary>Maintenance</summary>
-    <description>Your one stop tool for clearing your device.</description>
-    <language></language>
-    <license></license>
-    <source></source>
-    <forum></forum>
-    <website></website>
-  </extension>
-</addon>
-
-<addon id="script.featherence.service" name="Featherence Service" version="0.3.74" provider-name="finalmakerr">
-  <requires>
-	<import addon="xbmc.json" version="6.0.0"/>
-	<import addon="xbmc.python" version="2.24.0"/>
-  </requires>
-  <extension point="xbmc.python.script" library="default.py"/>
-  <extension point="xbmc.service" library="service.py" start="startup"/>
-  <extension point="xbmc.addon.metadata">
-	<platform>all</platform>
-    <summary>Add-on for skins and video plugins to provide simple development</summary>
-    <description>Add-on features can be used on any addon (with the right touch). Check Featherence Be-Creative for more information!</description>
-    <disclaimer></disclaimer>
-	<email>finalmakerr@gmail.com</email>
-	<forum></forum>
-	<source>https://github.com/finalmakerr/featherence/tree/master/master/script.featherence.service</source>
-	<website>www.featherence.com</website>
-  </extension>
-</addon>
-
 <addon id="script.module.addon.common"
 	     name="Common addon methods"
 	     version="2.0.0"
