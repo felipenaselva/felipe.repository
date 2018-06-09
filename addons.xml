@@ -771,6 +771,8 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
         </extension>
     </addon>
 
+<addon id="repository.elementum" name="Elementum Repository" version="0.0.46" provider-name="elgatito"><requires></requires><extension point="xbmc.addon.repository" name="Elementum Repository"><info compressed="false">http://localhost:65220/repository/elgatito/plugin.video.elementum/addons.xml</info><checksum>http://localhost:65220/repository/elgatito/plugin.video.elementum/addons.xml.md5</checksum><datadir zip="true">http://localhost:65220/repository/elgatito/</datadir></extension><extension point="xbmc.addon.metadata"><platform>all</platform><summary lang="en">GitHub repository for Elementum updates</summary></extension></addon>
+
 <addon id="repository.featherence" name="Featherence repository" version="1.2.0" provider-name="finalmakerr">
 	<extension point="xbmc.addon.repository" name="Featherence repository">
 		<dir minversion="0.0.0">
