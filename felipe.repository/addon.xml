@@ -17,11 +17,6 @@
 		    <checksum>http://localhost:65220/repository/elgatito/plugin.video.elementum/addons.xml.md5</checksum>
 		    <datadir zip="true">http://localhost:65220/repository/elgatito/</datadir>
 		</dir>
-		<dir>
-		    <info compressed="false">http://localhost:65251/repository/scakemyer/plugin.video.quasar/addons.xml</info>
-		    <checksum>http://localhost:65251/repository/scakemyer/plugin.video.quasar/addons.xml.md5</checksum>
-		    <datadir zip="true">http://localhost:65251/repository/scakemyer/</datadir>
-		</dir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Melhores addons reunidos em um so lugar.</summary>
