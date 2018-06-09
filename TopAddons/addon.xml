@@ -31,6 +31,11 @@
 	<import addon="script.common.plugin.cache" />
 	<import addon="script.module.parsedom" />
 	<import addon="script.module.t0mm0.common" />
+	<import addon="script.module.certifi" />
+	<import addon="script.module.chardet" />
+	<import addon="script.module.parsedom" />
+	<import addon="script.module.xbmcswift2" />
+	<import addon="script.video.F4mProxy" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
