@@ -55,13 +55,13 @@ def wizard(name,url,description):
     print '======================================='
     extract.all(lib,addonfolder,dp)
     dialog = xbmcgui.Dialog()
-    dialog.ok("Baixado com Sucesso:)", 'Para continuar a Instalacao ira ser solicitado que desligue o Kodi', 'Se for uma Box precione [COLOR yellow]NAO[/COLOR] e instale Todos addons a cima e Desligue o aparelho ou puxe-o da tomada sem sair do kodi se vc nao tem task kill.','[COLOR yellow][B][Kodi 17+][/B][/COLOR]Ao Voltar vai Addons em Meus Addons ativa o addons instalados.')
+    dialog.ok("Baixado com Sucesso:)", 'Para concluir a Instalacao feche o Kodi', 'Se for uma Box instale Todos addons acima e Desligue o aparelho ou puxe-o da tomada sem sair do kodi.','Ao voltar ao Kodi va em -> Addon-> Meus Addons- e ative os addons instalados no passo anterior.')
     killxbmc()
         
       
         
 def killxbmc():
-    choice = xbmcgui.Dialog().yesno('Desligando o Kodi', 'Desligando o Kodi', 'Vc quer continuar ?', nolabel='Nao, Vou Instalar Mais Addons',yeslabel='Sim, Vou Desligar')
+    choice = xbmcgui.Dialog().yesno('Instalacao concluida', 'voce deseja', 'instalar mais addons?', nolabel='Sim',yeslabel='Fechar Kodi')
     if choice == 0:
         return
     elif choice == 1:
