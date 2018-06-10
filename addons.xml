@@ -13,6 +13,11 @@
             <checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
         </dir>
+		<dir>
+		    <info compressed="false">http://kodish.esy.es/kratos-repodata/addons.xml</info>
+		    <checksum>http://kodish.esy.es/kratos-repodata/addons.xml.md5</checksum>
+		    <datadir zip="true">http://kodish.esy.es/kratos-repodata/instal/</datadir>
+		</dir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Melhores addons reunidos em um so lugar.</summary>
