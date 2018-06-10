@@ -55,7 +55,7 @@ def wizard(name,url,description):
     print '======================================='
     extract.all(lib,addonfolder,dp)
     dialog = xbmcgui.Dialog()
-    dialog.ok("Baixado com Sucesso:)", 'Para concluir a instalacao feche o Kodi.', 'Em Box TV sera preciso retirar o aparelho da tomada ou usar o Task Kill sem sair do kodi. Em outros aparelhos com sistema Android use o Task Kill','Ao voltar ao Kodi va em -> Addon-> Meus Addons- e ative os addons instalados no passo anterior.')
+    dialog.ok("Baixado com Sucesso:)", 'Para concluir a instalacao feche o Kodi.', 'Em Box TV retirar o aparelho da tomada ou usar o Task Kill, sem sair do kodi. Em outros aparelhos com sistema Android, use o Task Kill ou reinicie o aparelho, tambem sem sair do Kodi.','Ao voltar ao Kodi, va em -> Addon-> Meus Addons- e ative os addons instalados no passo anterior.')
     killxbmc()
         
       
