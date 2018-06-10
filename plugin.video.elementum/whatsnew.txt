@@ -1,0 +1,86 @@
+[COLOR springgreen]Elementum:[/COLOR]
+
+[COLOR red]-------------------------------------------------------------------------------------------------------[/COLOR]
+
+[B][COLOR red]v0.0.46[/COLOR][/B]
+    - Added Automatic memory size detection option, which is enabled by default. Default is 5% of physical memory, but not bigger than 200mb.
+    - Fixed TCPv6 issue with listening, while disabled.
+    - Added language selector for OSDB.
+    - Altered Trakt to start sync after startup, not only after period of time.
+    - Fixed issue with removing strm files when Kodi is renewing the information.
+    - Added lists of Movies/Shows, filtered by Countries/Original Language, Country/Language menu in Movies/Shows.
+    - Added sort by size for torrents list in search results.
+    - Now showing directory name in file selection, if files have different directories.
+    - Another attempt to fix hanging "Resolving torrent files" notification.
+
+[B][COLOR red]v0.0.45[/COLOR][/B]
+    - Fixed issues with IP+Port detection.
+    - Resume playback reorganized, so disable it from settings if needed.
+
+[B][COLOR red]v0.0.44[/COLOR][/B]
+    - Mostly a maintenance release, fixing small issues.
+    - Fixed Pride show being added always to the library.
+    - Trailers playback moved to Youtube plugin.
+
+[B][COLOR red]v0.0.43[/COLOR][/B]
+    - Migrating to another database engine to allow flexibility in the future.
+    - Library manipulations changed a lot due to database change, so it can bring bugs and errors. Please, report them on https://github.com/elgatito/plugin.video.elementum/issues website.
+    - Small fixes.
+    - Updated torrent engine.
+
+[B][COLOR red]v0.0.42[/COLOR][/B]
+    - Added Disable Upload setting to disable Uploading at all, if Seed Time is 0 - upload will stop when download is finished.
+    - Updated torrent engine.
+    - Small fixes.
+
+[B][COLOR red]v0.0.41[/COLOR][/B]
+    - Added Context menu add-on to Elementum repository. Allows playing any item from Kodi library, not only strm files.
+    - Fixes for Kodi 16 library.
+    - Updated torrent engine.
+
+[B][COLOR red]v0.0.40[/COLOR][/B]
+    - Custom DNS names reverted to become optional.
+    - Small fixes.
+
+[B][COLOR red]v0.0.39[/COLOR][/B]
+    - Added custom DNS resolvers (Using Google/Quad9/Opennic servers).
+
+[B][COLOR red]v0.0.38[/COLOR][/B]
+    - Fixing reported issues with the library management.
+    - Fixed searching non-english originated movies/shows.
+    - Updated Croatian and Hebrew languages. Thanks to @muzena and @meijin007.
+
+[B][COLOR red]v0.0.35[/COLOR][/B]
+    - Added Upnp/NAT support (is testing mode).
+    - Added Shows Progress page for Trakt.
+    - Movies/Shows menu reorganization and unification.
+    - Added Silent playback start setting to not ask for existing torrents and reusing old ones.
+
+[B][COLOR red]v0.0.33[/COLOR][/B]
+    - Re-Enabled seeding for memory storage.
+    - Fixed few bugs from github.
+
+[B][COLOR red]v0.0.31[/COLOR][/B]
+    - Trakt lists now use TMDB data. Can be turned off in Settings > Appearance
+    - Not removing UTF characters from search payload.
+    - Smaller fixes to stability.
+
+[B][COLOR red]v0.0.30[/COLOR][/B]
+    - Added unified watched status. TheMovieDB/Trakt lists can show Watched items, same with Kodi Library.
+
+[B][COLOR red]v0.0.29[/COLOR][/B]
+    - Global changes to Library management
+    - Trakt Watched items are synced to Kodi library
+    - Kodi Watched items are synced to Trakt, as well
+    - Torrent library updated to latest version
+    - [B][COLOR red]This is a big change release, if you encounter a bug, please report it on github.com![/COLOR][/B]
+
+[B][COLOR red]v0.0.26[/COLOR][/B]
+    - Added Changelog
+    - Caching moved to the database
+    - Added proper OS signal handling
+    - Fixed not-removed files after torrent removed
+    - Fixed rate limiting for download/upload
+    - Seeding is not disabled by default
+    - New rate limiter in use
+    - Faster tmdb listings
