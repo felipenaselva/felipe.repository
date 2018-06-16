@@ -189,6 +189,44 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.blurayplays"
+       name="[COLOR white][B]BLURAY[/B][/COLOR] [COLOR gold][B]PLAY'S[/B][/COLOR]"
+       version="0.6"
+       provider-name="[B][COLOR gold]Team[/COLOR] [COLOR white]BLURAY[/COLOR] [COLOR gold]PLAY'S[/B][/COLOR]">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>[COLOR white][B]Um Vasto ConteÃºdo Em Um SÃ³ Lugar, Instale O Addon BLURAY PLAY'S[/B][/COLOR]</summary>
+    <description lang="en">[B][COLOR gold]BLURAY PLAY'S Ã‰ Apenas Um AGREGADOR De Links E Assim Como O Google.com, Apenas Agrega E Organiza Os Links Externos. NÃ£o Somos ResponsÃ¡veis Pelos ConteÃºdos Encontrados Aqui.[/COLOR][/B]</description>
+    <disclaimer lang="en">[B][COLOR white]QUER ASSINAR UMA LISTA PAGA ?[/COLOR][/B] [B][COLOR dodgerblue]SÃ“ CHAMAR (83) 998273023[/COLOR][/B]</disclaimer>
+	<platform>all</platform>
+    <assets>
+	<icon>icon.png</icon>
+    <fanart>fanart.jpg</fanart>
+    <screenshot>resources/screenshots/01.jpg</screenshot>
+    <screenshot>resources/screenshots/02.jpg</screenshot>
+    <screenshot>resources/screenshots/03.jpg</screenshot>
+	</assets>
+  </extension>
+</addon>
+
 <addon id="plugin.video.BrazucaPlay"
        name="BRAZUCA PLAY"
        version="5.2"
@@ -714,6 +752,39 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
 		<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon. The author does not have any affiliation with the content provider.</disclaimer>
         <forum>http://bit.ly/uwc-support</forum>
     </extension>
+</addon>
+
+<addon id="plugin.video.vida"
+       name="[COLOR cadetblue][B]-VIDA-[/COLOR][/B]"
+       version="3.5.0"
+       provider-name="izac">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+	<import addon="script.module.livestreamer" optional="true"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">vida</summary>
+    <description lang="en">vida</description>
+    <platform>all</platform>
+  </extension>
+
 </addon>
 
 <addon
