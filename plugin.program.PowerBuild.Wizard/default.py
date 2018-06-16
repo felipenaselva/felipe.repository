@@ -17,11 +17,11 @@ VERSION = "2.9"
 
 def CATEGORIES():
     if KODIVERSION >= 18.0:
-        WIZARDURL = "https://pastebin.com/raw/D8M41abz"
+        WIZARDURL = "https://pastebin.com/raw/8QTmmcY1"
     if KODIVERSION >= 17.0:
         WIZARDURL = "https://pastebin.com/raw/D8M41abz"
     elif KODIVERSION >= 16.0:
-        WIZARDURL = "https://pastebin.com/raw/D8M41abz"
+        WIZARDURL = "https://pastebin.com/raw/ZvE2uQAX"
     else:
         WIZARDURL = "https://pastebin.com/raw/170p4yP6"
         
