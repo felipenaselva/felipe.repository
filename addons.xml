@@ -129,6 +129,20 @@
 
 </addon>
 
+<addon id="plugin.program.PowerBuild.Wizard" name="[COLOR gold]PowerBuild[/COLOR] [COLOR white]Wizard[/COLOR]" version="2.9" provider-name="Gfake">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">[COLOR lime]PowerBuild[/COLOR] - [COLOR white]Skin Aeon Nox Silvo modificada incluindo os melhores addons do momento. Quasar ok.[/COLOR]</summary>
+    <description lang="en">Skin Aeon Nox Silvo customizada. Inclui os melhores addons da atualidade totalmente configurados. Addon quasar pronto para o uso.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.program.super.favourites" name="Super Favourites" version="1.0.43" provider-name="spoyser">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
