@@ -7,7 +7,7 @@ class MyOpener(FancyURLopener):
 myopener = MyOpener()
 urlretrieve = MyOpener().retrieve
 urlopen = MyOpener().open
-AddonTitle="[COLOR lightsteelblue]Vikings[/COLOR] [COLOR lightsteelblue]Wizard[/COLOR]"
+AddonTitle="[COLOR gold]PowerBuild[/COLOR] [COLOR white]Wizard[/COLOR]"
 
 def download(url, dest, dp = None):
     if not dp:

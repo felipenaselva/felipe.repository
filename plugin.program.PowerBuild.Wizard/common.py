@@ -29,7 +29,7 @@ def FRESHSTARTBUILD():
     URL_Resolver_AD=xbmc.translatePath(os.path.join(ADDON_DATA,'script.module.urlresolver'))
     Specto_AD=xbmc.translatePath(os.path.join(ADDON_DATA,'plugin.video.specto'))
     ## Excluded Directories
-    EXCLUDES1 = ['plugin.program.VikingsWizard','script.module.addon.common','packages',Trakt_AD,URL_Resolver_AD,Specto_AD]                      
+    EXCLUDES1 = ['plugin.program.PowerBuild.Wizard','script.module.addon.common','packages',Trakt_AD,URL_Resolver_AD,Specto_AD]                      
     ## Excluded Files
     EXCLUDES2 = ['favourites.xml','advancedsettings.xml','profiles.xml']
     
@@ -66,7 +66,7 @@ def CLEANUP(url):
                 for d in dirs:
                     shutil.rmtree(os.path.join(root, d))
     except:
-        ADDONTITLE = "[COLOR aqua]Vikings [/COLOR] [COLOR white]Wizard[/COLOR]" 
+        ADDONTITLE = "[COLOR gold]PowerBuild[/COLOR] [COLOR white]Wizard[/COLOR]" 
         dialog = xbmcgui.Dialog()
         dialog.ok(ADDONTITLE, "Desculpe, nao conseguimos remover arquivos de pacote", "")
 	print '############################################################       DELETING STANDARD CACHE             ###############################################################'
