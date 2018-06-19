@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.program.Build.Tools" name="[COLOR gold]Build[/COLOR] [COLOR white]Tools Wizard[/COLOR]" version="2.1" provider-name="Gfake">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.service" library="startup.py" start="startup" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Build Tools Wizard</summary>
+    <description lang="en">Bem-vindo e obrigado por fazer o download do nosso assistente.[CR]O Assistente Build Tools Wizard permite que você tenha acesso livre a todas as compilações personalizadas para o seu Kodi em seu dispositivo de streaming.[CR]Executar manutenção, Limpar cache, Limpar pacotes, manter seus dados Trakt e Real Debrid e muito mais.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
