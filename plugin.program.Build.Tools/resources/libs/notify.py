@@ -546,8 +546,8 @@ def updateWindow(name='Testing Window', current='1.0', new='1.1', icon=ICON, fan
 			self.new = kwargs['new']
 			self.icon = kwargs['icon']
 			self.fanart = kwargs['fanart']
-			self.msgupdate  = "Nova atualizacao disponivel para a BUILD:\n[COLOR %s]%s[/COLOR]\n\nVersao instalada: v[COLOR %s]%s[/COLOR]\nNova versao disponivel: v[COLOR %s]%s[/COLOR]\n\n[COLOR %s]*Recomendamos o metodo de instalacao: Instalacao Limpa[/COLOR]" % (COLOR1, self.name, COLOR1, self.current, COLOR1, self.new, COLOR1)
-			self.msgcurrent = "Executando a versao mais recente da BUILD:\n[COLOR %s]%s[/COLOR]\n\nVersao Instalada: v[COLOR %s]%s[/COLOR]\nNova versao disponivel: v[COLOR %s]%s[/COLOR]\n\n[COLOR %s]*Recomendamos o metodo de instalacao: Instalacao Limpa[/COLOR]" % (COLOR1, self.name, COLOR1, self.current, COLOR1, self.new, COLOR1)
+			self.msgupdate  = "Update avaliable for installed build:\n[COLOR %s]%s[/COLOR]\n\nCurrent Version: v[COLOR %s]%s[/COLOR]\nLatest Version: v[COLOR %s]%s[/COLOR]\n\n[COLOR %s]*Recommened: Fresh install[/COLOR]" % (COLOR1, self.name, COLOR1, self.current, COLOR1, self.new, COLOR1)
+			self.msgcurrent = "Running latest version of installed build:\n[COLOR %s]%s[/COLOR]\n\nCurrent Version: v[COLOR %s]%s[/COLOR]\nLatest Version: v[COLOR %s]%s[/COLOR]\n\n[COLOR %s]*Recommended: Fresh install[/COLOR]" % (COLOR1, self.name, COLOR1, self.current, COLOR1, self.new, COLOR1)
 		
 		def onInit(self):
 			self.imagefanart = 101

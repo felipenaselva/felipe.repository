@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-	<category label="Opcoes de Build">
-		<setting type="lsep" label="Build Instalada:"/>
-		<setting id="buildname" type="text" label="Build Instalada: " enable="false" default=""/>
-		<setting id="buildversion" type="text" label="Versao Instalada: " enable="false" default=""/>
-		<setting id="buildtheme" type="text" label="Tema Atual: " enable="false" default=""/>
+	<category label="Build Options">
+		<setting type="lsep" label="Current Build:"/>
+		<setting id="buildname" type="text" label="Installed Build: " enable="false" default=""/>
+		<setting id="buildversion" type="text" label="Installed Version: " enable="false" default=""/>
+		<setting id="buildtheme" type="text" label="Current Theme: " enable="false" default=""/>
 		<setting id="latestversion" type="text" label="Latest Version: " enable="false" default=""/>
 		<setting id="lastbuildcheck" type="text" label="Next check for build update: " enable="false" default=""/>
 		<setting id="disableupdate" type="bool" label="Disable Update Notification" default="false"/>

@@ -4,17 +4,17 @@ import os, xbmc, xbmcaddon
 ### User Edit Variables #################################
 #########################################################
 ADDON_ID       = xbmcaddon.Addon().getAddonInfo('id')
-ADDONTITLE     = 'Build Tools'
-EXCLUDES       = [ADDON_ID, 'Kodish.repo.store']
+ADDONTITLE     = 'Build Tools Install'
+EXCLUDES       = [ADDON_ID]
 # Text File with build info in it.
 BUILDFILE      = 'https://pastebin.com/raw/awxe3cGQ'
 # How often you would list it to check for build updates in days
 # 0 being every startup of kodi
-UPDATECHECK    = 0
+UPDATECHECK    = 3
 # Text File with apk info in it.
 APKFILE        = 'https://kodi.tv/'
 # Text File with Youtube Videos urls.  Leave as 'http://' to ignore
-YOUTUBETITLE   = 'Videos Tutoriais'
+YOUTUBETITLE   = 'Videos Tutoriais (Aprenda a Instalar Kodi e Build)'
 YOUTUBEFILE    = 'https://pastebin.com/raw/wfGAH8PG'
 # Text File for addon installer.  Leave as 'http://' to ignore
 ADDONFILE      = 'http://'
@@ -34,19 +34,19 @@ ART            = os.path.join(PATH, 'resources', 'art')
 # Example:  ICONMAINT     = os.path.join(ART, 'mainticon.png')
 #           ICONSETTINGS  = 'http://aftermathwizard.net/repo/wizard/settings.png'
 # Leave as http:// for default icon
-ICONBUILDS     = 'https://i.imgur.com/59BAHp8.png'
-ICONMAINT      = 'https://i.imgur.com/59BAHp8.png'
-ICONAPK        = 'https://i.imgur.com/59BAHp8.png'
-ICONADDONS     = 'https://i.imgur.com/59BAHp8.png'
-ICONYOUTUBE    = 'https://i.imgur.com/59BAHp8.png'
-ICONSAVE       = 'https://i.imgur.com/59BAHp8.png'
-ICONTRAKT      = 'https://i.imgur.com/59BAHp8.png'
-ICONREAL       = 'https://i.imgur.com/59BAHp8.png'
-ICONLOGIN      = 'https://i.imgur.com/59BAHp8.png'
-ICONCONTACT    = 'https://i.imgur.com/59BAHp8.png'
-ICONSETTINGS   = 'https://i.imgur.com/59BAHp8.png'
+ICONBUILDS     = 'https://i.imgur.com/PIFOoPq.png'
+ICONMAINT      = 'https://i.imgur.com/PIFOoPq.png'
+ICONAPK        = 'https://i.imgur.com/PIFOoPq.png'
+ICONADDONS     = 'https://i.imgur.com/PIFOoPq.png'
+ICONYOUTUBE    = 'https://i.imgur.com/PIFOoPq.png'
+ICONSAVE       = 'https://i.imgur.com/PIFOoPq.png'
+ICONTRAKT      = 'https://i.imgur.com/PIFOoPq.png'
+ICONREAL       = 'https://i.imgur.com/PIFOoPq.png'
+ICONLOGIN      = 'https://i.imgur.com/PIFOoPq.png'
+ICONCONTACT    = 'https://i.imgur.com/PIFOoPq.png'
+ICONSETTINGS   = 'https://i.imgur.com/PIFOoPq.png'
 # Hide the ====== seperators 'Yes' or 'No'
-HIDESPACERS    = 'Yes'
+HIDESPACERS    = 'No'
 # Character used in seperator
 SPACER         = '//'
 
@@ -55,7 +55,7 @@ SPACER         = '//'
 COLOR1         = 'yellow'
 COLOR2         = 'white'
 # Primary menu items   / %s is the menu item and is required
-THEME1         = '[COLOR '+COLOR1+'][B][I]([COLOR '+COLOR2+']...[/COLOR])[/B][/COLOR] [COLOR '+COLOR2+']%s[/COLOR][/I]'
+THEME1         = '[COLOR '+COLOR1+'][B][I]([COLOR '+COLOR2+'][/COLOR])[/B][/COLOR] [COLOR '+COLOR2+']%s[/COLOR][/I]'
 # Build Names          / %s is the menu item and is required
 THEME2         = '[COLOR '+COLOR2+']%s[/COLOR]'
 # Alternate items      / %s is the menu item and is required
@@ -71,8 +71,8 @@ HIDECONTACT    = 'Yes'
 # You can add \n to do line breaks
 CONTACT        = 'Obrigado por escolher o Vikings Build.Inscreva-se em nosso canal no Youtbe:  http://www.youtube.com/c/VikingsArcades'
 #Images used for the contact window.  http:// for default icon and fanart
-CONTACTICON    = 'http://'
-CONTACTFANART  = 'http://'
+CONTACTICON    = 'https://i.imgur.com/PIFOoPq.png'
+CONTACTFANART  = 'https://i.imgur.com/PIFOoPq.png'
 #########################################################
 
 #########################################################
@@ -81,7 +81,7 @@ CONTACTFANART  = 'http://'
 # Enable Auto Update 'Yes' or 'No'
 AUTOUPDATE     = 'YES'
 # Url to wizard version
-WIZARDFILE     = 'https://pastebin.com/raw/awxe3cGQ'
+WIZARDFILE     = ''
 #########################################################
 
 #########################################################
@@ -90,11 +90,11 @@ WIZARDFILE     = 'https://pastebin.com/raw/awxe3cGQ'
 # Enable Auto Install 'Yes' or 'No'
 AUTOINSTALL    = 'YES'
 # Addon ID for the repository
-REPOID         = 'Kodish.repo.store'
+REPOID         = ''
 # Url to Addons.xml file in your repo folder(this is so we can get the latest version)
 REPOADDONXML   = ''
 # Url to folder zip is located in
-REPOZIPURL     = 'http://sokodi.net/repo/Kodish.repo.store.zip'
+REPOZIPURL     = ''
 #########################################################
 
 #########################################################

@@ -190,14 +190,14 @@ def index():
 	if len(BUILDNAME) > 0:
 		version = wiz.checkBuild(BUILDNAME, 'version')
 		build = '%s (v%s)' % (BUILDNAME, BUILDVERSION)
-		if version > BUILDVERSION: build = '%s [COLOR red][B][Encontrado Nova Versao da Build][/B][/COLOR]' % (build, version)
+		if version > BUILDVERSION: build = '%s [COLOR red][B][Atualizar v%s][/B][/COLOR]' % (build, version)
 		addDir(build,'viewbuild',BUILDNAME, themeit=THEME4)
 		themefile = wiz.themeCount(BUILDNAME)
 		if not themefile == False:
 			addFile('None' if BUILDTHEME == "" else BUILDTHEME, 'theme', BUILDNAME, themeit=THEME5)
 	else: addDir('None', 'builds', themeit=THEME4)
 	if HIDESPACERS == 'No': addFile(wiz.sep(), '', themeit=THEME3)
-	addDir ('Build Disponiveis'        ,'builds',   icon=ICONBUILDS,   themeit=THEME1)
+	addDir ('Builds Disponiveis'        ,'builds',   icon=ICONBUILDS,   themeit=THEME1)
 	addDir ('Manutencao'   ,'maint',    icon=ICONMAINT,    themeit=THEME1)
 	if wiz.platform() == 'android' or DEVELOPER == 'true': addDir ('Apk Installer' ,'apk', icon=ICONAPK, themeit=THEME1)
 	if not ADDONFILE == 'http://': addDir ('Addon Installer' ,'addons', icon=ICONADDONS, themeit=THEME1)
@@ -248,8 +248,8 @@ def buildMenu():
 					addDir('[%s] %s (v%s)' % (float(kodi), name, version), 'viewbuild', name, description=description, fanart=fanart,icon=icon, menu=menu, themeit=THEME2)
 			else:
 				if count18 > 0:
-					state = '+' if SHOW18 == 'false' else '-'
-					addFile('[B]%s Builds para Kodi 18 - Leia(%s)[/B]' % (state, count18), 'togglesetting',  'show17', themeit=THEME3)
+					state = '+' if SHOW18 == 'false' else '==>'
+					addFile('[B]%s Builds Kodi 18 - Leia(%s)[/B]' % (state, count18), 'togglesetting',  'show17', themeit=THEME3)
 					if SHOW18 == 'true':
 						for name, version, url, gui, kodi, theme, icon, fanart, adult, description in match:
 							if not SHOWADULT == 'true' and adult.lower() == 'yes': continue
@@ -259,8 +259,8 @@ def buildMenu():
 								menu = createMenu('install', '', name)
 								addDir('[%s] %s (v%s)' % (float(kodi), name, version), 'viewbuild', name, description=description, fanart=fanart,icon=icon, menu=menu, themeit=THEME2)
 				if count17 > 0:
-					state = '+' if SHOW17 == 'false' else '-'
-					addFile('[B]%s Builds para Kodi 17 - Krypton(%s)[/B]' % (state, count17), 'togglesetting',  'show17', themeit=THEME3)
+					state = '+' if SHOW17 == 'false' else '==>'
+					addFile('[B]%s Builds Kodi 17 - Krypton(%s)[/B]' % (state, count17), 'togglesetting',  'show17', themeit=THEME3)
 					if SHOW17 == 'true':
 						for name, version, url, gui, kodi, theme, icon, fanart, adult, description in match:
 							if not SHOWADULT == 'true' and adult.lower() == 'yes': continue
@@ -270,8 +270,8 @@ def buildMenu():
 								menu = createMenu('install', '', name)
 								addDir('[%s] %s (v%s)' % (float(kodi), name, version), 'viewbuild', name, description=description, fanart=fanart,icon=icon, menu=menu, themeit=THEME2)
 				if count16 > 0:
-					state = '+' if SHOW16 == 'false' else '-'
-					addFile('[B]%s Builds para Kodi 16 - Jarvis(%s)[/B]' % (state, count16), 'togglesetting',  'show16', themeit=THEME3)
+					state = '+' if SHOW16 == 'false' else '==>'
+					addFile('[B]%s Builds Kodi 16 - Jarvis(%s)[/B]' % (state, count16), 'togglesetting',  'show16', themeit=THEME3)
 					if SHOW16 == 'true':
 						for name, version, url, gui, kodi, theme, icon, fanart, adult, description in match:
 							if not SHOWADULT == 'true' and adult.lower() == 'yes': continue
@@ -296,7 +296,7 @@ def buildMenu():
 				addFile('Atualmente existe conteudo Adultos nessa Build', '', icon=ICONBUILDS, themeit=THEME3)
 				addFile('Mostra o conteudo adulto em configuracoes Adicionais? > Misc', '', icon=ICONBUILDS, themeit=THEME3)
 			else:
-				addFile('Atualmente nao ha Builds oferecidas a partir de %s' % ADDONTITLE, '', icon=ICONBUILDS, themeit=THEME3)
+				addFile('Atualmente nao ha Builds oeferecidas a partir de %s' % ADDONTITLE, '', icon=ICONBUILDS, themeit=THEME3)
 		else: addFile('Arquivos de texto da Build nao formatado corretamente.', '', icon=ICONBUILDS, themeit=THEME3)
 	setView('files', 'viewType')
 
@@ -322,15 +322,15 @@ def viewBuild(name):
 		if HIDESPACERS == 'No': addFile(wiz.sep(), '', themeit=THEME3)
 		addDir ('Salvar Menu de Dados',       'savedata', icon=ICONSAVE,     themeit=THEME3)
 		addFile('Informacao da Build',    'buildinfo', name, description=description, fanart=fanart, icon=icon, themeit=THEME3)
-		if not preview == "http://": addFile('Visualizar Video Preview', 'buildpreview', name, description=description, fanart=fanart, icon=icon, themeit=THEME3)
+		if not preview == "http://": addFile('View Video Preview', 'buildpreview', name, description=description, fanart=fanart, icon=icon, themeit=THEME3)
 		temp1 = int(float(KODIV)); temp2 = int(float(kodi))
 		if not temp1 == temp2: 
 			if temp1 == 16 and temp2 <= 15: warning = False
 			else: warning = True
 		else: warning = False
 		if warning == True:
-			addFile('[I]Build projetada para a versao%s(Instalado: %s)[/I]' % (str(kodi), str(KODIV)), '', fanart=fanart, icon=icon, themeit=THEME3)
-		addFile(wiz.sep('INSTALACAO'), '', fanart=fanart, icon=icon, themeit=THEME3)
+			addFile('[I]Build projetada para a versao%s(installed: %s)[/I]' % (str(kodi), str(KODIV)), '', fanart=fanart, icon=icon, themeit=THEME3)
+		addFile(wiz.sep('INSTALL'), '', fanart=fanart, icon=icon, themeit=THEME3)
 		addFile('Instalacao Limpa (Fresh Start)'   , 'install', name, 'fresh'  , description=description, fanart=fanart, icon=icon, themeit=THEME1)
 		addFile('Instalacao Padrao', 'install', name, 'normal' , description=description, fanart=fanart, icon=icon, themeit=THEME1)
 		if not gui == 'http://': addFile('Apply guiFix'    , 'install', name, 'gui'     , description=description, fanart=fanart, icon=icon, themeit=THEME1)
@@ -738,7 +738,7 @@ def maintMenu(view=None):
 	sizethumb  = wiz.getSize(THUMBS)
 	sizecache  = wiz.getCacheSize()
 	totalsize  = sizepack+sizethumb+sizecache
-	feq        = ['Sempre', 'Diaria', 'Cada 3 Dias', 'Semanal']
+	feq        = ['Always', 'Daily', '3 Days', 'Weekly']
 	addDir ('[B]Ferramentas de Limpeza[/B]'       ,'maint', 'clean',  icon=ICONMAINT, themeit=THEME1)
 	if view == "clean" or SHOWMAINT == 'true': 
 		addFile('Limpeza Total: [COLOR green][B]%s[/B][/COLOR]' % wiz.convertSize(totalsize)  ,'fullclean',       icon=ICONMAINT, themeit=THEME3)
@@ -1996,7 +1996,7 @@ def freshStart(install=None, over=False):
 				wiz.ebi('SendAction(Select)')
 			if xbmc.getCondVisibility("Window.isVisible(yesnodialog)"):
 				wiz.ebi('SendClick(11)')
-			else: wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, ADDONTITLE), '[COLOR %s]Instalacao Recente, a Skin Expirou!!![/COLOR]' % COLOR2); return False
+			else: wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, ADDONTITLE), '[COLOR %s]Inatalacao Recente, a Skin Expirou!!![/COLOR]' % COLOR2); return False
 			xbmc.sleep(1000)
 		if not wiz.currSkin() in ['skin.confluence', 'skin.estuary']:
 			wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, ADDONTITLE), '[COLOR %s]Instalacao recente: Falha na troca da Skin![/COLOR]' % COLOR2)
