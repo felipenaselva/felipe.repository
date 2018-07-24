@@ -2,7 +2,7 @@
 <addons>
 <addon id="felipe.repository"
        name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]"
-	   version="3.3.9"
+	   version="3.4.0"
 	   provider-name="felipenaselva">
 	<extension point="xbmc.addon.repository" name="Felipe Add-on Repository">
 		<info compressed="false">http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml</info>
@@ -206,24 +206,10 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.adultsonly" name="[B][COLOR red]ADULTS ONLY[/B][/COLOR]" version="1.0.0" provider-name="FOLIVER FOR KODI">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">Movies and Clips Adult</summary>
-    <description lang="en">Movies and Clips Adult</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
 <addon id="plugin.video.blurayplays"
        name="[COLOR white][B]BLURAY[/B][/COLOR] [COLOR gold][B]PLAY'S[/B][/COLOR]"
-       version="0.6"
-       provider-name="[B][COLOR gold]Team[/COLOR] [COLOR white]BLURAY[/COLOR] [COLOR gold]PLAY'S[/B][/COLOR]">
+       version="0.7"
+       provider-name="[B][COLOR gold]KENNEDY[/COLOR] [COLOR white]BLURAY[/COLOR] [COLOR gold]PLAY'S[/B][/COLOR]">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.t0mm0.common" version="2.0.0"/>
@@ -403,48 +389,6 @@ Add-on Retirado do Canal TONY WARLLEY TUTORIAIS, nÃ£o baixe Add-ons que nÃ£o
     <description lang="en">Assista Tv Online, Curta Filmes e Series Online no AddOn Igor Lista</description>
     <platform>all</platform>
   </extension>
-</addon>
-
-<addon id="plugin.video.kractosbr"
-       name="[COLOR green][B]Kratos[/B][/COLOR][COLOR yellow][B]Kodi Br[/B][/COLOR]"
-       version="4.1.0"
-       provider-name="Kodish MC,Mika,Le Rodrigues,Lojink">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.t0mm0.common" version="2.0.0"/>
-    <import addon="script.module.beautifulsoup" version="3.2.1"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.beautifulsoup4"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.requests" />
-    <import addon="script.module.httplib2" />
-    <import addon="script.module.youtube.dl" optional="true"/>
-    <import addon="plugin.video.youtube" version="3.0.0"/>
-    <import addon="script.module.simplejson" />
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-    <import addon="script.module.metahandler" version="2.5.1"/>
-
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">Kratos Kodi Br</summary>
-    <description lang="en">Kratos Kodi Br</description>
-    <platform>all</platform>
-  </extension>
-
- <extension point="xbmc.addon.repository" name="Kratos repository">
-		<info compressed="false">http://kodish.esy.es/kratos-repodata/addons.xml</info>
-		<checksum>http://kodish.esy.es/kratos-repodata/addons.xml.md5</checksum>
-		<datadir zip="true">http://kodish.esy.es/kratos-repodata/instal/</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Kratos repository</summary>
-		<description>Filmes torrent HD</description>
-		<disclaimer></disclaimer>
-		<platform>all</platform>
-	</extension>
 </addon>
 
 <addon id="plugin.video.last_played" name="Last Played (all sources)" version="1.0.5" provider-name="Luis Rodrigues">

@@ -81,7 +81,8 @@ def makeRequest(url, headers=None):
                 xbmc.executebuiltin("XBMC.Notification(blurayplays,We failed to reach a server. - "+str(e.reason)+",10000,"+icon+")")
 
 
-off1  =  "==AbthnLulWYt9yZtl2LpR2br9SbvNmL5FGbwlXYyVWdsJ2LvoDc0RHa"
+off1  =  "==AbthnLulWYt9yZtl2Lt92YukXYsBXehJXZ1xmYukGZvt2LvoDc0RHa"
+
 tam  = len(off1)
 off3 = off1[::-1]
 off =  base64.b64decode(off3)
@@ -359,7 +360,7 @@ def getData(url,fanart):
     print 'url-getData',url
     SetViewLayout = "List"
      
-    soup = getSoup(url)
+    soup = getSoup(url.replace('http://bluerayplay.com/kodi/img//', 'http://kodi.bluerayplay.com/img/').replace('http://bluerayplay.com/kodi/img/', 'http://kodi.bluerayplay.com/img/'))
     #print type(soup)
     if isinstance(soup,BeautifulSOAP):
         if len(soup('layoutype')) > 0:
