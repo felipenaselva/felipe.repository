@@ -1,0 +1,9 @@
+﻿<settings>
+<category label="INFORMAÇÕES">
+<setting id="mensagem" label="[B][COLOR white]TV, Filmes, Séries, Desenhos e Animes.[/COLOR]" value="true" type="bool" default="true"/>
+<setting id="mensagem" label="[B][COLOR white]Tv Fogo HD é apenas um AGREGADOR de links e, assim como o Google.com, apenas agrega e organiza os links externos. Não somos responsáveis pelos arquivos aqui encontrados.[/COLOR][/B]" value="true" type="bool" default="true"/>
+<setting id="mensagem" label="[B][COLOR white]Tv Fogo HD: [COLOR gold]O Melhor conteúdo de Todos ![/COLOR][/COLOR][/B]" value="true" type="bool" default="true"/>
+<setting id="mensagem" label="[B][COLOR white]Tv Fogo HD[/COLOR]" value="true" type="bool" default="true"/>
+<setting id="donotshowbychannels" label="" visible="false" type="bool" default="false"/>
+</category>
+</settings>

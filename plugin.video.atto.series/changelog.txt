@@ -1,0 +1,32 @@
+V1.0.8
+- Integração do novo método de conversão MD5 e pesquisa inversa.
+
+V1.0.7
+- Alteração na apresentação.
+
+V1.0.6
+- Mudança de servidor.
+
+V1.0.5 
+- Sem alterações, a atualização serve para limpar o cache.
+
+V1.0.4 
+- Makeover.
+
+V1.0.3 
+- Cambio de ruta de link principal.
+
+V1.0.2 
+- Cambio de alojamiento de nuestra lista M3U, para Atto.tv
+- Atualização do links.
+
+V1.0.1 
+- Cambio en la apariencia del Add-On.
+
+V1.0.0 
+- Versión beta del Add-On Atto.TV.Series
+
+
+
+
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.atto.filmes"
+       name="[B][COLOR black]_[COLOR aqua]ATTO[COLOR white] - [COLOR violet]FILMES![/COLOR][/B]"
+       version="2.0"
+       provider-name="[COLOR aqua]Team ATTO[/COLOR]">
+    <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.t0mm0.common" version="2.1.1"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="1.9.5"/>
+    <import addon="script.module.beautifulsoup4"/>
+    <import addon="script.module.simple.downloader" version="1.9.5"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="5.3.12"/>
+    <import addon="script.module.urlresolver"/>
+    <import addon="script.module.simplejson" /> 
+    <import addon="script.common.plugin.cache" version="2.5.5"/>
+    <import addon="script.module.metahandler" version="2.9.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <assets>
+         <icon>icon.png</icon>
+         <fanart>fanart.jpg</fanart>
+    </assets>
+    <summary lang="en">[COLOR aqua]Filmes [COLOR gold]4K[/COLOR], [COLOR gold]HD[/COLOR], [COLOR gold]SD[/COLOR], [COLOR gold]Novelas[/COLOR], [COLOR gold]Animes[/COLOR], [COLOR gold]Documentarios[/COLOR], [COLOR gold]Desenhos[/COLOR], [COLOR gold]Etc[/COLOR], [COLOR gold]Dublados[/COLOR] e [COLOR gold]Legendados[/COLOR]. A melhor recipiente de filmes!, aqui você encontra tudo, Garantido!. Senão falar com meu chefe.[/COLOR]</summary>
+    <description lang="en">[COLOR blue][B]Atto.TV[/B][COLOR aqua], Oferece Filmes [COLOR gold]4K[/COLOR], [COLOR gold]HD[/COLOR], [COLOR gold]720P[/COLOR], [COLOR gold]SD[/COLOR], [COLOR gold]Novelas[/COLOR], [COLOR gold]Animes[/COLOR], [COLOR gold]Documentarios[/COLOR], [COLOR gold]Desenhos[/COLOR], [COLOR gold]Etc[/COLOR], [COLOR gold]Dublados[/COLOR] e [COLOR gold]Legendados[/COLOR], pela internet, não precisa antena. Qualidade de imagen TOP com [COLOR gold]Doulby Vision[/COLOR]. Tecnologia "hassle free" da Atto, o melhor conteúdo Media Center.[/COLOR]</description>
+    <disclaimer lang="en">[COLOR aqua]O autor não hospedar ou distribuir qualquer conteúdo exibido por este complemento.[COLOR blue][B] Atto.TV [/B][/COLOR]tem nenhuma afiliação com o provedor de conteúdo.[COLOR blue][B] Atto.TV [/B][/COLOR]somente é responsável por coletar os melhores filmes da Internet, categorização e otimizá-los, de modo a que esta ao alcance de seus clientes. tão fácil e descomplicada.[/COLOR]</disclaimer>
+    <website>http://atto.tv/</website>
+    <forum>https://atto.tv/forum</forum>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 3.</license>
+    <platform>all</platform>
+  </extension>
+</addon>

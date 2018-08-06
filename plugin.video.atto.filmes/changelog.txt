@@ -1,0 +1,42 @@
+V2.0
+- Integração do novo método de conversão MD5 e pesquisa inversa.
+
+V1.0.9
+- Alteração na apresentação.
+
+V1.0.8
+- Mudança de servidor.
+
+V1.0.7
+- Sem alterações, a atualização serve para limpar o cache.
+
+V1.0.6
+- E realizada a modificação, de retirar da Secção "Adultos XXX" do menu Filmes.
+- IMDb inserido em todas as categorias de filmes. [Descrição + Género + Anho], durante os dias IMDb, 100% será incorporado nos Filmes.
+- Mudança na aparência do Add-On.
+
+V1.0.5
+- Implementação de scripts, para a segurança em nossos links.
+- Categoria de "Animes" adicionado.
+
+V1.0.4
+- Icono Novo.
+- Inserção de novas categorias.
+
+V1.0.3
+- Atualização, de todos os links por falha do servidor.
+
+V1.0.2
+- Alterando hospedagem nosso conteúdo multimídia para o servidor Atto.tv.
+
+V1.0.1
+- Mudança na aparência do Add-On.
+
+V1.0.0
+- Versión beta del Add-On, ATTO-Filmes.
+
+
+
+
+
+
