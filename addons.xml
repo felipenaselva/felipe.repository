@@ -521,6 +521,22 @@ Add-on Retirado do Canal TONY WARLLEY TUTORIAIS, nÃ£o baixe Add-ons que nÃ£o
 	</extension>
 </addon>
 
+<addon id="plugin.video.MMFilmesHD" name="MMFilmes HD" version="1.0" provider-name="Lojink">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.urlresolver" version="2.10.0"/>
+  </requires>
+    <extension point="xbmc.python.pluginsource"
+               library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary>MMFilmes HD</summary>
+        <description>Assista filmes e sÃ©ries online em seu computador, notebook ou celular.</description>
+    </extension>
+</addon>
+
 <addon id="plugin.video.mrpiracy" name="MrPiracy" provider-name="MrPiracy" version="0.7.8">
  <requires>
   <import addon="xbmc.python" version="2.14.0"/>

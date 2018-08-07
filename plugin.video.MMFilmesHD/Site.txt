@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+		<style>body{height:100%;margin:0;overflow:hidden;position:absolute;width:100%} video{min-height:100%;min-width:100%;position:absolute}</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+</head>
+<body style="margin: 0px; background-color:#000;">
+<div id="player" class="position: absolute;width: 100%;height: 100%;"></div>
+<script type="text/javascript" src="fnatic/jwtest/jwnovo/jwplayer.js"></script>
+<script type="text/javascript">
+	jwplayer.key = "rqQQ9nLfWs+4Fl37jqVWGp6N8e2Z0WldRIKhFg==";
+	var playerInstance = jwplayer("player");
+		playerInstance.setup({
+			id:'player',
+			primary: "html5",
+			preload: "auto",
+			controls: true,
+			allowfullscreen: true,
+			allowscriptaccess: "always",
+			sources: [{'file':'http://contentdelivery.vstreaming.net/movies/oscurados-dub-720p.mp4','type':'video\/mp4','label':'720p'},{'file':'http://contentdelivery.vstreaming.net/movies/oscurados-dub-480p.mp4','type':'video\/mp4','label':'480p'},{'file':'http://contentdelivery.vstreaming.net/movies/oscurados-dub-360p.mp4','type':'video\/mp4','label':'360p'}],
+			tracks: [{
+				file: 'http://player.mmfilmes.tv/legendas/',
+				label: "PT-BR",
+				"default": true,
+				kind: "captions"
+		}],
+		skin: {
+			name: "bekle"
+		},
+		cast: { },
+				logo: {
+				file: 'http://i.imgur.com/dw5iRjQ.png',
+				link: 'http://www.mmfilmes.tv'
+			},		captions: {
+			color: '#FFFF00',
+			fontSize: 14,
+			backgroundOpacity: 0,
+			edgeStyle: 'uniform'
+		},
+		autostart: true,
+		width: "100%",
+		height: "100%"
+	});
+$("#videoPlayer").remove();
+</script>
+</body>
+</html>
