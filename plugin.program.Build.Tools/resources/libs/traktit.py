@@ -14,12 +14,7 @@
 #  You should have received a copy of the GNU General Public License           #
 #  along with XBMC; see the file COPYING.  If not, write to                    #
 #  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.       #
-#  http://www.gnu.org/copyleft/gpl.html       								   #
-# 																			   #
-# Traduzido por:															   #
-# Air Gomes Pio																   #
-# Contato: vikingsarcades@gmail.com											   #
-#                                											   #
+#  http://www.gnu.org/copyleft/gpl.html                                        #
 ################################################################################
 
 import xbmc, xbmcaddon, xbmcgui, xbmcplugin, os, sys, xbmcvfs, glob
@@ -44,7 +39,7 @@ PLUGIN         = os.path.join(ADDONS,    ADDON_ID)
 PACKAGES       = os.path.join(ADDONS,    'packages')
 ADDONDATA      = os.path.join(USERDATA,  'addon_data', ADDON_ID)
 ADDOND         = os.path.join(USERDATA,  'addon_data')
-TRAKTFOLD      = os.path.join(ADDONDATA, 'trakt')
+TRAKTFOLD      = os.path.join(ADDONDATA, 'Trakt')
 ICON           = os.path.join(PLUGIN,    'icon.png')
 TODAY          = date.today()
 TOMORROW       = TODAY + timedelta(days=1)
@@ -260,7 +255,7 @@ def updateTrakt(do, who):
 				wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, name), '[COLOR %s]Trakt: Restored![/COLOR]' % COLOR2, 2000, icon)
 			except Exception, e:
 				wiz.log("[Trakt Data] Unable to Restore %s (%s)" % (who, str(e)), xbmc.LOGERROR)
-		#else: wiz.LogNotify(name,'Trakt Data: [COLOR red]Nao Encontrado![/COLOR]', 2000, icon)
+		#else: wiz.LogNotify(name,'Trakt Data: [COLOR red]Not Found![/COLOR]', 2000, icon)
 	elif do == 'clearaddon':
 		wiz.log('%s SETTINGS: %s' % (name, settings), xbmc.LOGDEBUG)
 		if os.path.exists(settings):

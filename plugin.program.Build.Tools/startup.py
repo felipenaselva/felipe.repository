@@ -1,26 +1,50 @@
-################################################################################
-#      Copyright (C) 2015 Surfacingx                                           #
-#                                                                              #
-#  This Program is free software; you can redistribute it and/or modify        #
-#  it under the terms of the GNU General Public License as published by        #
-#  the Free Software Foundation; either version 2, or (at your option)         #
-#  any later version.                                                          #
-#                                                                              #
-#  This Program is distributed in the hope that it will be useful,             #
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of              #
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the                #
-#  GNU General Public License for more details.                                #
-#                                                                              #
-#  You should have received a copy of the GNU General Public License           #
-#  along with XBMC; see the file COPYING.  If not, write to                    #
-#  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.       #
-#  http://www.gnu.org/copyleft/gpl.html       								   #
-# 																			   #
-# Traduzido por:															   #
-# Air Gomes Pio																   #
-# Contato: vikingsarcades@gmail.com											   #
-#                                											   #
-################################################################################
+############################################################################
+#                             /T /I                                        #
+#                              / |/ | .-~/                                 #
+#                          T\ Y  I  |/  /  _                               #
+#         /T               | \I  |  I  Y.-~/                               #
+#        I l   /I       T\ |  |  l  |  T  /                                #
+#     T\ |  \ Y l  /T   | \I  l   \ `  l Y       If your going to copy     #
+# __  | \l   \l  \I l __l  l   \   `  _. |       this addon just           #
+# \ ~-l  `\   `\  \  \ ~\  \   `. .-~   |        give credit!              #
+#  \   ~-. "-.  `  \  ^._ ^. "-.  /  \   |                                 #
+#.--~-._  ~-  `  _  ~-_.-"-." ._ /._ ." ./        Stop Deleting the        #
+# >--.  ~-.   ._  ~>-"    "\   7   7   ]          credits file!            #
+#^.___~"--._    ~-{  .-~ .  `\ Y . /    |                                  #
+# <__ ~"-.  ~       /_/   \   \I  Y   : |                                  #
+#   ^-.__           ~(_/   \   >._:   | l______                            #
+#       ^--.,___.-~"  /_/   !  `-.~"--l_ /     ~"-.                        #
+#              (_/ .  ~(   /'     "~"--,Y   -=b-. _)                       #
+#               (_/ .  \  :           / l      c"~o \                      #
+#                \ /    `.    .     .^   \_.-~"~--.  )                     #
+#                 (_/ .   `  /     /       !       )/                      #
+#                  / / _.   '.   .':      /        '                       #
+#                  ~(_/ .   /    _  `  .-<_                                #
+#                    /_/ . ' .-~" `.  / \  \          ,z=.  Surfacingx     #
+#                    ~( /   '  :   | K   "-.~-.______//   Original Author  #
+#                      "-,.    l   I/ \_    __{--->._(==.                  #
+#                       //(     \  <    ~"~"     //                        #
+#                      /' /\     \  \     ,v=.  ((     Fire TV Guru        #
+#                    .^. / /\     "  }__ //===-  `    PyXBMCt LaYOUt       #
+#                   / / ' '  "-.,__ {---(==-                               #
+#                 .^ '       :  T  ~"   ll                                 #
+#                / .  .  . : | :!        \                                 #
+#               (_/  /   | | j-"          ~^                               #
+#                 ~-<_(_.^-~"                                              #
+#                                                                          #
+#                  Copyright (C) One of those Years....                    #
+#                                                                          #
+#  This program is free software: you can redistribute it and/or modify    #
+#  it under the terms of the GNU General Public License as published by    #
+#  the Free Software Foundation, either version 3 of the License, or       #
+#  (at your option) any later version.                                     #
+#                                                                          #
+#  This program is distributed in the hope that it will be useful,         #
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of          #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           #
+#  GNU General Public License for more details.                            #
+#                                                                          #
+############################################################################
 
 import xbmc, xbmcaddon, xbmcgui, xbmcplugin, os, sys, xbmcvfs, glob
 import shutil
@@ -28,7 +52,7 @@ import urllib2,urllib
 import re
 import uservar
 from datetime import date, datetime, timedelta
-from resources.libs import extract, downloader, notify, loginit, debridit, traktit, skinSwitch, uploadLog, wizard as wiz
+from resources.libs import extract, downloader, notify, loginit, debridit, allucit, traktit, skinSwitch, uploadLog, wizard as wiz
 
 ADDON_ID       = uservar.ADDON_ID
 ADDONTITLE     = uservar.ADDONTITLE
@@ -47,10 +71,12 @@ USERDATA       = os.path.join(HOME,     'userdata')
 PLUGIN         = os.path.join(ADDONS,   ADDON_ID)
 PACKAGES       = os.path.join(ADDONS,   'packages')
 ADDONDATA      = os.path.join(USERDATA, 'addon_data', ADDON_ID)
+TEXTCACHE      = os.path.join(ADDONDATA, 'Cache')
 FANART         = os.path.join(ADDONPATH,'fanart.jpg')
 ICON           = os.path.join(ADDONPATH,'icon.png')
 ART            = os.path.join(ADDONPATH,'resources', 'art')
 SKIN           = xbmc.getSkinDir()
+THUMBS         = os.path.join(USERDATA,  'Thumbnails')
 BUILDNAME      = wiz.getS('buildname')
 DEFAULTSKIN    = wiz.getS('defaultskin')
 DEFAULTNAME    = wiz.getS('defaultskinname')
@@ -67,9 +93,11 @@ AUTOFEQ        = wiz.getS('autocleanfeq')
 AUTONEXTRUN    = wiz.getS('nextautocleanup')
 TRAKTSAVE      = wiz.getS('traktlastsave')
 REALSAVE       = wiz.getS('debridlastsave')
+ALLUCSAVE      = wiz.getS('alluclastsave')
 LOGINSAVE      = wiz.getS('loginlastsave')
 KEEPTRAKT      = wiz.getS('keeptrakt')
 KEEPREAL       = wiz.getS('keepdebrid')
+KEEPALLUC      = wiz.getS('keepalluc')
 KEEPLOGIN      = wiz.getS('keeplogin')
 INSTALLED      = wiz.getS('installed')
 EXTRACT        = wiz.getS('extract')
@@ -105,6 +133,10 @@ COLOR2         = uservar.COLOR2
 WORKING        = True if wiz.workingURL(BUILDFILE) == True else False
 FAILED         = False
 
+
+
+
+
 ###########################
 #### Check Updates   ######
 ###########################
@@ -120,24 +152,24 @@ def checkUpdate():
 		wiz.setS('latestversion', version)
 		if version > BUILDVERSION:
 			if DISABLEUPDATE == 'false':
-				wiz.log("[Verificar Atualizacoes] [Versao Instalada: %s] [Versao Atual: %s] Abrindo a Janela de Atualizacao" % (BUILDVERSION, version), xbmc.LOGNOTICE)
+				wiz.log("[Check Updates] [Installed Version: %s] [Current Version: %s] Opening Update Window" % (BUILDVERSION, version), xbmc.LOGNOTICE)
 				notify.updateWindow(BUILDNAME, BUILDVERSION, version, icon, fanart)
-			else: wiz.log("[Verificar Atualizacoes] [Versao Instalada: %s] [Versao Atual: %s] Abrindo a Janela de Atualizacao" % (BUILDVERSION, version), xbmc.LOGNOTICE)
-		else: wiz.log("[Verificar Atualizacoes] [Versao Instalada: %s] [Versao Atual: %s]" % (BUILDVERSION, version), xbmc.LOGNOTICE)
-	else: wiz.log("[erificar Atualizacoes] ERRO: Nao e possivel encontrar a versao de compilacao da BUILD no arquivo de texto", xbmc.LOGERROR)
+			else: wiz.log("[Check Updates] [Installed Version: %s] [Current Version: %s] Update Window Disabled" % (BUILDVERSION, version), xbmc.LOGNOTICE)
+		else: wiz.log("[Check Updates] [Installed Version: %s] [Current Version: %s]" % (BUILDVERSION, version), xbmc.LOGNOTICE)
+	else: wiz.log("[Check Updates] ERROR: Unable to find build version in build text file", xbmc.LOGERROR)
 
 def checkSkin():
-	wiz.log("[Build Check] Inicio de Verificacao de Skin Invalido")
+	wiz.log("[Build Check] Invalid Skin Check Start")
 	DEFAULTSKIN   = wiz.getS('defaultskin')
 	DEFAULTNAME   = wiz.getS('defaultskinname')
 	DEFAULTIGNORE = wiz.getS('defaultskinignore')
 	gotoskin = False
 	if not DEFAULTSKIN == '':
 		if os.path.exists(os.path.join(ADDONS, DEFAULTSKIN)):
-			if DIALOG.yesno(ADDONTITLE, "[COLOR %s] Parece que a versao de Skin foi disponibilizada com uma vcersao anterior [COLOR %s]%s[/COLOR]" % (COLOR2, COLOR1, SKIN[5:].title()), "Gostaria de Redefir a Build para a Versao Atual do Servidor?:[/COLOR]", '[COLOR %s]%s[/COLOR]' % (COLOR1, DEFAULTNAME)):
+			if DIALOG.yesno(ADDONTITLE, "[COLOR %s]It seems that the skin has been set back to [COLOR %s]%s[/COLOR]" % (COLOR2, COLOR1, SKIN[5:].title()), "Would you like to set the skin back to:[/COLOR]", '[COLOR %s]%s[/COLOR]' % (COLOR1, DEFAULTNAME)):
 				gotoskin = DEFAULTSKIN
 				gotoname = DEFAULTNAME
-			else: wiz.log("A Skin Nao foi Redefinida", xbmc.LOGNOTICE); wiz.setS('defaultskinignore', 'true'); gotoskin = False
+			else: wiz.log("Skin was not reset", xbmc.LOGNOTICE); wiz.setS('defaultskinignore', 'true'); gotoskin = False
 		else: wiz.setS('defaultskin', ''); wiz.setS('defaultskinname', ''); DEFAULTSKIN = ''; DEFAULTNAME = ''
 	if DEFAULTSKIN == '':
 		skinname = []
@@ -150,11 +182,11 @@ def checkSkin():
 				match2 = wiz.parseDOM(g, 'addon', ret='name')
 				wiz.log("%s: %s" % (folder, str(match[0])), xbmc.LOGNOTICE)
 				if len(match) > 0: skinlist.append(str(match[0])); skinname.append(str(match2[0]))
-				else: wiz.log("ID Nao Encontrada Para %s" % folder, xbmc.LOGNOTICE)
-			else: wiz.log("ID Nao Encontrada Para %s" % folder, xbmc.LOGNOTICE)
+				else: wiz.log("ID not found for %s" % folder, xbmc.LOGNOTICE)
+			else: wiz.log("ID not found for %s" % folder, xbmc.LOGNOTICE)
 		if len(skinlist) > 0:
 			if len(skinlist) > 1:
-				if DIALOG.yesno(ADDONTITLE, "[COLOR %s]Parece que a Skin foi redefinida para: [COLOR %s]%s[/COLOR]" % (COLOR2, COLOR1, SKIN[5:].title()), "Gostaria de Ver Uma lista de Skin Disponiveis?[/COLOR]"):
+				if DIALOG.yesno(ADDONTITLE, "[COLOR %s]It seems that the skin has been set back to [COLOR %s]%s[/COLOR]" % (COLOR2, COLOR1, SKIN[5:].title()), "Would you like to view a list of avaliable skins?[/COLOR]"):
 					choice = DIALOG.select("Select skin to switch to!", skinname)
 					if choice == -1: wiz.log("Skin was not reset", xbmc.LOGNOTICE); wiz.setS('defaultskinignore', 'true')
 					else: 
@@ -405,26 +437,38 @@ if KEEPLOGIN == 'true':
 		wiz.log("[Login Data] Next Auto Save isnt until: %s / TODAY is: %s" % (LOGINSAVE, str(TODAY)), xbmc.LOGNOTICE)
 else: wiz.log("[Login Data] Not Enabled", xbmc.LOGNOTICE)
 
-wiz.log("[Auto Clean Up] Started", xbmc.LOGNOTICE)
-if AUTOCLEANUP == 'true':
-	service = False
-	days = [TODAY, TOMORROW, THREEDAYS, ONEWEEK]
-	feq = int(float(AUTOFEQ))
-	if AUTONEXTRUN <= str(TODAY) or feq == 0:
-		service = True
-		next_run = days[feq]
-		wiz.setS('nextautocleanup', str(next_run))
-	else: wiz.log("[Auto Clean Up] Next Clean Up %s" % AUTONEXTRUN, xbmc.LOGNOTICE)
-	if service == True:
-		AUTOCACHE      = wiz.getS('clearcache')
-		AUTOPACKAGES   = wiz.getS('clearpackages')
-		AUTOTHUMBS     = wiz.getS('clearthumbs')
-		if AUTOCACHE == 'true': wiz.log('[Auto Clean Up] Cache: On', xbmc.LOGNOTICE); wiz.clearCache(True)
-		else: wiz.log('[Auto Clean Up] Cache: Off', xbmc.LOGNOTICE)
-		if AUTOTHUMBS == 'true': wiz.log('[Auto Clean Up] Old Thumbs: On', xbmc.LOGNOTICE); wiz.oldThumbs()
-		else: wiz.log('[Auto Clean Up] Old Thumbs: Off', xbmc.LOGNOTICE)
-		if AUTOPACKAGES == 'true': wiz.log('[Auto Clean Up] Packages: On', xbmc.LOGNOTICE); wiz.clearPackagesStartup()
-		else: wiz.log('[Auto Clean Up] Packages: Off', xbmc.LOGNOTICE)
-else: wiz.log('[Auto Clean Up] Turned off', xbmc.LOGNOTICE)
+filesize = int(wiz.getS('filesize_alert'))
+filesize_thumb = int(wiz.getS('filesizethumb_alert'))
+total_size2 = 0
+total_size = 0
+count = 0
+total_sizetext2 = "%.0f" % (total_size2/1024000.0)
 
+for dirpath, dirnames, filenames in os.walk(PACKAGES):
+	count = 0
+	for f in filenames:
+		count += 1
+		fp = os.path.join(dirpath, f)
+		total_size += os.path.getsize(fp)
+total_sizetext = "%.0f" % (total_size/1024000.0)
+	
+if int(total_sizetext) > filesize:
+	wiz.clearPackagesStart(); wiz.refresh()
+	wiz.log("[Auto Cleaner] Package Cleaner Triggered", xbmc.LOGNOTICE)
+	
+for dirpath2, dirnames2, filenames2 in os.walk(THUMBS):
+	for f2 in filenames2:
+		fp2 = os.path.join(dirpath2, f2)
+		total_size2 += os.path.getsize(fp2)
+total_sizetext2 = "%.0f" % (total_size2/1024000.0)
+
+if int(total_sizetext2) > filesize_thumb:
+	wiz.clearThumb(); wiz.refresh()
+	wiz.log("[Auto Cleaner] Thumbs Cleaner Triggered", xbmc.LOGNOTICE)
+
+if wiz.getS('clearcache') == 'true':
+	wiz.clearCache(); wiz.refresh()
+	wiz.log("[Auto Cleaner] Thumbs Cleaner Triggered", xbmc.LOGNOTICE)
+	
+	
 wiz.setS('kodi17iscrap', '')

@@ -1,0 +1,9 @@
+﻿<settings>
+<category label="Geral">
+<setting id="mensagem" label="" value="true" type="bool" default="true"/>
+<setting id="mensagem" label="" value="true" type="bool" default="true"/>
+<setting id="mensagem" label="" value="true" type="bool" default="true"/>
+<setting id="mensagem" label="" value="true" type="bool" default="true"/>
+<setting id="donotshowbychannels" label="" visible="false" type="bool" default="false"/>
+</category>
+</settings>

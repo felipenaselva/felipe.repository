@@ -2,7 +2,7 @@
 <window>
     <coordinates>
         <left>635</left>
-        <top>180</top>
+        <top>160</top>
     </coordinates>
     <controls>
         <control type="group">
@@ -10,25 +10,25 @@
                 <description>Background Image</description>
                 <posx>0</posx>
                 <posy>0</posy>
-                <width>700</width>
-                <height>720</height>
+                <width>650</width>
+                <height>765</height>
                 <texture border="2">Background/loguploader-dialog-bg.png</texture>
             </control>
             <control type="image">
                 <description>Dialog Header image</description>
                 <posx>0</posx>
                 <posy>0</posy>
-                <width>700</width>
+                <width>650</width>
                 <height>50</height>
-                <texture colordiffuse="FF12B2E7" border="2">Background/loguploader-white.png</texture>
+                <texture colordiffuse="FF333333" border="2">Background/loguploader-white.png</texture>
             </control>
             <control type="label" id="101">
                 <description>header label</description>
                 <posx>0</posx>
                 <posy>0</posy>
-                <width>700</width>
+                <width>650</width>
                 <height>50</height>
-                <font>font13</font>
+                <font>font14</font>
                 <label></label>
                 <align>center</align>
                 <aligny>center</aligny>
@@ -36,19 +36,19 @@
             </control>
             <control type="textbox" id="102">
                 <left>20</left>
-                <top>60</top>
-                <width>700</width>
+                <top>65</top>
+                <width>630</width>
                 <height>80</height>
                 <font>font12</font>
                 <align>left</align>
                 <aligny>top</aligny>
-                <label>Como esta é a primeira execução do assistente, gostaria de ativar qualquer uma das seguintes configurações??</label>
+                <label>Como esta e a sua primeira execucao do assistente, voce gostaria de ativar qualquer uma das seguintes configuracoes?</label>
             </control>
         </control>
         <control type="grouplist" id="9000">
             <left>20</left>
             <top>140</top>
-            <width>730</width>
+            <width>610</width>
             <height>520</height>
             <itemgap>-3</itemgap>
             <align>top</align>
@@ -63,8 +63,8 @@
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Manter Meu trakt</label>
+                <radioposx>530</radioposx>
+                <label>Keep My Trakt</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -79,8 +79,8 @@
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Mantenha Meu Real Debrid</label>
+                <radioposx>530</radioposx>
+                <label>Keep My Real Debrid</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -95,8 +95,8 @@
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Mantenha Meus Dados de Login</label>
+                <radioposx>530</radioposx>
+                <label>Keep My Login Data</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -105,14 +105,14 @@
                 <textureradioofffocus colordiffuse="FF12B2E7">RadioButton/radiobutton-focus.png</textureradioofffocus>
                 <textureradiooffnofocus>RadioButton/radiobutton-nofocus.png</textureradiooffnofocus>
             </control>
-            <control type="radiobutton" id="304">
+            <control type="radiobutton" id="314">
                 <width>610</width>
                 <height>40</height>
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Mantenha Meu Arquivo de Fontes (Sources.xml)</label>
+                <radioposx>530</radioposx>
+                <label>Keep My Alluc Login</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -127,8 +127,8 @@
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Mantenha Meus Perfis (Profiles.xml)</label>
+                <radioposx>530</radioposx>
+                <label>Keep My Profiles.xml</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -143,8 +143,8 @@
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>mantenha Minhas Configurações (AdvancedSettings.xml)</label>
+                <radioposx>530</radioposx>
+                <label>Keep My AdvancedSettings.xml</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -159,8 +159,8 @@
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Mantenha Meus Favoritos (Favourites.xml)</label>
+                <radioposx>530</radioposx>
+                <label>Keep My Favourites.xml</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -175,8 +175,8 @@
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Mantenha Meu Super Favourites</label>
+                <radioposx>530</radioposx>
+                <label>Keep My Super Favourites</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -191,8 +191,8 @@
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Mantenha Meus Repositórios</label>
+                <radioposx>530</radioposx>
+                <label>Keep My Repositories</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -207,8 +207,8 @@
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Mantenha Minha Lista de Permissões</label>
+                <radioposx>530</radioposx>
+                <label>Keep My Whitelist</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -223,40 +223,8 @@
                 <textwidth>565</textwidth>
                 <textoffsetx>10</textoffsetx>
                 <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Limpar Cache na Inicialização</label>
-                <font>font12</font>
-                <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
-                <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
-                <textureradioonfocus colordiffuse="FF12B2E7">RadioButton/radiobutton-focus.png</textureradioonfocus>
-                <textureradioonnofocus colordiffuse="FF12B2E7">RadioButton/radiobutton-focus.png</textureradioonnofocus>
-                <textureradioofffocus colordiffuse="FF12B2E7">RadioButton/radiobutton-focus.png</textureradioofffocus>
-                <textureradiooffnofocus>RadioButton/radiobutton-nofocus.png</textureradiooffnofocus>
-            </control>
-            <control type="radiobutton" id="312">
-                <width>610</width>
-                <height>40</height>
-                <textwidth>565</textwidth>
-                <textoffsetx>10</textoffsetx>
-                <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Limpar Pacotes na Inicialização</label>
-                <font>font12</font>
-                <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
-                <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
-                <textureradioonfocus colordiffuse="FF12B2E7">RadioButton/radiobutton-focus.png</textureradioonfocus>
-                <textureradioonnofocus colordiffuse="FF12B2E7">RadioButton/radiobutton-focus.png</textureradioonnofocus>
-                <textureradioofffocus colordiffuse="FF12B2E7">RadioButton/radiobutton-focus.png</textureradioofffocus>
-                <textureradiooffnofocus>RadioButton/radiobutton-nofocus.png</textureradiooffnofocus>
-            </control>
-            <control type="radiobutton" id="313">
-                <width>610</width>
-                <height>40</height>
-                <textwidth>580</textwidth>
-                <textoffsetx>10</textoffsetx>
-                <radioheight>45</radioheight>
-                <radioposx>590</radioposx>
-                <label>Limpar Miniaturas Antigas na Inicialização(Thumbnails)p</label>
+                <radioposx>530</radioposx>
+                <label>Clear Cache on Startup</label>
                 <font>font12</font>
                 <texturefocus colordiffuse="FF12B2E7">RadioButton/MenuItemFO.png</texturefocus>
                 <texturenofocus>RadioButton/MenuItemNF.png</texturenofocus>
@@ -269,12 +237,12 @@
         <control type="group" id="9001">
             <control type="button" id="201">
                 <left>350</left>
-                <top>630</top>
+                <top>675</top>
                 <width>300</width>
                 <height>90</height>
                 <font>font13</font>
                 <textcolor>FFF0F0F0</textcolor>
-                <label>Continuar</label>
+                <label>CONTINUAR</label>
                 <align>center</align>
                 <aligny>center</aligny>
                 <onup>9000</onup>

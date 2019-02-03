@@ -1,3 +1,48 @@
+v1.2.5 - Beta
+-Added Zlib to correct kodi 18 not extracting zip
+-Change all mods to reflect this change: >17 import zlib- default, wizard and extract
+
+v1.2.4 - Beta
+-Lots of layout changes and put each catagory to its own module to quicken the load time
+
+v1.2.3 - Beta
+-Added PyXBMCt Layout
+-Changed default startup options to none
+
+####FTG MODS####
+
+v0.1.8-Beta 2
+-Added Skin type to addon installer that extracts to special://home/
+-Fixed SkinSwap issue in addon installer
+-Fixed Install Method Issue
+-Fixed Meta/forks issue with build installs
+
+-todo
+ add  sections to builds menu
+ add  minor updates
+ add  youtube Playlist and channel scraper
+
+v0.1.8
+-Added 'Packs' to addon installer and back up options
+-Added Back up Addon Packs
+-Added 'Roms' to APK Menu
+-Added Enable unknown sources in maint menu
+-Added Clear /Archive_Cache/ to maint menu
+-Added Speed test window
+-Added Zen to video cache
+-Added Alluc section to Save Data Menu
+-Added Mr Know URL Resolver to debrid
+-Added Open Subtitles to Login
+-Added Info into build text files and create info file with backup zip
+-Added Text File Caching
+-Rem   Real Debrid from Exodus
+-Mod   Theme backup includes dependencies for addons if they are added
+-Mod   Improved speed of enable all addons.
+-Fixed Bug in clear cache for video addons
+-Fixed Bug in backup build and guifix
+-Fixed Bug in kodi 17 for addon installer
+-Fixed Bug in theme install where addons didnt enable
+
 v0.1.7a
 -Mod   tweaked code to prevent 2nd startup
 -Fixed bug where started with second char in notifications

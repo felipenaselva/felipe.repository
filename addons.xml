@@ -129,19 +129,17 @@
 
 </addon>
 
-<addon id="plugin.program.Build.Tools" name="[COLOR gold]Build Tools[/COLOR] [COLOR white] Wizard[/COLOR]" version="3.1" provider-name="Gfake">
+<addon id="plugin.program.Build.Tools" name="[B][COLOR orange]Build Tools Wizard[/COLOR][/B]" version="4.0" provider-name="[B][COLOR red]Gfake[/COLOR][/B]">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-  </requires>
+	</requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>executable</provides>
+        <provides>executable</provides>
   </extension>
   <extension point="xbmc.service" library="startup.py" start="startup" />
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Build Tools Wizard</summary>
-    <description lang="en">Bem-vindo e obrigado por fazer o download do nosso assistente.
-[CR]O Assistente Build Tools Wizard permite que vocÃª tenha acesso livre a todas as compilaÃ§Ãµes personalizadas para o seu Kodi em seu dispositivo de streaming.
-[CR]Executar manutenÃ§Ã£o, Limpar cache, Limpar pacotes, manter seus dados Trakt e Real Debrid e muito mais.</description>
+    <description lang="en">.</description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -282,6 +280,24 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.bestporn" name="Best Porn Collection" version="3.0.1" provider-name=" CRITTER ">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.addon.common" />
+	<import addon="script.module.requests" />
+	<import addon="script.module.beautifulsoup4" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+	<summary lang="en">Videos from collectionofbestporn.com</summary>
+	<description lang="en">This plugin contains Contents that should not be viewed by anyone under the age 18. By opening this plugin you agree that you take responsibility for your own actions.</description>
+	<disclaimer lang="en">The original author neither hosts or stores any content, the original author has no affiliation with content hosts, it is the sole responsibility of the user to ensure they have permission to view any streams provided</disclaimer>
+	<platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.blurayplays"
        name="[COLOR white][B]BLURAY[/B][/COLOR] [COLOR gold][B]PLAY'S[/B][/COLOR]"
        version="0.7"
@@ -317,6 +333,31 @@
     <screenshot>resources/screenshots/02.jpg</screenshot>
     <screenshot>resources/screenshots/03.jpg</screenshot>
 	</assets>
+  </extension>
+</addon>
+
+<addon id="plugin.video.braziltv" name="BrazilTV" version="0.7" provider-name="teamBrazilTV">
+  <requires>
+    <import addon="xbmc.python" version="2.24.0"/>
+    <import addon="plugin.video.f4mTester" version="2.7.1" optional="true"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">IPTV livre para todos.</summary>
+    <description lang="en">[COLOR lime]Instale nosso repositÃ³rio oficial (BrazilTV Repo) para receber atualizaÃ§Ãµes rapidamente![/COLOR]
+[COLOR yellow]Requer os addons F4mProxy e f4mTester para funcionar.[/COLOR]
+
+[B]ATENÃ‡ÃƒO:[/B] NÃ£o hospedamos nem temos ligaÃ§Ã£o com nenhum dos conteÃºdos deste addon, apenas reunimos links de transmissÃµes pÃºblicas feitas por terceiros. A estabilidade 100% dos canais nÃ£o Ã© garantida, mas estamos trabalhando diariamente para tentar mantÃª-la. Os dados de EPG tambÃ©m sÃ£o de disponibilidade pÃºblica e encontrados na internet. Fique atento a atualizaÃ§Ãµes futuras em nosso site oficial.</description>
+    <assets>
+        <icon>icon.png</icon>
+        <fanart>fanart.jpg</fanart>
+    </assets>
+    <website>http://bit.ly/BrazilTVKodi</website>
+    <news>[COLOR lime]v0.7 - Primeiro addon de TV do Brasil com EPG embutido (beta)! Agora com novas funÃ§Ãµes de EPG completo por canal e outras modificaÃ§Ãµes.[/COLOR]
+
+[COLOR white][B]Envie sugestÃµes de funcionalidades no nosso site oficial![/B][/COLOR]</news>
   </extension>
 </addon>
 
@@ -628,6 +669,45 @@ This is a Non-profit resource, organized solely for educational purposes which i
     <summary lang="en"></summary>
     <description lang="en"></description>
     <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.OnePlayHD"
+       name="[B][COLOR white]OnePlayHD[/COLOR][/B]"
+       version="2.1"
+       provider-name="OnePlayHD">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+	<import addon="script.module.livestreamer" optional="true"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="basedem.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">[COLOR white]OnePlayHD Ã© apenas um AGREGADOR de links e, assim como o Google.com, apenas agrega e organiza os links externos. NÃ£o somos responsÃ¡veis pelos arquivos aqui encontrados.[/COLOR]</summary>
+    <description lang="en">[B][COLOR white]TV, Filmes, SÃ©ries, Desenhos, Animes, Novelas e Shows.[/COLOR][/B]</description>
+    <platform>all</platform>
+	<assets>
+<icon>icon.png</icon>
+<fanart>fanart.jpg</fanart>
+<screenshot>resources/screenshots/1.png</screenshot>
+<screenshot>resources/screenshots/2.png</screenshot>
+<screenshot>resources/screenshots/3.png</screenshot>
+</assets>
   </extension>
 </addon>
 
@@ -1010,6 +1090,46 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
   </extension>
 </addon>
 
+<addon id="repo.vikings" name="[B][COLOR yellow].Vikings  [COLOR orange]Repo[/B][/COLOR]" version="1.02" provider-name="Vikings Builds by @	Pio">">
+	<requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="plugin.video.youtube" version="5.2.1" />
+    <import addon="script.module.urlresolver" />
+    <import addon="script.module.simplejson" />
+    <import addon="script.module.livestreamer"/>
+    <import addon="script.module.pyamf"/>
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+	<import addon="script.module.addon.common" />
+	<import addon="script.module.addon.signals" version="0.0.1"/>
+	<import addon="script.module.youtube.dl"/>
+
+  </requires>
+  <extension point="xbmc.addon.repository" name="Vikings Repository">
+		<info compressed="false">http://raw.github.com/vikingsbuild/repo.vikings/master/addons.xml</info>
+		<checksum>http://raw.github.com/vikingsbuild/repo.vikings/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/vikingsbuild/repo.vikings/master/addons/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Repositorio Vikings</summary>
+		<description>Repositorio oficial Vikings Build - Proibido reproducao sem previa autorizacao</description>
+		<news>
+	Somente Addons TOP, nÃ£o incluimos "PINDURICALHOS"... somente ADDONS atualizados constantemente!
+	Os addons que serÃ¡ instalado nÃ£o hospeda nem possui nenhum conteÃºdo. O autor nÃ£o Ã© responsÃ¡vel pelo uso e pelo conteÃºdo encontrado usando este addon
+</news>
+
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
   <addon id="repository.atto.team2.repository"
          name="[COLOR blue][B]Atto Pixel[/COLOR][COLOR yellow] 4K [/COLOR][COLOR aqua]Repository[/B][/COLOR]"
          provider-name="Team2Atto"
@@ -1066,6 +1186,26 @@ Follow us on twitter: [COLOR blue]Whitecream_UWC[/COLOR]</description>
             <genre>movies,usa</genre>
         </extension>
     </addon>
+
+<addon id="repository.braziltv" name="BrazilTV Repo" version="1.0a" provider-name="teamBrazilTV">
+  <extension point="xbmc.addon.repository" name="BrazilTV Repo">
+    <info compressed="false">http://braziltv.yolasite.com/resources/repo/addons.xml</info>
+    <checksum>http://braziltv.yolasite.com/resources/repo/addons.xml.md5</checksum>
+    <datadir zip="true">http://braziltv.yolasite.com/resources/repo/</datadir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">RepositÃ³rio oficial BrazilTV.</summary>
+    <description lang="en">Este Ã© o repositÃ³rio oficial com todos os addons e atualizaÃ§Ãµes do BrazilTV. Aqui vocÃª tambÃ©m encontra as dependÃªncias necessÃ¡rias para que tudo funcione corretamente.
+
+Fique atento em nosso site oficial para mais informaÃ§Ãµes!
+</description>
+    <assets>
+        <icon>icon.png</icon>
+        <fanart>fanart.jpg</fanart>
+    </assets>
+    <website>http://bit.ly/BrazilTVKodi</website>
+  </extension>
+</addon>
 
 <addon id="repository.featherence" name="Featherence repository" version="1.2.0" provider-name="finalmakerr">
 	<extension point="xbmc.addon.repository" name="Featherence repository">

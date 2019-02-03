@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.braziltv" name="BrazilTV" version="0.7" provider-name="teamBrazilTV">
+  <requires>
+    <import addon="xbmc.python" version="2.24.0"/>
+    <import addon="plugin.video.f4mTester" version="2.7.1" optional="true"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">IPTV livre para todos.</summary>
+    <description lang="en">[COLOR lime]Instale nosso repositório oficial (BrazilTV Repo) para receber atualizações rapidamente![/COLOR]
+[COLOR yellow]Requer os addons F4mProxy e f4mTester para funcionar.[/COLOR]
+
+[B]ATENÇÃO:[/B] Não hospedamos nem temos ligação com nenhum dos conteúdos deste addon, apenas reunimos links de transmissões públicas feitas por terceiros. A estabilidade 100% dos canais não é garantida, mas estamos trabalhando diariamente para tentar mantê-la. Os dados de EPG também são de disponibilidade pública e encontrados na internet. Fique atento a atualizações futuras em nosso site oficial.</description>
+    <assets>
+        <icon>icon.png</icon>
+        <fanart>fanart.jpg</fanart>
+    </assets>
+    <website>http://bit.ly/BrazilTVKodi</website>
+    <news>[COLOR lime]v0.7 - Primeiro addon de TV do Brasil com EPG embutido (beta)! Agora com novas funções de EPG completo por canal e outras modificações.[/COLOR]
+
+[COLOR white][B]Envie sugestões de funcionalidades no nosso site oficial![/B][/COLOR]</news>
+  </extension>
+</addon>

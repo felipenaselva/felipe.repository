@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="Servidores">
+        <setting label="[COLOR lightblue]Use estas configurações para filtrar os servidores de canais:[/COLOR]" type="lsep"/>
+        <setting label="Mostrar opções HD" type="bool" id="showhd" default="true"/>
+        <setting label="Mostrar opções SD" type="bool" id="showsd" default="true"/>
+        <setting label="Mostrar opções alternativas" type="bool" id="showalt" default="true"/>
+    </category>
+    <category label="EPG">
+        <setting label="[COLOR lightblue]Ativar o guia deixa o carregamento mais lento![/COLOR]" type="lsep"/>
+        <setting label="[COLOR lightblue]Use apenas se tiver um bom processador e RAM.[/COLOR]" type="lsep"/>
+        <setting label="Habilitar guia de programação" type="bool" id="epg" default="false"/>
+        <setting label="Baixar dados a cada" id="epg_days" type="enum" values="1 dia|2 dias|3 dias|4 dias|5 dias|6 dias|7 dias" default="2" />
+        <setting label="Última atualização" type="text" id="epg_last" enable="false" default=""/>
+        <setting label="Limpar dados existentes" type="action" action="RunScript(plugin.video.braziltv, clearEPG)"/>
+        <setting label="[COLOR yellow]Esta é uma ferramenta em fase de testes![/COLOR]" type="lsep"/>
+    </category>
+    <category label="Adultos">
+        <setting label="[COLOR lightblue]Opções de controle parental:[/COLOR]" type="lsep"/>
+        <setting label="Esconder canais adultos" type="bool" id="hide" default="false"/>
+        <setting label="Senha" type="number" id="password" option="hidden" default="0000"/>
+    </category>
+    <category label="Créditos">
+        <setting label="[B][COLOR yellow]DESENVOLVIDO POR [COLOR lime]TEAMBRAZILTV[/COLOR][/COLOR][/B]" type="lsep"/>
+        <setting label="[B][COLOR white]NÃO ACEITE IMITAÇÕES!  [COLOR red]© 2019[/COLOR][/COLOR][/B]" type="lsep"/>
+        <setting label="[B][COLOR lightgray]OFICIAL SÓ NO http://bit.ly/BrazilTVKodi[/COLOR][/B]" type="lsep"/>
+        <setting label="[CR][B][COLOR lightblue]INCENTIVE O BRAZILTV A CONTINUAR![/COLOR][/B]" type="lsep"/>
+        <setting label="[CR][B][COLOR pink]FAÇA UMA DOAÇÃO EM http://bit.ly/BrazilTVDoar[/COLOR][/B]" type="lsep"/>
+    </category>
+</settings>

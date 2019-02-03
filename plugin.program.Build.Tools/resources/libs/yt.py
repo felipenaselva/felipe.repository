@@ -1,5 +1,5 @@
 ################################################################################
-#      Copyright (C) 2015 Surfacingx                                           #
+#      Copyright (C) 2013 Sean Poyser                                          #
 #                                                                              #
 #  This Program is free software; you can redistribute it and/or modify        #
 #  it under the terms of the GNU General Public License as published by        #
@@ -14,13 +14,8 @@
 #  You should have received a copy of the GNU General Public License           #
 #  along with XBMC; see the file COPYING.  If not, write to                    #
 #  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.       #
-#  http://www.gnu.org/copyleft/gpl.html       								   #
-# 																			   #
-# Traduzido por:															   #
-# Air Gomes Pio																   #
-# Contato: vikingsarcades@gmail.com											   #
-#                                											   #
-################################################################################
+#  http://www.gnu.org/copyleft/gpl.html                                        #
+#################################################################################
 
 
 #        5: "240p h263 flv container",
@@ -98,14 +93,38 @@ def PlayVideo(id, forcePlayer=False):
         pl.clear()
         pl.add(url, liz)
         dp.close()
-        xbmc.Player().play(pl)
+        xbmc.Player().play(pl, windowed=False)
     
     else:
         import xbmcplugin
         liz.setPath(url)
         xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, liz)
-
+    
     return True
+
+def PlayVideoB(id, forcePlayer=False):
+    import sys
+    dp.create("Loading video",'<>','Please Wait','<>')
+
+    video, links = GetVideoInformation(id)
+
+    if 'best' not in video:
+        return False
+
+    url   = video['best']          
+    title = video['title']
+    image = video['thumbnail']
+
+    liz = xbmcgui.ListItem(title, iconImage=image, thumbnailImage=image)
+
+    liz.setInfo( type="Video", infoLabels={ "Title": title} )
+
+    import xbmc
+    pl = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+    pl.clear()
+    pl.add(url, liz)
+    dp.close()
+    xbmc.Player().play(pl, windowed=False)
 
 
 def GetVideoInformation(id):
