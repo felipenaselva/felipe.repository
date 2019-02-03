@@ -2,7 +2,7 @@
 <addons>
 <addon id="felipe.repository"
        name="[COLOR lime][B]Felipe[/B][/COLOR] [COLOR lime][B]Repository[/B][/COLOR]"
-	   version="3.4.4"
+	   version="3.4.5"
 	   provider-name="felipenaselva">
 	<extension point="xbmc.addon.repository" name="Felipe Add-on Repository">
 		<info compressed="false">http://raw.github.com/felipenaselva/felipe.repository/master/addons.xml</info>
@@ -129,7 +129,7 @@
 
 </addon>
 
-<addon id="plugin.program.Build.Tools" name="[B][COLOR orange]Build Tools Wizard[/COLOR][/B]" version="4.0" provider-name="[B][COLOR red]Gfake[/COLOR][/B]">
+<addon id="plugin.program.Build.Tools" name="[B][COLOR orange]Build Tools Wizard[/COLOR][/B]" version="5.0" provider-name="[B][COLOR red]Gfake[/COLOR][/B]">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	</requires>
@@ -140,20 +140,6 @@
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Build Tools Wizard</summary>
     <description lang="en">.</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.program.PowerBuild.Wizard" name="[COLOR gold]PowerBuild[/COLOR] [COLOR white]Wizard[/COLOR]" version="3.1" provider-name="Gfake">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video executable</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">[COLOR lime]PowerBuild[/COLOR] - [COLOR white]Skin Aeon Nox Silvo modificada incluindo os melhores addons do momento. Quasar ok.[/COLOR]</summary>
-    <description lang="en">Skin Aeon Nox Silvo customizada. Inclui os melhores addons da atualidade totalmente configurados. Addon quasar pronto para o uso.</description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -461,6 +447,25 @@ Add-on Retirado do Canal TONY WARLLEY TUTORIAIS, nÃ£o baixe Add-ons que nÃ£o
         <description></description>
         <platform>all</platform>
     </extension>
+</addon>
+
+<addon id="plugin.video.favourites"
+version="0.0.5"
+name="Video Favourites"
+provider-name="primaeval">
+<requires>
+  <import addon="xbmc.python" version="2.20.0"/>
+  <import addon="script.module.xbmcswift2" version="2.4.0"/>
+  <import addon="script.module.requests" version="2.9.1" />
+</requires>
+<extension point="xbmc.python.pluginsource" library="main.py">
+  <provides>video</provides>
+</extension>
+<extension point="xbmc.addon.metadata">
+  <summary lang="en">Video Favourites</summary>
+  <description lang="en"></description>
+  <disclaimer lang="en"></disclaimer>
+</extension>
 </addon>
 
 <addon id="plugin.video.gdrive" version="0.8.35" name="gdrive" provider-name="ddurdle">

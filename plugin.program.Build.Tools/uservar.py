@@ -128,7 +128,7 @@ CONTACTFANART  = 'http://'
 ### AUTO UPDATE #########################################
 ########## FOR THOSE WITH NO REPO #######################
 # Enable Auto Update 'Yes' or 'No'
-AUTOUPDATE     = 'Yes'
+AUTOUPDATE     = 'no'
 # Url to wizard version
 WIZARDFILE     = 'https://pastebin.com/raw/KJLMP2mD'
 #########################################################
